@@ -1,2 +1,3 @@
-# vue-shopping-cart
-Simple shopping cart with vue.js
+# Shopping Cart
+
+Simple shopping cart with Vue.js and Node.js
