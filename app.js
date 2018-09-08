@@ -3,16 +3,26 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const index = require('./routes/');
-
 const app = express();
+const routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.set(express.static(__dirname + '/public'));
+
+mongoose.connect(
+  'mongodb://localhost:27017/vueshoppingcart',
+  { useNewUrlParser: true }
+);
+mongoose.set('debug', true);
+
+require('./models/Product');
+require('./models/Category');
+
+app.use(routes);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -21,6 +31,6 @@ app.use((req, res, next) => {
   next(err);
 });
 
-const server = app.listen(4000, () => {
+const server = app.listen(3000, () => {
   console.log(`Listening on port ${server.address().port}`);
 });
