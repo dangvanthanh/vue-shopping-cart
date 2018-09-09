@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const routes = require('./routes');
+const config = require('./config');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -14,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set(express.static(__dirname + '/public'));
 
 mongoose.connect(
-  'mongodb://localhost:27017/vueshoppingcart',
+  config.db,
   { useNewUrlParser: true }
 );
 mongoose.set('debug', true);

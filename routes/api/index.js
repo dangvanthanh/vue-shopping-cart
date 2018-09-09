@@ -1,4 +1,5 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const products = require('./products');
 const categories = require('./categories');
 const seeder = require('./seeder');

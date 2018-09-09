@@ -26,6 +26,9 @@ export default {
       .get(`/products/${this.id}`)
       .then(res => {
         this.product = res.data;
+      })
+      .catch(err => {
+        console.log(err);
       });
   },
   methods: {

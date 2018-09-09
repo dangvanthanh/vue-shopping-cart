@@ -15,5 +15,8 @@
     "faker": "^4.1.0",
     "mongoose": "^5.2.13",
     "mongoose-unique-validator": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }

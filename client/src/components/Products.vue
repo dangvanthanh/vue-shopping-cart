@@ -49,6 +49,9 @@ export default {
         this.pages = res.data.pages;
         this.prevUrl = res.data.prevUrl;
         this.nextUrl = res.data.nextUrl;
+      })
+      .catch(err => {
+        console.log(err);
       });
   },
   methods: {
@@ -61,6 +64,9 @@ export default {
           this.pages = res.data.pages;
           this.prevUrl = res.data.prevUrl;
           this.nextUrl = res.data.nextUrl;
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

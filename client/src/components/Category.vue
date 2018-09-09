@@ -44,6 +44,9 @@ export default {
         .get(`/categories/${this.category}`)
         .then(res => {
           this.products = res.data;
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

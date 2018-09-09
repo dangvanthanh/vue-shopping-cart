@@ -32,6 +32,9 @@ export default {
       .get('/categories')
       .then(res => {
         this.categories = res.data;
+      })
+      .catch(err => {
+        console.log(err);
       });
   },
   computed: {

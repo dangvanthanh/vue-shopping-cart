@@ -1,6 +1,7 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+const config = require('../../config');
 const Product = require('../../models/Product');
-const apiUrl = `http://localhost:3000/api`;
 
 router.get('/', (req, res, next) => {
   let perPage = 6;
@@ -21,7 +22,7 @@ router.get('/', (req, res, next) => {
             pages,
             count,
             prevUrl: ``,
-            nextUrl: `${apiUrl}/products?page=${page + 1}`
+            nextUrl: `${config.api}/products?page=${page + 1}`
           });
         } else if (page === pages - 1) {
           res.json({
@@ -29,7 +30,7 @@ router.get('/', (req, res, next) => {
             currentPage: page,
             pages,
             count,
-            prevUrl: `${apiUrl}/products?page=${page - 1}`,
+            prevUrl: `${config.api}/products?page=${page - 1}`,
             nextUrl: ``
           });
         } else if (page > 0 && page < pages) {
@@ -37,8 +38,8 @@ router.get('/', (req, res, next) => {
             products,
             currentPage: page,
             pages,
-            prevUrl: `${apiUrl}/products?page=${page - 1}`,
-            nextUrl: `${apiUrl}/products?page=${page + 1}`
+            prevUrl: `${config.api}/products?page=${page - 1}`,
+            nextUrl: `${config.api}/products?page=${page + 1}`
           });
         } else {
           res.redirect('/products');

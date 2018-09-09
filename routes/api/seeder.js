@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
     'Computers',
     'Kids'
   ];
+
   for (let i = 0; i < 20; i++) {
     let product = new Product({
       name: faker.commerce.productName(),
@@ -25,13 +26,13 @@ router.get('/', function(req, res, next) {
 
     product.save();
   }
+
   for (let i = 0; i < categories.length; i++) {
     let cat = new Category({
       title: categories[i]
     });
     cat.save();
   }
-  res.redirect('/');
 });
 
 module.exports = router;
