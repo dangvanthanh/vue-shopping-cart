@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container mw-7 mx-auto">
     <img :src="product.image" :alt="product.name" class="img-fluid">
     <h5>{{ product.name }}</h5>
     <p><span class="font-weight-bold">Category</span>: {{ product.category }}</p>

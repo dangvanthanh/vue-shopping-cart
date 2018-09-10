@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 import Products from '../components/Products.vue';
 import Product from '../components/Product.vue';
 import Category from '../components/Category.vue';
+import CheckOut from '../components/CheckOut.vue';
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     name: 'category',
     component: Category,
     props: true
+  },
+  {
+    path: '/checkout',
+    name: 'checkout',
+    component: CheckOut
   }
 ];
 

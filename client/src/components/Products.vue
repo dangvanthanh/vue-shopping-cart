@@ -1,27 +1,27 @@
 <template>
   <div class="container mw-7 mx-auto">
     <div class="cards">
-      <div class="shadow-lg rounded-lg overflow-hidden" v-for="product in products" :key="product._id">
+      <div class="flex shadow-lg rounded-lg overflow-hidden" v-for="product in products" :key="product._id">
         <div class="px-6 py-4">
           <router-link tag="a" :to="{ name: 'product', params: { id: product._id } }">
             <img :src="product.image" :alt="product.name">
           </router-link>
           <h3>{{ product.name }}</h3>
-          <p>Category: {{ product.category }}</p>
           <p>{{ product.description.substring(0, 50) }}</p>
+          <p>Category: {{ product.category }}</p>
           <p>${{ product.price }}</p>
           <router-link tag="a" :to="{ name: 'product', params: { id: product._id }}">Desciption</router-link>
           <button>Buy Now</button>
         </div>
       </div>
     </div>
-    <p class="text-center mt-4 mb-0">{{currentPage+1 }} / {{ pages }}</p>
-    <ul class="flex list-reset">
+    <p class="text-center mt-6 mb-0">{{currentPage+1 }} / {{ pages }}</p>
+    <ul class="flex list-reset align-center justify-center mb-4 mt-4">
       <li>
-        <button class="block" @click="checkPage(prevUrl)" :disabled="prevUrl === ''">Previous</button>
+        <button class="block p-2 mx-2 border border-grey-light rounded" @click="checkPage(prevUrl)" :disabled="prevUrl === ''">Previous</button>
       </li>
       <li>
-        <button class="block" @click="checkPage(nextUrl)" :disabled="nextUrl === ''">Next</button>
+        <button class="block p-2 mx-2 border border-grey-light rounded" @click="checkPage(nextUrl)" :disabled="nextUrl === ''">Next</button>
       </li>
     </ul>
   </div>

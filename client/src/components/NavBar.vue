@@ -2,7 +2,7 @@
   <div class="container mw-7 mx-auto mt-4">
     <nav class="flex">
       <div class="flex">
-        <router-link class="block no-underline text-grey-dark" tag="a" :to="{ name: 'home' }">Vue Shopping Cart</router-link>
+        <router-link class="block no-underline text-grey-dark mt-3" tag="a" :to="{ name: 'home' }">Vue Shopping Cart</router-link>
       </div>
       <div class="flex-grow">
         <div class="flex-grow text-right">
