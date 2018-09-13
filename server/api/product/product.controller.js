@@ -1,14 +1,12 @@
-const express = require('express');
-const router = express.Router();
 const config = require('../../config');
-const Product = require('../../models/Product');
+const Product = require('./product.model');
 
-router.get('/', (req, res, next) => {
-  let perPage = 6;
+exports.findAll = async (req, res, next) => {
+  let perPage = 8;
   let page = parseInt(req.query.page, 10) || 0;
   let pages = 0;
 
-  Product.count().exec((err, count) => {
+  Product.countDocuments().exec((err, count) => {
     Product.find()
       .limit(perPage)
       .skip(perPage * page)
@@ -46,15 +44,13 @@ router.get('/', (req, res, next) => {
         }
       });
   });
-});
+};
 
-router.get('/:id', (req, res, next) => {
-  Product.findById(req.params.id, (err, product) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.status(200).json(product);
-  });
-});
-
-module.exports = router;
+exports.findById = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

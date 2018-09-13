@@ -1,76 +1,22 @@
 <template>
-  <div class="container mw-7 mx-auto">
-    <img :src="product.image" :alt="product.name" class="img-fluid">
-    <h5>{{ product.name }}</h5>
-    <p><span class="font-weight-bold">Category</span>: {{ product.category }}</p>
-    <p class="text-danger font-weight-bold">${{product.price}}</p>
-    <p>
-      {{ product.description }}
-    </p>
-    <button class="btn btn-outline-primary mb-5" @click="addToCart(product)">Buy Now</button>
+  <div>
+    <router-link tag="a" :to="{ name: 'product', params: { id: product._id } }">
+      <img :src="product.image" :alt="product.name">
+    </router-link>
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description.substring(0, 50) }}</p>
+    <p>Category: {{ product.category }}</p>
+    <p>${{ product.price }}</p>
+    <router-link tag="a" :to="{ name: 'product', params: { id: product._id }}">Desciption</router-link>
+    <button @click="addToCart(product)">Buy Now</button>
   </div>
 </template>
 
 <script>
-import Api from '../config/api';
+import addToCart from '../mixins/addToCart';
 
 export default {
-  props: ['id'],
-  data() {
-    return {
-      product: {}
-    };
-  },
-  created() {
-    Api()
-      .get(`/products/${this.id}`)
-      .then(res => {
-        this.product = res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },
-  methods: {
-    addToCart(product) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart.length === 0) {
-        let item = {
-          id: product._id,
-          name: product.name,
-          price: product.price,
-          subtotal: product.price * 1,
-          qty: 1
-        };
-        cart.push(item);
-        this.$store.commit('setCart', item);
-        localStorage.setItem('cart', JSON.stringify(cart));
-      } else {
-        let item = cart.find(item => {
-          return item.id === product._id;
-        });
-        if (item) {
-          // check if is not new item
-          item.qty++;
-          item.subtotal = item.price * item.qty;
-          this.$store.commit('setQuantity', item);
-          this.$store.commit('setPrice', item);
-          localStorage.setItem('cart', JSON.stringify(cart));
-        } else {
-          let item = {
-            id: product._id,
-            name: product.name,
-            price: product.price,
-            subtotal: product.price * 1,
-            qty: 1
-          };
-          cart.push(item);
-          this.$store.commit('setCart', item);
-          localStorage.setItem('cart', JSON.stringify(cart));
-        }
-      }
-    }
-  }
+  props: ['product'],
+  mixins: [addToCart]
 };
 </script>
-

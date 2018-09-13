@@ -3,15 +3,7 @@
     <div class="cards">
       <div class="flex shadow-lg rounded-lg overflow-hidden" v-for="product in products" :key="product._id">
         <div class="px-6 py-4">
-          <router-link tag="a" :to="{ name: 'product', params: { id: product._id } }">
-            <img :src="product.image" :alt="product.name">
-          </router-link>
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description.substring(0, 50) }}</p>
-          <p>Category: {{ product.category }}</p>
-          <p>${{ product.price }}</p>
-          <router-link tag="a" :to="{ name: 'product', params: { id: product._id }}">Desciption</router-link>
-          <button>Buy Now</button>
+          <Product :product="product"/>
         </div>
       </div>
     </div>
@@ -29,8 +21,10 @@
 
 <script>
 import Api from '../config/api';
+import Product from './Product.vue';
 
 export default {
+  components: {Product},
   data() {
     return {
       products: [],
@@ -49,9 +43,6 @@ export default {
         this.pages = res.data.pages;
         this.prevUrl = res.data.prevUrl;
         this.nextUrl = res.data.nextUrl;
-      })
-      .catch(err => {
-        console.log(err);
       });
   },
   methods: {
@@ -64,9 +55,6 @@ export default {
           this.pages = res.data.pages;
           this.prevUrl = res.data.prevUrl;
           this.nextUrl = res.data.nextUrl;
-        })
-        .catch(err => {
-          console.log(err);
         });
     }
   }
@@ -76,7 +64,7 @@ export default {
 <style>
 .cards {
   display: grid;
-  grid-template-columns: 32% 32% 32%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
 }
 </style>

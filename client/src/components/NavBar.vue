@@ -7,8 +7,8 @@
       <div class="flex-grow">
         <div class="flex-grow text-right">
           <div v-for="category in categories" :key="category._id" class="inline-block">
-            <router-link class="block no-underline p-3 text-grey-dark" tag="a" :to="{ name: 'category', params: { category: category.title } }">
-              {{ category.title }}
+            <router-link class="block no-underline p-3 text-grey-dark text-capitalize" tag="a" :to="{ name: 'category', params: { category: category.title } }">
+              {{ category.title  }}
             </router-link>
           </div>
           <router-link tag="a" :to = "{name: 'checkout'}" class="inline-block">Cart(<span class="badge badge-light">{{ cart.length }}</span>)</router-link>
@@ -32,9 +32,6 @@ export default {
       .get('/categories')
       .then(res => {
         this.categories = res.data;
-      })
-      .catch(err => {
-        console.log(err);
       });
   },
   computed: {
@@ -44,3 +41,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.text-capitalize {
+  text-transform: capitalize;
+}
+</style>
+

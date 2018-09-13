@@ -11,7 +11,7 @@
           <p>{{ product.description.substring(0, 50) }}</p>
           <p>${{ product.price }}</p>
           <router-link tag="a" :to="{ name: 'product', params: { id: product._id }}">Desciption</router-link>
-          <button>Buy Now</button>
+          <button @click="addToCart(product)">Buy Now</button>
         </div>
       </div>
     </div>
@@ -20,9 +20,11 @@
 
 <script>
 import Api from '../config/api';
+import addToCart from '../mixins/addToCart';
 
 export default {
   props: ['category'],
+  mixins: [addToCart],
   data() {
     return {
       products: []
@@ -44,9 +46,6 @@ export default {
         .get(`/categories/${this.category}`)
         .then(res => {
           this.products = res.data;
-        })
-        .catch(err => {
-          console.log(err);
         });
     }
   }

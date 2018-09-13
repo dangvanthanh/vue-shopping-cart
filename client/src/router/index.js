@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 import Products from '../components/Products.vue';
-import Product from '../components/Product.vue';
+import ProductDetail from '../components/ProductDetail.vue';
 import Category from '../components/Category.vue';
 import CheckOut from '../components/CheckOut.vue';
 
@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/product/:id',
     name: 'product',
-    component: Product,
+    component: ProductDetail,
     props: true
   },
   {
