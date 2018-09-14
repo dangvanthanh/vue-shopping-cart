@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import Products from '../components/Products.vue';
+import Home from '../components/Home.vue';
 import ProductDetail from '../components/ProductDetail.vue';
 import Category from '../components/Category.vue';
 import CheckOut from '../components/CheckOut.vue';
@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Products
+    component: Home
   },
   {
     path: '/product/:id',

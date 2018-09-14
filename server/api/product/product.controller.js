@@ -1,4 +1,4 @@
-const config = require('../../config');
+const config = require('../../config/config');
 const Product = require('./product.model');
 
 exports.findAll = async (req, res, next) => {

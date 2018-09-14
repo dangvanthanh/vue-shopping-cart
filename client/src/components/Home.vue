@@ -21,7 +21,7 @@
 
 <script>
 import Api from '../config/api';
-import Product from './Product.vue';
+import Product from './product/Product.vue';
 
 export default {
   components: {Product},
@@ -64,7 +64,13 @@ export default {
 <style>
 .cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 </style>

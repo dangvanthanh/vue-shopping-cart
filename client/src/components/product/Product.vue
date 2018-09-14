@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import addToCart from '../mixins/addToCart';
+import addToCart from '../../mixins/addToCart';
 
 export default {
   props: ['product'],

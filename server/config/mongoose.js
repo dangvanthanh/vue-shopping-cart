@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const config = require('./');
+const config = require('./config');
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
 exports.connect = () => {
   mongoose.connect(
-    config.db,
+    `${config.mongo.uri}${config.mongo.db}`,
     { useNewUrlParser: true }
   );
   return mongoose.connection;

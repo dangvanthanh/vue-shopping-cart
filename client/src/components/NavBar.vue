@@ -2,16 +2,22 @@
   <div class="container mw-7 mx-auto mt-4">
     <nav class="flex">
       <div class="flex">
-        <router-link class="block no-underline text-grey-dark mt-3" tag="a" :to="{ name: 'home' }">Vue Shopping Cart</router-link>
+        <router-link
+          tag="a" 
+          :to="{ name: 'home' }" 
+          class="block no-underline text-grey-dark mt-3">
+          Vue Shopping Cart
+        </router-link>
       </div>
       <div class="flex-grow">
         <div class="flex-grow text-right">
-          <div v-for="category in categories" :key="category._id" class="inline-block">
-            <router-link class="block no-underline p-3 text-grey-dark text-capitalize" tag="a" :to="{ name: 'category', params: { category: category.title } }">
-              {{ category.title  }}
-            </router-link>
-          </div>
-          <router-link tag="a" :to = "{name: 'checkout'}" class="inline-block">Cart(<span class="badge badge-light">{{ cart.length }}</span>)</router-link>
+          <Category :categories="categories"/>
+          <router-link 
+            tag="a" 
+            :to = "{name: 'checkout'}" 
+            class="inline-block">
+            Cart(<span class="badge badge-light">{{ cart.length }}</span>)
+          </router-link>
         </div>
       </div>
     </nav>
@@ -20,8 +26,10 @@
 
 <script>
 import Api from '../config/api';
+import Category from './category/Category.vue';
 
 export default {
+  components: {Category},
   data() {
     return {
       categories: []
