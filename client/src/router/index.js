@@ -1,31 +1,31 @@
 import VueRouter from 'vue-router';
-import Home from '../components/Home.vue';
-import ProductDetail from '../components/ProductDetail.vue';
-import Category from '../components/Category.vue';
-import CheckOut from '../components/CheckOut.vue';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/product/:id',
     name: 'product',
-    component: ProductDetail,
+    component: () => import('@/views/ProductDetail.vue'),
     props: true
   },
   {
     path: '/category/:category',
     name: 'category',
-    component: Category,
+    component: () => import('@/views/ProductCategory.vue'),
     props: true
   },
   {
     path: '/checkout',
     name: 'checkout',
-    component: CheckOut
+    component: () => import('@/views/CheckOut.vue')
+  },
+  {
+    path: '*',
+    redirect: { name: 'home' }
   }
 ];
 

@@ -1,46 +1,22 @@
 <template>
-  <div class="container mw-7 mx-auto">
-    <div class="cards">
-      <div class="shadow-lg rounded-lg overflow-hidden" v-for="product in products" :key="product._id">
-        <div class="px-6 py-4">
-          <Product :product="product"/>
-        </div>
-      </div>
+  <div class="inline-block">
+    <div v-for="category in categories" :key="category._id" class="inline-block">
+      <router-link 
+        tag="a" 
+        :to="{ name: 'category', params: { category: category.title } }" 
+        class="block no-underline p-3 text-grey-dark text-capitalize" >
+        {{ category.title  }}
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import Api from '../config/api';
-import Product from './product/Product.vue';
-
 export default {
-  props: ['category'],
-  components: {Product},
-  data() {
-    return {
-      products: []
-    };
-  },
-  created() {
-    this.fetch();
-  },
-  watch: {
-    $route(to, from) {
-      if (from.params.category !== to.params.category) {
-        this.fetch();
-      }
-    }
-  },
-  methods: {
-    fetch() {
-      Api()
-        .get(`/categories/${this.category}`)
-        .then(res => {
-          this.products = res.data;
-        });
-    }
-  }
-};
+  props: ['categories']
+}
 </script>
+
+<style scoped>
+</style>
 

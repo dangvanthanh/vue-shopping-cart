@@ -1,22 +1,22 @@
 <template>
-  <div class="container mw-7 mx-auto">
-    <div v-if="cart.length == 0">
+  <div class="container max-w-lg mx-auto mb-4">
+    <div class="bg-white p-2" v-if="cart.length == 0">
       <p>Your cart is empty</p>
     </div>
-    <div v-else>
+    <div class="bg-white p-2" v-else>
       <table class="table-fixed w-full border border-grey-light text-center">
         <thead>
-          <tr class="bg-grey">
-            <th class="p-3">Product</th>
-            <th class="p-3">Price</th>
-            <th class="p-3">Quantity</th>
-            <th class="p-3">Sub Total</th>
-            <th class="p-3">Actions</th>
+          <tr class="bg-grey uppercase text-sm">
+            <th class="px-2 py-3">Product</th>
+            <th class="px-2 py-3">Price</th>
+            <th class="px-2 py-3">Quantity</th>
+            <th class="px-2 py-3">Sub Total</th>
+            <th class="px-2 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in cart" :key="item.id" class="border hover:bg-grey-lighter">
-            <td class="p-2">{{ item.name }}</td>
+            <td class="p-2 text-left">{{ item.name }}</td>
             <td class="p-2">${{ item.price }}</td>
             <td class="p-2">{{ item.qty }}</td>
             <td class="p-2">${{ item.subtotal }}</td>
@@ -28,14 +28,12 @@
           </tr>
         </tbody>
       </table>
-      <h4 class="text-right mt-4">Total: ${{ total }}</h4> 
+      <h4 class="text-right text-2xl mt-6">Total: ${{ total }}</h4> 
     </div>
   </div>
 </template>
 
 <script>
-import Api from '../config/api';
-
 export default {
   computed: {
     cart() {
@@ -90,3 +88,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>
