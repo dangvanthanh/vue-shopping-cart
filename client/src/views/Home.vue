@@ -5,19 +5,18 @@
         <Product :product="product"/>
       </div>
     </div>
-    <!-- <p class="text-center mt-6 mb-0">{{ currentPage }} / {{ pages }}</p> -->
-    <ul class="flex list-reset align-center justify-center mb-4 mt-4">
+    <ul class="flex list-reset align-center justify-center mb-4 mt-6" v-if="pages > 1">
       <li>
         <button 
-          class="block bg-white p-2 mx-2 border border-grey-light rounded"
-          @click="checkPage(currentPage - 1)" 
-          v-if="currentPage !== 1">
+          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-r-none hover:outline-none"
+          @click="checkPage(currentPage)" 
+          :disabled="currentPage === 1">
           Previous
         </button>
       </li>
       <li v-for="page in pages" :key="page">
         <button 
-          class="block bg-white p-2 mx-2 border border-grey-light rounded"
+          class="block bg-white p-2 px-3 border border-grey-light hover:outline-none"
           :disabled="currentPage === page"
           @click="checkPage(page)" >
           {{ page }}
@@ -25,9 +24,9 @@
       </li>
       <li>
         <button 
-          class="block bg-white p-2 mx-2 border border-grey-light rounded"
+          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-l-none hover:outline-none"
           @click="checkPage(currentPage + 1)" 
-          v-if="currentPage !== pages">
+          :disabled="currentPage === pages">
           Next
         </button>
       </li>
@@ -36,11 +35,11 @@
 </template>
 
 <script>
-import Api from '@/config/api';
 import Product from '@/components/Product.vue';
+import ProductService from '@/services/product';
 
 export default {
-  components: {Product},
+  components: { Product },
   data() {
     return {
       products: [],
@@ -49,23 +48,19 @@ export default {
     };
   },
   created() {
-    Api()
-      .get('/products')
-      .then(res => {
+    ProductService.getProducts().then(res => {
+      this.products = res.data.products;
+      this.currentPage = res.data.currentPage;
+      this.pages = res.data.pages;
+    });
+  },
+  methods: {
+    checkPage(page) {
+      ProductService.getProductsByPage(page).then(res => {
         this.products = res.data.products;
         this.currentPage = res.data.currentPage;
         this.pages = res.data.pages;
       });
-  },
-  methods: {
-    checkPage(page) {
-      Api()
-        .get(`/products?page=${page}`)
-        .then(res => {
-          this.products = res.data.products;
-          this.currentPage = res.data.currentPage;
-          this.pages = res.data.pages;
-        });
     }
   }
 };

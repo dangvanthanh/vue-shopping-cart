@@ -1,12 +1,12 @@
 <template>
   <div class="container max-w-lg mx-auto mb-4">
-    <div class="bg-white p-2" v-if="cart.length == 0">
+    <div class="bg-white p-6" v-if="cart.length == 0">
       <p>Your cart is empty</p>
     </div>
     <div class="bg-white p-2" v-else>
       <table class="table-fixed w-full border border-grey-light text-center">
         <thead>
-          <tr class="bg-grey uppercase text-sm">
+          <tr class="bg-grey-light uppercase text-sm">
             <th class="px-2 py-3">Product</th>
             <th class="px-2 py-3">Price</th>
             <th class="px-2 py-3">Quantity</th>

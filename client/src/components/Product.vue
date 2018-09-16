@@ -10,7 +10,7 @@
     <button 
       class="block w-full border p-2 rounded mt-2 hover:bg-grey-light" 
       @click="addToCart(product)">
-      Buy Now
+      Add To Cart
     </button>
   </div>
 </template>
