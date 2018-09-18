@@ -3,7 +3,7 @@
     <div class="bg-white p-6" v-if="cart.length == 0">
       <p>Your cart is empty</p>
     </div>
-    <div class="bg-white p-2" v-else>
+    <div class="bg-white p-4" v-else>
       <table class="table-fixed w-full border border-grey-light text-center">
         <thead>
           <tr class="bg-grey-light uppercase text-sm">
@@ -28,7 +28,7 @@
           </tr>
         </tbody>
       </table>
-      <h4 class="text-right text-2xl mt-6">Total: ${{ total }}</h4> 
+      <h4 class="text-right text-xl mt-4">Total: ${{ total }}</h4> 
     </div>
   </div>
 </template>

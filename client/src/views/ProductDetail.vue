@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Api from '@/config/api';
+import ProductService from '@/services/product';
 import addToCart from '@/mixins/addToCart';
 
 export default {
@@ -34,11 +34,9 @@ export default {
     };
   },
   created() {
-    Api()
-      .get(`/products/${this.id}`)
-      .then(res => {
-        this.product = res.data;
-      });
+    ProductService.getProductsById(this.id).then(res => {
+      this.product = res.data;
+    });
   }
 };
 </script>

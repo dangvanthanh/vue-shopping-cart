@@ -5,41 +5,17 @@
         <Product :product="product"/>
       </div>
     </div>
-    <ul class="flex list-reset align-center justify-center mb-4 mt-6" v-if="pages > 1">
-      <li>
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-r-none hover:outline-none"
-          @click="checkPage(currentPage)" 
-          :disabled="currentPage === 1">
-          Previous
-        </button>
-      </li>
-      <li v-for="page in pages" :key="page">
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light hover:outline-none"
-          :disabled="currentPage === page"
-          @click="checkPage(page)" >
-          {{ page }}
-        </button>
-      </li>
-      <li>
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-l-none hover:outline-none"
-          @click="checkPage(currentPage + 1)" 
-          :disabled="currentPage === pages">
-          Next
-        </button>
-      </li>
-    </ul>
+    <Pagination :currentPage="currentPage" :pages="pages" :onPageChange="clickHandlerPage"/>
   </div>
 </template>
 
 <script>
-import Product from '@/components/Product.vue';
 import ProductService from '@/services/product';
+import Product from '@/components/Product.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
-  components: { Product },
+  components: { Product, Pagination },
   data() {
     return {
       products: [],
@@ -55,7 +31,7 @@ export default {
     });
   },
   methods: {
-    checkPage(page) {
+    clickHandlerPage(page) {
       ProductService.getProductsByPage(page).then(res => {
         this.products = res.data.products;
         this.currentPage = res.data.currentPage;

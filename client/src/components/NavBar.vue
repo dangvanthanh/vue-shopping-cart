@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Api from '@/config/api';
+import CategoryService from '@/services/category';
 import Category from '@/components/Category.vue';
 
 export default {
@@ -39,11 +39,9 @@ export default {
     };
   },
   created() {
-    Api()
-      .get('/categories')
-      .then(res => {
-        this.categories = res.data;
-      });
+    CategoryService.getCategories().then(res => {
+      this.categories = res.data;
+    });
   },
   computed: {
     cart() {

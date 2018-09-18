@@ -5,42 +5,18 @@
         <Product :product="product"/>
       </div>
     </div>
-    <ul class="flex list-reset align-center justify-center mb-4 mt-6" v-if="pages > 1">
-      <li>
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-r-none"
-          @click="checkPage(currentPage)" 
-          :disabled="currentPage === 1">
-          Previous
-        </button>
-      </li>
-      <li v-for="page in pages" :key="page">
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light"
-          :disabled="currentPage === page"
-          @click="checkPage(page)" >
-          {{ page }}
-        </button>
-      </li>
-      <li>
-        <button 
-          class="block bg-white p-2 px-3 border border-grey-light rounded rounded-l-none"
-          @click="checkPage(currentPage + 1)" 
-          :disabled="currentPage === pages">
-          Next
-        </button>
-      </li>
-    </ul>
+    <Pagination :currentPage="currentPage" :pages="pages" :onPageChange="clickHandlerPage"/>
   </div>
 </template>
 
 <script>
-import Product from '@/components/Product.vue';
 import CategoryService from '@/services/category';
+import Product from '@/components/Product.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   props: ['category'],
-  components: { Product },
+  components: { Product, Pagination },
   data() {
     return {
       products: [],
@@ -60,13 +36,13 @@ export default {
   },
   methods: {
     fetch() {
-      CategoryService.getCategories(this.category).then(res => {
+      CategoryService.getCategoriesByTitle(this.category).then(res => {
         this.products = res.data.products;
         this.currentPage = res.data.currentPage;
         this.pages = res.data.pages;
       });
     },
-    checkPage(page) {
+    clickHandlerPage(page) {
       CategoryService.getCategoriesByPage(this.category, page).then(res => {
         this.products = res.data.products;
         this.currentPage = res.data.currentPage;

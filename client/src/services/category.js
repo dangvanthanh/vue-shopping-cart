@@ -1,7 +1,11 @@
 import Api from './api';
 
 export default {
-  getCategories(category) {
+  getCategories() {
+    return Api().get(`/categories`);
+  },
+
+  getCategoriesByTitle(category) {
     return Api().get(`/categories/${category}`);
   },
 

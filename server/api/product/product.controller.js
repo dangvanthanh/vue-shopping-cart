@@ -22,7 +22,7 @@ exports.findAll = async (req, res, next) => {
 
 exports.findById = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).lean();
     res.json(product);
   } catch (error) {
     res.status(500).json(error);
