@@ -40,7 +40,7 @@ export default {
   },
   created() {
     CategoryService.getCategories().then(res => {
-      this.categories = res.data;
+      this.categories = res.data.categories;
     });
   },
   computed: {

@@ -7,64 +7,58 @@
       <table class="table-fixed w-full border border-grey-light text-center">
         <thead>
           <tr class="bg-grey-light uppercase text-sm">
-            <th class="px-2 py-3">Product</th>
+            <th></th>
+            <th class="px-2 py-3 text-left">Product</th>
             <th class="px-2 py-3">Price</th>
             <th class="px-2 py-3">Quantity</th>
             <th class="px-2 py-3">Sub Total</th>
-            <th class="px-2 py-3">Actions</th>
+            <th class="px-2 py-3"></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in cart" :key="item.id" class="border hover:bg-grey-lighter">
+          <tr v-for="item in cart" :key="item.id" class="border shadow">
+            <td class="p-2"><img :src="item.image" alt="" class="w-16"></td>
             <td class="p-2 text-left">{{ item.name }}</td>
-            <td class="p-2">${{ item.price }}</td>
-            <td class="p-2">{{ item.qty }}</td>
-            <td class="p-2">${{ item.subtotal }}</td>
+            <td class="p-2">{{ item.price | currency }}</td>
             <td class="p-2">
               <button class="inline-block px-2" @click="action('min', item)">-</button>
-              <button class="inline-block px-2" @click="action('clear', item)">Clear</button>
+              <span class="inline-block w-8">{{ item.qty }}</span>
               <button class="inline-block px-2" @click="action('max', item)">+</button>
+            </td>
+            <td class="p-2">{{ item.subtotal | currency }}</td>
+            <td class="p-2">
+              <button class="px-2" @click="action('clear', item)">&times;</button>
             </td>
           </tr>
         </tbody>
       </table>
-      <h4 class="text-right text-xl mt-4">Total: ${{ total }}</h4> 
+      <h4 class="text-right text-xl mt-4">Total: {{ cartTotal | currency }}</h4> 
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   computed: {
-    cart() {
-      return this.$store.getters.getCart
-    },
-    total() {
-      let total = 0;
-      this.cart.map(item => {
-        total += item.subtotal;
-      });
-
-      return total;
-    }
+    ...mapGetters({
+      cart: 'getCart',
+      cartTotal: 'getCartTotal'
+    })
   },
   methods: {
+    ...mapActions(['incrementCart', 'decrementCart']),
     action(event, item) {
-      switch(event) {
+      switch (event) {
         case 'max':
-          item.qty++;
-          item.subtotal = item.price * item.qty;
-          this.$store.commit('setQuantity', item);
-          this.$store.commit('setPrice', item);
+          this.incrementCart(item);
           localStorage.setItem('cart', JSON.stringify(this.cart));
           break;
         case 'min':
-          item.qty--;
-          item.subtotal = item.price * item.qty;
-          this.$store.commit('setQuantity', item);
-          this.$store.commit('setPrice', item);
+          this.decrementCart(item);
           localStorage.setItem('cart', JSON.stringify(this.cart));
-          
+
           if (item.qty === 0) {
             this.clearFromCart(item);
           }
@@ -73,7 +67,7 @@ export default {
         case 'clear':
           this.clearFromCart(item);
           break;
-        default: 
+        default:
           break;
       }
     },
@@ -86,7 +80,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@ const Product = require('../product/product.model');
 exports.findByAll = async (req, res, next) => {
   try {
     const categories = await Category.find().lean();
-    res.status(200).json(categories);
+    res.status(200).json({ categories });
   } catch (error) {
     res.status(500).json(error);
   }
