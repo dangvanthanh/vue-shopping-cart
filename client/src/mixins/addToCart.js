@@ -6,9 +6,8 @@ export default {
     ...mapActions(['addCart', 'incrementCart']),
     addToCart(product) {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart.length === 0) {
-        this.updateToCart(cart, product);
-      } else {
+
+      if (cart.length) {
         let item = getProductById(cart, product._id);
 
         if (item) {
@@ -18,6 +17,8 @@ export default {
         } else {
           this.updateToCart(cart, product);
         }
+      } else {
+        this.updateToCart(cart, product);
       }
     },
     updateToCart(cart, product) {

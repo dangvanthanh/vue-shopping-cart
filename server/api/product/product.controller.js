@@ -21,9 +21,15 @@ exports.findAll = async (req, res, next) => {
 
 exports.findRelated = async (req, res, next) => {
   try {
-    const products = await Product.find();
+    const product = await Product.findById(req.params.id).lean();
+    const productSize = 3;
+    const products = await Product.aggregate([
+      { $match: { category: product.category } },
+      { $sample: { size: productSize } }
+    ]);
     res.status(200).json({
-      products
+      products,
+      success: true
     });
   } catch (error) {
     res.status(500).json(error);
