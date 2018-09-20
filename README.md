@@ -13,6 +13,12 @@ $ cd server
 $ npm run dev
 ```
 
+The first time you need seeders data for products and categories.
+
+```shell
+$ curl http://localhost:3000/api/seeders
+```
+
 ### Client with Vue.js
 
 ```shell

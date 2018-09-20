@@ -5,7 +5,7 @@
         <Product :product="product"/>
       </div>
     </div>
-    <Pagination :currentPage="currentPage" :pages="pages" :onPageChange="clickHandlerPage"/>
+    <Pagination :currentPage="currentPage" :pages="pages" @handler-page="clickHandlerPage"/>
   </div>
 </template>
 

@@ -5,14 +5,14 @@
         <img :src="product.image" :alt="product.name" class="img-fluid">
       </div>
       <div class="w-1/2 px-2">
-        <h2 class="text-2xl mb-2 leading-tight">{{ product.name }}</h2>
-        <p class="text-sm mb-2">Category: <span class="text-capitalize">{{ product.category }}</span></p>
-        <p class="text-lg font-semibold mb-2">{{ product.price | currency }}</p>
-        <p class="text-base text-grey-darker mb-2">
+        <h2 class="text-2xl mb-2 leading-tight font-medium">{{ product.name }}</h2>
+        <p class="text-lg font-semibold mb-3">{{ product.price | currency }}</p>
+        <p class="text-sm mb-3">Category: <span class="text-capitalize">{{ product.category }}</span></p>
+        <p class="text-base text-grey-darker mb-5">
           {{ product.description }}
         </p>
         <button 
-          class="block w-full border shadow p-2 rounded mt-2 hover:bg-blue-dark hover:text-white" 
+          class="block w-full border shadow p-2 rounded hover:bg-blue-dark hover:text-white" 
           @click="addToCart(product)">
           Add To Cart
         </button>
