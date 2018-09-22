@@ -15,7 +15,7 @@ export default {
   components: {
     Navbar
   }
-}
+};
 </script>
 
 <style>
@@ -39,13 +39,19 @@ export default {
 }
 
 .fade-enter,
-.fade-leave-to { opacity: 0 }
+.fade-leave-to {
+  opacity: 0;
+}
 
 .fade-leave,
-.fade-enter-to { opacity: 1 }
+.fade-enter-to {
+  opacity: 1;
+}
 
 .fade-enter-active,
-.fade-leave-active { transition: opacity 300ms }
+.fade-leave-active {
+  transition: opacity 300ms;
+}
 
 /* .fade-enter-active {
   animation: up 1s;

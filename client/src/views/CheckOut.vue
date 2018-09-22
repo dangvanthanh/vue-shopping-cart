@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-lg mx-auto mb-4">
+  <div class="container max-w-xl mx-auto mb-4">
     <div class="bg-white p-6" v-if="cart.length == 0">
       <p>Your cart is empty</p>
     </div>

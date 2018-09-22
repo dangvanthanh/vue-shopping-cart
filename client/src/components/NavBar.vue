@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white mb-4">
-    <div class="container max-w-lg mx-auto">
+    <div class="container max-w-xl mx-auto">
       <nav class="flex">
         <div class="flex">
           <router-link
@@ -12,7 +12,18 @@
         </div>
         <div class="flex-grow">
           <div class="flex-grow text-right">
-            <Category :categories="categories"/>
+            <router-link
+              tag="a" 
+              :to="{ name: 'login' }" 
+              class="inline-block no-underline p-3 text-grey-dark text-capitalize">
+              Login
+            </router-link>
+            <router-link
+              tag="a" 
+              :to="{ name: 'signup' }" 
+              class="inline-block no-underline p-3 text-grey-dark text-capitalize">
+              Signup
+            </router-link>
             <router-link 
               tag="a" 
               :to = "{name: 'checkout'}" 
@@ -32,25 +43,13 @@
 </template>
 
 <script>
-import CategoryService from '@/services/category';
-import Category from '@/components/Category.vue';
+import { mapGetters } from 'vuex';
 
 export default {
-  components: { Category },
-  data() {
-    return {
-      categories: []
-    };
-  },
-  created() {
-    CategoryService.getCategories().then(res => {
-      this.categories = res.data.categories;
-    });
-  },
   computed: {
-    cart() {
-      return this.$store.getters.getCart;
-    }
+    ...mapGetters({
+      cart: 'getCart'
+    })
   }
 };
 </script>
