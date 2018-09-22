@@ -7,11 +7,17 @@
       <label class="block mb-2">
         <input type="password" placeholder="Password" class="w-full border border-grey-light p-3" v-model="password">
       </label>
-      <button class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold" @click.prevent="signup">Create a account</button>
-      <div class="text-center mt-8">
+      <button 
+        class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold" 
+        :class="{ 'opacity-75 pointer-events-none': isDisabled }"
+        @click.prevent="signup">
+        Create a account
+      </button>
+      <div class="text-center mt-6">
         <router-link
           tag="a" 
           :to="{ name: 'login' }" 
+          :class="{ 'opacity-75 pointer-events-none': isDisabled }"
           class="inline-block no-underline text-blue-dark hover:text-grey">
           Back to Login
         </router-link>
@@ -27,7 +33,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      isDisabled: false
     };
   },
   methods: {
@@ -35,11 +42,17 @@ export default {
       const username = this.username;
       const password = this.password;
 
-      UserService.signup({ username, password }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      })
+      this.isDisabled = true;
+
+      UserService.signup({ username, password })
+        .then(res => {
+          console.log(res);
+          this.isDisabled = false;
+        })
+        .catch(err => {
+          console.log(err);
+          this.isDisabled = false;
+        });
     }
   }
 };

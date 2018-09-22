@@ -9,6 +9,7 @@
   "author": "Dang Van Thanh <chieuhue@gmail.com> (dangthanh.org)",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",

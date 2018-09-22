@@ -7,7 +7,7 @@
             tag="a" 
             :to="{ name: 'home' }" 
             class="block no-underline text-grey-dark mt-4">
-            Cartyyy
+            Shopyyy
           </router-link>
         </div>
         <div class="flex-grow">

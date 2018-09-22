@@ -1,8 +1,8 @@
 import Api from './api';
 
 export default {
-  login() {
-    return Api().post(`/users/login`);
+  login(params) {
+    return Api().post(`/users/login`, params);
   },
 
   signup(params) {
