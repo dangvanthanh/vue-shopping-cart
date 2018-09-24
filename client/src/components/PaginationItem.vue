@@ -2,7 +2,7 @@
   <a 
     href="#" 
     class="inline-block no-underline text-grey-darker bg-white p-2 px-3 shadow-md" 
-    @click="handlerClick">
+    @click.prevent="handlerClick">
     <slot></slot>
   </a>
 </template>

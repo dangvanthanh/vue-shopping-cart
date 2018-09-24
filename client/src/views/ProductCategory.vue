@@ -10,7 +10,7 @@
             <Product :product="product"/>
           </div>
         </div>
-        <Pagination :currentPage="currentPage" :pages="pages" @handler-page="clickHandlerPage"/>
+        <Pagination :currentPage="currentPage" :pages="pages" pageLimit="5" @handler-page="clickHandlerPage"/>
       </div>
     </div>
   </div>

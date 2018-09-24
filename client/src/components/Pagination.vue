@@ -1,11 +1,11 @@
 <template>
-  <div class="mb-4 mt-6" v-if="_pages > 1">
+  <div class="mb-4 mt-6" v-if="totalPages > 1">
     <div class="flex align-center justify-center">
       <div class="flex">
         <PaginationItem 
           class="rounded rounded-r-none" 
           @hanlder-click="handlerPage(_currentPage - 1)" 
-          :class="{ 'cursor-default text-grey-light pointer-events-none': _currentPage === 1 }">
+          v-if="isFirst">
           Previous
         </PaginationItem>
       </div>
@@ -20,7 +20,7 @@
       <div class="flex">
         <PaginationItem 
           @hanlder-click="handlerPage(_currentPage + 1)" 
-          :class="{ 'cursor-default text-grey-light pointer-events-none': _currentPage === _pages }">
+          v-if="isLast">
           Next
         </PaginationItem>
       </div>
@@ -32,29 +32,60 @@
 import PaginationItem from '@/components/PaginationItem.vue';
 
 export default {
-  props: ['currentPage', 'pages'],
+  props: ['currentPage', 'pageLimit', 'pages'],
   components: { PaginationItem },
+  data() {
+    return {
+      isHasTotalPages: false,
+      isFirst: false,
+      isLast: false,
+      _pages: []
+    };
+  },
   computed: {
     _currentPage() {
       return this.currentPage;
     },
-    _pages() {
-      return this.pages;
+    _pageLimit() {
+      return this.pageLimit || 5
     },
-    _limit() {
-      return this.limit || 3;
+    totalPages() {
+      if (this.pages && !this.isHasTotalPages) {
+        this.isHasTotalPages = true;
+        this.pagination(1, this.pages);
+      }
+
+      return this.pages;
     }
   },
   methods: {
     handlerPage(page) {
       this.$emit('handler-page', page);
+      this.pagination(page, this.totalPages);
     },
-    pagination(page) {
-      return (
-        Math.abs(page - this._currentPage) < this._limit ||
-        page == this._pages - 1 ||
-        page == 0
-      );
+    pagination(current, total) {
+      this._pages = [];
+      let upperLimit, lowerLimit;
+      const currentPage = (lowerLimit = upperLimit = Math.min(current, total));
+
+      for (let b = 1; b < this._pageLimit && b < total; ) {
+        if (lowerLimit > 1) {
+          lowerLimit--;
+          b++;
+        }
+
+        if (b < this._pageLimit && upperLimit < total) {
+          upperLimit++;
+          b++;
+        }
+      }
+
+      for (let i = lowerLimit; i <= upperLimit; i++) {
+        this._pages.push(i);
+      }
+
+      this.isFirst = this._pages.indexOf(1) === -1;
+      this.isLast = this._pages.indexOf(total) === -1;
     }
   }
 };
