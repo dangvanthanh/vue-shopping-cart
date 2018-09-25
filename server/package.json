@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon ./app.js"
+    "dev": "node app.js",
+    "debug": "ndb npm run dev"
   },
   "author": "Dang Van Thanh <chieuhue@gmail.com> (dangthanh.org)",
   "license": "MIT",
@@ -17,8 +18,5 @@
     "mongoose": "^5.2.13",
     "mongoose-paginate": "^5.0.3",
     "mongoose-unique-validator": "^2.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
   }
 }

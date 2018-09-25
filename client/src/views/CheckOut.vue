@@ -3,7 +3,7 @@
     <div class="bg-white p-6" v-if="cart.length == 0">
       <p>Your cart is empty</p>
     </div>
-    <div class="bg-white p-4" v-else>
+    <div class="bg-white rounded box-shadow p-4" v-else>
       <table class="table-fixed w-full border border-grey-light text-center">
         <thead>
           <tr class="bg-grey-light uppercase text-sm">

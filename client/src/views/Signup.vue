@@ -1,11 +1,11 @@
 <template>
   <div class="container max-w-sm mx-auto mt-32">
-    <form class="bg-white p-6">
-      <label class="block mb-2">
-        <input type="text" placeholder="Username" class="w-full border border-grey-light p-3" v-model="username">
+    <form class="bg-white rounded box-shadow p-6">
+      <label class="block mb-3">
+        <input type="text" placeholder="Username" class="w-full border border-grey-light p-3 rounded box-shadow" v-model="username">
       </label>
-      <label class="block mb-2">
-        <input type="password" placeholder="Password" class="w-full border border-grey-light p-3" v-model="password">
+      <label class="block mb-3">
+        <input type="password" placeholder="Password" class="w-full border border-grey-light p-3 rounded box-shadow" v-model="password">
       </label>
       <button 
         class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold" 
@@ -46,11 +46,9 @@ export default {
 
       UserService.signup({ username, password })
         .then(res => {
-          console.log(res);
           this.isDisabled = false;
         })
         .catch(err => {
-          console.log(err);
           this.isDisabled = false;
         });
     }

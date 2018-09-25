@@ -13,15 +13,17 @@ module.exports = {
 
         if (isMatch) {
           res.status(201).json({
-            sucess: true
+            success: true
           });
         } else {
           res.status(201).json({
+            success: false,
             msg: 'Wrong username or password'
           });
         }
       } else {
         res.status(201).json({
+          success: false,
           msg: 'Required username or password'
         });
       }
@@ -40,10 +42,10 @@ module.exports = {
         password: hash
       });
 
-      await user.save();
+      const persistedUser = await user.save();
 
       res.status(201).json({
-        success: 'signup'
+        success: true
       });
     } catch (error) {
       res.status(500).json(error);

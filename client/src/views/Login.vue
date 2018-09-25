@@ -1,14 +1,17 @@
 <template>
   <div class="container max-w-sm mx-auto mt-32">
-    <form class="bg-white p-6">
-      <label class="block mb-2">
-        <input type="text" placeholder="Username" class="w-full border border-grey-light p-3" v-model="username">
+    <form class="bg-white rounded box-shadow p-6">
+      <div class="mb-3 p-3 border border-red bg-red-light" v-if="msgError != ''">
+        <span class="text-white font-semibold" v-text="msgError"></span>
+      </div>
+      <label class="block mb-3">
+        <input type="text" placeholder="Username" class="w-full border border-grey-light p-3 rounded box-shadow" v-model="username">
       </label>
-      <label class="block mb-2">
-        <input type="password" placeholder="Password" class="w-full border border-grey-light p-3" v-model="password">
+      <label class="block mb-3">
+        <input type="password" placeholder="Password" class="w-full border border-grey-light p-3 rounded box-shadow" v-model="password">
       </label>
       <button 
-        class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold" 
+        class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold rounded box-shadow" 
         :class="{ 'opacity-75 pointer-events-none': isDisabled }"
         @click.prevent="login">
         Login
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 import UserService from '@/services/user';
 
 export default {
@@ -34,24 +38,34 @@ export default {
     return {
       username: '',
       password: '',
-      isDisabled: false
+      isDisabled: false,
+      msgError: ''
     };
   },
   methods: {
+    ...mapActions(['logIn']),
     login() {
-      const username = this.username;
-      const password = this.password;
+      const vm = this;
+      const username = vm.username;
+      const password = vm.password;
 
-      this.isDisabled = true;
+      vm.isDisabled = true;
 
       UserService.login({ username, password })
         .then(res => {
-          console.log(res);
-          this.isDisabled = false;
+          vm.isDisabled = false;
+
+          if (res.data.success) {
+            vm.msgError = '';
+            vm.logIn();
+            localStorage.setItem('loggedIn', true);
+            this.$router.push('home');
+          } else {
+            vm.msgError = res.data.msg;
+          }
         })
         .catch(err => {
-          console.log(err);
-          this.isDisabled = false;
+          vm.isDisabled = false;
         });
     }
   }

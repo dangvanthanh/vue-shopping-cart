@@ -7,7 +7,7 @@
             tag="a" 
             :to="{ name: 'home' }" 
             class="block no-underline text-grey-dark mt-4">
-            Shopyyy
+            Share Comiccc
           </router-link>
         </div>
         <div class="flex-grow">
@@ -15,15 +15,24 @@
             <router-link
               tag="a" 
               :to="{ name: 'login' }" 
+              v-if="!loggedIn"
               class="inline-block no-underline p-3 text-grey-dark text-capitalize">
               Login
             </router-link>
             <router-link
               tag="a" 
               :to="{ name: 'signup' }" 
+              v-if="!loggedIn"
               class="inline-block no-underline p-3 text-grey-dark text-capitalize">
               Signup
             </router-link>
+            <a 
+              href="#"
+              v-if="loggedIn"
+              class="inline-block no-underline p-3 text-grey-dark text-capitalize"
+              @click.prevent="logout">
+              Logout
+            </a>
             <router-link 
               tag="a" 
               :to = "{name: 'checkout'}" 
@@ -43,13 +52,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters({
+      loggedIn: 'getLoggedIn',
       cart: 'getCart'
     })
+  },
+  methods: {
+    ...mapActions(['logOut']),
+    logout() {
+      this.logOut();
+      localStorage.removeItem('loggedIn');
+      this.$router.push('home');
+    }
   }
 };
 </script>

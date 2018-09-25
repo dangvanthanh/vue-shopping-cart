@@ -26,11 +26,13 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    meta: { requiresAuth: true },
     component: () => import('@/views/Login.vue')
   },
   {
     path: '/signup',
     name: 'signup',
+    meta: { requiresAuth: true },
     component: () => import('@/views/Signup.vue')
   },
   {
@@ -42,6 +44,22 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: 'history'
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const loggedIn = localStorage.getItem('loggedIn');
+
+    if (loggedIn) {
+      next({
+        path: 'home'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
