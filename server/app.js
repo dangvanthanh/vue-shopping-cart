@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -27,6 +26,4 @@ app.use((req, res, next) => {
   next(err);
 });
 
-const server = app.listen(3000, () => {
-  console.log(`Listening on port ${server.address().port}`);
-});
+module.exports = app;

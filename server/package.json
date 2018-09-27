@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "node app.js",
+    "dev": "node ./bin/www",
     "debug": "ndb npm run dev"
   },
   "author": "Dang Van Thanh <chieuhue@gmail.com> (dangthanh.org)",
