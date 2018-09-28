@@ -11,9 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Boostrap model
-require('./api/product/product.model');
-require('./api/category/category.model');
+require('./app.model').initialize();
 
 mongoose.connect();
 

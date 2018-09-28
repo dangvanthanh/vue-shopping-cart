@@ -1,5 +1,10 @@
 import { getProductById } from '@/utils/utils';
-import { ADD_CART, INCREMENT_CART, DECREMENT_CART } from './mutation-types';
+import {
+  ADD_CART,
+  INCREMENT_CART,
+  DECREMENT_CART,
+  CHANGE_CART
+} from './mutation-types';
 
 export default {
   addCart({ commit }, product) {
@@ -12,5 +17,9 @@ export default {
   decrementCart({ state, commit }, product) {
     let item = getProductById(state.cart, product.id);
     commit(DECREMENT_CART, item);
+  },
+  changeCart({ state, commit }, product) {
+    let item = getProductById(state.cart, product.id);
+    commit(CHANGE_CART, item);
   }
 };

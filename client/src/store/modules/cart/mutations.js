@@ -1,4 +1,9 @@
-import { ADD_CART, INCREMENT_CART, DECREMENT_CART } from './mutation-types';
+import {
+  ADD_CART,
+  INCREMENT_CART,
+  DECREMENT_CART,
+  CHANGE_CART
+} from './mutation-types';
 
 export default {
   [ADD_CART](state, payload) {
@@ -10,6 +15,9 @@ export default {
   },
   [DECREMENT_CART](state, payload) {
     payload.qty--;
+    payload.subtotal = payload.price * payload.qty;
+  },
+  [CHANGE_CART](state, payload) {
     payload.subtotal = payload.price * payload.qty;
   }
 };
