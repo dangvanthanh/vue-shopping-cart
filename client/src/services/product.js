@@ -1,19 +1,20 @@
 import Api from './api';
 
+const resource = '/products';
 export default {
   getProducts() {
-    return Api().get('/products');
+    return Api().get(`${resource}`);
   },
 
   getProductsById(id) {
-    return Api().get(`/products/${id}`);
+    return Api().get(`${resource}/${id}`);
   },
 
   getProductsRelatedById(id) {
-    return Api().get(`/products/${id}/related`);
+    return Api().get(`${resource}/${id}/related`);
   },
 
   getProductsByPage(page) {
-    return Api().get(`/products?page=${page}`);
+    return Api().get(`${resource}?page=${page}`);
   }
 };

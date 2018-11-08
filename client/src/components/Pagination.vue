@@ -2,25 +2,32 @@
   <div class="mb-4 mt-6" v-if="totalPages > 1">
     <div class="flex align-center justify-center">
       <div class="flex">
-        <PaginationItem 
-          class="rounded rounded-r-none" 
-          @hanlder-click="handlerPage(_currentPage - 1)" 
-          v-if="isFirst">
+        <PaginationItem
+          class="rounded rounded-r-none"
+          @hanlder-click="handlerPage(_currentPage - 1);"
+          v-if="isFirst"
+        >
           Previous
         </PaginationItem>
       </div>
       <div class="flex">
-        <PaginationItem 
-          v-for="page in _pages" :key="page"
-          @hanlder-click="handlerPage(page)" 
-          :class="{ 'cursor-default text-white pointer-events-none bg-blue-dark': _currentPage === page }">
+        <PaginationItem
+          v-for="page in _pages"
+          :key="page"
+          @hanlder-click="handlerPage(page);"
+          :class="{
+            'cursor-default text-white pointer-events-none bg-blue-dark':
+              _currentPage === page
+          }"
+        >
           {{ page }}
         </PaginationItem>
       </div>
       <div class="flex">
-        <PaginationItem 
-          @hanlder-click="handlerPage(_currentPage + 1)" 
-          v-if="isLast">
+        <PaginationItem
+          @hanlder-click="handlerPage(_currentPage + 1);"
+          v-if="isLast"
+        >
           Next
         </PaginationItem>
       </div>
@@ -29,10 +36,10 @@
 </template>
 
 <script>
-import PaginationItem from '@/components/PaginationItem.vue';
+import PaginationItem from "@/components/PaginationItem.vue";
 
 export default {
-  props: ['currentPage', 'pageLimit', 'pages'],
+  props: ["currentPage", "pageLimit", "pages"],
   components: { PaginationItem },
   data() {
     return {
@@ -47,7 +54,7 @@ export default {
       return this.currentPage;
     },
     _pageLimit() {
-      return this.pageLimit || 5
+      return this.pageLimit || 5;
     },
     totalPages() {
       if (this.pages && !this.isHasTotalPages) {
@@ -60,7 +67,7 @@ export default {
   },
   methods: {
     handlerPage(page) {
-      this.$emit('handler-page', page);
+      this.$emit("handler-page", page);
       this.pagination(page, this.totalPages);
     },
     pagination(current, total) {
@@ -91,5 +98,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

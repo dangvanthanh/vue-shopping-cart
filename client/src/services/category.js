@@ -1,15 +1,16 @@
 import Api from './api';
 
+const resource = '/categories';
 export default {
   getCategories() {
-    return Api().get(`/categories`);
+    return Api().get(`${resource}`);
   },
 
   getCategoriesByTitle(category) {
-    return Api().get(`/categories/${category}`);
+    return Api().get(`${resource}/${category}`);
   },
 
   getCategoriesByPage(category, page) {
-    return Api().get(`/categories/${category}?page=${page}`);
+    return Api().get(`${resource}/${category}?page=${page}`);
   }
 };

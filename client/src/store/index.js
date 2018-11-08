@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import auth from './modules/auth';
-import cart from './modules/cart';
+import auth from './auth.module';
+import cart from './cart.module';
 
 Vue.use(Vuex);
 
