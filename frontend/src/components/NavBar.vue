@@ -17,7 +17,7 @@
               tag="a"
               :to="{ name: 'login' }"
               v-if="!loggedIn"
-              class="inline-block no-underline p-3 text-grey-dark text-capitalize"
+              class="nav-item inline-block no-underline p-3 text-grey-dark capitalize"
             >
               Login
             </router-link>
@@ -25,14 +25,22 @@
               tag="a"
               :to="{ name: 'signup' }"
               v-if="!loggedIn"
-              class="inline-block no-underline p-3 text-grey-dark text-capitalize"
+              class="nav-item inline-block no-underline p-3 text-grey-dark capitalize"
             >
               Signup
+            </router-link>
+            <router-link
+              tag="a"
+              :to="{ name: 'dashboard' }"
+              v-if="loggedIn"
+              class="nav-item inline-block no-underline p-3 text-grey-dark capitalize"
+            >
+              Dashboard
             </router-link>
             <a
               href="#"
               v-if="loggedIn"
-              class="inline-block no-underline p-3 text-grey-dark text-capitalize"
+              class="nav-item inline-block no-underline p-3 text-grey-dark capitalize"
               @click.prevent="logout"
             >
               Logout
@@ -40,7 +48,7 @@
             <router-link
               tag="a"
               :to="{ name: 'checkout' }"
-              class="inline-block no-underline p-3 text-grey-dark text-capitalize"
+              class="inline-block no-underline px-3 py-2 text-grey-dark capitalize"
             >
               <span class="align-middle inline-block">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -60,28 +68,29 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters({
-      loggedIn: "getLoggedIn",
-      cart: "getCart"
+      loggedIn: 'getLoggedIn',
+      cart: 'getCart'
     })
   },
   methods: {
-    ...mapActions(["logOut"]),
+    ...mapActions(['logOut']),
     logout() {
       this.logOut();
-      localStorage.removeItem("loggedIn");
-      this.$router.push("home");
+      localStorage.removeItem('loggedIn');
+      this.$router.push('home');
     }
   }
 };
 </script>
 
 <style>
-.text-capitalize {
-  text-transform: capitalize;
+.nav-item.router-link-exact-active {
+  background-color: #2779bd;
+  color: #fff;
 }
 </style>

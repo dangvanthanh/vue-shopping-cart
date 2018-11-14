@@ -1,16 +1,23 @@
 <template>
   <div class="container max-w-xl mx-auto mb-4">
     <div class="flex">
-      <div class="w-1/4">
-        <Categories/>
-      </div>
+      <div class="w-1/4"><Categories /></div>
       <div class="w-3/4">
         <div class="cards">
-          <div class="shadow-lg rounded-lg overflow-hidden bg-white" v-for="product in products" :key="product._id">
-            <Product :product="product"/>
+          <div
+            class="shadow-lg rounded-lg overflow-hidden bg-white"
+            v-for="product in products"
+            :key="product._id"
+          >
+            <Product :product="product" />
           </div>
         </div>
-        <Pagination :currentPage="currentPage" :pages="pages" pageLimit="5" @handler-page="clickHandlerPage"/>
+        <Pagination
+          :currentPage="currentPage"
+          :pages="pages"
+          pageLimit="5"
+          @handler-page="clickHandlerPage"
+        />
       </div>
     </div>
   </div>
@@ -61,6 +68,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>

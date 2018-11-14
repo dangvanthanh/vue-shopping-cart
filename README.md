@@ -6,22 +6,26 @@ Simple shopping cart with Vue.js and Node.js
 
 ## Usage
 
+```bash
+$ npm run dev
+```
+
 ### Backend with Node.js
 
-```shell
+```bash
 $ cd server
 $ npm run dev
 ```
 
 The first time you need seeders data for products and categories.
 
-```shell
+```bash
 $ curl http://localhost:3000/api/seeders
 ```
 
 ### Client with Vue.js
 
-```shell
+```bash
 $ cd client
 $ npm run serve
 ```

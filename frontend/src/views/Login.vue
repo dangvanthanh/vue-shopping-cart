@@ -1,29 +1,44 @@
 <template>
   <div class="container max-w-sm mx-auto mt-32">
     <form class="bg-white rounded box-shadow p-6 pt-8">
-      <div class="mb-8 p-3 border border-red bg-red-light" v-if="msgError != ''">
+      <div
+        class="mb-8 p-3 border border-red bg-red-light"
+        v-if="msgError != ''"
+      >
         <span class="text-white font-semibold" v-text="msgError"></span>
       </div>
       <div class="block mb-8 relative">
-        <input type="text" placeholder="Username" class="Input-text w-full border border-grey-light p-3 rounded box-shadow" v-model="username">
+        <input
+          type="text"
+          placeholder="Username"
+          class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+          v-model="username"
+        />
         <label class="Input-label">Username</label>
       </div>
       <div class="block mb-3 relative">
-        <input type="password" placeholder="Password" class="Input-text w-full border border-grey-light p-3 rounded box-shadow" v-model="password">
+        <input
+          type="password"
+          placeholder="Password"
+          class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+          v-model="password"
+        />
         <label class="Input-label">Password</label>
       </div>
-      <button 
-        class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold rounded box-shadow" 
+      <button
+        class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold rounded box-shadow"
         :class="{ 'opacity-75 pointer-events-none': isDisabled }"
-        @click.prevent="login">
+        @click.prevent="login"
+      >
         Login
       </button>
       <div class="text-center mt-6">
         <router-link
-          tag="a" 
-          :to="{ name: 'signup' }" 
+          tag="a"
+          :to="{ name: 'signup' }"
           :class="{ 'opacity-75 pointer-events-none': isDisabled }"
-          class="inline-block no-underline text-blue-dark hover:text-grey">
+          class="inline-block no-underline text-blue-dark hover:text-grey"
+        >
           Create new a account?
         </router-link>
       </div>
@@ -32,20 +47,20 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import UserService from "@/services/user";
+import { mapActions } from 'vuex';
+import UserService from '@/services/user';
 
 export default {
   data() {
     return {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       isDisabled: false,
-      msgError: ""
+      msgError: ''
     };
   },
   methods: {
-    ...mapActions(["logIn"]),
+    ...mapActions(['logIn']),
     login() {
       const vm = this;
       const username = vm.username;
@@ -58,15 +73,15 @@ export default {
           vm.isDisabled = false;
 
           if (res.data.success) {
-            vm.msgError = "";
+            vm.msgError = '';
             vm.logIn();
-            localStorage.setItem("loggedIn", true);
-            this.$router.push("home");
+            localStorage.setItem('loggedIn', true);
+            this.$router.push('home');
           } else {
             vm.msgError = res.data.msg;
           }
         })
-        .catch(err => {
+        .catch(() => {
           vm.isDisabled = false;
         });
     }

@@ -4,46 +4,51 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue'),
   },
   {
     path: '/product/:id',
     name: 'product',
     component: () => import('@/views/ProductDetail.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/category/:category',
     name: 'category',
     component: () => import('@/views/ProductCategory.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/checkout',
     name: 'checkout',
-    component: () => import('@/views/CheckOut.vue')
+    component: () => import('@/views/CheckOut.vue'),
   },
   {
     path: '/login',
     name: 'login',
     meta: { requiresAuth: true },
-    component: () => import('@/views/Login.vue')
+    component: () => import('@/views/Login.vue'),
   },
   {
     path: '/signup',
     name: 'signup',
     meta: { requiresAuth: true },
-    component: () => import('@/views/Signup.vue')
+    component: () => import('@/views/Signup.vue'),
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('@/views/dashboard/Dashboard.vue'),
   },
   {
     path: '*',
-    redirect: { name: 'home' }
-  }
+    redirect: { name: 'home' },
+  },
 ];
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
 });
 
 router.beforeEach((to, from, next) => {
@@ -52,7 +57,7 @@ router.beforeEach((to, from, next) => {
 
     if (loggedIn) {
       next({
-        path: 'home'
+        path: 'home',
       });
     } else {
       next();

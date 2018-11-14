@@ -1,16 +1,21 @@
 <template>
   <div class="block box-shadow bg-white mr-4 rounded">
-    <div v-for="(category, index) in categories" :key="category._id" class="block">
-      <router-link 
-        tag="a" 
-        :to="{ name: 'category', params: { category: category.title } }" 
-        :class="{ 
-          'bg-blue-dark text-white': currentCategory == category.title, 
+    <div
+      v-for="(category, index) in categories"
+      :key="category._id"
+      class="block"
+    >
+      <router-link
+        tag="a"
+        :to="{ name: 'category', params: { category: category.title } }"
+        :class="{
+          'bg-blue-dark text-white': currentCategory == category.title,
           'rounded rounded-b-none': index == 0,
-          'rounded rounded-t-none': index == categories.length - 1,
+          'rounded rounded-t-none': index == categories.length - 1
         }"
-        class="block no-underline p-3 text-grey-dark text-capitalize" >
-        {{ category.title  }}
+        class="block no-underline p-3 text-grey-dark capitalize"
+      >
+        {{ category.title }}
       </router-link>
     </div>
   </div>
@@ -26,8 +31,8 @@ export default {
       currentCategory: ''
     };
   },
-    watch: {
-    $route(to, from) {
+  watch: {
+    $route() {
       this.getCurrentCategory();
     }
   },
@@ -41,15 +46,13 @@ export default {
   methods: {
     getCurrentCategory() {
       if (this.$route.params.category) {
-        this.currentCategory = this.$route.params.category
+        this.currentCategory = this.$route.params.category;
       } else {
         this.currentCategory = '';
       }
     }
   }
-}
+};
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>

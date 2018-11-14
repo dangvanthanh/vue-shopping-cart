@@ -1,0 +1,27 @@
+{
+  "name": "vue-shopping-cart",
+  "version": "1.0.0",
+  "description": "Simple shopping cart with Vue.js and Node.js",
+  "workscapes": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run --prefix frontend serve",
+    "dev:backend": "npm run --prefix backend dev",
+    "dev": "run-p dev:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangvanthanh/vue-shopping-cart.git"
+  },
+  "author": "Dang Van Thanh <chieuhue@gmail.com> (dangthanh.org)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dangvanthanh/vue-shopping-cart/issues"
+  },
+  "homepage": "https://github.com/dangvanthanh/vue-shopping-cart#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.3"
+  }
+}
