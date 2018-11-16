@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 Vue.filter('currency', currency);
 
 new Vue({
-  store,
   router,
-  render: h => h(App),
+  store,
+  render: h => h(App)
 }).$mount('#app');

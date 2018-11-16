@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white mb-4">
-    <div class="container max-w-xl mx-auto">
+    <div class="container max-w-xl mx-auto px-4">
       <nav class="flex">
         <div class="flex">
           <router-link
@@ -73,7 +73,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   computed: {
     ...mapGetters({
-      loggedIn: 'getLoggedIn',
+      loggedIn: 'isAuthenticated',
       cart: 'getCart'
     })
   },

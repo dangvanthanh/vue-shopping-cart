@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-xl mx-auto mb-4">
+  <div class="container max-w-xl mx-auto mb-4 px-4">
     <div class="flex">
       <div class="w-1/4"><Categories /></div>
       <div class="w-3/4">

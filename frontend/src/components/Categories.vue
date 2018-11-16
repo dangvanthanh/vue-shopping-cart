@@ -1,5 +1,5 @@
 <template>
-  <div class="block box-shadow bg-white mr-4 rounded">
+  <div class="block box-shadow bg-white rounded md:mr-4">
     <div
       v-for="(category, index) in categories"
       :key="category._id"

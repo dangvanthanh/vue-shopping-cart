@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-xl mx-auto mb-4">
+  <div class="container max-w-xl mx-auto mb-4 px-4">
     <div class="flex bg-white p-2 shadow">
       <div class="w-1/2">
         <img :src="currentProduct.image" :alt="currentProduct.name" class="img-fluid">

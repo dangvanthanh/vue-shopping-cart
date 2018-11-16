@@ -2,11 +2,21 @@
   <div class="container max-w-sm mx-auto mt-32">
     <form class="bg-white rounded box-shadow p-6 pt-10">
       <div class="block mb-8 relative">
-        <input type="text" placeholder="Username" class="Input-text w-full border border-grey-light p-3 rounded box-shadow" v-model="username">
+        <input 
+          type="text" 
+          placeholder="Username" 
+          class="Input-text w-full border border-grey-light p-3 rounded box-shadow" 
+          autocomplete="username"
+          v-model="username">
         <label class="Input-label">Username</label>
       </div>
       <div class="block mb-3 relative">
-        <input type="password" placeholder="Password" class="Input-text w-full border border-grey-light p-3 rounded box-shadow" v-model="password">
+        <input 
+          type="password" 
+          placeholder="Password" 
+          class="Input-text w-full border border-grey-light p-3 rounded box-shadow" 
+          autocomplete="current-password"
+          v-model="password">
         <label class="Input-label">Password</label>
       </div>
       <button 

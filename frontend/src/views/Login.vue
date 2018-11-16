@@ -12,6 +12,7 @@
           type="text"
           placeholder="Username"
           class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+          autocomplete="username"
           v-model="username"
         />
         <label class="Input-label">Username</label>
@@ -21,6 +22,7 @@
           type="password"
           placeholder="Password"
           class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+          autocomplete="current-password"
           v-model="password"
         />
         <label class="Input-label">Password</label>
@@ -48,7 +50,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import UserService from '@/services/user';
 
 export default {
   data() {
@@ -68,17 +69,16 @@ export default {
 
       vm.isDisabled = true;
 
-      UserService.login({ username, password })
-        .then(res => {
+      const body = { username, password };
+
+      this.logIn(body)
+        .then(data => {
           vm.isDisabled = false;
 
-          if (res.data.success) {
-            vm.msgError = '';
-            vm.logIn();
-            localStorage.setItem('loggedIn', true);
+          if (data.success) {
             this.$router.push('home');
           } else {
-            vm.msgError = res.data.msg;
+            vm.msgError = data.msg;
           }
         })
         .catch(() => {

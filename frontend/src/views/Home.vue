@@ -1,8 +1,8 @@
 <template>
-  <div class="container max-w-xl mx-auto mb-4">
-    <div class="flex">
-      <div class="w-1/4"><Categories /></div>
-      <div class="w-3/4">
+  <div class="container max-w-xl mx-auto mb-4 px-4">
+    <div class="flex flex-wrap">
+      <div class="w-full mb-6 md:w-1/4 md:mb-0"><Categories /></div>
+      <div class="w-full md:w-3/4">
         <div class="cards">
           <div
             class="flex shadow-lg rounded-lg overflow-hidden bg-white"

@@ -1,70 +1,92 @@
 import VueRouter from 'vue-router';
+import NProgress from 'nprogress';
+import store from '../store/';
+
+const isAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next('/home');
+  } else {
+    next();
+  }
+};
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/Home.vue'),
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/product/:id',
     name: 'product',
     component: () => import('@/views/ProductDetail.vue'),
-    props: true,
+    props: true
   },
   {
     path: '/category/:category',
     name: 'category',
     component: () => import('@/views/ProductCategory.vue'),
-    props: true,
+    props: true
   },
   {
     path: '/checkout',
     name: 'checkout',
-    component: () => import('@/views/CheckOut.vue'),
+    component: () => import('@/views/CheckOut.vue')
   },
   {
     path: '/login',
     name: 'login',
-    meta: { requiresAuth: true },
     component: () => import('@/views/Login.vue'),
+    beforeEnter: isAuthenticated
   },
   {
     path: '/signup',
     name: 'signup',
-    meta: { requiresAuth: true },
     component: () => import('@/views/Signup.vue'),
+    beforeEnter: isAuthenticated
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('@/views/dashboard/Dashboard.vue'),
+    meta: { requiresAuth: true },
+    component: () => import('@/views/dashboard/Dashboard.vue')
   },
   {
     path: '*',
-    redirect: { name: 'home' },
-  },
+    redirect: { name: 'home' }
+  }
 ];
 
 const router = new VueRouter({
   routes,
-  mode: 'history',
+  mode: 'history'
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    const loggedIn = localStorage.getItem('loggedIn');
-
-    if (loggedIn) {
-      next({
-        path: 'home',
-      });
-    } else {
-      next();
-    }
-  } else {
-    next();
+  if (!to.meta.requiresAuth) {
+    return next();
   }
+
+  if (!store.getters.isAuthenticated) {
+    return next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    });
+  }
+
+  next();
+});
+
+router.beforeResolve((to, from, next) => {
+  if (to.name) {
+    NProgress.start();
+  }
+
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
