@@ -6,10 +6,6 @@ Simple shopping cart with Vue.js and Node.js
 
 ## Usage
 
-```bash
-$ npm run dev
-```
-
 ### Backend with Node.js
 
 ```bash

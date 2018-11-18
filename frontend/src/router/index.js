@@ -14,52 +14,65 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue'),
   },
   {
     path: '/product/:id',
     name: 'product',
     component: () => import('@/views/ProductDetail.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/category/:category',
     name: 'category',
     component: () => import('@/views/ProductCategory.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/checkout',
     name: 'checkout',
-    component: () => import('@/views/CheckOut.vue')
+    component: () => import('@/views/CheckOut.vue'),
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue'),
-    beforeEnter: isAuthenticated
+    beforeEnter: isAuthenticated,
   },
   {
     path: '/signup',
     name: 'signup',
     component: () => import('@/views/Signup.vue'),
-    beforeEnter: isAuthenticated
+    beforeEnter: isAuthenticated,
   },
   {
     path: '/dashboard',
     name: 'dashboard',
     meta: { requiresAuth: true },
-    component: () => import('@/views/dashboard/Dashboard.vue')
+    component: () => import('@/views/dashboard/Dashboard.vue'),
   },
   {
     path: '*',
-    redirect: { name: 'home' }
-  }
+    redirect: { name: 'home' },
+  },
 ];
+
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    return savedPosition;
+  }
+
+  if (to.hash) {
+    return { selector: to.hash };
+  }
+
+  return { x: 0, y: 0 };
+};
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  scrollBehavior,
+  mode: 'history',
 });
 
 router.beforeEach((to, from, next) => {
@@ -70,7 +83,7 @@ router.beforeEach((to, from, next) => {
   if (!store.getters.isAuthenticated) {
     return next({
       path: '/login',
-      query: { redirect: to.fullPath }
+      query: { redirect: to.fullPath },
     });
   }
 
