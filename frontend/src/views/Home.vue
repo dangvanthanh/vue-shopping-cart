@@ -36,12 +36,22 @@ export default {
   components: { Product, Pagination, Categories },
   data() {
     return {
+      bottom: false,
       products: [],
       currentPage: 0,
       pages: 0,
-      isLoadMoreBtn: true
+      isLoadMoreBtn: true,
+      isLoadMoreFinish: false
     };
   },
+  watch: {
+    bottom(bottom) {
+      if (bottom && !this.isLoadMoreFinish) {
+        this.loadMoreProduct();
+      }
+    }
+  },
+
   created() {
     ProductService.getProducts().then(res => {
       this.products = res.data.products;
@@ -49,7 +59,19 @@ export default {
       this.pages = res.data.pages;
     });
   },
+  mounted() {
+    window.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible();
+    });
+  },
   methods: {
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
     clickHandlerPage(page) {
       ProductService.getProductsByPage(page).then(res => {
         this.products = res.data.products;
@@ -60,14 +82,18 @@ export default {
     loadMoreProduct() {
       const page = this.currentPage + 1;
       ProductService.getProductsByPage(page).then(res => {
-        if (!res.data.products.length) {
+        const { data } = res;
+
+        if (!data.products.length) {
           this.isLoadMoreBtn = false;
+          this.isLoadMoreFinish = true;
           return;
         }
 
-        res.data.products.forEach(product => {
+        data.products.forEach(product => {
           this.products.push(product);
         });
+
         this.currentPage = page;
       });
     }
