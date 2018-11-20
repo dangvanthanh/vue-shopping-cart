@@ -37,7 +37,7 @@
           Login
         </button>
       </div>
-      <div class="bg-blue-darker px-4 py-3">
+      <div class="bg-blue-darker p-4">
         <p class="mb-0 text-white">
           Haven't account?
           <router-link

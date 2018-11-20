@@ -31,7 +31,7 @@
           Create a account
         </button>
       </div>
-      <div class="bg-blue-darker px-4 py-3">
+      <div class="bg-blue-darker p-4">
         <p class="mb-0 text-white">
           Already signed up?
           <router-link
@@ -68,10 +68,10 @@ export default {
       this.isDisabled = true;
 
       UserService.signup({ username, password })
-        .then(res => {
+        .then(() => {
           this.isDisabled = false;
         })
-        .catch(err => {
+        .catch(() => {
           this.isDisabled = false;
         });
     }
