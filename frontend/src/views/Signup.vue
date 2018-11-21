@@ -5,7 +5,7 @@
         <h2 class="text-xl mb-0">Signup</h2>
       </fieldset>
       <div class="p-4">
-        <div class="block mb-3 relative">
+        <div class="block mb-3">
           <input
             type="text"
             placeholder="Username"
@@ -14,7 +14,7 @@
             v-model="username"
           />
         </div>
-        <div class="block mb-3 relative">
+        <div class="block mb-3">
           <input
             type="password"
             placeholder="Password"

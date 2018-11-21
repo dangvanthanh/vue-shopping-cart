@@ -2,8 +2,8 @@ import Api from './api';
 
 const resource = '/categories';
 export default {
-  getCategories() {
-    return Api().get(`${resource}`);
+  getCategories(params = {}) {
+    return Api().get(`${resource}`, { params: params });
   },
 
   getCategoriesByTitle(category) {

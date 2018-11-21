@@ -10,8 +10,7 @@
         :to="{ name: 'category', params: { category: category.title } }"
         :class="{
           'bg-blue-dark text-white': currentCategory == category.title,
-          'rounded rounded-b-none': index == 0,
-          'rounded rounded-t-none': index == categories.length - 1
+          'border-t border-grey-lighter': index === 0
         }"
         class="block no-underline p-3 text-grey-dark capitalize"
       >
@@ -22,12 +21,11 @@
 </template>
 
 <script>
-import CategoryService from '@/services/category';
+import {mapState} from 'vuex';
 
 export default {
   data() {
     return {
-      categories: [],
       currentCategory: ''
     };
   },
@@ -36,11 +34,12 @@ export default {
       this.getCurrentCategory();
     }
   },
+  computed: {
+    ...mapState({
+      categories: state => state.category.categories
+    })
+  },
   created() {
-    CategoryService.getCategories().then(res => {
-      this.categories = res.data.categories;
-    });
-
     this.getCurrentCategory();
   },
   methods: {

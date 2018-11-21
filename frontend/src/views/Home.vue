@@ -1,8 +1,7 @@
 <template>
   <div class="container max-w-xl mx-auto mb-4 px-4">
     <div class="flex flex-wrap">
-      <div class="w-full mb-6 md:w-1/4 md:mb-0"><Categories /></div>
-      <div class="w-full md:w-3/4">
+      <div class="w-full">
         <div class="cards">
           <div
             class="flex shadow-lg rounded-lg overflow-hidden bg-white"
@@ -15,7 +14,7 @@
         <div class="text-center mt-6">
           <a
             href="#"
-            class="rounder inline-block px-4 py-3 bg-blue-dark text-white no-underline rounded"
+            class="w-full max-w-xs rounded inline-block px-4 py-3 bg-blue-dark text-white no-underline rounded"
             @click.prevent="loadMoreProduct"
             v-if="isLoadMoreBtn"
             >Load more</a
@@ -74,9 +73,10 @@ export default {
     },
     clickHandlerPage(page) {
       ProductService.getProductsByPage(page).then(res => {
-        this.products = res.data.products;
-        this.currentPage = res.data.currentPage;
-        this.pages = res.data.pages;
+        const { data } = res;
+        this.products = data.products;
+        this.currentPage = data.currentPage;
+        this.pages = data.pages;
       });
     },
     loadMoreProduct() {

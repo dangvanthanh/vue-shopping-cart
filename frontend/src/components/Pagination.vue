@@ -54,7 +54,7 @@ export default {
       return this.currentPage;
     },
     _pageLimit() {
-      return this.pageLimit || 5;
+      return this.pageLimit || 8;
     },
     totalPages() {
       if (this.pages && !this.isHasTotalPages) {

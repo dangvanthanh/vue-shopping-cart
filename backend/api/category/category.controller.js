@@ -13,7 +13,7 @@ exports.findByAll = async (req, res, next) => {
 exports.findByCategory = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const pagesize = 6;
+    const pagesize = parseInt(req.query.pagesize) || 8;
     const category = await Category.findOne({
       title: req.params.category
     }).lean();

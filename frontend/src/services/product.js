@@ -2,8 +2,8 @@ import Api from './api';
 
 const resource = '/products';
 export default {
-  getProducts() {
-    return Api().get(`${resource}`);
+  getProducts(params = {}) {
+    return Api().get(`${resource}`, { params: params });
   },
 
   getProductsById(id) {

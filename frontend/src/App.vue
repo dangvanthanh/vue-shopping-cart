@@ -9,16 +9,27 @@
 
 <script>
 import Navbar from './components/NavBar.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'app',
   components: {
     Navbar
+  },
+  created() {
+    this.getAllCategories({ page: 0, pagesize: 8 });
+  },
+  methods: {
+    ...mapActions(['getAllCategories'])
   }
 };
 </script>
 
 <style>
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -35,6 +46,12 @@ export default {
 @media (min-width: 768px) {
   .cards {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 978px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 

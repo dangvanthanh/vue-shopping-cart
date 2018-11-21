@@ -21,6 +21,12 @@ $ curl http://localhost:3000/api/seeders
 
 ### Frontend with Vue.js
 
+Create `.env.local` and update configuration
+
+```
+VUE_APP_BACKEND=http://localhost:3000/api
+```
+
 ```bash
 $ cd frontend 
 $ npm run serve

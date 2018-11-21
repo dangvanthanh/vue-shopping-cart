@@ -4,7 +4,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { currency } from './utils/currency';
-import './app.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);

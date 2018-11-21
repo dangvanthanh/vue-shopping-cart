@@ -11,7 +11,7 @@
         >
           <span class="text-white font-semibold" v-text="msgError"></span>
         </div>
-        <div class="block mb-3 relative">
+        <div class="block mb-3">
           <input
             type="text"
             placeholder="Username"
@@ -20,7 +20,7 @@
             v-model="username"
           />
         </div>
-        <div class="block mb-3 relative">
+        <div class="block mb-3">
           <input
             type="password"
             placeholder="Password"

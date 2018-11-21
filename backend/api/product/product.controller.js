@@ -3,7 +3,7 @@ const Product = require('./product.model');
 exports.findAll = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const pagesize = 6;
+    const pagesize = parseInt(req.query.pagesize) || 8;
     const products = await Product.paginate(
       {},
       { page: page, limit: pagesize }

@@ -1,8 +1,7 @@
 <template>
   <div class="container max-w-xl mx-auto mb-4 px-4">
-    <div class="flex">
-      <div class="w-1/4"><Categories /></div>
-      <div class="w-3/4">
+    <div class="flex flex-wrap">
+      <div class="w-full">
         <div class="cards">
           <div
             class="shadow-lg rounded-lg overflow-hidden bg-white"
@@ -52,16 +51,18 @@ export default {
   methods: {
     fetch() {
       CategoryService.getCategoriesByTitle(this.category).then(res => {
-        this.products = res.data.products;
-        this.currentPage = res.data.currentPage;
-        this.pages = res.data.pages;
+        const { data } = res;
+        this.products = data.products;
+        this.currentPage = data.currentPage;
+        this.pages = data.pages;
       });
     },
     clickHandlerPage(page) {
       CategoryService.getCategoriesByPage(this.category, page).then(res => {
-        this.products = res.data.products;
-        this.currentPage = res.data.currentPage;
-        this.pages = res.data.pages;
+        const { data } = res;
+        this.products = data.products;
+        this.currentPage = data.currentPage;
+        this.pages = data.pages;
       });
     }
   }
