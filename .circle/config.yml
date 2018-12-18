@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-frontend:
+  build_frontend:
     docker:
       - image: circleci/node:8
     working_directory: ~/frontend
@@ -25,7 +25,7 @@ jobs:
           name: Build Frontend
           command: cd frontend && yarn run build
   
-  build-backend:
+  build_backend:
     docker:
       - image: circleci/node:8
     working_directory: ~/backend
@@ -37,7 +37,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cd backend && npm install
+      - run: 
+          name: Install Package
+          command: cd backend && npm install
 
       - save_cache:
           paths:
@@ -48,8 +50,8 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build-frontend
-      - build-backend
+      - build_frontend
+      - build_backend
 
 deployment:
   staging:
