@@ -55,7 +55,7 @@ export default {
   }
 }
 
-.fade-enter,
+/* .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
@@ -68,5 +68,5 @@ export default {
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 300ms;
-}
+} */
 </style>
