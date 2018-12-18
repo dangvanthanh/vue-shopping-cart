@@ -6,26 +6,7 @@ jobs:
     working_directory: ~/frontend
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "frontend/package.json" }}
-            - v1-dependencies-
 
-      - run: 
-          name: Install Packages
-          command: |
-                cd frontend && npm install
-
-      - save_cache:
-          paths:
-            - frontend/node_modules
-          key: v1-dependencies-{{ checksum "frontend/package.json" }}
-        
-      - run: 
-          name: Build Frontend
-          command: |
-                cd frontend && yarn run build
-  
 workflows:
   version: 2
   workflow:
