@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-frontend:
+  frontend:
     docker:
       - image: circleci/node:8.11.2
     working_directory: ~/frontend
@@ -8,13 +8,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-codebase-{{ checksum "frontend/package-lock.json" }}
-            - v1-codebase-
+            - v1-npm-{{ checksum "frontend/package-lock.json" }}
+            - v1-npm-
       - run:
           name: Install Packages
           command: cd ./frontend/ && npm install
       - save_cache:
-          key: v1-codebase-{{ checksum "frontend/package-lock.json" }}
+          key: v1-npm-{{ checksum "frontend/package-lock.json" }}
           paths:
             - ./frontend/node_modules
       - run:
@@ -28,4 +28,4 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build-frontend
+      - frontend
