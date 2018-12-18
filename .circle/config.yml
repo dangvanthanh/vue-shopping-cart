@@ -2,10 +2,27 @@ version: 2
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.11.2
     working_directory: ~/frontend
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-codebase-{{ checksum "frontend/package-lock.json" }}
+            - v1-codebase-
+      - run:
+          name: Install Packages
+          command: cd ./frontend/ && npm install
+      - save_cache:
+          key: v1-codebase-{{ checksum "frontend/package-lock.json" }}
+          paths:
+            - ./frontend/node_modules
+      - run:
+          name: Build Project
+          command: cd ./frontend/ && npm run build:prod
+      - run:
+          name: Move To Public
+          command: mv ./frontend/dist backend/public
 
 workflows:
   version: 2
