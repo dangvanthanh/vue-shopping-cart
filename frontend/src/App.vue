@@ -69,33 +69,4 @@ export default {
 .fade-leave-active {
   transition: opacity 300ms;
 }
-
-/* .fade-enter-active {
-  animation: up 1s;
-  animation-delay: .5s;
-  opacity: 0;
-}
-.fade-leave-active {
-  animation: down 1s;
-}
-
-@keyframes down {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-}
-@keyframes up {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-} */
 </style>
