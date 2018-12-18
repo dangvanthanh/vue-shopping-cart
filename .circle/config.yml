@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  build-frontend:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/frontend
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "frontend/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: cd frontend && npm install
+
+      - save_cache:
+          paths:
+            - frontend/node_modules
+          key: v1-dependencies-{{ checksum "frontend/package.json" }}
+        
+      # run tests!
+      - run: cd frontend && yarn run build
+  
+  build-backend:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/backend
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "backend/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: cd backend && npm install
+
+      - save_cache:
+          paths:
+            - backend/node_modules
+          key: v1-dependencies-{{ checksum "backend/package.json" }}
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build-frontend
+      - build-backend
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: shopyyy
