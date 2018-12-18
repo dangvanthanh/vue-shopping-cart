@@ -12,15 +12,18 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: cd frontend && npm install
+      - run: 
+          name: Install Packages
+          command: cd frontend && npm install
 
       - save_cache:
           paths:
             - frontend/node_modules
           key: v1-dependencies-{{ checksum "frontend/package.json" }}
         
-      # run tests!
-      - run: cd frontend && yarn run build
+      - run: 
+          name: Build Frontend
+          command: cd frontend && yarn run build
   
   build-backend:
     docker:
