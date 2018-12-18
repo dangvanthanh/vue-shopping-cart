@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_frontend:
+  build:
     docker:
       - image: circleci/node:8
     working_directory: ~/frontend
@@ -50,7 +50,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build_frontend
+      - build
       - build_backend
 
 deployment:
