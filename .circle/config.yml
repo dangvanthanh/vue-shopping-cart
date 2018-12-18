@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  frontend:
+  build:
     docker:
       - image: circleci/node:8.11.2
     working_directory: ~/frontend
@@ -28,4 +28,4 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - frontend
+      - build
