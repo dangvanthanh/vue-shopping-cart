@@ -1,7 +1,7 @@
 <template>
   <div class="container max-w-sm mx-auto mt-32">
     <form class="bg-white rounded box-shadow">
-      <fieldset class="bg-grey-light p-4">
+      <fieldset class="p-4">
         <h2 class="text-xl mb-0">Login</h2>
       </fieldset>
       <div class="p-4">
@@ -37,14 +37,14 @@
           Login
         </button>
       </div>
-      <div class="bg-blue-darker p-4">
-        <p class="mb-0 text-white">
+      <div class="p-4">
+        <p class="mb-0 text-black">
           Haven't account?
           <router-link
             tag="a"
             :to="{ name: 'signup' }"
             :class="{ 'opacity-75 pointer-events-none': isDisabled }"
-            class="inline-block no-underline font-bold text-white hover:underline"
+            class="inline-block no-underline font-bold text-black hover:underline"
           >
             Create new a account
           </router-link>

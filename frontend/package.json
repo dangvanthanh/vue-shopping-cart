@@ -15,9 +15,10 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "3.3.0",
+    "@vue/cli-plugin-eslint": "3.3.0",
+    "@vue/cli-service": "3.3.0",
+    "autoprefixer": "9.4.4",
     "postcss-import": "^12.0.1",
     "tailwindcss": "^0.7.3",
     "vue-template-compiler": "^2.5.21"
@@ -34,13 +35,6 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "postcss-import": {},
-      "tailwindcss": {},
-      "autoprefixer": {}
     }
   },
   "browserslist": [

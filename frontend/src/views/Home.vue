@@ -14,7 +14,7 @@
         <div class="text-center mt-6">
           <a
             href="#"
-            class="w-full max-w-xs rounded inline-block px-4 py-3 bg-blue-dark text-white no-underline rounded"
+            class="w-full rounded inline-block px-4 py-3 bg-blue-dark text-white no-underline rounded"
             @click.prevent="loadMoreProduct"
             v-if="isLoadMoreBtn"
             >Load more</a

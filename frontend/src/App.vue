@@ -26,10 +26,6 @@ export default {
 </script>
 
 <style>
-@tailwind preflight;
-@tailwind components;
-@tailwind utilities;
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,19 +50,4 @@ export default {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
-
-/* .fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-leave,
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 300ms;
-} */
 </style>
