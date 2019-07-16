@@ -1,6 +1,6 @@
 <template>
-  <div class="container max-w-sm mx-auto mt-32">
-    <form class="bg-white rounded box-shadow">
+  <div class="max-w-sm mx-auto mt-24">
+    <form class="bg-white">
       <fieldset class="p-4">
         <h2 class="text-xl mb-0">Login</h2>
       </fieldset>
@@ -15,7 +15,7 @@
           <input
             type="text"
             placeholder="Username"
-            class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+            class="Input-text w-full border border-grey-light p-3 rounded shadow"
             autocomplete="username"
             v-model="username"
           />
@@ -24,13 +24,13 @@
           <input
             type="password"
             placeholder="Password"
-            class="Input-text w-full border border-grey-light p-3 rounded box-shadow"
+            class="Input-text w-full border border-grey-light p-3 rounded shadow"
             autocomplete="current-password"
             v-model="password"
           />
         </div>
         <button
-          class="w-full border box-shadow bg-blue-dark text-white p-3 font-semibold rounded box-shadow"
+          class="w-full border shadow bg-blue-600 text-white p-3 font-semibold rounded shadow"
           :class="{ 'opacity-75 pointer-events-none': isDisabled }"
           @click.prevent="login"
         >

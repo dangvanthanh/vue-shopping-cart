@@ -9,10 +9,10 @@
         tag="a"
         :to="{ name: 'category', params: { category: category.title } }"
         :class="{
-          'bg-blue-dark text-white': currentCategory == category.title,
+          'bg-blue-600 text-white': currentCategory == category.title,
           'border-t border-grey-lighter': index === 0
         }"
-        class="block no-underline p-3 text-grey-dark capitalize"
+        class="block no-underline p-3 text-grey-600 capitalize hover:bg-blue-600 hover:text-white"
       >
         {{ category.title }}
       </router-link>

@@ -1,6 +1,6 @@
 <template>
-  <div class="container max-w-xl mx-auto mb-4 px-4">
-    <div class="flex bg-white p-2 shadow">
+  <div class="max-w-6xl mx-auto mb-4 px-4">
+    <div class="flex bg-white p-2 shadow mt-10">
       <div class="w-1/2">
         <img :src="currentProduct.image" :alt="currentProduct.name" class="img-fluid">
       </div>
@@ -12,7 +12,7 @@
           {{ currentProduct.description }}
         </p>
         <button 
-          class="block w-full border shadow p-2 rounded hover:bg-blue-dark hover:text-white" 
+          class="block w-full border shadow p-2 rounded hover:bg-blue-600 hover:text-white" 
           @click="addToCart(currentProduct)">
           Add To Cart
         </button>

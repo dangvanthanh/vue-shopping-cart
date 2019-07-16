@@ -1,7 +1,7 @@
 <template>
-  <div class="container max-w-xl mx-auto mb-4 px-4">
+  <div class="max-w-6xl mx-auto mb-4 px-4">
     <div class="flex flex-wrap">
-      <div class="w-full">
+      <div class="w-full mt-6">
         <div class="cards">
           <div
             class="flex shadow-lg rounded-lg overflow-hidden bg-white"

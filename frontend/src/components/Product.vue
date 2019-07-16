@@ -8,7 +8,7 @@
       <p class="font-semibold text-md mb-2">{{ product.price | currency }}</p>
       <p class="text-sm text-grey-darker mb-2">{{ product.description.substring(0, 50) }}</p>
       <button 
-        class="block w-full border shadow p-2 rounded mt-2 hover:bg-blue-dark hover:text-white" 
+        class="block w-full border shadow p-2 rounded mt-2 hover:bg-blue-600 hover:text-white" 
         @click="addToCart(product)">
         Add To Cart
       </button>

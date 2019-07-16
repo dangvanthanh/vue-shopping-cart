@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-blue-dark mb-4">
-    <div class="container max-w-xl mx-auto px-4">
+  <div class="bg-blue-600 mb-4">
+    <div class="max-w-6xl mx-auto mb-4 px-4">
       <nav class="flex">
         <div class="flex">
           <router-link
             tag="a"
             :to="{ name: 'home' }"
-            class="block no-underline text-white mt-4"
+            class="block no-underline text-white mt-2 text-2xl uppercase font-semibold"
           >
             Shopyyy
           </router-link>
@@ -14,27 +14,19 @@
         <div class="flex-grow">
           <div class="flex-grow text-right">
             <div 
-              class="relative inline-block" 
-              @mouseover="isShowDropdown = true" 
-              @mouseout="isShowDropdown = false">
+              class="relative inline-block group">
               <a 
                 href="#"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue">
+                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400">
                 Category
               </a>
-              <transition name="dropdown">
-                <Categories 
-                  class="text-left absolute pin-l pin-dropdown" 
-                  v-if="isShowDropdown" 
-                  @mouseover="isShowDropdown = true" 
-                  @mouseout="isShowDropdown = false"/>
-              </transition>
+              <Categories class="hidden group-hover:block text-left absolute left-0 pin-dropdown shadow" />
             </div>
             <div class="relative inline-block" v-if="!loggedIn">
               <router-link
                 tag="a"
                 :to="{ name: 'login' }"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue"
+                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
               >
                 Login
               </router-link>
@@ -43,7 +35,7 @@
               <router-link
                 tag="a"
                 :to="{ name: 'signup' }"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue"
+                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
               >
                 Signup
               </router-link>
@@ -53,7 +45,7 @@
                 tag="a"
                 :to="{ name: 'dashboard' }"
                 
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue"
+                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
               >
                 Dashboard
               </router-link>
@@ -61,7 +53,7 @@
             <div class="relative inline-block" v-if="loggedIn">
               <a
                 href="#"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue"
+                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
                 @click.prevent="logout"
               >
                 Logout
@@ -144,7 +136,7 @@ export default {
 }
 
 .pin-dropdown {
-  top: 43px;
+  top: 48px;
   min-width: 150px;
 }
 </style>
