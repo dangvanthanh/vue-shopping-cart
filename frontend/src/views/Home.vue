@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-6xl mx-auto mb-4 px-4">
+    <Categories />
     <div class="flex flex-wrap">
       <div class="w-full mt-6">
         <div class="cards">

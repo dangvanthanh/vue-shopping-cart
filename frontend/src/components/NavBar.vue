@@ -13,15 +13,6 @@
         </div>
         <div class="flex-grow">
           <div class="flex-grow text-right">
-            <div 
-              class="relative inline-block group">
-              <a 
-                href="#"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400">
-                Category
-              </a>
-              <Categories class="hidden group-hover:block text-left absolute left-0 pin-dropdown shadow" />
-            </div>
             <div class="relative inline-block" v-if="!loggedIn">
               <router-link
                 tag="a"
@@ -44,7 +35,6 @@
               <router-link
                 tag="a"
                 :to="{ name: 'dashboard' }"
-                
                 class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
               >
                 Dashboard
@@ -66,9 +56,14 @@
                 class="inline-block no-underline px-3 py-2 text-white capitalize"
               >
                 <span class="align-middle inline-block">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                  >
                     <path
-                      d="M10 19.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm3.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6.305-15l-3.432 12H5.945L3.008 8H14.17l-1.412 5h2.078l1.977-7H0l4.615 11h13.239l3.474-12h1.929L24 3h-4.195z" fill="#ffffff"
+                      d="M10 19.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm3.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6.305-15l-3.432 12H5.945L3.008 8H14.17l-1.412 5h2.078l1.977-7H0l4.615 11h13.239l3.474-12h1.929L24 3h-4.195z"
+                      fill="#ffffff"
                     />
                   </svg>
                 </span>

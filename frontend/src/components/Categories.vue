@@ -1,18 +1,17 @@
 <template>
-  <div class="block box-shadow bg-white rounded md:mr-4">
+  <div class="max-w-6xl mx-auto mb-4 px-4">
     <div
-      v-for="(category, index) in categories"
+      v-for="category in categories"
       :key="category._id"
-      class="block"
+      class="inline-block"
     >
       <router-link
         tag="a"
         :to="{ name: 'category', params: { category: category.title } }"
         :class="{
-          'bg-blue-600 text-white': currentCategory == category.title,
-          'border-t border-grey-lighter': index === 0
+          'border-blue-600 text-blue-600': currentCategory == category.title
         }"
-        class="block no-underline p-3 text-grey-600 capitalize hover:bg-blue-600 hover:text-white"
+        class="block no-underline p-3 text-grey-600 capitalize border-b-4 border-transparent hover:border-blue-600"
       >
         {{ category.title }}
       </router-link>
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   data() {

@@ -4,7 +4,7 @@
       <div class="flex">
         <PaginationItem
           class="rounded rounded-r-none"
-          @hanlder-click="handlerPage(_currentPage - 1);"
+          @hanlder-click="handlerPage(_currentPage - 1)"
           v-if="isFirst"
         >
           Previous
@@ -14,9 +14,9 @@
         <PaginationItem
           v-for="page in _pages"
           :key="page"
-          @hanlder-click="handlerPage(page);"
+          @hanlder-click="handlerPage(page)"
           :class="{
-            'cursor-default text-white pointer-events-none bg-blue-dark':
+            'cursor-default text-white pointer-events-none bg-blue-600':
               _currentPage === page
           }"
         >
@@ -25,7 +25,7 @@
       </div>
       <div class="flex">
         <PaginationItem
-          @hanlder-click="handlerPage(_currentPage + 1);"
+          @hanlder-click="handlerPage(_currentPage + 1)"
           v-if="isLast"
         >
           Next
@@ -36,17 +36,16 @@
 </template>
 
 <script>
-import PaginationItem from "@/components/PaginationItem.vue";
+import PaginationItem from '@/components/PaginationItem.vue';
 
 export default {
-  props: ["currentPage", "pageLimit", "pages"],
+  props: ['currentPage', 'pageLimit', 'pages'],
   components: { PaginationItem },
   data() {
     return {
       isHasTotalPages: false,
       isFirst: false,
-      isLast: false,
-      _pages: []
+      isLast: false
     };
   },
   computed: {
@@ -58,7 +57,6 @@ export default {
     },
     totalPages() {
       if (this.pages && !this.isHasTotalPages) {
-        this.isHasTotalPages = true;
         this.pagination(1, this.pages);
       }
 
@@ -67,13 +65,12 @@ export default {
   },
   methods: {
     handlerPage(page) {
-      this.$emit("handler-page", page);
+      this.$emit('handler-page', page);
       this.pagination(page, this.totalPages);
     },
     pagination(current, total) {
       this._pages = [];
       let upperLimit, lowerLimit;
-      const currentPage = (lowerLimit = upperLimit = Math.min(current, total));
 
       for (let b = 1; b < this._pageLimit && b < total; ) {
         if (lowerLimit > 1) {
