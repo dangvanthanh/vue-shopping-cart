@@ -4,7 +4,7 @@ import { getProductById } from '@/utils/utils';
 export default {
   methods: {
     ...mapActions(['addCart', 'incrementCart']),
-    addToCart(product: any): void {
+    addToCart(product: any) {
       //JSON.parse(localStorage.getItem('cart')) || [];
       let cart: any = [];
 
