@@ -17,22 +17,28 @@
         </thead>
         <tbody>
           <tr v-for="item in cart" :key="item.id" class="border shadow">
-            <td class="p-2"><img :src="item.image" alt="" class="w-16"></td>
+            <td class="p-2"><img :src="item.image" alt="" class="w-16" /></td>
             <td class="p-2 text-left">{{ item.name }}</td>
             <td class="p-2">{{ item.price | currency }}</td>
             <td class="p-2">
-              <button class="inline-block px-2" @click="action('min', item)">-</button>
+              <button class="inline-block px-2" @click="action('min', item)">
+                -
+              </button>
               <span class="inline-block w-8">{{ item.qty }}</span>
-              <button class="inline-block px-2" @click="action('max', item)">+</button>
+              <button class="inline-block px-2" @click="action('max', item)">
+                +
+              </button>
             </td>
             <td class="p-2">{{ item.subtotal | currency }}</td>
             <td class="p-2">
-              <button class="px-2" @click="action('clear', item)">&times;</button>
+              <button class="px-2" @click="action('clear', item)">
+                &times;
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <h4 class="text-right text-xl mt-4">Total: {{ cartTotal | currency }}</h4> 
+      <h4 class="text-right text-xl mt-4">Total: {{ cartTotal | currency }}</h4>
     </div>
   </div>
 </template>
@@ -83,5 +89,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

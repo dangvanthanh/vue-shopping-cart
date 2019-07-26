@@ -29,11 +29,10 @@
 <script>
 import ProductService from '@/services/product';
 import Product from '@/components/Product.vue';
-import Pagination from '@/components/Pagination.vue';
 import Categories from '@/components/Categories.vue';
 
 export default {
-  components: { Product, Pagination, Categories },
+  components: { Product, Categories },
   data() {
     return {
       bottom: false,

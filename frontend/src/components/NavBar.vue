@@ -80,10 +80,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Categories from '@/components/Categories.vue';
 
 export default {
-  components: { Categories },
   data() {
     return {
       isShowDropdown: false
