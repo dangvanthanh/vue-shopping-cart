@@ -13,6 +13,18 @@ $ cd backend
 $ npm run dev
 ```
 
+Create new database name `cartdb` in `mongo` then update `backend/config/config.js`
+
+```
+module.exports = {
+  mongo: {
+    uri: 'mongodb://localhost:27017/',
+    db: 'cartdb'
+  },
+  api: 'http://localhost:3000/api'
+};
+```
+
 The first time you need seeders data for products and categories.
 
 ```bash
