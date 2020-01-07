@@ -6,7 +6,7 @@ exports.connect = () => {
 
   mongoose.connect(
     database,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useUnifiedTopology: true }
   );
 
   return mongoose.connection

@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-blue-600 mb-4">
-    <div class="max-w-6xl mx-auto mb-4 px-4">
-      <nav class="flex">
+  <div class="bg-gray-700">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="flex py-1">
         <div class="flex">
           <router-link
             tag="a"
             :to="{ name: 'home' }"
-            class="block no-underline text-white mt-2 text-2xl uppercase font-semibold"
+            class="block no-underline text-white mt-3 text-2xl uppercase font-semibold leading-none"
           >
             Shopyyy
           </router-link>
@@ -17,7 +17,7 @@
               <router-link
                 tag="a"
                 :to="{ name: 'login' }"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
+                class="router-link inline-block px-3 py-2 mx-1 leading-none text-sm font-medium text-white"
               >
                 Login
               </router-link>
@@ -26,24 +26,15 @@
               <router-link
                 tag="a"
                 :to="{ name: 'signup' }"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
+                class="router-link inline-block px-3 py-2 mx-1 leading-none text-sm font-medium text-white"
               >
                 Signup
               </router-link>
             </div>
             <div class="relative inline-block" v-if="loggedIn">
-              <router-link
-                tag="a"
-                :to="{ name: 'dashboard' }"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
-              >
-                Dashboard
-              </router-link>
-            </div>
-            <div class="relative inline-block" v-if="loggedIn">
               <a
                 href="#"
-                class="nav-item inline-block no-underline p-3 text-white capitalize hover:bg-blue-400"
+                class="router-link inline-block px-3 py-2 mx-1 leading-none text-sm font-medium text-white"
                 @click.prevent="logout"
               >
                 Logout

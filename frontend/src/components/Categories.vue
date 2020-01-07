@@ -20,9 +20,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
+  props: ['categories'],
   data() {
     return {
       currentCategory: ''
@@ -32,11 +31,6 @@ export default {
     $route() {
       this.getCurrentCategory();
     }
-  },
-  computed: {
-    ...mapState({
-      categories: state => state.category.categories
-    })
   },
   created() {
     this.getCurrentCategory();

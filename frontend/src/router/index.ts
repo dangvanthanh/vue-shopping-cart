@@ -49,12 +49,6 @@ const routes = [
     beforeEnter: isAuthenticated
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    meta: { requiresAuth: true },
-    component: () => import('@/views/dashboard/Dashboard.vue')
-  },
-  {
     path: '*',
     redirect: { name: 'home' }
   }

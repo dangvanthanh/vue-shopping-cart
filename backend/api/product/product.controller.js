@@ -21,7 +21,7 @@ exports.findAll = async (req, res, next) => {
 
 exports.findRelated = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id).lean();
+    const product = await Product.findById(req.params.id);
     const productSize = 3;
     const products = await Product.aggregate([
       { $match: { category: product.category } },
@@ -38,7 +38,7 @@ exports.findRelated = async (req, res, next) => {
 
 exports.findById = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id).lean();
+    const product = await Product.findById(req.params.id);
     res.json({ product });
   } catch (error) {
     res.status(500).json(error);

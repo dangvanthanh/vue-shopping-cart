@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <Navbar />
-    <transition name="fade">
-      <router-view />
-    </transition>
+    <header role="banner">
+      <Navbar />
+    </header>
+    <main role="main">
+      <transition name="fade">
+        <router-view />
+      </transition>
+    </main>
   </div>
 </template>
 
@@ -15,12 +19,6 @@ export default {
   name: 'app',
   components: {
     Navbar
-  },
-  created() {
-    this.getAllCategories({ page: 0, pagesize: 8 });
-  },
-  methods: {
-    ...mapActions(['getAllCategories'])
   }
 };
 </script>
@@ -37,6 +35,10 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
+}
+
+.router-link.router-link-exact-active.router-link-active {
+  @apply bg-gray-800 rounded-lg;
 }
 
 @media (min-width: 768px) {

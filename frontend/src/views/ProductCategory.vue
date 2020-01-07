@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-6xl mx-auto mb-4 px-4">
-    <Categories />
+    <Categories :categories="categories" />
     <div class="flex flex-wrap">
       <div class="w-full mt-6">
         <div class="cards">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import CategoryService from '@/services/category';
 import Product from '@/components/Product.vue';
 import Pagination from '@/components/Pagination.vue';
@@ -49,22 +50,32 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      categories: state => state.category.categories
+    })
+  },
   methods: {
-    fetch() {
-      CategoryService.getCategoriesByTitle(this.category).then(res => {
-        const { data } = res;
+    async fetch() {
+      try {
+        const { data } = await CategoryService.getCategoriesByTitle(
+          this.category
+        );
         this.products = data.products;
         this.currentPage = data.currentPage;
         this.pages = data.pages;
-      });
+      } catch (__) {}
     },
-    clickHandlerPage(page) {
-      CategoryService.getCategoriesByPage(this.category, page).then(res => {
-        const { data } = res;
+    async clickHandlerPage(page) {
+      try {
+        const { data } = CategoryService.getCategoriesByPage(
+          this.category,
+          page
+        );
         this.products = data.products;
         this.currentPage = data.currentPage;
         this.pages = data.pages;
-      });
+      } catch (__) {}
     }
   }
 };

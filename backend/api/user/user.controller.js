@@ -42,7 +42,7 @@ module.exports = {
         password: hash
       });
 
-      const persistedUser = await user.save();
+      await user.save();
 
       res.status(201).json({
         success: true

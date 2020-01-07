@@ -13,7 +13,7 @@ export default {
 
         if (item) {
           // check if is not new item
-          // this.incrementCart(item);
+          this.incrementCart(item);
           localStorage.setItem('cart', JSON.stringify(cart));
         } else {
           this.updateToCart(cart, product);
@@ -32,7 +32,7 @@ export default {
         qty: 1
       };
       cart.push(item);
-      // this.addCart(item);
+      this.addCart(item);
       // localStorage.setItem('cart', JSON.stringify(cart));
     }
   }

@@ -3,7 +3,7 @@ const Product = require('../product/product.model');
 
 exports.findByAll = async (req, res, next) => {
   try {
-    const categories = await Category.find().lean();
+    const categories = await Category.find();
     res.status(200).json({ categories });
   } catch (error) {
     res.status(500).json(error);
@@ -16,7 +16,7 @@ exports.findByCategory = async (req, res, next) => {
     const pagesize = parseInt(req.query.pagesize) || 8;
     const category = await Category.findOne({
       title: req.params.category
-    }).lean();
+    });
     const products = await Product.paginate(
       { category: category.title },
       { page: page, limit: pagesize }
