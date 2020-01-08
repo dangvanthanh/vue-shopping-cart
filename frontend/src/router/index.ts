@@ -66,6 +66,14 @@ const scrollBehavior = (to: any, from: any, savedPosition: any) => {
   return { x: 0, y: 0 };
 };
 
+// const originalPush = VueRouter.prototype.push;
+
+// VueRouter.prototype.push = function push(location:any, onResolve:any, onReject:any) {
+//   if (onResolve || onReject)
+//     return originalPush.call(this, location, onResolve, onReject);
+//   return originalPush.call(this, location).catch(err:any => err:any);
+// };
+
 const router = new VueRouter({
   routes,
   scrollBehavior,

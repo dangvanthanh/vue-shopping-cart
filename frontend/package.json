@@ -48,5 +48,17 @@
     "tailwindcss": "^1.1.4",
     "typescript": "^3.7.4",
     "vue-template-compiler": "^2.6.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "npm run lint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

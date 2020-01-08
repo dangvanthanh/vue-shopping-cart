@@ -18,7 +18,8 @@
             class="w-full rounded inline-block px-4 py-3 bg-blue-dark text-white no-underline rounded"
             @click.prevent="loadMoreProduct"
             v-if="isLoadMoreBtn"
-          >Load more</a>
+            >Load more</a
+          >
         </div>
       </div>
     </div>
@@ -28,7 +29,6 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import ProductService from '@/services/product';
-import CategoryService from '@/services/category';
 import Product from '@/components/Product.vue';
 import Categories from '@/components/Categories.vue';
 
@@ -61,17 +61,10 @@ export default {
 
   async created() {
     try {
-      const [products, categories] = await Promise.all([
-        ProductService.getProducts(),
-        CategoryService.getCategories()
-      ])
-
-      console.log(products);
-
-      this.products = products.data.products;
-      this.currentPage = products.data.currentPage;
-      this.pages = products.data.pages;
-      this.getAllCategories(categories.data.categories);
+      const { data } = await ProductService.getProducts();
+      this.products = data.products;
+      this.currentPage = data.currentPage;
+      this.pages = data.pages;
     } catch (__) {}
   },
   mounted() {
@@ -80,7 +73,6 @@ export default {
     });
   },
   methods: {
-    ...mapActions(['getAllCategories']),
     bottomVisible() {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;

@@ -13,12 +13,20 @@
 
 <script>
 import Navbar from './components/NavBar.vue';
-import { mapActions } from 'vuex';
+import CategoryService from '@/services/category';
 
 export default {
   name: 'app',
   components: {
     Navbar
+  },
+  async mounted() {
+    try {
+      const { data } = await CategoryService.getCategories();
+      this.$store.dispatch('getAllCategories', data.categories);
+    } catch {
+      this.$store.dispatch('getAllCategories', []);
+    }
   }
 };
 </script>
