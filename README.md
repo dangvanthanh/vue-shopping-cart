@@ -1,5 +1,14 @@
 # Shopping Cart
 
+## Technology
+
+- Node.js
+- Nest.js
+- Vue.js
+- MongoDB
+
+## Information
+
 Simple shopping cart with Vue.js and Node.js
 
 ![](screenshot.png)
