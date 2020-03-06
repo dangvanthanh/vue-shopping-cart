@@ -1,5 +1,7 @@
 # Shopping Cart
 
+![](screenshot.png)
+
 ## Technologies
 
 - Node.js
@@ -7,8 +9,9 @@
 - Nuxt.js (Vue.js with TypeScript) 
 - MongoDB
 
-## Information
+## Development
 
-Simple shopping cart with Vue.js and Node.js
-
-![](screenshot.png)
+[] TypeScript (linting and formatting)
+[] Nest.js server
+[] Nuxt.js client
+[] Environment configurations
