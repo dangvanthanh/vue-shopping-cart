@@ -11,10 +11,10 @@
 
 ## Development
 
-[x] Lerna monorepo
-[] TypeScript (linting and formatting)
-[] Nest.js server
-[] Nuxt.js client (Vue.js with Vue Composition API)
+- [x] Lerna monorepo
+- [] TypeScript (linting and formatting)
+- [] Nest.js server
+- [] Nuxt.js client (Vue.js with Vue Composition API)
 
 
 ## Getting Started
@@ -37,3 +37,5 @@ Let's adjust `lerna` so we can benefit from npm workspaces:
   "version": "independent"
 }
 ```
+
+### TypeScript
