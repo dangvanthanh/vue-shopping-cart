@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "husky": "^4.2.3",
     "lerna": "^3.20.2"
   }
 }
