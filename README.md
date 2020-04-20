@@ -4,17 +4,19 @@
 
 ## Technologies
 
-- Node.js
-- Nest.js
-- Nuxt.js (Vue.js with TypeScript) 
+- Hapi.js
+- Nuxt.js
+
+## Database
+
 - MongoDB
 
 ## Development
 
 - [x] Lerna monorepo
 - [] TypeScript (linting and formatting)
-- [] Nest.js server
-- [] Nuxt.js client (Vue.js with Vue Composition API)
+- [] Hapi.js server
+- [] Nuxt.js client
 
 
 ## Getting Started
@@ -37,5 +39,3 @@ Let's adjust `lerna` so we can benefit from npm workspaces:
   "version": "independent"
 }
 ```
-
-### TypeScript
