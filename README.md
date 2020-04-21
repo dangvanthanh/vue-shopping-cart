@@ -14,9 +14,9 @@
 ## Development
 
 - [x] Lerna monorepo
-- [] TypeScript (linting and formatting)
-- [] Hapi.js server
-- [] Nuxt.js client
+- [x] TypeScript (linting and formatting)
+- [x] Hapi.js server
+- [x] Nuxt.js client
 
 
 ## Getting Started
