@@ -4,7 +4,7 @@
 
 ## Technologies
 
-- Hapi.js
+- Deno.js
 - Nuxt.js
 
 ## Database
@@ -13,29 +13,5 @@
 
 ## Development
 
-- [x] Lerna monorepo
-- [x] TypeScript (linting and formatting)
-- [x] Hapi.js server
-- [x] Nuxt.js client
-
-
-## Getting Started
-
-### Lerna monorepo
-
-```
-$ npm install -g lerna
-$ cd vue-shopping-cart
-$ lerna init --independent
-```
-
-Let's adjust `lerna` so we can benefit from npm workspaces:
-
-```json
-{
-  "packages": [
-    "packages/*"
-  ],
-  "version": "independent"
-}
-```
+- [x] Deno.js server
+- [x] Nuxt.js (with TypeScritp) client

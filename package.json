@@ -1,8 +1,20 @@
 {
-  "name": "root",
-  "private": true,
-  "devDependencies": {
-    "husky": "^4.2.3",
-    "lerna": "^3.20.2"
-  }
+  "name": "vue-shopping-cart",
+  "version": "1.0.0",
+  "description": "Shopping cart with Vue and Deno",
+  "main": "index.js",
+  "scripts": {
+    "server": "deno run --allow-write --allow-read --allow-plugin --allow-net --allow-env server/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangvanthanh/vue-shopping-cart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dangvanthanh/vue-shopping-cart/issues"
+  },
+  "homepage": "https://github.com/dangvanthanh/vue-shopping-cart#readme"
 }
