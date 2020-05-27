@@ -1,17 +1,17 @@
-# Shopping Cart
+# Vue Shopping Cart
 
 ![](screenshot.png)
 
 ## Technologies
 
 - Deno.js
-- Nuxt.js
+- Vue.js
 
 ## Database
 
-- MongoDB
+- [] MongoDB
 
 ## Development
 
 - [x] Deno.js server
-- [x] Nuxt.js (with TypeScritp) client
+- [] Vue.js (with TypeScritp) client

@@ -1,4 +1,4 @@
-import db from '../helpers/dbconnect.ts';
+import db from '../helpers/dbconnect';
 const database = db.getDatabase;
 const products = database.collection('products');
 
