@@ -7,7 +7,7 @@ products.set('1', {
   thumbnail: ''
 });
 
-products.set('22', {
+products.set('2', {
   id: '2',
   title: 'Shifty Boa White 2020',
   description: 'Focused around comfort and flexibility',
@@ -24,13 +24,12 @@ products.set('3', {
 });
 
 class ProductController {
-  async index({ response }) {
+  async index({ response }: { response: any }) {
     response.body = Array.from(products.values());
   }
 
-  async show({ params, response }) {
-    const id = params ? params.id : 1;
-    response.body = products.get(id);
+  async show({ params, response }: { params: { id: string }; response: any }) {
+    response.body = products.get(params.id);
   }
 
   // async create({ request, response }) {}
