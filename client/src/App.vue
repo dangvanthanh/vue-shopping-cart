@@ -1,6 +1,6 @@
 <template>
   <div class="App">
-    <header class="App-header">
+    <header role="banner">
       <h1>Shopyyy</h1>
     </header>
   </div>
