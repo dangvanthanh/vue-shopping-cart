@@ -7,7 +7,14 @@
   "webDependencies": {},
   "devDependencies": {
     "@snowpack/app-scripts-vue": "^0.8.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "postcss-each": "^0.10.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
     "snowpack": "^2.0.0-0",
+    "tailwindcss": "^1.4.6",
     "vue": "^3.0.0-0"
   }
 }
