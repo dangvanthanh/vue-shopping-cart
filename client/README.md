@@ -1,26 +1,37 @@
-# New Project
+# vue-shopping-cart
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+> Simple shopping cart with Vue.js and Deno.js
 
-## Available Scripts
+## Build setup
 
-### npm start
+### [yarn](https://yarnpkg.com) - recommend
+``` bash
+# Install dependencies
+yarn install
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+# Server with hot reload at localhost:5000
+yarn run dev
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+# Build for production with minification
+yarn run build
+```
 
-### npm test
+### [npm](https://www.npmjs.com/)
+``` bash
+# Install dependencies
+npm install
 
-**⚠️ NOTE:** Vue 3 testing support is still in progress. This template does not ship with a test runner.
+# Server with hot reload at localhost:5000
+npm run dev
 
-### npm run build
+# Build for production with minification
+npm run build
+```
 
-Builds the app for production to the `build/` folder.
-It correctly bundles Vue in production mode and optimizes the build for the best performance.
+## Reference
 
-### Q: What about Eject?
+- For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+## License
+
+MIT © Dang Van Thanh <dangvanthanh@dangthanh.org>

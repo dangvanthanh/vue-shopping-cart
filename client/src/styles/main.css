@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+}
+
+img {
+  filter: sepia(1) hue-rotate(180deg) opacity(.9) grayscale(.7);
+}

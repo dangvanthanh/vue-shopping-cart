@@ -4,7 +4,7 @@ const postcssEach = require('postcss-each');
 const postcssNested = require('postcss-nested');
 const postcssPresetEnv = require('postcss-preset-env');
 const cssMqpacker = require('css-mqpacker');
-const cssnano = require('css-nano');
+const cssnano = require('cssnano');
 
 module.exports = {
   plugins: [

@@ -1,34 +1,37 @@
 <template>
-  <div class="App">
+  <div class="app">
     <header role="banner" class="bg-blue-500">
-      <div class="container mx-auto flex flex-wrap items-center p-5">
-        <router-link to="/" class="flex items-center">
-          <span class="text-xl">Shopyyy</span>
+      <div class="max-w-5xl mx-auto flex flex-wrap items-center px-5 py-3">
+        <router-link
+          to="/"
+          class="flex items-center text-xl text-white leading-none uppercase"
+        >
+          <span>Shopyyy</span>
         </router-link>
-        <nav class="flex flex-1 flex-wrap items-center text-right">
-          <router-link to="/login">Login</router-link>
-          <router-link to="/signup">Signup</router-link>
+        <nav class="flex-1 flex-wrap items-center text-right">
+          <router-link to="/login" class="inline-block text-white"
+            >Login</router-link
+          >
+          <router-link to="/signup" class="inline-block text-white ml-3">
+            Signup</router-link
+          >
         </nav>
       </div>
     </header>
     <main role="main">
-      <div class="container mx-auto">
-        <div class="flex flex-wrap -m-3">
-          <div v-for="n in 8" :key="n" class="w-full p-3 md:w-1/2 lg:w-1/4">
-            <product />
-          </div>
-        </div>
+      <div class="max-w-5xl mx-auto px-5 py-12">
+        <router-view />
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import Product from './components/Product';
-
 export default {
-  components: { Product }
-};
+  name: 'App',
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
