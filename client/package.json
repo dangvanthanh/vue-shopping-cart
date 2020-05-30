@@ -36,16 +36,5 @@
     "rollup-plugin-vue": "^5.1.6",
     "tailwindcss": "^1.4.6",
     "vue-template-compiler": "^2.6.11"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,vue},!dist/*.js": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
