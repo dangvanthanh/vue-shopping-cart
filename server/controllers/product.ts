@@ -23,6 +23,46 @@ products.set('3', {
   thumbnail: ''
 });
 
+products.set('4', {
+  id: '4',
+  title: 'Shifty Boa White 2020',
+  description: 'Focused around comfort and flexibility',
+  price: 95.9,
+  thumbnail: ''
+});
+
+products.set('5', {
+  id: '5',
+  title: 'Shifty Boa White 2020',
+  description: 'Focused around comfort and flexibility',
+  price: 95.9,
+  thumbnail: ''
+});
+
+products.set('6', {
+  id: '6',
+  title: 'Shifty Boa White 2020',
+  description: 'Focused around comfort and flexibility',
+  price: 95.9,
+  thumbnail: ''
+});
+
+products.set('7', {
+  id: '7',
+  title: 'Shifty Boa White 2020',
+  description: 'Focused around comfort and flexibility',
+  price: 95.9,
+  thumbnail: ''
+});
+
+products.set('8', {
+  id: '8',
+  title: 'Shifty Boa White 2020',
+  description: 'Focused around comfort and flexibility',
+  price: 95.9,
+  thumbnail: ''
+});
+
 class ProductController {
   async index({ response }: { response: any }) {
     response.body = Array.from(products.values());

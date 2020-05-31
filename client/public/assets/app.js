@@ -10365,7 +10365,8 @@
   }
 
   var script = {
-    name: "Product"
+    name: "Product",
+    props: ["product"]
   };
 
   function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -10458,7 +10459,7 @@
           "router-link",
           {
             staticClass: "block relative h-48 rounded overflow-hidden",
-            attrs: { to: "/product/1" }
+            attrs: { to: "/product/" + _vm.product.id }
           },
           [
             _c("img", {
@@ -10468,25 +10469,20 @@
           ]
         ),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "mt-3" }, [
+          _c("h2", { staticClass: "text-gray-900 text-lg font-medium" }, [
+            _vm._v(_vm._s(_vm.product.title))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-1" }, [
+            _vm._v("$ " + _vm._s(_vm.product.price))
+          ])
+        ])
       ],
       1
     )
   };
-  var __vue_staticRenderFns__ = [
-    function() {
-      var _vm = this;
-      var _h = _vm.$createElement;
-      var _c = _vm._self._c || _h;
-      return _c("div", { staticClass: "mt-3" }, [
-        _c("h2", { staticClass: "text-gray-900 text-lg font-medium" }, [
-          _vm._v("Shifty Boa White 2020")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "mt-1" }, [_vm._v("$ 75.90")])
-      ])
-    }
-  ];
+  var __vue_staticRenderFns__ = [];
   __vue_render__._withStripped = true;
 
     /* style */
@@ -10522,6 +10518,16 @@
     name: "Home",
     components: {
       Product: __vue_component__
+    },
+    data() {
+      return {
+        products: []
+      };
+    },
+    async mounted() {
+      const res = await fetch("http://localhost:3000/products");
+      const json = await res.json();
+      this.products = json;
     }
   };
 
@@ -10536,11 +10542,11 @@
     return _c(
       "div",
       { staticClass: "flex flex-wrap -m-3" },
-      _vm._l(16, function(n) {
+      _vm._l(_vm.products, function(product) {
         return _c(
           "div",
-          { key: n, staticClass: "w-full p-3 md:w-1/2 lg:w-1/4" },
-          [_c("product")],
+          { key: product.id, staticClass: "w-full p-3 md:w-1/2 lg:w-1/4" },
+          [_c("product", { attrs: { product: product } })],
           1
         )
       }),
@@ -11050,7 +11056,7 @@
     );
 
   var script$4 = {
-    name: "NotFound"
+    name: "Login"
   };
 
   /* script */
@@ -11061,7 +11067,7 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", [_vm._v("Not found")])
+    return _c("div", [_vm._v("Login")])
   };
   var __vue_staticRenderFns__$4 = [];
   __vue_render__$4._withStripped = true;
@@ -11095,6 +11101,98 @@
       undefined
     );
 
+  var script$5 = {
+    name: "Signup"
+  };
+
+  /* script */
+  const __vue_script__$5 = script$5;
+
+  /* template */
+  var __vue_render__$5 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", [_vm._v("Signup")])
+  };
+  var __vue_staticRenderFns__$5 = [];
+  __vue_render__$5._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$5 = undefined;
+    /* scoped */
+    const __vue_scope_id__$5 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$5 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$5 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$5 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+      __vue_inject_styles__$5,
+      __vue_script__$5,
+      __vue_scope_id__$5,
+      __vue_is_functional_template__$5,
+      __vue_module_identifier__$5,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+  var script$6 = {
+    name: "NotFound"
+  };
+
+  /* script */
+  const __vue_script__$6 = script$6;
+
+  /* template */
+  var __vue_render__$6 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", [_vm._v("Not found")])
+  };
+  var __vue_staticRenderFns__$6 = [];
+  __vue_render__$6._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$6 = undefined;
+    /* scoped */
+    const __vue_scope_id__$6 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$6 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$6 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$6 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+      __vue_inject_styles__$6,
+      __vue_script__$6,
+      __vue_scope_id__$6,
+      __vue_is_functional_template__$6,
+      __vue_module_identifier__$6,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
   Vue.use(VueRouter);
   const routes = [{
     path: "/",
@@ -11105,9 +11203,17 @@
     name: "product",
     component: __vue_component__$3
   }, {
+    path: "/login",
+    name: "login",
+    component: __vue_component__$4
+  }, {
+    path: "/signup",
+    name: "signup",
+    component: __vue_component__$5
+  }, {
     path: "/404",
     name: "404",
-    component: __vue_component__$4
+    component: __vue_component__$6
   }, {
     path: "*",
     redirect: "/404"
@@ -11132,14 +11238,14 @@
     scrollBehavior
   });
 
-  var script$5 = {
+  var script$7 = {
     name: "App"
   };
 
   /* script */
-  const __vue_script__$5 = script$5;
+  const __vue_script__$7 = script$7;
   /* template */
-  var __vue_render__$5 = function() {
+  var __vue_render__$7 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -11200,17 +11306,17 @@
       ])
     ])
   };
-  var __vue_staticRenderFns__$5 = [];
-  __vue_render__$5._withStripped = true;
+  var __vue_staticRenderFns__$7 = [];
+  __vue_render__$7._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$5 = undefined;
+    const __vue_inject_styles__$7 = undefined;
     /* scoped */
-    const __vue_scope_id__$5 = undefined;
+    const __vue_scope_id__$7 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$5 = undefined;
+    const __vue_module_identifier__$7 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$5 = false;
+    const __vue_is_functional_template__$7 = false;
     /* style inject */
     
     /* style inject SSR */
@@ -11219,13 +11325,13 @@
     
 
     
-    const __vue_component__$5 = /*#__PURE__*/normalizeComponent(
-      { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-      __vue_inject_styles__$5,
-      __vue_script__$5,
-      __vue_scope_id__$5,
-      __vue_is_functional_template__$5,
-      __vue_module_identifier__$5,
+    const __vue_component__$7 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+      __vue_inject_styles__$7,
+      __vue_script__$7,
+      __vue_scope_id__$7,
+      __vue_is_functional_template__$7,
+      __vue_module_identifier__$7,
       false,
       undefined,
       undefined,
@@ -11235,7 +11341,7 @@
   Vue.config.productionTip = false;
   new Vue({
     router: router,
-    render: (h) => h(__vue_component__$5)
+    render: (h) => h(__vue_component__$7)
   }).$mount("#app");
 
 }());

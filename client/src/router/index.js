@@ -1,7 +1,9 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../views/Home.vue';
 import Product from '../views/Product.vue';
+import Login from '../views/Login.vue';
+import Signup from '../views/Signup.vue';
 import NotFound from '../views/NotFound.vue';
 
 Vue.use(Router);
@@ -18,6 +20,16 @@ const routes = [
     component: Product,
   },
   {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: Signup,
+  },
+  {
     path: '/404',
     name: '404',
     component: NotFound,
@@ -25,9 +37,8 @@ const routes = [
   {
     path: '*',
     redirect: '/404',
-  }
+  },
 ];
-
 
 const scrollBehavior = (to, from, savedPosition) => {
   if (savedPosition) {
