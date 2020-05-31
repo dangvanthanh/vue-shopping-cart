@@ -5,7 +5,7 @@
       class="block relative h-48 rounded overflow-hidden"
     >
       <img
-        src="https://dummyimage.com/423x263"
+        :src="product.thumbnail"
         class="object-cover object-center w-full h-full block"
       />
     </router-link>

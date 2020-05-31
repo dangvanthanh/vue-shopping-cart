@@ -14,4 +14,22 @@
 ## Development
 
 - [x] Deno.js server
-- [] Vue.js (with TypeScritp) client
+- [x] Vue.js client
+
+### Server
+
+Go to server folder then running server with `https://localhost:3000`
+
+```
+$ cd server
+$ npm start
+```
+
+### Client
+
+Go to client folder then running client with `https://localhost:8080`
+
+```
+$ cd client
+$ npm run dev
+```

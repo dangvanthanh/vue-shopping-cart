@@ -4,7 +4,8 @@
   "description": "Shopping cart with Vue and Deno",
   "main": "index.js",
   "scripts": {
-    "start": "deno run --allow-write --allow-read --allow-plugin --allow-net --allow-env app.ts"
+    "start": "deno run --allow-write --allow-read --allow-plugin --allow-net --allow-env app.ts",
+    "dev": "deno run --allow-all app.ts"
   },
   "repository": {
     "type": "git",

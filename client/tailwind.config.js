@@ -21,6 +21,8 @@ module.exports = {
     'position',
     'inset',
     'height',
-    'maxWidth'
+    'maxWidth',
+    'objectFit',
+    'fontWeight'
   ]
 };

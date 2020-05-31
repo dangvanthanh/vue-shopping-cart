@@ -22,9 +22,13 @@ export default {
     };
   },
   async mounted() {
-    const res = await fetch('http://localhost:3000/products');
-    const json = await res.json();
-    this.products = json;
+    try {
+      const res = await fetch('http://localhost:3000/products');
+      const json = await res.json();
+      this.products = json;
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

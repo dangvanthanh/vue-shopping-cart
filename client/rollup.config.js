@@ -18,9 +18,6 @@ export default {
     format: 'iife',
     sourcemap: false,
     name: 'app',
-    globals: {
-      axios: 'axios',
-    },
   },
   plugins: [
     postcss({ extract: true }),
@@ -36,6 +33,7 @@ export default {
     }),
     !production &&
       serve({
+        open: true,
         contentBase: 'public',
         historyApiFallback: true,
         port,
