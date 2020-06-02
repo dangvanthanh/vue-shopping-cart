@@ -24,7 +24,7 @@ For development, you need run command line:
 $ npm run dev
 ```
 
-* If you have troubleshoot with CORS from API. Currently, you need install CORS changer
+#### If you have troubleshoot with CORS from API. Currently, you need install Moesif Orign & CORS Changer
 
-- On Chrome: [Moesif Orign & CORS Changer](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
-- On Firefox: [Moesif Origin & CORS Changer](https://addons.mozilla.org/en-US/firefox/addon/moesif-origin-cors-changer1/)
+- [Google Chrome](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/moesif-origin-cors-changer1/)
