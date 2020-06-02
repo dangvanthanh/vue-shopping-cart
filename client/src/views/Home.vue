@@ -23,7 +23,9 @@ export default {
   },
   async mounted() {
     try {
-      const res = await fetch('http://localhost:3000/products');
+      const res = await fetch('http://localhost:3000/products', {
+        mode: 'no-cors'
+      });
       const json = await res.json();
       this.products = json;
     } catch (e) {

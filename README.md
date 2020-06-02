@@ -16,20 +16,15 @@
 - [x] Deno.js server
 - [x] Vue.js client
 
-### Server
+### Gettting Started
 
-Go to server folder then running server with `https://localhost:3000`
-
-```
-$ cd server
-$ npm start
-```
-
-### Client
-
-Go to client folder then running client with `https://localhost:8080`
+For development, you need run command line:
 
 ```
-$ cd client
 $ npm run dev
 ```
+
+* If you have troubleshoot with CORS from API. Currently, you need install CORS changer
+
+- On Chrome: [Moesif Orign & CORS Changer](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
+- On Firefox: [Moesif Origin & CORS Changer](https://addons.mozilla.org/en-US/firefox/addon/moesif-origin-cors-changer1/)

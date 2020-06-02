@@ -1,7 +1,6 @@
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import vue from 'rollup-plugin-vue';
 import esbuild from 'rollup-plugin-esbuild';
@@ -12,9 +11,9 @@ const production = !process.env.ROLLUP_WATCH;
 const port = 8080;
 
 export default {
-  input: 'src/main.js',
+  input: 'client/src/main.js',
   output: {
-    file: 'public/assets/app.js',
+    file: 'client/public/assets/app.js',
     format: 'iife',
     sourcemap: false,
     name: 'app',
@@ -34,10 +33,10 @@ export default {
     !production &&
       serve({
         open: true,
-        contentBase: 'public',
-        historyApiFallback: true,
+        contentBase: 'client/public',
         port,
+        historyApiFallback: true,
       }),
-    !production && livereload({ watch: 'public' }),
+    !production && livereload({ watch: 'client/public' }),
   ],
 };
