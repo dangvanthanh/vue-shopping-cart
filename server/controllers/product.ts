@@ -6,7 +6,7 @@ products.set('1', {
   description: 'Focused around comfort and flexibility',
   price: 45.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 1
+  rating: 1,
 });
 
 products.set('2', {
@@ -15,7 +15,7 @@ products.set('2', {
   description: 'Focused around comfort and flexibility',
   price: 75.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 2
+  rating: 2,
 });
 
 products.set('3', {
@@ -24,7 +24,7 @@ products.set('3', {
   description: 'Focused around comfort and flexibility',
   price: 95.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 5
+  rating: 5,
 });
 
 products.set('4', {
@@ -33,7 +33,7 @@ products.set('4', {
   description: 'Focused around comfort and flexibility',
   price: 195.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 3
+  rating: 3,
 });
 
 products.set('5', {
@@ -42,7 +42,7 @@ products.set('5', {
   description: 'Focused around comfort and flexibility',
   price: 945.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 4
+  rating: 4,
 });
 
 products.set('6', {
@@ -51,7 +51,7 @@ products.set('6', {
   description: 'Focused around comfort and flexibility',
   price: 50.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 2
+  rating: 2,
 });
 
 products.set('7', {
@@ -60,7 +60,7 @@ products.set('7', {
   description: 'Focused around comfort and flexibility',
   price: 950.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 2
+  rating: 2,
 });
 
 products.set('8', {
@@ -69,7 +69,7 @@ products.set('8', {
   description: 'Focused around comfort and flexibility',
   price: 195.9,
   thumbnail: 'https://dummyimage.com/400x400',
-  rating: 3
+  rating: 3,
 });
 
 class ProductController {

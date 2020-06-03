@@ -10526,9 +10526,7 @@
     },
     async mounted() {
       try {
-        const res = await fetch("http://localhost:3000/products", {
-          mode: "no-cors"
-        });
+        const res = await fetch("http://localhost:3000/products");
         const json = await res.json();
         this.products = json;
       } catch (e) {
