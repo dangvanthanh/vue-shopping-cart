@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev:client": "rollup -c -w",
-    "dev:server": "deno run --allow-write --allow-read --allow-plugin --allow-net --allow-env server/app.ts",
+    "dev:server": "denon run --allow-write --allow-read --allow-plugin --allow-net --allow-env server/app.ts",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
   },
   "dependencies": {

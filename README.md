@@ -13,7 +13,7 @@
 
 ## Development
 
-- [x] Deno.js server
+- [x] Deno.js server and monitor any changes with [Denon](https://github.com/denosaurs/denon)
 - [x] Vue.js client
 
 ### Gettting Started
