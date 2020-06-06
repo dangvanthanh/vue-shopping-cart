@@ -10470,12 +10470,12 @@
         ),
         _vm._v(" "),
         _c("div", { staticClass: "mt-3" }, [
-          _c("h2", { staticClass: "text-gray-900 text-lg font-medium" }, [
-            _vm._v(_vm._s(_vm.product.title))
+          _c("p", { staticClass: "mb-2 text-blue-600 text-xl font-bold" }, [
+            _vm._v("$ " + _vm._s(_vm.product.price))
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "mt-1" }, [
-            _vm._v("$ " + _vm._s(_vm.product.price))
+          _c("h2", { staticClass: "text-gray-900 text-lg font-medium" }, [
+            _vm._v(_vm._s(_vm.product.title))
           ])
         ])
       ],

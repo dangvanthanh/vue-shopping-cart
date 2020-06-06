@@ -10,8 +10,8 @@
       />
     </router-link>
     <div class="mt-3">
+      <p class="mb-2 text-blue-600 text-xl font-bold">$ {{ product.price }}</p>
       <h2 class="text-gray-900 text-lg font-medium">{{ product.title }}</h2>
-      <p class="mt-1">$ {{ product.price }}</p>
     </div>
   </div>
 </template>
