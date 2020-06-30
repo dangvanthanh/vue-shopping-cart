@@ -1,5 +1,5 @@
 <template>
-  <section class="text-gray-700 body-font overflow-hidden">
+  <section class="bg-white shadow rounded-lg p-6">
     <div class="flex flex-wrap">
       <img
         alt=""
@@ -7,7 +7,7 @@
         :src="product.thumbnail"
       />
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+        <h1 class="text-gray-900 text-3xl font-medium mb-1">
           {{ product.title }}
         </h1>
         <div class="flex mb-4">
@@ -18,7 +18,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              class="w-4 h-4 text-blue-500"
+              class="w-4 h-4 text-orange"
               viewBox="0 0 24 24"
               v-for="n in 5"
               :key="n"
@@ -27,13 +27,13 @@
                 d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
               ></path>
             </svg>
-            <span class="text-gray-600 ml-3"
+            <span class="text-gray-700 ml-3"
               >{{ product.rating }}
               {{ product.rating > 1 ? 'Reviews' : 'Review' }}</span
             >
           </span>
           <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-            <a class="text-gray-500">
+            <a class="text-gray-400">
               <svg
                 fill="currentColor"
                 stroke-linecap="round"
@@ -47,7 +47,7 @@
                 ></path>
               </svg>
             </a>
-            <a class="ml-2 text-gray-500">
+            <a class="ml-2 text-gray-400">
               <svg
                 fill="currentColor"
                 stroke-linecap="round"
@@ -61,7 +61,7 @@
                 ></path>
               </svg>
             </a>
-            <a class="ml-2 text-gray-500">
+            <a class="ml-2 text-gray-400">
               <svg
                 fill="currentColor"
                 stroke-linecap="round"
@@ -82,11 +82,11 @@
         </p>
 
         <div class="flex mt-6">
-          <span class="title-font font-medium text-2xl text-gray-900"
+          <span class="font-semibold text-2xl text-orange"
             >$ {{ product.price }}</span
           >
           <button
-            class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
+            class="flex ml-auto button button-primary px-6"
           >
             Add to cart
           </button>

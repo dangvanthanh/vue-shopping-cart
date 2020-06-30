@@ -1,4 +1,12 @@
 module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        blue: '#2b42a2',
+        orange: '#ff9141',
+      }
+    }
+  },
   corePlugins: [
     'preflight',
     'alignItems',
@@ -17,6 +25,7 @@ module.exports = {
     'pointerEvents',
     'borderWidth',
     'borderColor',
+    'borderRadius',
     'appearance',
     'position',
     'inset',

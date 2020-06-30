@@ -1,23 +1,30 @@
 <template>
   <div class="app">
-    <header role="banner" class="bg-blue-500">
-      <div class="max-w-5xl mx-auto flex flex-wrap items-center px-5 py-3">
+    <header role="banner" class="bg-blue">
+      <div class="max-w-5xl mx-auto flex flex-wrap items-center px-5 py-5">
         <router-link
           to="/"
-          class="flex items-center text-xl text-white leading-none uppercase"
+          class="flex items-center text-3xl text-white leading-none uppercase relative"
         >
-          <span>Shopyyy</span>
+          <span>S</span>
         </router-link>
-        <!-- <nav class="flex-1 flex-wrap items-center text-right">
-          <router-link to="/login" class="inline-block text-white"
-            >Login</router-link
-          >
-          <router-link to="/signup" class="inline-block text-white ml-3">
-            Signup</router-link
-          >
-        </nav> -->
       </div>
     </header>
+    <nav class="bg-white shadow">
+      <div class="max-w-5xl mx-auto px-5">
+        <ol>
+          <li class="inline-block align-middle">
+            <a href="#" class="block text-lg border-b-2 border-orange p-3">Road Bikes</a>
+          </li>
+          <li class="inline-block align-middle">
+            <a href="#" class="block text-lg border-b-2 border-transparent p-3 hover:border-orange">Mountain Bikes</a>
+          </li>
+          <li class="inline-block align-middle">
+            <a href="#" class="block text-lg border-b-2 border-transparent p-3 hover:border-orange">Electric Bikes</a>
+          </li>
+        </ol>
+      </div>
+    </nav>
     <main role="main">
       <div class="max-w-5xl mx-auto px-5 py-12">
         <router-view />
@@ -33,5 +40,4 @@ export default {
 </script>
 
 <style>
-
 </style>
