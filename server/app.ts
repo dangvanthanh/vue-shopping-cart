@@ -1,4 +1,5 @@
 import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import ProductController from './controllers/product.ts';
 
 const router = new Router();
@@ -9,6 +10,7 @@ router
 // Starting the server
 const app = new Application();
 const PORT = 3000;
+app.use(oakCors()); // Enabled Cors
 app.use(router.routes());
 app.use(router.allowedMethods());
 console.log(`Listening on port ${PORT}`);
