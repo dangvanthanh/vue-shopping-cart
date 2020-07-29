@@ -26,22 +26,22 @@ $ npm run dev
 
 ### About Vue Shopping Cart
 
-> Comming development
+> Coming soon for development
 
 Vue shopping cart is a modern web app
 - It has a frontend (Vue.js) and a backend (Deno.js)
 - It has two roles: customer and manager
 - New users have only the customer role
-- *Custombers* can:
+- *Customers* can:
   - Register into the system
   - Login into the system
   - List products
   - See the product details
-  - Add the product into cart
+  - Add the product into the cart
   - Remove the product from the cart
-  - Checkout the cart
+  - Check out the cart
   - List past orders
-- * Managers* can:
+- *Managers* can:
   - Login into the system
   - Add new products and categories
   - Change the product stocks
