@@ -24,6 +24,8 @@ For development, you need run command line:
 $ npm run dev
 ```
 
+You shoud
+
 ### About Vue Shopping Cart
 
 > Coming soon for development

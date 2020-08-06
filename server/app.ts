@@ -1,11 +1,13 @@
 import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
-import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { oakCors } from 'https://deno.land/x/cors/mod.ts';
 import ProductController from './controllers/product.ts';
+import CategoryController from './controllers/category.ts';
 
 const router = new Router();
 router
-  .get('/products', ProductController.index)
-  .get('/product/:id', ProductController.show);
+  .get('/products/:id', ProductController.index)
+  .get('/product/:id', ProductController.show)
+  .get('/categories', CategoryController.index);
 
 // Starting the server
 const app = new Application();
