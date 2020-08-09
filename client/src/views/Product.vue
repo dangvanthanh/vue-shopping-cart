@@ -1,15 +1,19 @@
 <template>
   <div>
-    <product-detail :product="product" />
+    <NavBar />
+    <div class="max-w-5xl mx-auto px-6 py-12">
+      <ProductDetail :product="product" />
+    </div>
   </div>
 </template>
 
 <script>
+import NavBar from '../components/NavBar.vue';
 import ProductDetail from '../components/ProductDetail.vue';
 
 export default {
   name: 'Product',
-  components: { ProductDetail },
+  components: { NavBar, ProductDetail },
   data() {
     return {
       product: {},

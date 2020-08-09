@@ -24,8 +24,6 @@ For development, you need run command line:
 $ npm run dev
 ```
 
-You shoud
-
 ### About Vue Shopping Cart
 
 > Coming soon for development
@@ -34,7 +32,7 @@ Vue shopping cart is a modern web app
 - It has a frontend (Vue.js) and a backend (Deno.js)
 - It has two roles: customer and manager
 - New users have only the customer role
-- *Customers* can:
+- **Customers** can:
   - Register into the system
   - Login into the system
   - List products
@@ -43,7 +41,7 @@ Vue shopping cart is a modern web app
   - Remove the product from the cart
   - Check out the cart
   - List past orders
-- *Managers* can:
+- **Managers** can:
   - Login into the system
   - Add new products and categories
   - Change the product stocks

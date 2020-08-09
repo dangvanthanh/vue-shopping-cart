@@ -7,13 +7,14 @@
   "scripts": {
     "build": "rollup -c",
     "dev:client": "rollup -c -w",
-    "dev:server": "deno run -A --unstable --reload --allow-write --allow-read --allow-plugin --allow-net --allow-env server/app.ts",
+    "dev:server": "deno run -A --unstable --reload server/app.ts",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
   },
   "dependencies": {
     "concurrently": "^5.2.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.3.4"
+    "vue-router": "^3.3.4",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^14.0.0",
@@ -22,6 +23,7 @@
     "@rollup/plugin-replace": "^2.3.3",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
+    "esbuild": "^0.6.18",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "postcss-each": "^0.10.0",

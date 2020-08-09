@@ -1,5 +1,5 @@
-import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
-import { oakCors } from 'https://deno.land/x/cors/mod.ts';
+import { Application, Router } from './deps/oak.ts';
+import { oakCors } from './deps/cors.ts';
 import ProductController from './controllers/product.ts';
 import CategoryController from './controllers/category.ts';
 
