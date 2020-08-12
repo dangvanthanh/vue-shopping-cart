@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev:client": "rollup -c -w",
-    "dev:server": "deno run -A --unstable --reload server/app.ts",
+    "dev:server": "deno run -A --unstable --reload --config=tsconfig.json server/app.ts",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
   },
   "dependencies": {
