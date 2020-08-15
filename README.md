@@ -7,14 +7,11 @@
 - Deno.js
 - Vue.js
 
-## Database
-
-- [] MongoDB
-
 ## Development
 
-- [x] Deno.js server and monitor any changes with [Denon](https://github.com/denosaurs/denon)
+- [x] Deno.js server
 - [x] Vue.js client
+- [ ] MongoDB
 
 ### Gettting Started
 
@@ -49,6 +46,5 @@ Vue shopping cart is a modern web app
   - See order details
   - Change order status
   - List customers
-  - See customers details
-
+  - See customers details 
 
