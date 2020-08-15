@@ -204,12 +204,6 @@ products.set('20', {
 
 export const categories = new Map<string, any>();
 
-categories.set('1', {
-  id: '1',
-  slug: 'all',
-  name: 'All',
-});
-
 categories.set('2', {
   id: '2',
   slug: 'road-bikes',

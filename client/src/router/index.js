@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../views/Home.vue';
+import Category from '../views/Category.vue';
 import Product from '../views/Product.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
@@ -17,7 +18,7 @@ const routes = [
   {
     path: '/category/:slug',
     name: 'category',
-    component: Home,
+    component: Category,
   },
   {
     path: '/product/:id',

@@ -16,7 +16,7 @@ import NavBar from '../components/NavBar.vue';
 import Product from '../components/Product.vue';
 
 export default {
-  name: 'Home',
+  name: 'Category',
   components: { NavBar, Product },
   data() {
     return {
@@ -37,7 +37,15 @@ export default {
   methods: {
     async getProducts() {
       try {
-        const res = await fetch(`http://localhost:3000/products`);
+        const categories = {
+          all: '1',
+          'road-bikes': '2',
+          'mountain-bikes': '3',
+          'electric-bikes': '4',
+          'touring-bikes': '5',
+        };
+
+        const res = await fetch(`http://localhost:3000/products/${categories[this.slug]}`);
         const json = await res.json();
         this.products = json;
       } catch (e) {

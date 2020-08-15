@@ -1,19 +1,16 @@
-import { Application, Router } from './deps/oak.ts';
-import { oakCors } from './deps/cors.ts';
-import ProductController from './controllers/product.ts';
-import CategoryController from './controllers/category.ts';
+import { Application} from './deps/dactyl.ts';
+import CategoriesController from './controllers/categories.controller.ts';
+import ProductController from './controllers/product.controller.ts'
+import ProductsController from './controllers/products.controller.ts';
 
-const router = new Router();
-router
-  .get('/products/:id', ProductController.index)
-  .get('/product/:id', ProductController.show)
-  .get('/categories', CategoryController.index);
+const app: Application = new Application({
+  controllers: [
+    CategoriesController,
+    ProductController,
+    ProductsController
+  ]
+})
 
-// Starting the server
-const app = new Application();
 const PORT = 3000;
-app.use(oakCors()); // Enabled Cors
-app.use(router.routes());
-app.use(router.allowedMethods());
 console.log(`Listening on port ${PORT}`);
-await app.listen({ port: PORT });
+await app.run(PORT);

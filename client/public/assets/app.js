@@ -7494,18 +7494,10 @@
   }
 
   /*!
-    * vue-router v3.3.4
+    * vue-router v3.4.3
     * (c) 2020 Evan You
     * @license MIT
     */
-
-  function isError (err) {
-    return Object.prototype.toString.call(err).indexOf('Error') > -1
-  }
-
-  function isRouterError (err, errorType) {
-    return isError(err) && err._isRouter && (errorType == null || err.type === errorType)
-  }
 
   function extend$1 (a, b) {
     for (var key in b) {
@@ -7615,7 +7607,7 @@
       };
 
       var configProps = matched.props && matched.props[name];
-      // save route and configProps in cachce
+      // save route and configProps in cache
       if (configProps) {
         extend$1(cache[name], {
           route: route,
@@ -7668,8 +7660,8 @@
   // - escapes [!'()*]
   // - preserve commas
   var encode = function (str) { return encodeURIComponent(str)
-    .replace(encodeReserveRE, encodeReserveReplacer)
-    .replace(commaRE, ','); };
+      .replace(encodeReserveRE, encodeReserveReplacer)
+      .replace(commaRE, ','); };
 
   var decode = decodeURIComponent;
 
@@ -7688,10 +7680,15 @@
       parsedQuery = {};
     }
     for (var key in extraQuery) {
-      parsedQuery[key] = extraQuery[key];
+      var value = extraQuery[key];
+      parsedQuery[key] = Array.isArray(value)
+        ? value.map(castQueryParamValue)
+        : castQueryParamValue(value);
     }
     return parsedQuery
   }
+
+  var castQueryParamValue = function (value) { return (value == null || typeof value === 'object' ? value : String(value)); };
 
   function parseQuery (query) {
     var res = {};
@@ -7705,9 +7702,7 @@
     query.split('&').forEach(function (param) {
       var parts = param.replace(/\+/g, ' ').split('=');
       var key = decode(parts.shift());
-      var val = parts.length > 0
-        ? decode(parts.join('='))
-        : null;
+      var val = parts.length > 0 ? decode(parts.join('=')) : null;
 
       if (res[key] === undefined) {
         res[key] = val;
@@ -7722,34 +7717,39 @@
   }
 
   function stringifyQuery (obj) {
-    var res = obj ? Object.keys(obj).map(function (key) {
-      var val = obj[key];
+    var res = obj
+      ? Object.keys(obj)
+        .map(function (key) {
+          var val = obj[key];
 
-      if (val === undefined) {
-        return ''
-      }
-
-      if (val === null) {
-        return encode(key)
-      }
-
-      if (Array.isArray(val)) {
-        var result = [];
-        val.forEach(function (val2) {
-          if (val2 === undefined) {
-            return
+          if (val === undefined) {
+            return ''
           }
-          if (val2 === null) {
-            result.push(encode(key));
-          } else {
-            result.push(encode(key) + '=' + encode(val2));
-          }
-        });
-        return result.join('&')
-      }
 
-      return encode(key) + '=' + encode(val)
-    }).filter(function (x) { return x.length > 0; }).join('&') : null;
+          if (val === null) {
+            return encode(key)
+          }
+
+          if (Array.isArray(val)) {
+            var result = [];
+            val.forEach(function (val2) {
+              if (val2 === undefined) {
+                return
+              }
+              if (val2 === null) {
+                result.push(encode(key));
+              } else {
+                result.push(encode(key) + '=' + encode(val2));
+              }
+            });
+            return result.join('&')
+          }
+
+          return encode(key) + '=' + encode(val)
+        })
+        .filter(function (x) { return x.length > 0; })
+        .join('&')
+      : null;
     return res ? ("?" + res) : ''
   }
 
@@ -7863,6 +7863,8 @@
     return aKeys.every(function (key) {
       var aVal = a[key];
       var bVal = b[key];
+      // query values can be null and undefined
+      if (aVal == null || bVal == null) { return aVal === bVal }
       // check nested equality
       if (typeof aVal === 'object' && typeof bVal === 'object') {
         return isObjectEqual(aVal, bVal)
@@ -9280,6 +9282,88 @@
     step(0);
   }
 
+  var NavigationFailureType = {
+    redirected: 2,
+    aborted: 4,
+    cancelled: 8,
+    duplicated: 16
+  };
+
+  function createNavigationRedirectedError (from, to) {
+    return createRouterError(
+      from,
+      to,
+      NavigationFailureType.redirected,
+      ("Redirected when going from \"" + (from.fullPath) + "\" to \"" + (stringifyRoute(
+        to
+      )) + "\" via a navigation guard.")
+    )
+  }
+
+  function createNavigationDuplicatedError (from, to) {
+    var error = createRouterError(
+      from,
+      to,
+      NavigationFailureType.duplicated,
+      ("Avoided redundant navigation to current location: \"" + (from.fullPath) + "\".")
+    );
+    // backwards compatible with the first introduction of Errors
+    error.name = 'NavigationDuplicated';
+    return error
+  }
+
+  function createNavigationCancelledError (from, to) {
+    return createRouterError(
+      from,
+      to,
+      NavigationFailureType.cancelled,
+      ("Navigation cancelled from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" with a new navigation.")
+    )
+  }
+
+  function createNavigationAbortedError (from, to) {
+    return createRouterError(
+      from,
+      to,
+      NavigationFailureType.aborted,
+      ("Navigation aborted from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" via a navigation guard.")
+    )
+  }
+
+  function createRouterError (from, to, type, message) {
+    var error = new Error(message);
+    error._isRouter = true;
+    error.from = from;
+    error.to = to;
+    error.type = type;
+
+    return error
+  }
+
+  var propertiesToLog = ['params', 'query', 'hash'];
+
+  function stringifyRoute (to) {
+    if (typeof to === 'string') { return to }
+    if ('path' in to) { return to.path }
+    var location = {};
+    propertiesToLog.forEach(function (key) {
+      if (key in to) { location[key] = to[key]; }
+    });
+    return JSON.stringify(location, null, 2)
+  }
+
+  function isError (err) {
+    return Object.prototype.toString.call(err).indexOf('Error') > -1
+  }
+
+  function isNavigationFailure (err, errorType) {
+    return (
+      isError(err) &&
+      err._isRouter &&
+      (errorType == null || err.type === errorType)
+    )
+  }
+
   /*  */
 
   function resolveAsyncComponents (matched) {
@@ -9388,73 +9472,6 @@
     }
   }
 
-  var NavigationFailureType = {
-    redirected: 1,
-    aborted: 2,
-    cancelled: 3,
-    duplicated: 4
-  };
-
-  function createNavigationRedirectedError (from, to) {
-    return createRouterError(
-      from,
-      to,
-      NavigationFailureType.redirected,
-      ("Redirected when going from \"" + (from.fullPath) + "\" to \"" + (stringifyRoute(
-        to
-      )) + "\" via a navigation guard.")
-    )
-  }
-
-  function createNavigationDuplicatedError (from, to) {
-    return createRouterError(
-      from,
-      to,
-      NavigationFailureType.duplicated,
-      ("Avoided redundant navigation to current location: \"" + (from.fullPath) + "\".")
-    )
-  }
-
-  function createNavigationCancelledError (from, to) {
-    return createRouterError(
-      from,
-      to,
-      NavigationFailureType.cancelled,
-      ("Navigation cancelled from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" with a new navigation.")
-    )
-  }
-
-  function createNavigationAbortedError (from, to) {
-    return createRouterError(
-      from,
-      to,
-      NavigationFailureType.aborted,
-      ("Navigation aborted from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" via a navigation guard.")
-    )
-  }
-
-  function createRouterError (from, to, type, message) {
-    var error = new Error(message);
-    error._isRouter = true;
-    error.from = from;
-    error.to = to;
-    error.type = type;
-
-    return error
-  }
-
-  var propertiesToLog = ['params', 'query', 'hash'];
-
-  function stringifyRoute (to) {
-    if (typeof to === 'string') { return to }
-    if ('path' in to) { return to.path }
-    var location = {};
-    propertiesToLog.forEach(function (key) {
-      if (key in to) { location[key] = to[key]; }
-    });
-    return JSON.stringify(location, null, 2)
-  }
-
   /*  */
 
   var History = function History (router, base) {
@@ -9496,7 +9513,17 @@
   ) {
       var this$1 = this;
 
-    var route = this.router.match(location, this.current);
+    var route;
+    // catch redirect option https://github.com/vuejs/vue-router/issues/3201
+    try {
+      route = this.router.match(location, this.current);
+    } catch (e) {
+      this.errorCbs.forEach(function (cb) {
+        cb(e);
+      });
+      // Exception should still be thrown
+      throw e
+    }
     this.confirmTransition(
       route,
       function () {
@@ -9524,7 +9551,7 @@
           this$1.ready = true;
           // Initial redirection should still trigger the onReady onSuccess
           // https://github.com/vuejs/vue-router/issues/3225
-          if (!isRouterError(err, NavigationFailureType.redirected)) {
+          if (!isNavigationFailure(err, NavigationFailureType.redirected)) {
             this$1.readyErrorCbs.forEach(function (cb) {
               cb(err);
             });
@@ -9546,7 +9573,7 @@
       // changed after adding errors with
       // https://github.com/vuejs/vue-router/pull/3047 before that change,
       // redirect and aborted navigation would produce an err == null
-      if (!isRouterError(err) && isError(err)) {
+      if (!isNavigationFailure(err) && isError(err)) {
         if (this$1.errorCbs.length) {
           this$1.errorCbs.forEach(function (cb) {
             cb(err);
@@ -10131,7 +10158,7 @@
           this$1.updateRoute(route);
         },
         function (err) {
-          if (isRouterError(err, NavigationFailureType.duplicated)) {
+          if (isNavigationFailure(err, NavigationFailureType.duplicated)) {
             this$1.index = targetIndex;
           }
         }
@@ -10152,8 +10179,6 @@
 
   /*  */
 
-
-
   var VueRouter = function VueRouter (options) {
     if ( options === void 0 ) options = {};
 
@@ -10166,7 +10191,8 @@
     this.matcher = createMatcher(options.routes || [], this);
 
     var mode = options.mode || 'hash';
-    this.fallback = mode === 'history' && !supportsPushState && options.fallback !== false;
+    this.fallback =
+      mode === 'history' && !supportsPushState && options.fallback !== false;
     if (this.fallback) {
       mode = 'hash';
     }
@@ -10190,11 +10216,7 @@
 
   var prototypeAccessors$1 = { currentRoute: { configurable: true } };
 
-  VueRouter.prototype.match = function match (
-    raw,
-    current,
-    redirectedFrom
-  ) {
+  VueRouter.prototype.match = function match (raw, current, redirectedFrom) {
     return this.matcher.match(raw, current, redirectedFrom)
   };
 
@@ -10235,10 +10257,24 @@
     var history = this.history;
 
     if (history instanceof HTML5History || history instanceof HashHistory) {
-      var setupListeners = function () {
-        history.setupListeners();
+      var handleInitialScroll = function (routeOrError) {
+        var from = history.current;
+        var expectScroll = this$1.options.scrollBehavior;
+        var supportsScroll = supportsPushState && expectScroll;
+
+        if (supportsScroll && 'fullPath' in routeOrError) {
+          handleScroll(this$1, routeOrError, from, false);
+        }
       };
-      history.transitionTo(history.getCurrentLocation(), setupListeners, setupListeners);
+      var setupListeners = function (routeOrError) {
+        history.setupListeners();
+        handleInitialScroll(routeOrError);
+      };
+      history.transitionTo(
+        history.getCurrentLocation(),
+        setupListeners,
+        setupListeners
+      );
     }
 
     history.listen(function (route) {
@@ -10315,11 +10351,14 @@
     if (!route) {
       return []
     }
-    return [].concat.apply([], route.matched.map(function (m) {
-      return Object.keys(m.components).map(function (key) {
-        return m.components[key]
+    return [].concat.apply(
+      [],
+      route.matched.map(function (m) {
+        return Object.keys(m.components).map(function (key) {
+          return m.components[key]
+        })
       })
-    }))
+    )
   };
 
   VueRouter.prototype.resolve = function resolve (
@@ -10328,12 +10367,7 @@
     append
   ) {
     current = current || this.history.current;
-    var location = normalizeLocation(
-      to,
-      current,
-      append,
-      this
-    );
+    var location = normalizeLocation(to, current, append, this);
     var route = this.match(location, current);
     var fullPath = route.redirectedFrom || route.fullPath;
     var base = this.history.base;
@@ -10371,7 +10405,9 @@
   }
 
   VueRouter.install = install;
-  VueRouter.version = '3.3.4';
+  VueRouter.version = '3.4.3';
+  VueRouter.isNavigationFailure = isNavigationFailure;
+  VueRouter.NavigationFailureType = NavigationFailureType;
 
   if (inBrowser$1 && window.Vue) {
     window.Vue.use(VueRouter);
@@ -11772,14 +11808,7 @@
       getProducts() {
         return __async(this, [], function* () {
           try {
-            const categories = {
-              all: "1",
-              "road-bikes": "2",
-              "mountain-bikes": "3",
-              "electric-bikes": "4",
-              "touring-bikes": "5"
-            };
-            const res = yield fetch(`http://localhost:3000/products/${categories[this.slug]}`);
+            const res = yield fetch(`http://localhost:3000/products`);
             const json = yield res.json();
             this.products = json;
           } catch (e) {
@@ -11854,7 +11883,134 @@
       undefined
     );
 
+  var __async$1 = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (result) => {
+        return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
+      };
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
   var script$3 = {
+    name: "Category",
+    components: {NavBar: __vue_component__, Product: __vue_component__$1},
+    data() {
+      return {
+        products: []
+      };
+    },
+    computed: {
+      slug() {
+        return this.$route.params.slug ? this.$route.params.slug : "all";
+      }
+    },
+    watch: {
+      $route: "getProducts"
+    },
+    mounted() {
+      this.getProducts();
+    },
+    methods: {
+      getProducts() {
+        return __async$1(this, [], function* () {
+          try {
+            const categories = {
+              all: "1",
+              "road-bikes": "2",
+              "mountain-bikes": "3",
+              "electric-bikes": "4",
+              "touring-bikes": "5"
+            };
+            const res = yield fetch(`http://localhost:3000/products/${categories[this.slug]}`);
+            const json = yield res.json();
+            this.products = json;
+          } catch (e) {
+            console.log(e);
+          }
+        });
+      }
+    }
+  };
+
+  /* script */
+  const __vue_script__$3 = script$3;
+
+  /* template */
+  var __vue_render__$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "div",
+      [
+        _c("NavBar"),
+        _vm._v(" "),
+        _c("div", { staticClass: "max-w-5xl mx-auto px-6 py-12" }, [
+          _c(
+            "div",
+            { staticClass: "flex flex-wrap -m-3" },
+            _vm._l(_vm.products, function(product) {
+              return _c(
+                "div",
+                { key: product.id, staticClass: "w-full p-3 md:w-1/2 lg:w-1/4" },
+                [_c("Product", { attrs: { product: product } })],
+                1
+              )
+            }),
+            0
+          )
+        ])
+      ],
+      1
+    )
+  };
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$3 = undefined;
+    /* scoped */
+    const __vue_scope_id__$3 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$3 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$3 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$3 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+  var script$4 = {
     name: "ProductDetail",
     props: ["product"],
     methods: {
@@ -11865,10 +12021,10 @@
   };
 
   /* script */
-  const __vue_script__$3 = script$3;
+  const __vue_script__$4 = script$4;
 
   /* template */
-  var __vue_render__$3 = function() {
+  var __vue_render__$4 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -12060,104 +12216,6 @@
       ])
     ])
   };
-  var __vue_staticRenderFns__$3 = [];
-  __vue_render__$3._withStripped = true;
-
-    /* style */
-    const __vue_inject_styles__$3 = undefined;
-    /* scoped */
-    const __vue_scope_id__$3 = undefined;
-    /* module identifier */
-    const __vue_module_identifier__$3 = undefined;
-    /* functional template */
-    const __vue_is_functional_template__$3 = false;
-    /* style inject */
-    
-    /* style inject SSR */
-    
-    /* style inject shadow dom */
-    
-
-    
-    const __vue_component__$3 = /*#__PURE__*/normalizeComponent(
-      { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-      __vue_inject_styles__$3,
-      __vue_script__$3,
-      __vue_scope_id__$3,
-      __vue_is_functional_template__$3,
-      __vue_module_identifier__$3,
-      false,
-      undefined,
-      undefined,
-      undefined
-    );
-
-  var __async$1 = (__this, __arguments, generator) => {
-    return new Promise((resolve, reject) => {
-      var fulfilled = (value) => {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      };
-      var rejected = (value) => {
-        try {
-          step(generator.throw(value));
-        } catch (e) {
-          reject(e);
-        }
-      };
-      var step = (result) => {
-        return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
-      };
-      step((generator = generator.apply(__this, __arguments)).next());
-    });
-  };
-  var script$4 = {
-    name: "Product",
-    components: {NavBar: __vue_component__, ProductDetail: __vue_component__$3},
-    data() {
-      return {
-        product: {}
-      };
-    },
-    mounted() {
-      return __async$1(this, [], function* () {
-        try {
-          const res = yield fetch(`http://localhost:3000/product/${this.$route.params.id}`);
-          const json = yield res.json();
-          this.product = json;
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    }
-  };
-
-  /* script */
-  const __vue_script__$4 = script$4;
-
-  /* template */
-  var __vue_render__$4 = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c(
-      "div",
-      [
-        _c("NavBar"),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "max-w-5xl mx-auto px-6 py-12" },
-          [_c("ProductDetail", { attrs: { product: _vm.product } })],
-          1
-        )
-      ],
-      1
-    )
-  };
   var __vue_staticRenderFns__$4 = [];
   __vue_render__$4._withStripped = true;
 
@@ -12190,8 +12248,47 @@
       undefined
     );
 
+  var __async$2 = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (result) => {
+        return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
+      };
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
   var script$5 = {
-    name: "Login"
+    name: "Product",
+    components: {NavBar: __vue_component__, ProductDetail: __vue_component__$4},
+    data() {
+      return {
+        product: {}
+      };
+    },
+    mounted() {
+      return __async$2(this, [], function* () {
+        try {
+          const res = yield fetch(`http://localhost:3000/product/${this.$route.params.id}`);
+          const json = yield res.json();
+          this.product = json;
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    }
   };
 
   /* script */
@@ -12202,73 +12299,22 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "h-screen flex items-center" }, [
-      _c("div", { staticClass: "w-full max-w-md mx-auto py-12 px-6" }, [
+    return _c(
+      "div",
+      [
+        _c("NavBar"),
+        _vm._v(" "),
         _c(
-          "h2",
-          { staticClass: "flex justify-center" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "flex items-center text-6xl text-blue leading-none uppercase relative",
-                attrs: { to: "/" }
-              },
-              [_c("span", [_vm._v("S")])]
-            )
-          ],
+          "div",
+          { staticClass: "max-w-5xl mx-auto px-6 py-12" },
+          [_c("ProductDetail", { attrs: { product: _vm.product } })],
           1
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
-          [_vm._v("Log in to your account")]
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ])
+        )
+      ],
+      1
+    )
   };
-  var __vue_staticRenderFns__$5 = [
-    function() {
-      var _vm = this;
-      var _h = _vm.$createElement;
-      var _c = _vm._self._c || _h;
-      return _c("form", [
-        _c("div", { staticClass: "rounded-md shadow-sm" }, [
-          _c("div", [
-            _c("input", {
-              staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
-              attrs: { type: "email", placeholder: "Email address" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
-              attrs: { type: "password", placeholder: "Password" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mt-5" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Log in")]
-            )
-          ])
-        ])
-      ])
-    }
-  ];
+  var __vue_staticRenderFns__$5 = [];
   __vue_render__$5._withStripped = true;
 
     /* style */
@@ -12301,7 +12347,7 @@
     );
 
   var script$6 = {
-    name: "Signup"
+    name: "Login"
   };
 
   /* script */
@@ -12334,7 +12380,7 @@
         _c(
           "p",
           { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
-          [_vm._v("Create new an account")]
+          [_vm._v("Log in to your account")]
         ),
         _vm._v(" "),
         _vm._m(0)
@@ -12372,7 +12418,7 @@
                   "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
                 attrs: { type: "submit" }
               },
-              [_vm._v("Sign up")]
+              [_vm._v("Log in")]
             )
           ])
         ])
@@ -12411,7 +12457,7 @@
     );
 
   var script$7 = {
-    name: "NotFound"
+    name: "Signup"
   };
 
   /* script */
@@ -12419,6 +12465,116 @@
 
   /* template */
   var __vue_render__$7 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "h-screen flex items-center" }, [
+      _c("div", { staticClass: "w-full max-w-md mx-auto py-12 px-6" }, [
+        _c(
+          "h2",
+          { staticClass: "flex justify-center" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "flex items-center text-6xl text-blue leading-none uppercase relative",
+                attrs: { to: "/" }
+              },
+              [_c("span", [_vm._v("S")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
+          [_vm._v("Create new an account")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ])
+  };
+  var __vue_staticRenderFns__$7 = [
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("form", [
+        _c("div", { staticClass: "rounded-md shadow-sm" }, [
+          _c("div", [
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { type: "email", placeholder: "Email address" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { type: "password", placeholder: "Password" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-5" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Sign up")]
+            )
+          ])
+        ])
+      ])
+    }
+  ];
+  __vue_render__$7._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$7 = undefined;
+    /* scoped */
+    const __vue_scope_id__$7 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$7 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$7 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$7 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+      __vue_inject_styles__$7,
+      __vue_script__$7,
+      __vue_scope_id__$7,
+      __vue_is_functional_template__$7,
+      __vue_module_identifier__$7,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
+  var script$8 = {
+    name: "NotFound"
+  };
+
+  /* script */
+  const __vue_script__$8 = script$8;
+
+  /* template */
+  var __vue_render__$8 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
@@ -12451,17 +12607,17 @@
       ])
     ])
   };
-  var __vue_staticRenderFns__$7 = [];
-  __vue_render__$7._withStripped = true;
+  var __vue_staticRenderFns__$8 = [];
+  __vue_render__$8._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$7 = undefined;
+    const __vue_inject_styles__$8 = undefined;
     /* scoped */
-    const __vue_scope_id__$7 = undefined;
+    const __vue_scope_id__$8 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$7 = undefined;
+    const __vue_module_identifier__$8 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$7 = false;
+    const __vue_is_functional_template__$8 = false;
     /* style inject */
     
     /* style inject SSR */
@@ -12470,13 +12626,13 @@
     
 
     
-    const __vue_component__$7 = /*#__PURE__*/normalizeComponent(
-      { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-      __vue_inject_styles__$7,
-      __vue_script__$7,
-      __vue_scope_id__$7,
-      __vue_is_functional_template__$7,
-      __vue_module_identifier__$7,
+    const __vue_component__$8 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+      __vue_inject_styles__$8,
+      __vue_script__$8,
+      __vue_scope_id__$8,
+      __vue_is_functional_template__$8,
+      __vue_module_identifier__$8,
       false,
       undefined,
       undefined,
@@ -12493,27 +12649,27 @@
     {
       path: "/category/:slug",
       name: "category",
-      component: __vue_component__$2
+      component: __vue_component__$3
     },
     {
       path: "/product/:id",
       name: "product",
-      component: __vue_component__$4
+      component: __vue_component__$5
     },
     {
       path: "/login",
       name: "login",
-      component: __vue_component__$5
+      component: __vue_component__$6
     },
     {
       path: "/signup",
       name: "signup",
-      component: __vue_component__$6
+      component: __vue_component__$7
     },
     {
       path: "/404",
       name: "404",
-      component: __vue_component__$7
+      component: __vue_component__$8
     },
     {
       path: "*",
@@ -12564,7 +12720,7 @@
     modules: modules2
   });
 
-  var __async$2 = (__this, __arguments, generator) => {
+  var __async$3 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -12586,7 +12742,7 @@
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
-  var script$8 = {
+  var script$9 = {
     name: "App",
     data() {
       return {
@@ -12594,7 +12750,7 @@
       };
     },
     mounted() {
-      return __async$2(this, [], function* () {
+      return __async$3(this, [], function* () {
         try {
           const res = yield fetch("http://localhost:3000/categories");
           const json = yield res.json();
@@ -12607,25 +12763,25 @@
   };
 
   /* script */
-  const __vue_script__$8 = script$8;
+  const __vue_script__$9 = script$9;
   /* template */
-  var __vue_render__$8 = function() {
+  var __vue_render__$9 = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "app" }, [_c("router-view")], 1)
   };
-  var __vue_staticRenderFns__$8 = [];
-  __vue_render__$8._withStripped = true;
+  var __vue_staticRenderFns__$9 = [];
+  __vue_render__$9._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$8 = undefined;
+    const __vue_inject_styles__$9 = undefined;
     /* scoped */
-    const __vue_scope_id__$8 = undefined;
+    const __vue_scope_id__$9 = undefined;
     /* module identifier */
-    const __vue_module_identifier__$8 = undefined;
+    const __vue_module_identifier__$9 = undefined;
     /* functional template */
-    const __vue_is_functional_template__$8 = false;
+    const __vue_is_functional_template__$9 = false;
     /* style inject */
     
     /* style inject SSR */
@@ -12634,13 +12790,13 @@
     
 
     
-    const __vue_component__$8 = /*#__PURE__*/normalizeComponent(
-      { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-      __vue_inject_styles__$8,
-      __vue_script__$8,
-      __vue_scope_id__$8,
-      __vue_is_functional_template__$8,
-      __vue_module_identifier__$8,
+    const __vue_component__$9 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+      __vue_inject_styles__$9,
+      __vue_script__$9,
+      __vue_scope_id__$9,
+      __vue_is_functional_template__$9,
+      __vue_module_identifier__$9,
       false,
       undefined,
       undefined,
@@ -12651,7 +12807,7 @@
   new Vue({
     router: router,
     store: store,
-    render: (h) => h(__vue_component__$8)
+    render: (h) => h(__vue_component__$9)
   }).$mount("#app");
 
 }());

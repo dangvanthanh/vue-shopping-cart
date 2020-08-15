@@ -1,1 +1,1 @@
-export * from 'https://deno.land/x/dactyl/mod.ts';
+export * from 'https://raw.githubusercontent.com/liamtan28/dactyl/master/mod.ts';
