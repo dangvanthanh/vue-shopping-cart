@@ -1,12 +1,12 @@
 <template>
-  <section class="bg-white shadow rounded-lg p-6">
+  <section class="bg-white shadow rounded overflow-hidden">
     <div class="flex flex-wrap">
       <img
         alt=""
-        class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+        class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center"
         :src="product.thumbnail"
       />
-      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+      <div class="lg:w-1/2 w-full p-6">
         <h1 class="text-gray-900 text-3xl font-medium mb-1">
           {{ product.title }}
         </h1>

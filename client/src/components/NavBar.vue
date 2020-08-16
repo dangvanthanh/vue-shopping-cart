@@ -9,8 +9,8 @@
           <span>S</span>
         </router-link>
         <div class="flex-1 w-0 text-right">
-          <router-link to="/login" class="ml-5 font-medium text-white">Login</router-link>
-          <router-link to="/signup" class="ml-5 font-medium text-white">Signup</router-link>
+          <router-link to="/login" class="ml-2 font-medium text-white p-3">Login</router-link>
+          <router-link to="/signup" class="ml-2 font-medium text-white p-3">Signup</router-link>
         </div>
       </div>
     </header>

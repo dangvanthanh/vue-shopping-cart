@@ -11595,7 +11595,7 @@
                 _c(
                   "router-link",
                   {
-                    staticClass: "ml-5 font-medium text-white",
+                    staticClass: "ml-2 font-medium text-white p-3",
                     attrs: { to: "/login" }
                   },
                   [_vm._v("Login")]
@@ -11604,7 +11604,7 @@
                 _c(
                   "router-link",
                   {
-                    staticClass: "ml-5 font-medium text-white",
+                    staticClass: "ml-2 font-medium text-white p-3",
                     attrs: { to: "/signup" }
                   },
                   [_vm._v("Signup")]
@@ -11651,7 +11651,7 @@
     /* style */
     const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__ = "data-v-8ecf7ad4";
+    const __vue_scope_id__ = "data-v-12fee548";
     /* module identifier */
     const __vue_module_identifier__ = undefined;
     /* functional template */
@@ -11690,24 +11690,20 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "bg-white shadow rounded-lg py-6" }, [
-      _c("div", { staticClass: "px-6" }, [
-        _c(
-          "div",
-          { staticClass: "block relative h-48 rounded overflow-hidden" },
-          [
-            _c("img", {
-              staticClass: "object-cover object-center w-full h-full block",
-              attrs: { src: _vm.product.thumbnail }
-            })
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "px-3" },
-        [
+    return _c(
+      "div",
+      {
+        staticClass: "bg-white shadow rounded pb-5 flex flex-col overflow-hidden"
+      },
+      [
+        _c("div", { staticClass: "block relative h-48 overflow-hidden" }, [
+          _c("img", {
+            staticClass: "object-cover object-center w-full h-full block",
+            attrs: { src: _vm.product.thumbnail }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "px-3 flex-1" }, [
           _c("h2", { staticClass: "text-gray-900 text-base font-medium my-3" }, [
             _vm._v(_vm._s(_vm.product.title))
           ]),
@@ -11716,20 +11712,26 @@
             "p",
             { staticClass: "mb-3 text-blue-600 text-lg font-bold text-orange" },
             [_vm._v("$ " + _vm._s(_vm.product.price))]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "button button-primary w-full",
-              attrs: { to: "/product/" + _vm.product.id }
-            },
-            [_vm._v("View Details")]
           )
-        ],
-        1
-      )
-    ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "px-3" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "button button-primary w-full",
+                attrs: { to: "/product/" + _vm.product.id }
+              },
+              [_vm._v("View Details")]
+            )
+          ],
+          1
+        )
+      ]
+    )
   };
   var __vue_staticRenderFns__$1 = [];
   __vue_render__$1._withStripped = true;
@@ -11839,7 +11841,10 @@
             _vm._l(_vm.products, function(product) {
               return _c(
                 "div",
-                { key: product.id, staticClass: "w-full p-3 md:w-1/2 lg:w-1/4" },
+                {
+                  key: product.id,
+                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/4"
+                },
                 [_c("Product", { attrs: { product: product } })],
                 1
               )
@@ -11966,7 +11971,10 @@
             _vm._l(_vm.products, function(product) {
               return _c(
                 "div",
-                { key: product.id, staticClass: "w-full p-3 md:w-1/2 lg:w-1/4" },
+                {
+                  key: product.id,
+                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/4"
+                },
                 [_c("Product", { attrs: { product: product } })],
                 1
               )
@@ -12028,18 +12036,18 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("section", { staticClass: "bg-white shadow rounded-lg p-6" }, [
-      _c("div", { staticClass: "flex flex-wrap" }, [
-        _c("img", {
-          staticClass:
-            "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded",
-          attrs: { alt: "", src: _vm.product.thumbnail }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" },
-          [
+    return _c(
+      "section",
+      { staticClass: "bg-white shadow rounded overflow-hidden" },
+      [
+        _c("div", { staticClass: "flex flex-wrap" }, [
+          _c("img", {
+            staticClass:
+              "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center",
+            attrs: { alt: "", src: _vm.product.thumbnail }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "lg:w-1/2 w-full p-6" }, [
             _c("h1", { staticClass: "text-gray-900 text-3xl font-medium mb-1" }, [
               _vm._v("\n        " + _vm._s(_vm.product.title) + "\n      ")
             ]),
@@ -12211,10 +12219,10 @@
                 ]
               )
             ])
-          ]
-        )
-      ])
-    ])
+          ])
+        ])
+      ]
+    )
   };
   var __vue_staticRenderFns__$4 = [];
   __vue_render__$4._withStripped = true;
