@@ -1,4 +1,8 @@
-import { Controller, Get, Param } from '../deps/dactyl.ts';
+import {
+  Controller,
+  Get,
+  Param,
+} from '../deps/dactyl.ts';
 import { products } from '../config/sampleDb.ts';
 
 @Controller('/product')

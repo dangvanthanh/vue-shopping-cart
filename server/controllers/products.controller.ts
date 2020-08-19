@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  Param
+  Param,
 } from '../deps/dactyl.ts';
 import { products } from '../config/sampleDb.ts';
 
@@ -9,7 +9,7 @@ import { products } from '../config/sampleDb.ts';
 class ProductsController {
   @Get('/')
   async getAllProducts() {
-    return Array.from(products.values())
+    return Array.from(products.values());
   }
 
   @Get('/:id')

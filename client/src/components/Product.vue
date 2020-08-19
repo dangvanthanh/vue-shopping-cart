@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white shadow rounded pb-5 flex flex-col overflow-hidden">
     <div class="block relative h-48 overflow-hidden">
-      <img :src="product.thumbnail" class="object-cover object-center w-full h-full block" />
+      <v-lazy-image :src="product.thumbnail" class="object-cover object-center w-full h-full block" />
     </div>
     <div class="px-3 flex-1">
       <h2 class="text-gray-900 text-base font-medium my-3">{{ product.title }}</h2>

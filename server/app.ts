@@ -8,7 +8,8 @@ const app: Application = new Application({
     CategoriesController,
     ProductController,
     ProductsController
-  ]
+  ],
+  injectables: []
 })
 
 const PORT = 3000;
