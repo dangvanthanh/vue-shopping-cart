@@ -4,8 +4,8 @@
   'use strict';
 
   /*!
-   * Vue.js v2.6.11
-   * (c) 2014-2019 Evan You
+   * Vue.js v2.6.12
+   * (c) 2014-2020 Evan You
    * Released under the MIT License.
    */
   /*  */
@@ -1275,7 +1275,7 @@
           ? val
           : { type: val };
       }
-    }
+    } else ;
     options.props = res;
   }
 
@@ -1297,7 +1297,7 @@
           ? extend({ from: key }, val)
           : { from: val };
       }
-    }
+    } else ;
   }
 
   /**
@@ -4024,7 +4024,7 @@
       keys.push(key);
       var value = validateProp(key, propsOptions, propsData, vm);
       /* istanbul ignore else */
-      {
+      var hyphenatedKey; {
         defineReactive$$1(props, key, value);
       }
       // static props are already proxied on the component's prototype
@@ -4681,7 +4681,7 @@
     value: FunctionalRenderContext
   });
 
-  Vue.version = '2.6.11';
+  Vue.version = '2.6.12';
 
   /*  */
 
@@ -6138,7 +6138,7 @@
         // skip the update if old and new VDOM state is the same.
         // `value` is handled separately because the DOM value may be temporarily
         // out of sync with VDOM state due to focus, composition and modifiers.
-        // This  #4521 by skipping the unnecesarry `checked` update.
+        // This  #4521 by skipping the unnecessary `checked` update.
         cur !== oldProps[key]
       ) {
         // some property updates can throw
@@ -7328,7 +7328,7 @@
       for (var i = 0; i < rawChildren.length; i++) {
         var c = rawChildren[i];
         if (c.tag) {
-          if (c.key != null && String(c.key).indexOf('__vlist') !== 0) {
+          var opts, name; if (c.key != null && String(c.key).indexOf('__vlist') !== 0) {
             children.push(c);
             map[c.key] = c
             ;(c.data || (c.data = {})).transition = transitionData;
@@ -8554,7 +8554,7 @@
       } else if (current.matched.length) {
         var rawPath = current.matched[current.matched.length - 1].path;
         next.path = fillParams(rawPath, params$1, ("path " + (current.path)));
-      }
+      } else ;
       return next
     }
 
