@@ -4,8 +4,8 @@ module.exports = {
       colors: {
         blue: '#2b42a2',
         orange: '#ff9141',
-      }
-    }
+      },
+    },
   },
   corePlugins: [
     'preflight',
@@ -18,6 +18,7 @@ module.exports = {
     'padding',
     'backgroundColor',
     'textAlign',
+    'textTransform',
     'width',
     'fontSize',
     'textColor',
@@ -34,6 +35,9 @@ module.exports = {
     'height',
     'maxWidth',
     'objectFit',
-    'fontWeight'
-  ]
+    'fontWeight',
+  ],
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
 };

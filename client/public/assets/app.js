@@ -7493,103 +7493,6 @@
     }, 0);
   }
 
-  /**
-   * v-lazy-image v1.4.0
-   * (c) 2020 Alex Jover Morales <alexjovermorales@gmail.com>
-   * @license MIT
-   */
-
-  var VLazyImageComponent = {
-    props: {
-      src: {
-        type: String,
-        required: true
-      },
-      srcPlaceholder: {
-        type: String,
-        default: "//:0"
-      },
-      srcset: {
-        type: String
-      },
-      intersectionOptions: {
-        type: Object,
-        default: function () { return ({}); }
-      },
-      usePicture: {
-        type: Boolean,
-        default: false
-      }
-    },
-    inheritAttrs: false,
-    data: function () { return ({ observer: null, intersected: false, loaded: false }); },
-    computed: {
-      srcImage: function srcImage() {
-        return this.intersected && this.src ? this.src : this.srcPlaceholder;
-      },
-      srcsetImage: function srcsetImage() {
-        return this.intersected && this.srcset ? this.srcset : false;
-      }
-    },
-    methods: {
-      load: function load() {
-        if (this.$el.getAttribute("src") !== this.srcPlaceholder) {
-          this.loaded = true;
-          this.$emit("load");
-        }
-      }
-    },
-    render: function render(h) {
-      var img = h("img", {
-        attrs: {
-          src: this.srcImage,
-          srcset: this.srcsetImage
-        },
-        domProps: this.$attrs,
-        class: {
-          "v-lazy-image": true,
-          "v-lazy-image-loaded": this.loaded
-        },
-        on: { load: this.load }
-      });
-      if (this.usePicture) {
-        return h(
-          "picture",
-          { on: { load: this.load } },
-          this.intersected ? [this.$slots.default, img] : [img]
-        );
-      } else {
-        return img;
-      }
-    },
-    mounted: function mounted() {
-      var this$1 = this;
-
-      if ("IntersectionObserver" in window) {
-        this.observer = new IntersectionObserver(function (entries) {
-          var image = entries[0];
-          if (image.isIntersecting) {
-            this$1.intersected = true;
-            this$1.observer.disconnect();
-            this$1.$emit("intersect");
-          }
-        }, this.intersectionOptions);
-        this.observer.observe(this.$el);
-      }
-    },
-    destroyed: function destroyed() {
-      if ("IntersectionObserver" in window) {
-        this.observer.disconnect();
-      }
-    }
-  };
-
-  var VLazyImagePlugin = {
-    install: function (Vue, opts) {
-      Vue.component("VLazyImage", VLazyImageComponent);
-    }
-  };
-
   /*!
     * vue-router v3.4.3
     * (c) 2020 Evan You
@@ -11582,6 +11485,12 @@
   var __assign = Object.assign;
   var script = {
     name: "NavBar",
+    props: {
+      isCategory: {
+        type: Boolean,
+        default: () => true
+      }
+    },
     computed: __assign({}, mapState("category", ["categories"]))
   };
 
@@ -11692,19 +11601,80 @@
                 _c(
                   "router-link",
                   {
-                    staticClass: "ml-2 font-medium text-white p-3",
+                    staticClass:
+                      "ml-4 font-medium text-white inline-block align-middle relative",
                     attrs: { to: "/login" }
                   },
-                  [_vm._v("Login")]
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass:
+                          "w-6 h-6 text-white inline-block align-middle",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d:
+                              "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "router-link",
                   {
-                    staticClass: "ml-2 font-medium text-white p-3",
-                    attrs: { to: "/signup" }
+                    staticClass:
+                      "ml-4 font-medium text-white inline-block align-middle relative",
+                    attrs: { to: "/checkout" }
                   },
-                  [_vm._v("Signup")]
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass:
+                          "w-6 h-6 text-white inline-block align-middle",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d:
+                              "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "inline-block align-base text-gray leading-none"
+                      },
+                      [_vm._v("0")]
+                    )
+                  ]
                 )
               ],
               1
@@ -11714,32 +11684,37 @@
         )
       ]),
       _vm._v(" "),
-      _c("nav", { staticClass: "bg-white shadow" }, [
-        _c("div", { staticClass: "max-w-5xl mx-auto px-5" }, [
-          _c(
-            "ol",
-            _vm._l(_vm.categories, function(category) {
-              return _c(
-                "li",
-                { key: category.id, staticClass: "inline-block align-middle" },
-                [
-                  _c(
-                    "router-link",
+      _vm.isCategory
+        ? _c("nav", { staticClass: "bg-white shadow" }, [
+            _c("div", { staticClass: "max-w-5xl mx-auto px-5" }, [
+              _c(
+                "ol",
+                _vm._l(_vm.categories, function(category) {
+                  return _c(
+                    "li",
                     {
-                      staticClass:
-                        "block text-lg border-b-2 border-transparent p-3 hover:border-orange p-3",
-                      attrs: { to: "/category/" + category.slug }
+                      key: category.id,
+                      staticClass: "inline-block align-middle"
                     },
-                    [_vm._v(_vm._s(category.name))]
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass:
+                            "block text-lg border-b-2 border-transparent p-3 hover:border-orange p-3",
+                          attrs: { to: "/category/" + category.slug }
+                        },
+                        [_vm._v(_vm._s(category.name))]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
+                }),
+                0
               )
-            }),
-            0
-          )
-        ])
-      ])
+            ])
+          ])
+        : _vm._e()
     ])
   };
   var __vue_staticRenderFns__ = [];
@@ -11748,7 +11723,7 @@
     /* style */
     const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__ = "data-v-12fee548";
+    const __vue_scope_id__ = "data-v-97130a04";
     /* module identifier */
     const __vue_module_identifier__ = undefined;
     /* functional template */
@@ -11776,7 +11751,12 @@
 
   var script$1 = {
     name: "Product",
-    props: ["product"]
+    props: {
+      product: {
+        type: Object,
+        required: true
+      }
+    }
   };
 
   /* script */
@@ -11793,17 +11773,13 @@
         staticClass: "bg-white shadow rounded pb-5 flex flex-col overflow-hidden"
       },
       [
-        _c(
-          "div",
-          { staticClass: "block relative h-48 overflow-hidden" },
-          [
-            _c("v-lazy-image", {
-              staticClass: "object-cover object-center w-full h-full block",
-              attrs: { src: _vm.product.thumbnail }
-            })
-          ],
-          1
-        ),
+        _c("div", { staticClass: "block relative h-48 overflow-hidden" }, [
+          _c("img", {
+            staticClass:
+              "object-cover object-center w-full h-full block bg-gray-500",
+            attrs: { src: _vm.product.thumbnail }
+          })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "px-3 flex-1" }, [
           _c("h2", { staticClass: "text-gray-900 text-base font-medium my-3" }, [
@@ -12122,7 +12098,12 @@
 
   var script$4 = {
     name: "ProductDetail",
-    props: ["product"],
+    props: {
+      product: {
+        type: Object,
+        required: true
+      }
+    },
     methods: {
       fillStar(n, rating) {
         return n <= rating ? "currentColor" : "none";
@@ -12142,98 +12123,32 @@
       "section",
       { staticClass: "bg-white shadow rounded overflow-hidden" },
       [
-        _c(
-          "div",
-          { staticClass: "flex flex-wrap" },
-          [
-            _c("v-lazy-image", {
-              staticClass:
-                "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center",
-              attrs: { alt: "", src: _vm.product.thumbnail }
-            }),
+        _c("div", { staticClass: "flex flex-wrap" }, [
+          _c("img", {
+            staticClass:
+              "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center bg-gray-500",
+            attrs: { alt: "", src: _vm.product.thumbnail }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "lg:w-1/2 w-full p-6" }, [
+            _c("h1", { staticClass: "text-gray-900 text-3xl font-medium mb-1" }, [
+              _vm._v(_vm._s(_vm.product.title))
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "lg:w-1/2 w-full p-6" }, [
+            _c("div", { staticClass: "flex mb-4" }, [
               _c(
-                "h1",
-                { staticClass: "text-gray-900 text-3xl font-medium mb-1" },
-                [_vm._v("\n        " + _vm._s(_vm.product.title) + "\n      ")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex mb-4" }, [
-                _c(
-                  "span",
-                  { staticClass: "flex items-center" },
-                  [
-                    _vm._l(5, function(n) {
-                      return _c(
-                        "svg",
-                        {
-                          key: n,
-                          staticClass: "w-4 h-4 text-orange",
-                          attrs: {
-                            fill: _vm.fillStar(n, _vm.product.rating),
-                            stroke: "currentColor",
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            viewBox: "0 0 24 24"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                            }
-                          })
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-gray-700 ml-3" }, [
-                      _vm._v(
-                        _vm._s(_vm.product.rating) +
-                          "\n            " +
-                          _vm._s(_vm.product.rating > 1 ? "Reviews" : "Review")
-                      )
-                    ])
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "leading-relaxed" }, [
-                _vm._v(
-                  "\n        " + _vm._s(_vm.product.description) + "\n      "
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mt-6" }, [
-                _c(
-                  "span",
-                  { staticClass: "font-semibold text-2xl text-orange" },
-                  [_vm._v("$ " + _vm._s(_vm.product.price))]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex mt-6" }, [
-                _c("button", { staticClass: "button button-primary px-6" }, [
-                  _vm._v("\n          Add to cart\n        ")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
-                  },
-                  [
-                    _c(
+                "span",
+                { staticClass: "flex items-center" },
+                [
+                  _vm._l(5, function(n) {
+                    return _c(
                       "svg",
                       {
-                        staticClass: "w-5 h-5",
+                        key: n,
+                        staticClass: "w-4 h-4 text-orange",
                         attrs: {
-                          fill: "currentColor",
+                          fill: _vm.fillStar(n, _vm.product.rating),
+                          stroke: "currentColor",
                           "stroke-linecap": "round",
                           "stroke-linejoin": "round",
                           "stroke-width": "2",
@@ -12244,22 +12159,88 @@
                         _c("path", {
                           attrs: {
                             d:
-                              "M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                              "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
                           }
                         })
                       ]
                     )
-                  ]
-                )
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-gray-700 ml-3" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.product.rating) +
+                        "\n            " +
+                        _vm._s(_vm.product.rating > 1 ? "Reviews" : "Review") +
+                        "\n          "
+                    )
+                  ])
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "leading-relaxed" }, [
+              _vm._v(_vm._s(_vm.product.description))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mt-6" }, [
+              _c("span", { staticClass: "font-semibold text-2xl text-orange" }, [
+                _vm._v("$ " + _vm._s(_vm.product.price))
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex flex-wrap items-center mt-6" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "rounded-full w-12 h-12 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "w-5 h-5",
+                      attrs: {
+                        fill: "currentColor",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "2",
+                        viewBox: "0 0 24 24"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
             ])
-          ],
-          1
-        )
+          ])
+        ])
       ]
     )
   };
-  var __vue_staticRenderFns__$4 = [];
+  var __vue_staticRenderFns__$4 = [
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("div", { staticClass: "flex-1 w-0" }, [
+        _c("button", { staticClass: "button button-primary w-full" }, [
+          _vm._v("Add to cart")
+        ])
+      ])
+    }
+  ];
   __vue_render__$4._withStripped = true;
 
     /* style */
@@ -12390,7 +12371,8 @@
     );
 
   var script$6 = {
-    name: "Login"
+    name: "Checkout",
+    components: {NavBar: __vue_component__}
   };
 
   /* script */
@@ -12401,70 +12383,23 @@
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "h-screen flex items-center" }, [
-      _c("div", { staticClass: "w-full max-w-md mx-auto py-12 px-6" }, [
-        _c(
-          "h2",
-          { staticClass: "flex justify-center" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "flex items-center text-6xl text-blue leading-none uppercase relative",
-                attrs: { to: "/" }
-              },
-              [_c("span", [_vm._v("S")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "p",
-          { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
-          [_vm._v("Log in to your account")]
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ])
+    return _c(
+      "div",
+      [_c("NavBar", { attrs: { isCategory: false } }), _vm._v(" "), _vm._m(0)],
+      1
+    )
   };
   var __vue_staticRenderFns__$6 = [
     function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("form", [
-        _c("div", { staticClass: "rounded-md shadow-sm" }, [
-          _c("div", [
-            _c("input", {
-              staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
-              attrs: { type: "email", placeholder: "Email address" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
-              attrs: { type: "password", placeholder: "Password" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mt-5" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Log in")]
-            )
-          ])
-        ])
+      return _c("div", { staticClass: "max-w-5xl mx-auto px-6 py-12" }, [
+        _c("h2", { staticClass: "text-3xl text-gray-900 font-medium mb-8" }, [
+          _vm._v("My Cart")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("You have no items in your shopping cart.")])
       ])
     }
   ];
@@ -12500,7 +12435,7 @@
     );
 
   var script$7 = {
-    name: "Signup"
+    name: "Login"
   };
 
   /* script */
@@ -12533,10 +12468,27 @@
         _c(
           "p",
           { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
-          [_vm._v("Create new an account")]
+          [_vm._v("Log in to your account")]
         ),
         _vm._v(" "),
-        _vm._m(0)
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-6" }, [
+          _c(
+            "p",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "text-blue underline hover:no-underline",
+                  attrs: { to: "/signup" }
+                },
+                [_vm._v("Create an account?")]
+              )
+            ],
+            1
+          )
+        ])
       ])
     ])
   };
@@ -12547,19 +12499,37 @@
       var _c = _vm._self._c || _h;
       return _c("form", [
         _c("div", { staticClass: "rounded-md shadow-sm" }, [
-          _c("div", [
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "email" }
+              },
+              [_vm._v("Email *")]
+            ),
+            _vm._v(" "),
             _c("input", {
               staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
               attrs: { type: "email", placeholder: "Email address" }
             })
           ]),
           _vm._v(" "),
-          _c("div", [
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "password" }
+              },
+              [_vm._v("Password *")]
+            ),
+            _vm._v(" "),
             _c("input", {
               staticClass:
-                "border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full p-3 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
-              attrs: { type: "password", placeholder: "Password" }
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { id: "password", type: "password", placeholder: "Password" }
             })
           ]),
           _vm._v(" "),
@@ -12571,7 +12541,7 @@
                   "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
                 attrs: { type: "submit" }
               },
-              [_vm._v("Sign up")]
+              [_vm._v("Sign In")]
             )
           ])
         ])
@@ -12610,7 +12580,7 @@
     );
 
   var script$8 = {
-    name: "NotFound"
+    name: "Signup"
   };
 
   /* script */
@@ -12624,33 +12594,139 @@
     return _c("div", { staticClass: "h-screen flex items-center" }, [
       _c("div", { staticClass: "w-full max-w-md mx-auto py-12 px-6" }, [
         _c(
-          "p",
-          {
-            staticClass: "text-2xl text-base leading-5 text-center text-gray-900"
-          },
-          [_vm._v("404 - Page not found.")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "text-center mt-10" },
+          "h2",
+          { staticClass: "flex justify-center" },
           [
             _c(
               "router-link",
               {
                 staticClass:
-                  "relative inline-block align-middle py-3 px-8 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
+                  "flex items-center text-6xl text-blue leading-none uppercase relative",
                 attrs: { to: "/" }
               },
-              [_vm._v("Back to home")]
+              [_c("span", [_vm._v("S")])]
             )
           ],
           1
-        )
+        ),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
+          [_vm._v("Create new an account")]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "mt-6" }, [
+          _c(
+            "p",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "text-blue underline hover:no-underline",
+                  attrs: { to: "/login" }
+                },
+                [_vm._v("Back to login?")]
+              )
+            ],
+            1
+          )
+        ])
       ])
     ])
   };
-  var __vue_staticRenderFns__$8 = [];
+  var __vue_staticRenderFns__$8 = [
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("form", [
+        _c("div", { staticClass: "rounded-md shadow-sm" }, [
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "firstName" }
+              },
+              [_vm._v("First Name *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { id: "firstName", type: "text", placeholder: "First name" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "lastName" }
+              },
+              [_vm._v("Last Name *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { id: "lastName", type: "text", placeholder: "Last name" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "email" }
+              },
+              [_vm._v("Email *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { id: "email", type: "email", placeholder: "Email address" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm text-gray-900",
+                attrs: { for: "password" }
+              },
+              [_vm._v("Password *")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                "border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10",
+              attrs: { id: "password", type: "password", placeholder: "Password" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-5" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Create An Account")]
+            )
+          ])
+        ])
+      ])
+    }
+  ];
   __vue_render__$8._withStripped = true;
 
     /* style */
@@ -12682,6 +12758,80 @@
       undefined
     );
 
+  var script$9 = {
+    name: "NotFound"
+  };
+
+  /* script */
+  const __vue_script__$9 = script$9;
+
+  /* template */
+  var __vue_render__$9 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "h-screen flex items-center" }, [
+      _c("div", { staticClass: "w-full max-w-md mx-auto py-12 px-6" }, [
+        _c(
+          "p",
+          {
+            staticClass:
+              "text-2xl text-base leading-5 text-center text-gray-900 uppercase"
+          },
+          [_vm._v("404 - Page not found.")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "text-center mt-10" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "relative inline-block align-middle py-3 px-8 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline",
+                attrs: { to: "/" }
+              },
+              [_vm._v("Back to home")]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  };
+  var __vue_staticRenderFns__$9 = [];
+  __vue_render__$9._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$9 = undefined;
+    /* scoped */
+    const __vue_scope_id__$9 = undefined;
+    /* module identifier */
+    const __vue_module_identifier__$9 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$9 = false;
+    /* style inject */
+    
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$9 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+      __vue_inject_styles__$9,
+      __vue_script__$9,
+      __vue_scope_id__$9,
+      __vue_is_functional_template__$9,
+      __vue_module_identifier__$9,
+      false,
+      undefined,
+      undefined,
+      undefined
+    );
+
   Vue.use(VueRouter);
   const routes = [
     {
@@ -12700,19 +12850,24 @@
       component: __vue_component__$5
     },
     {
+      path: "/checkout",
+      name: "Checkout",
+      component: __vue_component__$6
+    },
+    {
       path: "/login",
       name: "login",
-      component: __vue_component__$6
+      component: __vue_component__$7
     },
     {
       path: "/signup",
       name: "signup",
-      component: __vue_component__$7
+      component: __vue_component__$8
     },
     {
       path: "/404",
       name: "404",
-      component: __vue_component__$8
+      component: __vue_component__$9
     },
     {
       path: "*",
@@ -12785,7 +12940,7 @@
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
-  var script$9 = {
+  var script$a = {
     name: "App",
     data() {
       return {
@@ -12806,25 +12961,25 @@
   };
 
   /* script */
-  const __vue_script__$9 = script$9;
+  const __vue_script__$a = script$a;
   /* template */
-  var __vue_render__$9 = function() {
+  var __vue_render__$a = function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "app" }, [_c("router-view")], 1)
   };
-  var __vue_staticRenderFns__$9 = [];
-  __vue_render__$9._withStripped = true;
+  var __vue_staticRenderFns__$a = [];
+  __vue_render__$a._withStripped = true;
 
     /* style */
-    const __vue_inject_styles__$9 = undefined;
+    const __vue_inject_styles__$a = undefined;
     /* scoped */
-    const __vue_scope_id__$9 = undefined;
+    const __vue_scope_id__$a = undefined;
     /* module identifier */
-    const __vue_module_identifier__$9 = undefined;
+    const __vue_module_identifier__$a = undefined;
     /* functional template */
-    const __vue_is_functional_template__$9 = false;
+    const __vue_is_functional_template__$a = false;
     /* style inject */
     
     /* style inject SSR */
@@ -12833,13 +12988,13 @@
     
 
     
-    const __vue_component__$9 = /*#__PURE__*/normalizeComponent(
-      { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-      __vue_inject_styles__$9,
-      __vue_script__$9,
-      __vue_scope_id__$9,
-      __vue_is_functional_template__$9,
-      __vue_module_identifier__$9,
+    const __vue_component__$a = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+      __vue_inject_styles__$a,
+      __vue_script__$a,
+      __vue_scope_id__$a,
+      __vue_is_functional_template__$a,
+      __vue_module_identifier__$a,
       false,
       undefined,
       undefined,
@@ -12847,11 +13002,10 @@
     );
 
   Vue.config.productionTip = false;
-  Vue.use(VLazyImagePlugin);
   new Vue({
     router: router,
     store: store,
-    render: (h) => h(__vue_component__$9)
+    render: (h) => h(__vue_component__$a)
   }).$mount("#app");
 
 }());

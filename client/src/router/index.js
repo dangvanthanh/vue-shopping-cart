@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '../views/Home.vue';
 import Category from '../views/Category.vue';
 import Product from '../views/Product.vue';
+import Checkout from '../views/Checkout.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import NotFound from '../views/NotFound.vue';
@@ -24,6 +25,11 @@ const routes = [
     path: '/product/:id',
     name: 'product',
     component: Product,
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout,
   },
   {
     path: '/login',

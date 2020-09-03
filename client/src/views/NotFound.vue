@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex items-center">
     <div class="w-full max-w-md mx-auto py-12 px-6">
-      <p class="text-2xl text-base leading-5 text-center text-gray-900">404 - Page not found.</p>
+      <p class="text-2xl text-base leading-5 text-center text-gray-900 uppercase">404 - Page not found.</p>
       <div class="text-center mt-10">
         <router-link
           to="/"

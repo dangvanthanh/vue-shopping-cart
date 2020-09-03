@@ -1,7 +1,10 @@
 <template>
   <div class="bg-white shadow rounded pb-5 flex flex-col overflow-hidden">
     <div class="block relative h-48 overflow-hidden">
-      <v-lazy-image :src="product.thumbnail" class="object-cover object-center w-full h-full block" />
+      <img
+        :src="product.thumbnail"
+        class="object-cover object-center w-full h-full block bg-gray-500"
+      />
     </div>
     <div class="px-3 flex-1">
       <h2 class="text-gray-900 text-base font-medium my-3">{{ product.title }}</h2>
@@ -16,6 +19,11 @@
 <script>
 export default {
   name: 'Product',
-  props: ['product'],
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>

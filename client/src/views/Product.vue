@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import NavBar from '../components/NavBar.vue';
-import ProductDetail from '../components/ProductDetail.vue';
+import NavBar from '../components/Shared/NavBar.vue';
+import ProductDetail from '../components/Product/ProductDetail.vue';
 
 export default {
   name: 'Product',
