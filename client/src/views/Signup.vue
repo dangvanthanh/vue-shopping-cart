@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex items-center">
-    <div class="w-full max-w-md mx-auto py-12 px-6">
+    <div class="w-full max-w-md mx-auto py-12 px-6 bg-white shadow rounded-md">
       <h2 class="flex justify-center">
         <router-link
           to="/"
@@ -17,7 +17,7 @@
             <input
               id="firstName"
               type="text"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="First name"
             />
           </div>
@@ -26,7 +26,7 @@
             <input
               id="lastName"
               type="text"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="Last name"
             />
           </div>
@@ -35,7 +35,7 @@
             <input
               id="email"
               type="email"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="Email address"
             />
           </div>
@@ -44,21 +44,22 @@
             <input
               id="password"
               type="password"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="Password"
             />
           </div>
           <div class="mt-5">
             <button
               type="submit"
-              class="relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline"
+              class="button button-blue w-full rounded-md"
             >Create An Account</button>
           </div>
         </div>
       </form>
-      <div class="mt-6">
-        <p>
-          <router-link to="/login" class="text-blue underline hover:no-underline">Back to login?</router-link>
+      <div class="mt-10">
+        <p class="text-center">
+          Already have an account?
+          <router-link to="/login" class="text-blue underline hover:no-underline">Back to login</router-link>
         </p>
       </div>
     </div>

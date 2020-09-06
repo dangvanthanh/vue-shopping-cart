@@ -2,7 +2,7 @@
   <div>
     <NavBar />
     <div class="max-w-5xl mx-auto px-6 py-12">
-      <ProductDetail :product="product" />
+      <ProductDetail :product="product" @addToCart="handlerAddToCart" />
     </div>
   </div>
 </template>
@@ -30,5 +30,10 @@ export default {
       console.log(e);
     }
   },
+  methods: {
+    handlerAddToCart(product) {
+      console.log(product);
+    }
+  }
 };
 </script>

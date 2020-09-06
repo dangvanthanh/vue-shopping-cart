@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex items-center">
-    <div class="w-full max-w-md mx-auto py-12 px-6">
+    <div class="w-full max-w-md mx-auto py-12 px-6 bg-white shadow rounded-md">
       <h2 class="flex justify-center">
         <router-link
           to="/"
@@ -16,7 +16,7 @@
             <label for="email" class="block mb-2 text-sm text-gray-900">Email *</label>
             <input
               type="email"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="Email address"
             />
           </div>
@@ -25,24 +25,25 @@
             <input
               id="password"
               type="password"
-              class="border-gray-300 placeholder-gray-500 appearance-none relative block w-full p-3 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+              class="text-field"
               placeholder="Password"
             />
           </div>
           <div class="mt-5">
             <button
               type="submit"
-              class="relative block w-full p-3 leading-5 border border-transparent rounded-md text-white font-semibold bg-blue focus:outline-none focus:shadow-outline"
+              class="button button-blue w-full rounded-md"
             >Sign In</button>
           </div>
         </div>
       </form>
-      <div class="mt-6">
-        <p>
+      <div class="mt-10">
+        <p class="text-center">
+          Not registered?
           <router-link
             to="/signup"
             class="text-blue underline hover:no-underline"
-          >Create an account?</router-link>
+          >Create an account</router-link>
         </p>
       </div>
     </div>

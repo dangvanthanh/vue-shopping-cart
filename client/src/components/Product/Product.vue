@@ -11,7 +11,7 @@
       <p class="mb-3 text-blue-600 text-lg font-bold text-orange">$ {{ product.price }}</p>
     </div>
     <div class="px-3">
-      <router-link :to="`/product/${product.id}`" class="button button-primary w-full">View Details</router-link>
+      <router-link :to="`/product/${product.id}`" class="button button-orange w-full rounded-full">View Details</router-link>
     </div>
   </div>
 </template>

@@ -1,0 +1,29 @@
+.button {
+  @apply block;
+  @apply border border-transparent;
+  @apply text-center;
+  @apply p-3;
+  @apply leading-none;
+  @apply font-semibold;
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}
+
+.button-orange {
+  @apply text-orange;
+  @apply border-orange;
+
+  &:hover,
+  &:focus {
+    @apply bg-orange text-white;
+  }
+}
+
+.button-blue {
+  @apply text-white;
+  @apply bg-blue;
+  @apply border-blue;
+}

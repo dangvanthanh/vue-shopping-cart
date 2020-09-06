@@ -6,26 +6,3 @@ body {
   color: #444;
   line-height: 1.5;
 }
-
-.button {
-  @apply block;
-  @apply border-2 border-transparent;
-  @apply text-center;
-  @apply p-2;
-  @apply rounded-full;
-
-  &:hover,
-  &:focus {
-    outline: none;
-  }
-}
-
-.button-primary {
-  @apply text-orange;
-  @apply border-orange;
-
-  &:hover,
-  &:focus {
-    @apply bg-orange text-white;
-  }
-}

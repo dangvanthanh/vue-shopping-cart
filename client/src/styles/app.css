@@ -2,5 +2,7 @@
 
 @import 'tailwindcss/components';
 @import './main.css';
+@import './forms.css';
+@import './buttons.css';
 
 @import 'tailwindcss/utilities';
