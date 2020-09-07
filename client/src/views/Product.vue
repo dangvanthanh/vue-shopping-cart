@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     handlerAddToCart(product) {
-      console.log(product);
+      this.$store.dispatch('cart/addToCart', product);
     }
   }
 };

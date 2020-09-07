@@ -1,11 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import modules from './modules';
+import cart from './cart';
+import category from './category';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules
+  modules: {
+    cart,
+    category,
+  },
 });
 
 export default store;

@@ -8,7 +8,7 @@
     </div>
     <div class="px-3 flex-1">
       <h2 class="text-gray-900 text-base font-medium my-3">{{ product.title }}</h2>
-      <p class="mb-3 text-blue-600 text-lg font-bold text-orange">$ {{ product.price }}</p>
+      <p class="mb-3 text-lg font-bold text-orange">$ {{ product.price }}</p>
     </div>
     <div class="px-3">
       <router-link :to="`/product/${product.id}`" class="button button-orange w-full rounded-full">View Details</router-link>
