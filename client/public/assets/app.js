@@ -11491,7 +11491,7 @@
         default: () => true
       }
     },
-    computed: __assign(__assign({}, mapState("category", ["categories"])), mapState("cart", ["carts"]))
+    computed: __assign(__assign({}, mapState("category", ["categories"])), mapGetters("cart", ["totalCart"]))
   };
 
   function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -11672,7 +11672,7 @@
                         staticClass:
                           "inline-block align-base text-gray leading-none"
                       },
-                      [_vm._v(_vm._s(_vm.carts.length))]
+                      [_vm._v(_vm._s(_vm.totalCart))]
                     )
                   ]
                 )
@@ -11723,7 +11723,7 @@
     /* style */
     const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__ = "data-v-743b22dc";
+    const __vue_scope_id__ = "data-v-f0b1d366";
     /* module identifier */
     const __vue_module_identifier__ = undefined;
     /* functional template */
@@ -12106,8 +12106,8 @@
       fillStar(n, rating) {
         return n <= rating ? "currentColor" : "none";
       },
-      handlerAddToCart(product) {
-        this.$emit("addToCart", product);
+      handlerAddProductToCart(product) {
+        this.$emit("addProductToCart", product);
       }
     }
   };
@@ -12200,7 +12200,7 @@
                     on: {
                       click: function($event) {
                         $event.preventDefault();
-                        return _vm.handlerAddToCart(_vm.product)
+                        return _vm.handlerAddProductToCart(_vm.product)
                       }
                     }
                   },
@@ -12318,8 +12318,8 @@
       });
     },
     methods: {
-      handlerAddToCart(product) {
-        this.$store.dispatch("cart/addToCart", product);
+      handlerAddProductToCart(product) {
+        this.$store.dispatch("cart/addProductToCart", product);
       }
     }
   };
@@ -12343,7 +12343,7 @@
           [
             _c("ProductDetail", {
               attrs: { product: _vm.product },
-              on: { addToCart: _vm.handlerAddToCart }
+              on: { addProductToCart: _vm.handlerAddProductToCart }
             })
           ],
           1
@@ -12387,17 +12387,9 @@
   var script$6 = {
     name: "ProductCart",
     props: {
-      cart: {
+      product: {
         type: Object,
         required: true
-      }
-    },
-    methods: {
-      decrementProduct(id) {
-        this.$emit("decrement", id);
-      },
-      incrementProduct(id) {
-        this.$emit("increment", id);
       }
     }
   };
@@ -12418,58 +12410,32 @@
           _c("img", {
             staticClass:
               "object-cover object-center w-full h-full block bg-gray-500 rounded",
-            attrs: { src: _vm.cart.thumbnail }
+            attrs: { src: _vm.product.thumbnail }
           })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "flex-1 w-0 px-3" }, [
-          _vm._v(_vm._s(_vm.cart.title))
+          _vm._v(_vm._s(_vm.product.title))
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-24 text-center font-bold text-orange" }, [
-          _vm._v("$ " + _vm._s(_vm.cart.price))
+          _vm._v("$ " + _vm._s(_vm.product.price))
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-32 text-center px-3" }, [
           _c("div", { staticClass: "flex flex-wrap items-center" }, [
-            _c(
-              "span",
-              {
-                staticClass:
-                  "w-8 h-8 rounded-full border border-gray-300 text-gray-500 cursor-pointer",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault();
-                    return _vm.decrementProduct(_vm.cart.id)
-                  }
-                }
-              },
-              [_vm._v("-")]
-            ),
+            _c("button", { staticClass: "button" }, [_vm._v("-")]),
             _vm._v(" "),
-            _c("span", { staticClass: "flex-1 w-0 px-3 text-gray-500" }, [
-              _vm._v(_vm._s(_vm.cart.quantity))
+            _c("span", { staticClass: "flex-1 w-0 px-3 text-gray-800" }, [
+              _vm._v(_vm._s(_vm.product.quantity))
             ]),
             _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "w-8 h-8 rounded-full border border-gray-300 text-gray-500 cursor-pointer",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault();
-                    return _vm.incrementProduct(_vm.cart.id)
-                  }
-                }
-              },
-              [_vm._v("+")]
-            )
+            _c("button", { staticClass: "button" }, [_vm._v("+")])
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-32 text-right font-bold text-orange" }, [
-          _vm._v("$ " + _vm._s(_vm.cart.price * _vm.cart.quantity))
+          _vm._v("$ " + _vm._s(_vm.product.price * _vm.product.quantity))
         ])
       ]
     )
@@ -12510,16 +12476,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1({}, mapState("cart", ["carts"])),
-    methods: {
-      decrementProduct(id) {
-        console.log(id);
-        this.$store.dispatch("cart/decrementProduct", id);
-      },
-      incrementProduct(id) {
-        this.$store.dispatch("cart/incrementProduct", id);
-      }
-    }
+    computed: __assign$1({}, mapState("cart", ["carts"]))
   };
 
   /* script */
@@ -12544,18 +12501,14 @@
             ]),
             _vm._v(" "),
             _vm.carts.length
-              ? _vm._l(_vm.carts, function(cart) {
+              ? _vm._l(_vm.carts, function(item) {
                   return _c(
                     "div",
-                    { key: cart.id },
+                    { key: item.id },
                     [
                       _c("ProductCart", {
                         staticClass: "mb-3",
-                        attrs: { cart: cart },
-                        on: {
-                          decrement: _vm.decrementProduct,
-                          increment: _vm.incrementProduct
-                        }
+                        attrs: { product: item }
                       })
                     ],
                     1
@@ -13737,8 +13690,13 @@
     scrollBehavior
   });
 
+  var getters2 = {
+    totalCart: (state) => state.carts.length
+  };
+
   var mutations2 = {
-    ADD_TO_CART(state, product) {
+    ADD_PRODUCT_TO_CART(state, product) {
+      console.log(state.carts);
       const cart = state.carts.find((cart2) => cart2.id === product.id);
       if (cart) {
         cart.quantity += 1;
@@ -13747,38 +13705,12 @@
           quantity: 1
         }));
       }
-    },
-    DECREMENT_PRODUCT(state, id) {
-      state.carts = state.carts.map((cart) => {
-        if (cart.id === id) {
-          if (cart.quantity) {
-            cart.quantity -= 1;
-          } else {
-            cart.quantity = 0;
-          }
-        }
-        return cart;
-      });
-    },
-    INCREMENT_PRODUCT(state, id) {
-      state.carts = state.carts.map((cart) => {
-        if (cart.id === id) {
-          cart.quantity += 1;
-        }
-        return cart;
-      });
     }
   };
 
   var actions2 = {
-    addToCart({commit}, product) {
-      commit("ADD_TO_CART", product);
-    },
-    decrementProduct({commit}, id) {
-      commit("DECREMENT_PRODUCT", id);
-    },
-    incrementProduct({commit}, id) {
-      commit("INCREMENT_PRODUCT", id);
+    addProductToCart({commit}, product) {
+      commit("ADD_PRODUCT_TO_CART", product);
     }
   };
 
@@ -13788,6 +13720,7 @@
   var cart2 = {
     namespaced: true,
     state,
+    getters: getters2,
     mutations: mutations2,
     actions: actions2
   };

@@ -2,7 +2,7 @@
   <div>
     <NavBar />
     <div class="max-w-5xl mx-auto px-6 py-12">
-      <ProductDetail :product="product" @addToCart="handlerAddToCart" />
+      <ProductDetail :product="product" @addProductToCart="handlerAddProductToCart" />
     </div>
   </div>
 </template>
@@ -31,9 +31,9 @@ export default {
     }
   },
   methods: {
-    handlerAddToCart(product) {
-      this.$store.dispatch('cart/addToCart', product);
-    }
-  }
+    handlerAddProductToCart(product) {
+      this.$store.dispatch('cart/addProductToCart', product);
+    },
+  },
 };
 </script>

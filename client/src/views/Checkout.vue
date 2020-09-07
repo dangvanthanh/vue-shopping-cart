@@ -4,12 +4,10 @@
     <div class="max-w-5xl mx-auto px-6 py-12">
       <h2 class="text-3xl text-gray-900 font-medium mb-8">My Cart</h2>
       <template v-if="carts.length">
-        <div v-for="cart in carts" :key="cart.id">
+        <div v-for="item in carts" :key="item.id">
           <ProductCart
              class="mb-3"
-            :cart="cart"
-            @decrement="decrementProduct"
-            @increment="incrementProduct"
+            :product="item"
           />
         </div>
       </template>
@@ -30,15 +28,6 @@ export default {
   components: { NavBar, ProductCart },
   computed: {
     ...mapState('cart', ['carts']),
-  },
-  methods: {
-    decrementProduct(id) {
-      console.log(id);
-      this.$store.dispatch('cart/decrementProduct', id);
-    },
-    incrementProduct(id) {
-      this.$store.dispatch('cart/incrementProduct', id);
-    },
-  },
+  }
 };
 </script>

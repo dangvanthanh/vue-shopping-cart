@@ -39,7 +39,7 @@
 
         <div class="flex flex-wrap items-center mt-6">
           <div class="flex-1 w-0">
-            <button class="button button-orange w-full rounded-full" @click.prevent="handlerAddToCart(product)">Add To Cart</button>
+            <button class="button button-orange w-full rounded-full" @click.prevent="handlerAddProductToCart(product)">Add To Cart</button>
           </div>
           <button
             class="rounded-full w-10 h-10 bg-gray-200  border-0 inline-flex items-center justify-center text-gray-500 ml-4"
@@ -76,8 +76,8 @@ export default {
     fillStar(n, rating) {
       return n <= rating ? 'currentColor' : 'none';
     },
-    handlerAddToCart(product) {
-      this.$emit('addToCart', product);
+    handlerAddProductToCart(product) {
+      this.$emit('addProductToCart', product);
     }
   },
 };
