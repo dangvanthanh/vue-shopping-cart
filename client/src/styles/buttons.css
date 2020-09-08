@@ -1,5 +1,5 @@
 .button {
-  @apply block;
+  @apply inline-block;
   @apply border border-transparent;
   @apply text-center;
   @apply p-3;

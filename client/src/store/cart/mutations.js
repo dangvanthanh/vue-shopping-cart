@@ -1,6 +1,5 @@
 export default {
   ADD_PRODUCT_TO_CART(state, product) {
-    console.log(state.carts);
     const cart = state.carts.find((cart) => cart.id === product.id);
 
     if (cart) {

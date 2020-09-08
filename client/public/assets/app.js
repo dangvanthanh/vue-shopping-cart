@@ -12404,21 +12404,25 @@
     var _c = _vm._self._c || _h;
     return _c(
       "div",
-      { staticClass: "bg-white shadow p-3 flex flex-wrap items-center" },
+      { staticClass: "bg-white shadow py-3 flex flex-wrap items-center" },
       [
-        _c("div", { staticClass: "w-16" }, [
-          _c("img", {
-            staticClass:
-              "object-cover object-center w-full h-full block bg-gray-500 rounded",
-            attrs: { src: _vm.product.thumbnail }
-          })
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "flex-1 w-0 px-3" }, [
-          _vm._v(_vm._s(_vm.product.title))
+          _c("div", { staticClass: "flex flex-wrap items-center" }, [
+            _c("div", { staticClass: "w-16" }, [
+              _c("img", {
+                staticClass:
+                  "object-cover object-center w-full h-full block bg-gray-500 rounded",
+                attrs: { src: _vm.product.thumbnail }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex-1 w-0 px-3" }, [
+              _vm._v(_vm._s(_vm.product.title))
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-24 text-center font-bold text-orange" }, [
+        _c("div", { staticClass: "w-24 text-center" }, [
           _vm._v("$ " + _vm._s(_vm.product.price))
         ]),
         _vm._v(" "),
@@ -12434,7 +12438,7 @@
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-right font-bold text-orange" }, [
+        _c("div", { staticClass: "w-32 text-right px-3" }, [
           _vm._v("$ " + _vm._s(_vm.product.price * _vm.product.quantity))
         ])
       ]
@@ -12476,7 +12480,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1({}, mapState("cart", ["carts"]))
+    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"]))
   };
 
   /* script */
@@ -12500,20 +12504,37 @@
               _vm._v("My Cart")
             ]),
             _vm._v(" "),
-            _vm.carts.length
-              ? _vm._l(_vm.carts, function(item) {
-                  return _c(
-                    "div",
-                    { key: item.id },
-                    [
+            _vm.totalCart
+              ? [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.carts, function(item) {
+                    return [
                       _c("ProductCart", {
-                        staticClass: "mb-3",
+                        key: item.id,
+                        staticClass: "border-b border-gray-300",
                         attrs: { product: item }
                       })
-                    ],
-                    1
-                  )
-                })
+                    ]
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-right" }, [
+                    _c("p", { staticClass: "mt-5 text-lg" }, [
+                      _c("strong", [_vm._v("Subtotal")]),
+                      _vm._v(
+                        "\n          : $ " +
+                          _vm._s(_vm.totalAmount) +
+                          "\n        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      { staticClass: "button button-blue rounded-md mt-5" },
+                      [_vm._v("Proceed to Checkout")]
+                    )
+                  ])
+                ]
               : [_c("p", [_vm._v("You have no items in your shopping cart.")])]
           ],
           2
@@ -12522,7 +12543,22 @@
       1
     )
   };
-  var __vue_staticRenderFns__$7 = [];
+  var __vue_staticRenderFns__$7 = [
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("div", { staticClass: "py-3 flex flex-wrap items-center" }, [
+        _c("div", { staticClass: "flex-1 w-0" }, [_vm._v("Item")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-24 text-center" }, [_vm._v("Price")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-32 text-center px-3" }, [_vm._v("Qty")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-32 text-right" }, [_vm._v("Subtotal")])
+      ])
+    }
+  ];
   __vue_render__$7._withStripped = true;
 
     /* style */
@@ -13691,12 +13727,12 @@
   });
 
   var getters2 = {
-    totalCart: (state) => state.carts.length
+    totalCart: (state) => state.carts.length,
+    totalAmount: (state) => state.carts.reduce((currentAmount, cart) => currentAmount + cart.quantity * cart.price, 0)
   };
 
   var mutations2 = {
     ADD_PRODUCT_TO_CART(state, product) {
-      console.log(state.carts);
       const cart = state.carts.find((cart2) => cart2.id === product.id);
       if (cart) {
         cart.quantity += 1;
