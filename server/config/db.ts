@@ -1,10 +1,8 @@
-import { Database } from '../deps/denodb.ts';
-import { CategoryModel } from '../models/category.model.ts';
-import { ProductModel } from '../models/product.model.ts';
+import { Client, config } from '../deps.ts';
 
-export const db = new Database('mongo', {
-  uri: 'mongodb://localhost:27017',
-  database: 's_db',
-});
+const client: any = new Client();
+client.setEndpoint(config().APP_WRITE_API_ENDPOINT);
+client.setKey(config().APP_WRITE_API_KEY);
+client.setProject(config().APP_WRITE_PROJECT_ID);
 
-db.link([CategoryModel, ProductModel]);
+export default client;

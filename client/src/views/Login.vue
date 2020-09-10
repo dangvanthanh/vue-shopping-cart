@@ -10,15 +10,11 @@
         </router-link>
       </h2>
       <p class="my-5 text-base leading-5 text-center text-gray-900">Log in to your account</p>
-      <form>
+      <form @submit.prevent="onSubmit">
         <div class="rounded-md shadow-sm">
           <div class="mb-3">
             <label for="email" class="block mb-2 text-sm text-gray-900">Email *</label>
-            <input
-              type="email"
-              class="text-field"
-              placeholder="Email address"
-            />
+            <input type="email" class="text-field" placeholder="Email address" v-model="email" />
           </div>
           <div class="mb-3">
             <label for="password" class="block mb-2 text-sm text-gray-900">Password *</label>
@@ -27,23 +23,18 @@
               type="password"
               class="text-field"
               placeholder="Password"
+              v-model="password"
             />
           </div>
           <div class="mt-5">
-            <button
-              type="submit"
-              class="button button-blue w-full rounded-md"
-            >Sign In</button>
+            <button type="submit" class="button button-blue w-full rounded-md">Sign In</button>
           </div>
         </div>
       </form>
       <div class="mt-10">
         <p class="text-center">
           Not registered?
-          <router-link
-            to="/signup"
-            class="text-blue underline hover:no-underline"
-          >Create an account</router-link>
+          <router-link to="/signup" class="text-blue underline hover:no-underline">Create an account</router-link>
         </p>
       </div>
     </div>
@@ -53,5 +44,14 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    onSubmit() {},
+  },
 };
 </script>

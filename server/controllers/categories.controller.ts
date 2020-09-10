@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-} from '../deps/dactyl.ts';
+} from '../deps.ts';
 import { categories } from '../config/sampleDb.ts';
 
 @Controller('/categories')

@@ -4,20 +4,35 @@
 
 ## Technologies
 
-- Deno.js
-- Vue.js
+- [Deno.js](https://deno.land/)
+- [Vue.js](https://vuejs.org/)
+- [AppWrite](https://appwrite.io/)
 
 ## Development
 
 - [x] Deno.js server
 - [x] Vue.js client
-- [ ] MongoDB
+- [x] AppWrite is (BaaS - Backend as a service)
 
 ### Gettting Started
 
-For development, you need run command line:
+Make sure everything is centralized in one place (`deps.ts`)
+
+```shell
+$ deno cache server/deps.ts
+```
+
+After installation AppWrite, create `.env` in root folder and updated AppWrite environments.
 
 ```
+APP_WRITE_API_ENDPOINT=http://localhost/v1
+APP_WRITE_PROJECT_ID=
+APP_WRITE_API_KEY=
+```
+
+For development, you need run command line:
+
+```shell
 $ npm run dev
 ```
 

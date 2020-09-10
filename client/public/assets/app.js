@@ -12591,7 +12591,17 @@
     );
 
   var script$8 = {
-    name: "Login"
+    name: "Login",
+    data() {
+      return {
+        email: "",
+        password: ""
+      };
+    },
+    methods: {
+      onSubmit() {
+      }
+    }
   };
 
   /* script */
@@ -12633,7 +12643,92 @@
             [_vm._v("Log in to your account")]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault();
+                  return _vm.onSubmit($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "rounded-md shadow-sm" }, [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "block mb-2 text-sm text-gray-900",
+                      attrs: { for: "email" }
+                    },
+                    [_vm._v("Email *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.email,
+                        expression: "email"
+                      }
+                    ],
+                    staticClass: "text-field",
+                    attrs: { type: "email", placeholder: "Email address" },
+                    domProps: { value: _vm.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.email = $event.target.value;
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "block mb-2 text-sm text-gray-900",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Password *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.password,
+                        expression: "password"
+                      }
+                    ],
+                    staticClass: "text-field",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      placeholder: "Password"
+                    },
+                    domProps: { value: _vm.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.password = $event.target.value;
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "mt-10" }, [
             _c(
@@ -12662,51 +12757,15 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("form", [
-        _c("div", { staticClass: "rounded-md shadow-sm" }, [
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "email" }
-              },
-              [_vm._v("Email *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { type: "email", placeholder: "Email address" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "password" }
-              },
-              [_vm._v("Password *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { id: "password", type: "password", placeholder: "Password" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mt-5" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button button-blue w-full rounded-md",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Sign In")]
-            )
-          ])
-        ])
+      return _c("div", { staticClass: "mt-5" }, [
+        _c(
+          "button",
+          {
+            staticClass: "button button-blue w-full rounded-md",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Sign In")]
+        )
       ])
     }
   ];
@@ -12741,8 +12800,56 @@
       undefined
     );
 
+  var __async$3 = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (result) => {
+        return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
+      };
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
   var script$9 = {
-    name: "Signup"
+    name: "Signup",
+    data() {
+      return {
+        name: "",
+        email: "",
+        password: ""
+      };
+    },
+    methods: {
+      onSubmit() {
+        return __async$3(this, [], function* () {
+          try {
+            const res = yield fetch(`http://localhost:3000/user/create`, {
+              method: "POST",
+              body: JSON.stringify({
+                name: this.name,
+                email: this.email,
+                password: this.password
+              })
+            });
+            const json = yield res.json();
+          } catch (e) {
+            console.log(e);
+          }
+        });
+      }
+    }
   };
 
   /* script */
@@ -12784,7 +12891,129 @@
             [_vm._v("Create new an account")]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault();
+                  return _vm.onSubmit($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "rounded-md shadow-sm" }, [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "block mb-2 text-sm text-gray-900",
+                      attrs: { for: "name" }
+                    },
+                    [_vm._v("Full Name *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name,
+                        expression: "name"
+                      }
+                    ],
+                    staticClass: "text-field",
+                    attrs: { id: "name", type: "text", placeholder: "Full name" },
+                    domProps: { value: _vm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name = $event.target.value;
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "block mb-2 text-sm text-gray-900",
+                      attrs: { for: "email" }
+                    },
+                    [_vm._v("Email *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.email,
+                        expression: "email"
+                      }
+                    ],
+                    staticClass: "text-field",
+                    attrs: {
+                      id: "email",
+                      type: "email",
+                      placeholder: "Email address"
+                    },
+                    domProps: { value: _vm.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.email = $event.target.value;
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "block mb-2 text-sm text-gray-900",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Password *")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.password,
+                        expression: "password"
+                      }
+                    ],
+                    staticClass: "text-field",
+                    attrs: {
+                      id: "password",
+                      type: "password",
+                      placeholder: "Password"
+                    },
+                    domProps: { value: _vm.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.password = $event.target.value;
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "mt-10" }, [
             _c(
@@ -12813,83 +13042,15 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("form", [
-        _c("div", { staticClass: "rounded-md shadow-sm" }, [
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "firstName" }
-              },
-              [_vm._v("First Name *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { id: "firstName", type: "text", placeholder: "First name" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "lastName" }
-              },
-              [_vm._v("Last Name *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { id: "lastName", type: "text", placeholder: "Last name" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "email" }
-              },
-              [_vm._v("Email *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { id: "email", type: "email", placeholder: "Email address" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-3" }, [
-            _c(
-              "label",
-              {
-                staticClass: "block mb-2 text-sm text-gray-900",
-                attrs: { for: "password" }
-              },
-              [_vm._v("Password *")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "text-field",
-              attrs: { id: "password", type: "password", placeholder: "Password" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mt-5" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button button-blue w-full rounded-md",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Create An Account")]
-            )
-          ])
-        ])
+      return _c("div", { staticClass: "mt-5" }, [
+        _c(
+          "button",
+          {
+            staticClass: "button button-blue w-full rounded-md",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Create An Account")]
+        )
       ])
     }
   ];
@@ -13791,7 +13952,7 @@
     }
   });
 
-  var __async$3 = (__this, __arguments, generator) => {
+  var __async$4 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -13821,7 +13982,7 @@
       };
     },
     mounted() {
-      return __async$3(this, [], function* () {
+      return __async$4(this, [], function* () {
         try {
           const res = yield fetch("http://localhost:3000/categories");
           const json = yield res.json();

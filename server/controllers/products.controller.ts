@@ -2,7 +2,7 @@ import {
   Controller,
   Get,
   Param,
-} from '../deps/dactyl.ts';
+} from '../deps.ts';
 import { products } from '../config/sampleDb.ts';
 
 @Controller('/products')
