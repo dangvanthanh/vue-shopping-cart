@@ -12518,22 +12518,25 @@
                     ]
                   }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "text-right" }, [
-                    _c("p", { staticClass: "mt-5 text-lg" }, [
-                      _c("strong", [_vm._v("Subtotal")]),
-                      _vm._v(
-                        "\n          : $ " +
-                          _vm._s(_vm.totalAmount) +
-                          "\n        "
-                      )
-                    ]),
+                  _c("hr", {
+                    staticClass: "my-5 border border-b border-gray-300"
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex flex-wrap" }, [
+                    _vm._m(1),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      { staticClass: "button button-blue rounded-md mt-5" },
-                      [_vm._v("Proceed to Checkout")]
-                    )
-                  ])
+                    _c("div", { staticClass: "text-right" }, [
+                      _c("strong", { staticClass: "text-lg" }, [
+                        _vm._v("$ " + _vm._s(_vm.totalAmount))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    { staticClass: "button button-blue rounded-md mt-5 w-full" },
+                    [_vm._v("Proceed to Checkout")]
+                  )
                 ]
               : [_c("p", [_vm._v("You have no items in your shopping cart.")])]
           ],
@@ -12556,6 +12559,14 @@
         _c("div", { staticClass: "w-32 text-center px-3" }, [_vm._v("Qty")]),
         _vm._v(" "),
         _c("div", { staticClass: "w-32 text-right" }, [_vm._v("Subtotal")])
+      ])
+    },
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("div", { staticClass: "flex-1 w-0" }, [
+        _c("strong", { staticClass: "text-lg" }, [_vm._v("Subtotal")])
       ])
     }
   ];
