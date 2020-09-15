@@ -6,6 +6,7 @@ import vue from 'rollup-plugin-vue';
 import esbuild from 'rollup-plugin-esbuild';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
+import nodePolyfills from 'rollup-plugin-node-polyfills'
 
 const production = !process.env.ROLLUP_WATCH;
 const port = 8080;
@@ -19,6 +20,7 @@ export default {
     name: 'app',
   },
   plugins: [
+    nodePolyfills(),
     postcss({ extract: true }),
     vue({ css: false }),
     replace({

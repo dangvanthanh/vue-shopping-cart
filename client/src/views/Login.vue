@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import appwrite from '../services/appwrite';
+
 export default {
   name: 'Login',
   data() {
@@ -51,7 +53,15 @@ export default {
     };
   },
   methods: {
-    onSubmit() {},
+    async onSubmit() {
+      try {
+        await appwrite.account.createSession(this.email, this.password);
+        const response = await appwrite.account.get();
+        console.log(response);
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
 };
 </script>

@@ -11,7 +11,9 @@
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
   },
   "dependencies": {
+    "appwrite": "^1.1.0",
     "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
     "vue": "^2.6.12",
     "vue-router": "^3.4.3",
     "vuex": "^3.5.1"
@@ -35,6 +37,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-esbuild": "^2.4.2",
     "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-postcss": "^3.1.6",
     "rollup-plugin-serve": "^1.0.4",
     "rollup-plugin-vue": "^5.1.9",
