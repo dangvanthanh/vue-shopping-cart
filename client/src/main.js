@@ -4,6 +4,7 @@ import store from './store';
 import App from './App.vue';
 import './styles/app.css';
 
+Vue.config.devtools = true;
 Vue.config.productionTip = false;
 
 new Vue({

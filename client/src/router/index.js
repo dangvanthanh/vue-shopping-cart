@@ -35,11 +35,17 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: '/signup',
     name: 'signup',
     component: Signup,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: '/404',
@@ -64,25 +70,43 @@ const scrollBehavior = (to, from, savedPosition) => {
   return { x: 0, y: 0 };
 };
 
+const originalPush = Router.prototype.push;
+
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch((err) => err);
+};
+
 const router = new Router({
   mode: 'history',
   routes,
   scrollBehavior,
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (store.getters['auth/authenticated']) {
-//       return next();
-//     } else {
-//       return next({
-//         path: '/login',
-//         params: { nextUrl: to.fullPath },
-//       });
-//     }
-//   }
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('cookieFallback')) {
+      return next();
+    } else {
+      return next({
+        path: '/login',
+        params: { nextUrl: to.fullPath },
+      });
+    }
+  }
 
-//   next();
-// });
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (localStorage.getItem('cookieFallback')) {
+      return next({
+        path: '/',
+      });
+    } else {
+      return next();
+    }
+  }
+
+  next();
+});
 
 export default router;

@@ -12,6 +12,7 @@
       <p class="my-5 text-base leading-5 text-center text-gray-900">Create new an account</p>
       <form @submit.prevent="onSubmit">
         <div class="rounded-md shadow-sm">
+          <BaseAlert v-if="error" :message="error" class="bg-red-500"/>
           <div class="mb-3">
             <label for="name" class="block mb-2 text-sm text-gray-900">Full Name *</label>
             <input id="name" type="text" class="text-field" placeholder="Full name" v-model="name" />
@@ -52,13 +53,17 @@
 </template>
 
 <script>
+import BaseAlert from '../components/Base/BaseAlert.vue';
+
 export default {
   name: 'Signup',
+  components: { BaseAlert },
   data() {
     return {
       name: '',
       email: '',
       password: '',
+      error: '',
     };
   },
   methods: {
@@ -73,8 +78,12 @@ export default {
           }),
         });
         const json = await res.json();
+
+        if (json.message) {
+          this.error = json.message;
+        }
       } catch (e) {
-        console.log(e);
+        this.error = e.message ? e.message : 'Invalid signup.';
       }
     },
   },

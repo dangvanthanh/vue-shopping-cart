@@ -4,14 +4,12 @@ import UserService from '../services/UserService.ts';
 @Controller('/user')
 class UsersController {
   @Post('/create')
-  createUser(
+  async createUser(
     @Body() body: any,
     @Inject('UserService') userService: UserService
   ) {
-    userService.createUser(body);
-    return {
-      message: `Created a user sucssfully`,
-    };
+    const user = await userService.createUser(body);
+    return user;
   }
 }
 

@@ -1,3 +1,4 @@
+import { config as configDotenv } from 'dotenv';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -6,7 +7,8 @@ import vue from 'rollup-plugin-vue';
 import esbuild from 'rollup-plugin-esbuild';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
-import nodePolyfills from 'rollup-plugin-node-polyfills'
+
+configDotenv();
 
 const production = !process.env.ROLLUP_WATCH;
 const port = 8080;
@@ -20,13 +22,21 @@ export default {
     name: 'app',
   },
   plugins: [
-    nodePolyfills(),
     postcss({ extract: true }),
     vue({ css: false }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),
+      __myapp: JSON.stringify({
+        env: {
+          APP_WRITE_API_ENDPOINT: process.env.APP_WRITE_API_ENDPOINT,
+          APP_WRITE_PROJECT_ID: process.env.APP_WRITE_PROJECT_ID,
+        },
+      }),
     }),
-    resolve(),
+    resolve({
+      jsnext: true,
+      main: true
+    }),
     commonjs(),
     esbuild({
       minify: production,

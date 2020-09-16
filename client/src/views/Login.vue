@@ -12,6 +12,7 @@
       <p class="my-5 text-base leading-5 text-center text-gray-900">Log in to your account</p>
       <form @submit.prevent="onSubmit">
         <div class="rounded-md shadow-sm">
+          <BaseAlert v-if="error" :message="error" class="bg-red-500" />
           <div class="mb-3">
             <label for="email" class="block mb-2 text-sm text-gray-900">Email *</label>
             <input type="email" class="text-field" placeholder="Email address" v-model="email" />
@@ -43,13 +44,16 @@
 
 <script>
 import appwrite from '../services/appwrite';
+import BaseAlert from '../components/Base/BaseAlert.vue';
 
 export default {
   name: 'Login',
+  components: { BaseAlert },
   data() {
     return {
       email: '',
       password: '',
+      error: '',
     };
   },
   methods: {
@@ -57,9 +61,12 @@ export default {
       try {
         await appwrite.account.createSession(this.email, this.password);
         const response = await appwrite.account.get();
-        console.log(response);
+        this.$store.dispatch('auth/authenticated', response);
+        this.$router.push({
+          name: 'home',
+        });
       } catch (err) {
-        console.error(err);
+        this.error = err.message;
       }
     },
   },

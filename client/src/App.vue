@@ -5,12 +5,20 @@
 </template>
 
 <script>
+import appwrite from './services/appwrite';
+
 export default {
   name: 'App',
   data() {
     return {
       categories: [],
     };
+  },
+  async created() {
+    if (localStorage.getItem('cookieFallback')) {
+      const response = await appwrite.account.get();
+      this.$store.dispatch('auth/authenticated', response);
+    }
   },
   async mounted() {
     try {
