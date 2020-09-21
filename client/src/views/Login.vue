@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import appwrite from '../services/appwrite';
-import BaseAlert from '../components/Base/BaseAlert.vue';
+import appwrite from '@/services/appwrite';
+import BaseAlert from '@/components/Base/BaseAlert.vue';
 
 export default {
   name: 'Login',

@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import BaseAlert from '../components/Base/BaseAlert.vue';
+import BaseAlert from '@/components/Base/BaseAlert.vue';
 
 export default {
   name: 'Signup',

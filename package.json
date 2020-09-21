@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev:client": "rollup -c -w",
-    "dev:server": "deno run -A --unstable --reload --config=tsconfig.json server/app.ts",
+    "dev:server": "deno run -A --reload --config=tsconfig.json server/app.ts",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",

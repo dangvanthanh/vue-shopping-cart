@@ -90,7 +90,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import appwrite from '../../services/appwrite';
+import appwrite from '@/services/appwrite';
 
 export default {
   name: 'NavBar',

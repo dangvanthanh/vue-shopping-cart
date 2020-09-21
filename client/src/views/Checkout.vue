@@ -33,8 +33,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import NavBar from '../components/Shared/NavBar.vue';
-import ProductCart from '../components/Product/ProductCart.vue';
+import NavBar from '@/components/Shared/NavBar.vue';
+import ProductCart from '@/components/Product/ProductCart.vue';
 
 export default {
   name: 'Checkout',

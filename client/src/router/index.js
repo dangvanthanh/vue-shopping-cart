@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../views/Home.vue';
-import Category from '../views/Category.vue';
-import Product from '../views/Product.vue';
-import Checkout from '../views/Checkout.vue';
-import Login from '../views/Login.vue';
-import Signup from '../views/Signup.vue';
-import NotFound from '../views/NotFound.vue';
+import Home from '@/views/Home.vue';
+import Category from '@/views/Category.vue';
+import Product from '@/views/Product.vue';
+import Checkout from '@/views/Checkout.vue';
+import Login from '@/views/Login.vue';
+import Signup from '@/views/Signup.vue';
+import NotFound from '@/views/NotFound.vue';
 
 Vue.use(Router);
 

@@ -1,4 +1,5 @@
 import { config as configDotenv } from 'dotenv';
+import alias from '@rollup/plugin-alias';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -22,7 +23,10 @@ export default {
     name: 'app',
   },
   plugins: [
-    postcss({ extract: true }),
+    alias({
+      entries: [{ find: '@', replacement: __dirname + '/client/src/' }],
+    }),
+    postcss({ extract: true}),
     vue({ css: false }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),

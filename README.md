@@ -45,10 +45,10 @@ Vue shopping cart is a modern web app
 - It has two roles: customer and manager
 - New users have only the customer role
 - **Customers** can:
-  - Register into the system
-  - Login into the system
-  - List products
-  - See the product details
+  - [x] Register into the system
+  - [x] Login into the system
+  - [x] List products
+  - [x] See the product details
   - Add the product into the cart
   - Remove the product from the cart
   - Check out the cart

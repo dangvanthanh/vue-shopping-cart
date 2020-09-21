@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import IconDonutLove from '../components/Icons/IconDonutLove.vue';
+import IconDonutLove from '@/components/Icons/IconDonutLove.vue';
 
 export default {
   name: 'NotFound',
