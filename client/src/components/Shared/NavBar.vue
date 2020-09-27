@@ -68,7 +68,9 @@
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <span class="inline-block align-base text-gray leading-none">{{ totalCart }}</span>
+            <span class="inline-block align-base text-gray leading-none">{{
+              totalCart
+            }}</span>
           </router-link>
         </div>
       </div>
@@ -76,11 +78,16 @@
     <nav class="bg-white shadow" v-if="isCategory">
       <div class="max-w-5xl mx-auto px-5">
         <ol>
-          <li class="inline-block align-middle" v-for="category in categories" :key="category.id">
+          <li
+            class="inline-block align-middle"
+            v-for="category in categories"
+            :key="category.id"
+          >
             <router-link
               :to="`/category/${category.slug}`"
               class="block text-lg border-b-2 border-transparent p-3 hover:border-orange p-3"
-            >{{ category.name }}</router-link>
+              >{{ category.name }}</router-link
+            >
           </li>
         </ol>
       </div>
@@ -107,13 +114,21 @@ export default {
     ...mapGetters('auth', ['authenticated']),
   },
   methods: {
-    async handlerLogout() {
-      localStorage.removeItem('cookieFallback');
-      this.$store.dispatch('auth/logout');
-      await appwrite.account.deleteSession('current');
-      this.$router.push({
-        path: '/',
-        force: true,
+    handlerLogout() {
+      const promise = appwrite.account.deleteSession('current');
+
+      promise.then(() => {
+        localStorage.removeItem('cookieFallback');
+        this.$store.dispatch('auth/logout');
+        this.$router.push(
+          {
+            path: '/',
+            force: true,
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       });
     },
   },

@@ -13629,28 +13629,6 @@
   appwrite2.setEndpoint({env: {APP_WRITE_API_ENDPOINT: "http://localhost/v1", APP_WRITE_PROJECT_ID: "5f615e53a610b"}}.env.APP_WRITE_API_ENDPOINT).setProject({env: {APP_WRITE_API_ENDPOINT: "http://localhost/v1", APP_WRITE_PROJECT_ID: "5f615e53a610b"}}.env.APP_WRITE_PROJECT_ID);
 
   var __assign = Object.assign;
-  var __async = (__this, __arguments, generator) => {
-    return new Promise((resolve, reject) => {
-      var fulfilled = (value) => {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      };
-      var rejected = (value) => {
-        try {
-          step(generator.throw(value));
-        } catch (e) {
-          reject(e);
-        }
-      };
-      var step = (result) => {
-        return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
-      };
-      step((generator = generator.apply(__this, __arguments)).next());
-    });
-  };
   var script = {
     name: "NavBar",
     props: {
@@ -13662,13 +13640,15 @@
     computed: __assign(__assign(__assign(__assign({}, mapState("auth", ["user"])), mapState("category", ["categories"])), mapGetters("cart", ["totalCart"])), mapGetters("auth", ["authenticated"])),
     methods: {
       handlerLogout() {
-        return __async(this, [], function* () {
+        const promise = appwrite2.account.deleteSession("current");
+        promise.then(() => {
           localStorage.removeItem("cookieFallback");
           this.$store.dispatch("auth/logout");
-          yield appwrite2.account.deleteSession("current");
           this.$router.push({
             path: "/",
             force: true
+          }, (error) => {
+            console.log(error);
           });
         });
       }
@@ -13949,7 +13929,7 @@
     /* style */
     const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__ = "data-v-79a47f19";
+    const __vue_scope_id__ = "data-v-bba1c7f6";
     /* module identifier */
     const __vue_module_identifier__ = undefined;
     /* functional template */
@@ -14067,7 +14047,7 @@
       undefined
     );
 
-  var __async$1 = (__this, __arguments, generator) => {
+  var __async = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -14110,7 +14090,7 @@
     },
     methods: {
       getProducts() {
-        return __async$1(this, [], function* () {
+        return __async(this, [], function* () {
           try {
             const res = yield fetch(`http://localhost:3000/products`);
             const json = yield res.json();
@@ -14190,7 +14170,7 @@
       undefined
     );
 
-  var __async$2 = (__this, __arguments, generator) => {
+  var __async$1 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -14233,7 +14213,7 @@
     },
     methods: {
       getProducts() {
-        return __async$2(this, [], function* () {
+        return __async$1(this, [], function* () {
           try {
             const categories = {
               all: "1",
@@ -14502,7 +14482,7 @@
       undefined
     );
 
-  var __async$3 = (__this, __arguments, generator) => {
+  var __async$2 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -14533,7 +14513,7 @@
       };
     },
     mounted() {
-      return __async$3(this, [], function* () {
+      return __async$2(this, [], function* () {
         try {
           const res = yield fetch(`http://localhost:3000/product/${this.$route.params.id}`);
           const json = yield res.json();
@@ -14883,7 +14863,7 @@
       undefined
     );
 
-  var __async$4 = (__this, __arguments, generator) => {
+  var __async$3 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -14917,17 +14897,21 @@
     },
     methods: {
       onSubmit() {
-        return __async$4(this, [], function* () {
-          try {
-            yield appwrite2.account.createSession(this.email, this.password);
-            const response = yield appwrite2.account.get();
-            this.$store.dispatch("auth/authenticated", response);
-            this.$router.push({
-              name: "home"
+        return __async$3(this, [], function* () {
+          const promise = appwrite2.account.createSession(this.email, this.password);
+          promise.then(() => {
+            const newPromise = appwrite2.account.get();
+            newPromise.then((response) => {
+              this.$store.dispatch("auth/getAuthenticated", response);
+              this.$router.push({
+                name: "home"
+              });
+            }, (error) => {
+              this.error = error.message;
             });
-          } catch (err) {
-            this.error = err.message;
-          }
+          }, (error) => {
+            this.error = error.message;
+          });
         });
       }
     }
@@ -14969,7 +14953,7 @@
           _c(
             "p",
             { staticClass: "my-5 text-base leading-5 text-center text-gray-900" },
-            [_vm._v("Log in to your account")]
+            [_vm._v("\n      Log in to your account\n    ")]
           ),
           _vm._v(" "),
           _c(
@@ -15105,7 +15089,7 @@
             staticClass: "button button-blue w-full rounded-md",
             attrs: { type: "submit" }
           },
-          [_vm._v("Sign In")]
+          [_vm._v("\n            Sign In\n          ")]
         )
       ])
     }
@@ -15141,7 +15125,7 @@
       undefined
     );
 
-  var __async$5 = (__this, __arguments, generator) => {
+  var __async$4 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -15176,7 +15160,7 @@
     },
     methods: {
       onSubmit() {
-        return __async$5(this, [], function* () {
+        return __async$4(this, [], function* () {
           try {
             const res = yield fetch(`http://localhost:3000/user/create`, {
               method: "POST",
@@ -16385,7 +16369,7 @@
     }
   });
 
-  var __async$6 = (__this, __arguments, generator) => {
+  var __async$5 = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
         try {
@@ -16415,7 +16399,7 @@
       };
     },
     created() {
-      return __async$6(this, [], function* () {
+      return __async$5(this, [], function* () {
         if (localStorage.getItem("cookieFallback")) {
           const response = yield appwrite2.account.get();
           this.$store.dispatch("auth/authenticated", response);
@@ -16423,7 +16407,7 @@
       });
     },
     mounted() {
-      return __async$6(this, [], function* () {
+      return __async$5(this, [], function* () {
         try {
           const res = yield fetch("http://localhost:3000/categories");
           const json = yield res.json();
