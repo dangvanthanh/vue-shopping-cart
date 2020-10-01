@@ -3,6 +3,7 @@
     <NavBar :isCategory="false" />
     <div class="max-w-5xl mx-auto px-6 py-12">
       <h2 class="text-3xl text-gray-900 font-medium mb-8">My Cart</h2>
+      <button class="button button-blue rounded-md mb-3" @click.prevent="handlerRemoveAllCarts" v-if="carts.length">Remove All Cart</button>
       <template v-if="totalCart">
         <div class="py-3 flex flex-wrap items-center">
           <div class="flex-1 w-0">Item</div>
@@ -43,5 +44,10 @@ export default {
     ...mapState('cart', ['carts']),
     ...mapGetters('cart', ['totalCart', 'totalAmount']),
   },
+  methods: {
+    handlerRemoveAllCarts() {
+      this.$store.dispatch('cart/removeAllCarts');
+    }
+  }
 };
 </script>

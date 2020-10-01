@@ -11,5 +11,12 @@ export default {
         })
       );
     }
+
+    localStorage.setItem('carts', JSON.stringify(state.carts));
+  },
+
+  REMOVE_ALL_CARTS(state) {
+    localStorage.removeItem('carts');
+    state.carts = [];
   },
 };

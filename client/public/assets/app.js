@@ -14686,7 +14686,12 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"]))
+    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"])),
+    methods: {
+      handlerRemoveAllCarts() {
+        this.$store.dispatch("cart/removeAllCarts");
+      }
+    }
   };
 
   /* script */
@@ -14709,6 +14714,22 @@
             _c("h2", { staticClass: "text-3xl text-gray-900 font-medium mb-8" }, [
               _vm._v("My Cart")
             ]),
+            _vm._v(" "),
+            _vm.carts.length
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "button button-blue rounded-md mb-3",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault();
+                        return _vm.handlerRemoveAllCarts($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Remove All Cart")]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _vm.totalCart
               ? [
@@ -16304,7 +16325,7 @@
   };
 
   var getters2$1 = {
-    totalCart: (state) => state.carts.length,
+    totalCart: (state) => state.carts.reduce((currentQuantiy, cart) => currentQuantiy + cart.quantity, 0),
     totalAmount: (state) => state.carts.reduce((currentAmount, cart) => currentAmount + cart.quantity * cart.price, 0)
   };
 
@@ -16318,17 +16339,25 @@
           quantity: 1
         }));
       }
+      localStorage.setItem("carts", JSON.stringify(state.carts));
+    },
+    REMOVE_ALL_CARTS(state) {
+      localStorage.removeItem("carts");
+      state.carts = [];
     }
   };
 
   var actions2$1 = {
     addProductToCart({commit}, product) {
       commit("ADD_PRODUCT_TO_CART", product);
+    },
+    removeAllCarts({commit}) {
+      commit("REMOVE_ALL_CARTS");
     }
   };
 
   const state$1 = {
-    carts: []
+    carts: localStorage.getItem("carts") ? JSON.parse(localStorage.getItem("carts")) : []
   };
   var cart2 = {
     namespaced: true,
