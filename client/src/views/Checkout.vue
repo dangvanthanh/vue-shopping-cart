@@ -3,16 +3,15 @@
     <NavBar :isCategory="false" />
     <div class="max-w-5xl mx-auto px-6 py-12">
       <h2 class="text-3xl text-gray-900 font-medium mb-8">My Cart</h2>
-      <button class="button button-blue rounded-md mb-3" @click.prevent="handlerRemoveAllCarts" v-if="carts.length">Remove All Cart</button>
       <template v-if="totalCart">
         <div class="py-3 flex flex-wrap items-center">
           <div class="flex-1 w-0">Item</div>
-          <div class="w-24 text-center">Price</div>
+          <div class="w-32 text-center">Price</div>
           <div class="w-32 text-center px-3">Qty</div>
           <div class="w-32 text-right">Subtotal</div>
         </div>
         <template v-for="item in carts">
-          <ProductCart class="border-b border-gray-300" :key="item.id" :product="item" />
+          <ProductCart class="border-b border-gray-300 mb-2 rounded" :key="item.id" :product="item" />
         </template>
         <hr class="my-5 border border-b border-gray-300" />
         <div class="flex flex-wrap">

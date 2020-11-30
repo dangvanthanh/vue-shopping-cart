@@ -1,7 +1,6 @@
 const tailwindcss = require('tailwindcss');
 const postcssImport = require('postcss-import');
 const postcssEach = require('postcss-each');
-// const postcssNested = require('postcss-nested');
 const postcssPresetEnv = require('postcss-preset-env');
 const cssMqpacker = require('css-mqpacker');
 const cssnano = require('cssnano');
@@ -11,7 +10,6 @@ module.exports = {
     postcssImport(),
     tailwindcss('./tailwind.config.js'),
     postcssEach(),
-    // postcssNested(),
     postcssPresetEnv({
       stage: 0,
       browsers: 'last 2 versions'

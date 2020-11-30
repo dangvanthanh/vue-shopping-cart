@@ -14603,6 +14603,14 @@
         type: Object,
         required: true
       }
+    },
+    methods: {
+      decProductToCart(productId) {
+        this.$store.dispatch("cart/decProductToCart", productId);
+      },
+      incProductToCart(productId) {
+        this.$store.dispatch("cart/incProductToCart", productId);
+      }
     }
   };
 
@@ -14634,19 +14642,43 @@
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-24 text-center" }, [
+        _c("div", { staticClass: "w-32 text-center" }, [
           _vm._v("$ " + _vm._s(_vm.product.price))
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "w-32 text-center px-3" }, [
           _c("div", { staticClass: "flex flex-wrap items-center" }, [
-            _c("button", { staticClass: "button" }, [_vm._v("-")]),
+            _c(
+              "button",
+              {
+                staticClass: "button",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault();
+                    return _vm.decProductToCart(_vm.product.id)
+                  }
+                }
+              },
+              [_vm._v("-")]
+            ),
             _vm._v(" "),
             _c("span", { staticClass: "flex-1 w-0 px-3 text-gray-800" }, [
               _vm._v(_vm._s(_vm.product.quantity))
             ]),
             _vm._v(" "),
-            _c("button", { staticClass: "button" }, [_vm._v("+")])
+            _c(
+              "button",
+              {
+                staticClass: "button",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault();
+                    return _vm.incProductToCart(_vm.product.id)
+                  }
+                }
+              },
+              [_vm._v("+")]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -14721,22 +14753,6 @@
               _vm._v("My Cart")
             ]),
             _vm._v(" "),
-            _vm.carts.length
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "button button-blue rounded-md mb-3",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault();
-                        return _vm.handlerRemoveAllCarts($event)
-                      }
-                    }
-                  },
-                  [_vm._v("Remove All Cart")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
             _vm.totalCart
               ? [
                   _vm._m(0),
@@ -14745,7 +14761,7 @@
                     return [
                       _c("ProductCart", {
                         key: item.id,
-                        staticClass: "border-b border-gray-300",
+                        staticClass: "border-b border-gray-300 mb-2 rounded",
                         attrs: { product: item }
                       })
                     ]
@@ -14787,7 +14803,7 @@
       return _c("div", { staticClass: "py-3 flex flex-wrap items-center" }, [
         _c("div", { staticClass: "flex-1 w-0" }, [_vm._v("Item")]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-24 text-center" }, [_vm._v("Price")]),
+        _c("div", { staticClass: "w-32 text-center" }, [_vm._v("Price")]),
         _vm._v(" "),
         _c("div", { staticClass: "w-32 text-center px-3" }, [_vm._v("Qty")]),
         _vm._v(" "),
@@ -16347,6 +16363,27 @@
       }
       localStorage.setItem("carts", JSON.stringify(state.carts));
     },
+    INC_PRODUCT_TO_CART(state, productId) {
+      state.carts.map((cart) => {
+        if (cart.id === productId) {
+          cart.quantity += 1;
+        }
+        return cart;
+      });
+      localStorage.setItem("carts", JSON.stringify(state.carts));
+    },
+    DEC_PRODUCT_TO_CART(state, productId) {
+      state.carts.map((cart) => {
+        if (cart.id === productId) {
+          cart.quantity -= 1;
+        }
+        if (cart.quantity < 0) {
+          cart.quantity = 0;
+        }
+        return cart;
+      });
+      localStorage.setItem("carts", JSON.stringify(state.carts));
+    },
     REMOVE_ALL_CARTS(state) {
       localStorage.removeItem("carts");
       state.carts = [];
@@ -16356,6 +16393,12 @@
   var actions2$1 = {
     addProductToCart({commit}, product) {
       commit("ADD_PRODUCT_TO_CART", product);
+    },
+    decProductToCart({commit}, productId) {
+      commit("DEC_PRODUCT_TO_CART", productId);
+    },
+    incProductToCart({commit}, productId) {
+      commit("INC_PRODUCT_TO_CART", productId);
     },
     removeAllCarts({commit}) {
       commit("REMOVE_ALL_CARTS");

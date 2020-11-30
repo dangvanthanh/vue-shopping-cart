@@ -43,5 +43,11 @@
     "rollup-plugin-vue": "^5.1.9",
     "tailwindcss": "^1.9.4",
     "vue-template-compiler": "^2.6.12"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true
   }
 }
