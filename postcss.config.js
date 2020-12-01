@@ -1,9 +1,8 @@
-const tailwindcss = require('tailwindcss');
-const postcssImport = require('postcss-import');
-const postcssEach = require('postcss-each');
-const postcssPresetEnv = require('postcss-preset-env');
-const cssMqpacker = require('css-mqpacker');
-const cssnano = require('cssnano');
+const tailwindcss = require('tailwindcss')
+const postcssImport = require('postcss-import')
+const postcssEach = require('postcss-each')
+const postcssPresetEnv = require('postcss-preset-env')
+const cssnano = require('cssnano')
 
 module.exports = {
   plugins: [
@@ -12,9 +11,8 @@ module.exports = {
     postcssEach(),
     postcssPresetEnv({
       stage: 0,
-      browsers: 'last 2 versions'
+      browsers: 'last 2 versions',
     }),
-    cssMqpacker(),
-    cssnano()
-  ]
-};
+    cssnano(),
+  ],
+}
