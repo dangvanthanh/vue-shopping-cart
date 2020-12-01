@@ -49,8 +49,8 @@ Vue shopping cart is a modern web app
   - [x] Login into the system
   - [x] List products
   - [x] See the product details
-  - Add the product into the cart
-  - Remove the product from the cart
+  - [x] Add the product into the cart
+  - [x] Remove the product from the cart
   - Check out the cart
   - List past orders
 - **Managers** can:
