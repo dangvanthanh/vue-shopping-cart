@@ -4,7 +4,7 @@
     <div class="max-w-5xl mx-auto px-6 py-12">
       <h2 class="text-3xl text-gray-900 font-medium mb-8">My Cart</h2>
       <template v-if="totalCart">
-        <div class="py-3 flex flex-wrap items-center">
+        <div class="hidden py-3 md:flex flex-wrap items-center">
           <div class="flex-1 w-0">Item</div>
           <div class="w-32 text-center">Price</div>
           <div class="w-32 text-center px-3">Qty</div>
@@ -22,7 +22,7 @@
             <strong class="text-lg">$ {{ totalAmount }}</strong>
           </div>
         </div>
-        <button class="button button-blue rounded-md mt-5 w-full">Proceed to Checkout</button>
+        <!-- <button class="button button-blue rounded-md mt-5 w-full">Proceed to Checkout</button> -->
       </template>
       <template v-else>
         <p>You have no items in your shopping cart.</p>
@@ -42,11 +42,6 @@ export default {
   computed: {
     ...mapState('cart', ['carts']),
     ...mapGetters('cart', ['totalCart', 'totalAmount']),
-  },
-  methods: {
-    handlerRemoveAllCarts() {
-      this.$store.dispatch('cart/removeAllCarts');
-    }
   }
 };
 </script>

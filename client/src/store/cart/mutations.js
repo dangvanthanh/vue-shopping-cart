@@ -1,26 +1,12 @@
 export default {
   ADD_PRODUCT_TO_CART(state, product) {
-    const cart = state.carts.find((cart) => cart.id === product.id)
-
-    if (cart) {
-      cart.quantity += 1
-    } else {
-      state.carts.push(
-        Object.assign(product, {
-          quantity: 1,
-        })
-      )
-    }
-
-    localStorage.setItem('carts', JSON.stringify(state.carts))
-  },
-
-  INC_PRODUCT_TO_CART(state, productId) {
     const carts = [...state.carts]
-    const index = carts.findIndex((cart) => cart.id === productId)
+    const cartIndex = carts.findIndex((cart) => cart.id === product.id)
 
-    if (index !== -1) {
-      carts[index].quantity++
+    if (cartIndex !== -1) {
+      carts[cartIndex].quantity++
+    } else {
+      carts.push({ ...product, quantity: 1 })
     }
 
     state.carts = [...carts]
@@ -28,26 +14,22 @@ export default {
     localStorage.setItem('carts', JSON.stringify(state.carts))
   },
 
-  DEC_PRODUCT_TO_CART(state, productId) {
+  REMOVE_PRODUCT_FROM_CART(state, product) {
     const carts = [...state.carts]
-    const index = carts.findIndex((cart) => cart.id === productId)
+    const cartIndex = carts.findIndex((cart) => cart.id === product.id)
 
-    if (index !== -1) {
-      const item = carts[index]
+    if (cartIndex !== -1) {
+      const item = carts[cartIndex]
+
       if (item.quantity === 1) {
-        carts.splice(index, 1)
+        carts.splice(cartIndex, 1)
       } else {
-        carts[index].quantity--
+        carts[cartIndex].quantity--
       }
     }
 
     state.carts = [...carts]
 
     localStorage.setItem('carts', JSON.stringify(state.carts))
-  },
-
-  REMOVE_ALL_CARTS(state) {
-    localStorage.removeItem('carts')
-    state.carts = []
   },
 }

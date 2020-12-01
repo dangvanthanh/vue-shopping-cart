@@ -14605,11 +14605,11 @@
       }
     },
     methods: {
-      decProductToCart(productId) {
-        this.$store.dispatch("cart/decProductToCart", productId);
+      addProductToCart(product) {
+        this.$store.dispatch("cart/addProductToCart", product);
       },
-      incProductToCart(productId) {
-        this.$store.dispatch("cart/incProductToCart", productId);
+      removeProductFromCart(product) {
+        this.$store.dispatch("cart/removeProductFromCart", product);
       }
     }
   };
@@ -14628,7 +14628,7 @@
       [
         _c("div", { staticClass: "flex-1 w-0 px-3" }, [
           _c("div", { staticClass: "flex flex-wrap items-center" }, [
-            _c("div", { staticClass: "w-16" }, [
+            _c("div", { staticClass: "w-24" }, [
               _c("img", {
                 staticClass:
                   "object-cover object-center w-full h-full block bg-gray-500 rounded",
@@ -14642,49 +14642,72 @@
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-center" }, [
-          _vm._v("$ " + _vm._s(_vm.product.price))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-center px-3" }, [
-          _c("div", { staticClass: "flex flex-wrap items-center" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault();
-                    return _vm.decProductToCart(_vm.product.id)
-                  }
-                }
-              },
-              [_vm._v("-")]
-            ),
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-gray-200 rounded w-full flex items-center justify-center mx-3 mt-3 px-3 md:bg-transparent md:px-0 md:m-0 md:w-auto"
+          },
+          [
+            _c("div", { staticClass: "w-1/3 md:w-32 text-center" }, [
+              _vm._v("$ " + _vm._s(_vm.product.price))
+            ]),
             _vm._v(" "),
-            _c("span", { staticClass: "flex-1 w-0 px-3 text-gray-800" }, [
-              _vm._v(_vm._s(_vm.product.quantity))
+            _c("div", { staticClass: "w-1/3 md:w-32 text-center px-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "text-center md:text-auto md:flex md:flex-wrap md:items-center md:justify-center"
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault();
+                          return _vm.removeProductFromCart(_vm.product)
+                        }
+                      }
+                    },
+                    [_vm._v("-")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "block md:flex md:flex-1 md:w-0 px-3 text-gray-800"
+                    },
+                    [_vm._v(_vm._s(_vm.product.quantity))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault();
+                          return _vm.addProductToCart(_vm.product)
+                        }
+                      }
+                    },
+                    [_vm._v("+")]
+                  )
+                ]
+              )
             ]),
             _vm._v(" "),
             _c(
-              "button",
-              {
-                staticClass: "button",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault();
-                    return _vm.incProductToCart(_vm.product.id)
-                  }
-                }
-              },
-              [_vm._v("+")]
+              "div",
+              { staticClass: "w-1/3 text-center md:w-32 md:text-right px-3" },
+              [_vm._v("$ " + _vm._s(_vm.product.price * _vm.product.quantity))]
             )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-right px-3" }, [
-          _vm._v("$ " + _vm._s(_vm.product.price * _vm.product.quantity))
-        ])
+          ]
+        )
       ]
     )
   };
@@ -14724,12 +14747,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"])),
-    methods: {
-      handlerRemoveAllCarts() {
-        this.$store.dispatch("cart/removeAllCarts");
-      }
-    }
+    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"]))
   };
 
   /* script */
@@ -14779,13 +14797,7 @@
                         _vm._v("$ " + _vm._s(_vm.totalAmount))
                       ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "button button-blue rounded-md mt-5 w-full" },
-                    [_vm._v("Proceed to Checkout")]
-                  )
+                  ])
                 ]
               : [_c("p", [_vm._v("You have no items in your shopping cart.")])]
           ],
@@ -14800,15 +14812,19 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { staticClass: "py-3 flex flex-wrap items-center" }, [
-        _c("div", { staticClass: "flex-1 w-0" }, [_vm._v("Item")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-center" }, [_vm._v("Price")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-center px-3" }, [_vm._v("Qty")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-32 text-right" }, [_vm._v("Subtotal")])
-      ])
+      return _c(
+        "div",
+        { staticClass: "hidden py-3 md:flex flex-wrap items-center" },
+        [
+          _c("div", { staticClass: "flex-1 w-0" }, [_vm._v("Item")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-32 text-center" }, [_vm._v("Price")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-32 text-center px-3" }, [_vm._v("Qty")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-32 text-right" }, [_vm._v("Subtotal")])
+        ]
+      )
     },
     function() {
       var _vm = this;
@@ -16351,44 +16367,32 @@
     totalAmount: (state) => state.carts.reduce((currentAmount, cart) => currentAmount + cart.quantity * cart.price, 0)
   };
 
+  var __assign$2 = Object.assign;
   var mutations2$1 = {
     ADD_PRODUCT_TO_CART(state, product) {
-      const cart = state.carts.find((cart2) => cart2.id === product.id);
-      if (cart) {
-        cart.quantity += 1;
-      } else {
-        state.carts.push(Object.assign(product, {
-          quantity: 1
-        }));
-      }
-      localStorage.setItem("carts", JSON.stringify(state.carts));
-    },
-    INC_PRODUCT_TO_CART(state, productId) {
       const carts = [...state.carts];
-      const index = carts.findIndex((cart) => cart.id === productId);
-      if (index !== -1) {
-        carts[index].quantity++;
+      const cartIndex = carts.findIndex((cart) => cart.id === product.id);
+      if (cartIndex !== -1) {
+        carts[cartIndex].quantity++;
+      } else {
+        carts.push(__assign$2(__assign$2({}, product), {quantity: 1}));
       }
       state.carts = [...carts];
       localStorage.setItem("carts", JSON.stringify(state.carts));
     },
-    DEC_PRODUCT_TO_CART(state, productId) {
+    REMOVE_PRODUCT_FROM_CART(state, product) {
       const carts = [...state.carts];
-      const index = carts.findIndex((cart) => cart.id === productId);
-      if (index !== -1) {
-        const item = carts[index];
+      const cartIndex = carts.findIndex((cart) => cart.id === product.id);
+      if (cartIndex !== -1) {
+        const item = carts[cartIndex];
         if (item.quantity === 1) {
-          carts.splice(index, 1);
+          carts.splice(cartIndex, 1);
         } else {
-          carts[index].quantity--;
+          carts[cartIndex].quantity--;
         }
       }
       state.carts = [...carts];
       localStorage.setItem("carts", JSON.stringify(state.carts));
-    },
-    REMOVE_ALL_CARTS(state) {
-      localStorage.removeItem("carts");
-      state.carts = [];
     }
   };
 
@@ -16396,14 +16400,8 @@
     addProductToCart({commit}, product) {
       commit("ADD_PRODUCT_TO_CART", product);
     },
-    decProductToCart({commit}, productId) {
-      commit("DEC_PRODUCT_TO_CART", productId);
-    },
-    incProductToCart({commit}, productId) {
-      commit("INC_PRODUCT_TO_CART", productId);
-    },
-    removeAllCarts({commit}) {
-      commit("REMOVE_ALL_CARTS");
+    removeProductFromCart({commit}, productId) {
+      commit("REMOVE_PRODUCT_FROM_CART", productId);
     }
   };
 
