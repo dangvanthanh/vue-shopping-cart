@@ -10415,11 +10415,19 @@
     window.Vue.use(VueRouter);
   }
 
+  var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+  function createCommonjsModule(fn) {
+    var module = { exports: {} };
+  	return fn(module, module.exports), module.exports;
+  }
+
   /*!
    * vuex v3.6.0
    * (c) 2020 Evan You
    * @license MIT
    */
+
   function applyMixin (Vue) {
     var version = Number(Vue.version.split('.')[0]);
 
@@ -10458,8 +10466,8 @@
 
   var target$2 = typeof window !== 'undefined'
     ? window
-    : typeof global !== 'undefined'
-      ? global
+    : typeof commonjsGlobal !== 'undefined'
+      ? commonjsGlobal
       : {};
   var devtoolHook = target$2.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 
@@ -11476,7 +11484,7 @@
     return repeat('0', maxLength - num.toString().length) + num
   }
 
-  var index$1 = {
+  var index_cjs = {
     Store: Store,
     install: install$1,
     version: '3.6.0',
@@ -11488,19 +11496,19 @@
     createLogger: createLogger
   };
 
-  function createCommonjsModule(fn, basedir, module) {
-  	return module = {
-  		path: basedir,
-  		exports: {},
-  		require: function (path, base) {
-  			return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-  		}
-  	}, fn(module, module.exports), module.exports;
-  }
+  var vuex_common = index_cjs;
 
-  function commonjsRequire () {
-  	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-  }
+  const {
+    Store: Store$1,
+    install: install$2,
+    version,
+    mapState: mapState$1,
+    mapMutations: mapMutations$1,
+    mapGetters: mapGetters$1,
+    mapActions: mapActions$1,
+    createNamespacedHelpers: createNamespacedHelpers$1,
+    createLogger: createLogger$1
+  } = vuex_common;
 
   var sdk = createCommonjsModule(function (module) {
   (function (window) {
@@ -13643,7 +13651,7 @@
         default: () => true
       }
     },
-    computed: __assign(__assign(__assign(__assign({}, mapState("auth", ["user"])), mapState("category", ["categories"])), mapGetters("cart", ["totalCart"])), mapGetters("auth", ["authenticated"])),
+    computed: __assign(__assign(__assign(__assign({}, mapState$1("auth", ["user"])), mapState$1("category", ["categories"])), mapGetters$1("cart", ["totalCart"])), mapGetters$1("auth", ["authenticated"])),
     methods: {
       handlerLogout() {
         const promise = appwrite2.account.deleteSession("current");
@@ -14747,7 +14755,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1(__assign$1({}, mapState("cart", ["carts"])), mapGetters("cart", ["totalCart", "totalAmount"]))
+    computed: __assign$1(__assign$1({}, mapState$1("cart", ["carts"])), mapGetters$1("cart", ["totalCart", "totalAmount"]))
   };
 
   /* script */
@@ -16438,8 +16446,8 @@
     actions: actions2$2
   };
 
-  Vue.use(index$1);
-  const store = new index$1.Store({
+  Vue.use(vuex_common);
+  const store = new vuex_common.Store({
     modules: {
       auth: auth2,
       cart: cart2,
