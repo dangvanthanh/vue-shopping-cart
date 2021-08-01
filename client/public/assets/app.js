@@ -13997,13 +13997,13 @@
           _c("img", {
             staticClass:
               "object-cover object-center w-full h-full block bg-gray-500",
-            attrs: { src: _vm.product.thumbnail }
+            attrs: { src: _vm.product.thumbnail, loading: "lazy" }
           })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "px-3 flex-1" }, [
           _c("h2", { staticClass: "text-gray-900 text-base font-medium my-3" }, [
-            _vm._v(_vm._s(_vm.product.title))
+            _vm._v("\n      " + _vm._s(_vm.product.title) + "\n    ")
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mb-3 text-lg font-bold text-orange" }, [
@@ -14240,7 +14240,9 @@
             const json = yield res.json();
             this.products = json;
           } catch (e) {
-            console.log(e);
+            this.$router.push({
+              name: "home"
+            });
           }
         });
       }
@@ -14348,12 +14350,12 @@
           _c("img", {
             staticClass:
               "lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center bg-gray-500",
-            attrs: { alt: "", src: _vm.product.thumbnail }
+            attrs: { alt: "", loading: "lazy", src: _vm.product.thumbnail }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "lg:w-1/2 w-full p-6" }, [
             _c("h1", { staticClass: "text-gray-900 text-3xl font-medium mb-1" }, [
-              _vm._v(_vm._s(_vm.product.title))
+              _vm._v("\n        " + _vm._s(_vm.product.title) + "\n      ")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "flex mb-4" }, [
@@ -14424,7 +14426,7 @@
                       }
                     }
                   },
-                  [_vm._v("Add To Cart")]
+                  [_vm._v("\n            Add To Cart\n          ")]
                 )
               ]),
               _vm._v(" "),
@@ -14432,7 +14434,7 @@
                 "button",
                 {
                   staticClass:
-                    "rounded-full w-10 h-10 bg-gray-200  border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                    "\n            rounded-full\n            w-10\n            h-10\n            bg-gray-200\n            border-0\n            inline-flex\n            items-center\n            justify-center\n            text-gray-500\n            ml-4\n          "
                 },
                 [
                   _c(
@@ -14533,7 +14535,9 @@
           const json = yield res.json();
           this.product = json;
         } catch (e) {
-          console.log(e);
+          this.$router.push({
+            name: "home"
+          });
         }
       });
     },
@@ -14640,7 +14644,7 @@
               _c("img", {
                 staticClass:
                   "object-cover object-center w-full h-full block bg-gray-500 rounded",
-                attrs: { src: _vm.product.thumbnail }
+                attrs: { src: _vm.product.thumbnail, loading: "lazy" }
               })
             ]),
             _vm._v(" "),
@@ -14654,7 +14658,7 @@
           "div",
           {
             staticClass:
-              "bg-gray-200 rounded w-full flex items-center justify-center mx-3 mt-3 px-3 md:bg-transparent md:px-0 md:m-0 md:w-auto"
+              "\n      bg-gray-200\n      rounded\n      w-full\n      flex\n      items-center\n      justify-center\n      mx-3\n      mt-3\n      px-3\n      md:bg-transparent\n      md:px-0\n      md:m-0\n      md:w-auto\n    "
           },
           [
             _c("div", { staticClass: "w-1/3 md:w-32 text-center" }, [

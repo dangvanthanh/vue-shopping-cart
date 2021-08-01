@@ -3,15 +3,22 @@
     <div class="block relative h-48 overflow-hidden">
       <img
         :src="product.thumbnail"
+        loading="lazy"
         class="object-cover object-center w-full h-full block bg-gray-500"
       />
     </div>
     <div class="px-3 flex-1">
-      <h2 class="text-gray-900 text-base font-medium my-3">{{ product.title }}</h2>
+      <h2 class="text-gray-900 text-base font-medium my-3">
+        {{ product.title }}
+      </h2>
       <p class="mb-3 text-lg font-bold text-orange">$ {{ product.price }}</p>
     </div>
     <div class="px-3">
-      <router-link :to="`/product/${product.id}`" class="button button-orange w-full rounded-full">View Details</router-link>
+      <router-link
+        :to="`/product/${product.id}`"
+        class="button button-orange w-full rounded-full"
+        >View Details</router-link
+      >
     </div>
   </div>
 </template>
@@ -25,5 +32,5 @@ export default {
       required: true,
     },
   },
-};
+}
 </script>
