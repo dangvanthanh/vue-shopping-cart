@@ -1,11 +1,11 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function () {
   'use strict';
 
   /*!
-   * Vue.js v2.6.12
-   * (c) 2014-2020 Evan You
+   * Vue.js v2.6.14
+   * (c) 2014-2021 Evan You
    * Released under the MIT License.
    */
   /*  */
@@ -1464,13 +1464,15 @@
       : def
   }
 
+  var functionTypeCheckRE = /^\s*function (\w+)/;
+
   /**
    * Use function string name to check built-in types,
    * because a simple equality check will fail when running
    * across different vms / iframes.
    */
   function getType (fn) {
-    var match = fn && fn.toString().match(/^\s*function (\w+)/);
+    var match = fn && fn.toString().match(functionTypeCheckRE);
     return match ? match[1] : ''
   }
 
@@ -2064,6 +2066,12 @@
 
   /*  */
 
+  function isAsyncPlaceholder (node) {
+    return node.isComment && node.asyncFactory
+  }
+
+  /*  */
+
   function normalizeScopedSlots (
     slots,
     normalSlots,
@@ -2120,9 +2128,10 @@
       res = res && typeof res === 'object' && !Array.isArray(res)
         ? [res] // single vnode
         : normalizeChildren(res);
+      var vnode = res && res[0];
       return res && (
-        res.length === 0 ||
-        (res.length === 1 && res[0].isComment) // #9658
+        !vnode ||
+        (res.length === 1 && vnode.isComment && !isAsyncPlaceholder(vnode)) // #9658, #10391
       ) ? undefined
         : res
     };
@@ -2195,20 +2204,25 @@
    */
   function renderSlot (
     name,
-    fallback,
+    fallbackRender,
     props,
     bindObject
   ) {
     var scopedSlotFn = this.$scopedSlots[name];
     var nodes;
-    if (scopedSlotFn) { // scoped slot
+    if (scopedSlotFn) {
+      // scoped slot
       props = props || {};
       if (bindObject) {
         props = extend(extend({}, bindObject), props);
       }
-      nodes = scopedSlotFn(props) || fallback;
+      nodes =
+        scopedSlotFn(props) ||
+        (typeof fallbackRender === 'function' ? fallbackRender() : fallbackRender);
     } else {
-      nodes = this.$slots[name] || fallback;
+      nodes =
+        this.$slots[name] ||
+        (typeof fallbackRender === 'function' ? fallbackRender() : fallbackRender);
     }
 
     var target = props && props.slot;
@@ -2258,6 +2272,7 @@
     } else if (eventKeyName) {
       return hyphenate(eventKeyName) !== key
     }
+    return eventKeyCode === undefined
   }
 
   /*  */
@@ -2767,8 +2782,10 @@
   }
 
   function createComponentInstanceForVnode (
-    vnode, // we know it's MountedComponentVNode but flow doesn't
-    parent // activeInstance in lifecycle state
+    // we know it's MountedComponentVNode but flow doesn't
+    vnode,
+    // activeInstance in lifecycle state
+    parent
   ) {
     var options = {
       _isComponent: true,
@@ -3188,12 +3205,6 @@
 
   /*  */
 
-  function isAsyncPlaceholder (node) {
-    return node.isComment && node.asyncFactory
-  }
-
-  /*  */
-
   function getFirstComponentChild (children) {
     if (Array.isArray(children)) {
       for (var i = 0; i < children.length; i++) {
@@ -3510,7 +3521,8 @@
     var hasDynamicScopedSlot = !!(
       (newScopedSlots && !newScopedSlots.$stable) ||
       (oldScopedSlots !== emptyObject && !oldScopedSlots.$stable) ||
-      (newScopedSlots && vm.$scopedSlots.$key !== newScopedSlots.$key)
+      (newScopedSlots && vm.$scopedSlots.$key !== newScopedSlots.$key) ||
+      (!newScopedSlots && vm.$scopedSlots.$key)
     );
 
     // Any static slot children from the parent may have changed during parent's
@@ -3924,11 +3936,8 @@
         var oldValue = this.value;
         this.value = value;
         if (this.user) {
-          try {
-            this.cb.call(this.vm, value, oldValue);
-          } catch (e) {
-            handleError(e, this.vm, ("callback for watcher \"" + (this.expression) + "\""));
-          }
+          var info = "callback for watcher \"" + (this.expression) + "\"";
+          invokeWithErrorHandling(this.cb, this.vm, [value, oldValue], this.vm, info);
         } else {
           this.cb.call(this.vm, value, oldValue);
         }
@@ -4212,11 +4221,10 @@
       options.user = true;
       var watcher = new Watcher(vm, expOrFn, cb, options);
       if (options.immediate) {
-        try {
-          cb.call(vm, watcher.value);
-        } catch (error) {
-          handleError(error, vm, ("callback for immediate watcher \"" + (watcher.expression) + "\""));
-        }
+        var info = "callback for immediate watcher \"" + (watcher.expression) + "\"";
+        pushTarget();
+        invokeWithErrorHandling(cb, vm, [watcher.value], vm, info);
+        popTarget();
       }
       return function unwatchFn () {
         watcher.teardown();
@@ -4488,6 +4496,8 @@
 
 
 
+
+
   function getComponentName (opts) {
     return opts && (opts.Ctor.options.name || opts.tag)
   }
@@ -4509,9 +4519,9 @@
     var keys = keepAliveInstance.keys;
     var _vnode = keepAliveInstance._vnode;
     for (var key in cache) {
-      var cachedNode = cache[key];
-      if (cachedNode) {
-        var name = getComponentName(cachedNode.componentOptions);
+      var entry = cache[key];
+      if (entry) {
+        var name = entry.name;
         if (name && !filter(name)) {
           pruneCacheEntry(cache, key, keys, _vnode);
         }
@@ -4525,9 +4535,9 @@
     keys,
     current
   ) {
-    var cached$$1 = cache[key];
-    if (cached$$1 && (!current || cached$$1.tag !== current.tag)) {
-      cached$$1.componentInstance.$destroy();
+    var entry = cache[key];
+    if (entry && (!current || entry.tag !== current.tag)) {
+      entry.componentInstance.$destroy();
     }
     cache[key] = null;
     remove(keys, key);
@@ -4545,6 +4555,32 @@
       max: [String, Number]
     },
 
+    methods: {
+      cacheVNode: function cacheVNode() {
+        var ref = this;
+        var cache = ref.cache;
+        var keys = ref.keys;
+        var vnodeToCache = ref.vnodeToCache;
+        var keyToCache = ref.keyToCache;
+        if (vnodeToCache) {
+          var tag = vnodeToCache.tag;
+          var componentInstance = vnodeToCache.componentInstance;
+          var componentOptions = vnodeToCache.componentOptions;
+          cache[keyToCache] = {
+            name: getComponentName(componentOptions),
+            tag: tag,
+            componentInstance: componentInstance,
+          };
+          keys.push(keyToCache);
+          // prune oldest entry
+          if (this.max && keys.length > parseInt(this.max)) {
+            pruneCacheEntry(cache, keys[0], keys, this._vnode);
+          }
+          this.vnodeToCache = null;
+        }
+      }
+    },
+
     created: function created () {
       this.cache = Object.create(null);
       this.keys = [];
@@ -4559,12 +4595,17 @@
     mounted: function mounted () {
       var this$1 = this;
 
+      this.cacheVNode();
       this.$watch('include', function (val) {
         pruneCache(this$1, function (name) { return matches(val, name); });
       });
       this.$watch('exclude', function (val) {
         pruneCache(this$1, function (name) { return !matches(val, name); });
       });
+    },
+
+    updated: function updated () {
+      this.cacheVNode();
     },
 
     render: function render () {
@@ -4600,12 +4641,9 @@
           remove(keys, key);
           keys.push(key);
         } else {
-          cache[key] = vnode;
-          keys.push(key);
-          // prune oldest entry
-          if (this.max && keys.length > parseInt(this.max)) {
-            pruneCacheEntry(cache, keys[0], keys, this._vnode);
-          }
+          // delay setting the cache until update
+          this.vnodeToCache = vnode;
+          this.keyToCache = key;
         }
 
         vnode.data.keepAlive = true;
@@ -4681,7 +4719,7 @@
     value: FunctionalRenderContext
   });
 
-  Vue.version = '2.6.12';
+  Vue.version = '2.6.14';
 
   /*  */
 
@@ -4718,7 +4756,7 @@
     'default,defaultchecked,defaultmuted,defaultselected,defer,disabled,' +
     'enabled,formnovalidate,hidden,indeterminate,inert,ismap,itemscope,loop,multiple,' +
     'muted,nohref,noresize,noshade,novalidate,nowrap,open,pauseonexit,readonly,' +
-    'required,reversed,scoped,seamless,selected,sortable,translate,' +
+    'required,reversed,scoped,seamless,selected,sortable,' +
     'truespeed,typemustmatch,visible'
   );
 
@@ -4842,7 +4880,7 @@
   // contain child elements.
   var isSVG = makeMap(
     'svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font-face,' +
-    'foreignObject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,' +
+    'foreignobject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,' +
     'polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view',
     true
   );
@@ -5042,7 +5080,8 @@
 
   function sameVnode (a, b) {
     return (
-      a.key === b.key && (
+      a.key === b.key &&
+      a.asyncFactory === b.asyncFactory && (
         (
           a.tag === b.tag &&
           a.isComment === b.isComment &&
@@ -5050,7 +5089,6 @@
           sameInputType(a, b)
         ) || (
           isTrue(a.isAsyncPlaceholder) &&
-          a.asyncFactory === b.asyncFactory &&
           isUndef(b.asyncFactory.error)
         )
       )
@@ -5831,7 +5869,7 @@
       cur = attrs[key];
       old = oldAttrs[key];
       if (old !== cur) {
-        setAttr(elm, key, cur);
+        setAttr(elm, key, cur, vnode.data.pre);
       }
     }
     // #4391: in IE9, setting type can reset value for input[type=radio]
@@ -5851,8 +5889,8 @@
     }
   }
 
-  function setAttr (el, key, value) {
-    if (el.tagName.indexOf('-') > -1) {
+  function setAttr (el, key, value, isInPre) {
+    if (isInPre || el.tagName.indexOf('-') > -1) {
       baseSetAttr(el, key, value);
     } else if (isBooleanAttr(key)) {
       // set attribute for blank value
@@ -7494,8 +7532,8 @@
   }
 
   /*!
-    * vue-router v3.4.9
-    * (c) 2020 Evan You
+    * vue-router v3.5.2
+    * (c) 2021 Evan You
     * @license MIT
     */
 
@@ -7688,23 +7726,23 @@
     return (path || '/') + stringify(query) + hash
   }
 
-  function isSameRoute (a, b) {
+  function isSameRoute (a, b, onlyPath) {
     if (b === START) {
       return a === b
     } else if (!b) {
       return false
     } else if (a.path && b.path) {
-      return (
-        a.path.replace(trailingSlashRE, '') === b.path.replace(trailingSlashRE, '') &&
+      return a.path.replace(trailingSlashRE, '') === b.path.replace(trailingSlashRE, '') && (onlyPath ||
         a.hash === b.hash &&
-        isObjectEqual(a.query, b.query)
-      )
+        isObjectEqual(a.query, b.query))
     } else if (a.name && b.name) {
       return (
         a.name === b.name &&
-        a.hash === b.hash &&
+        (onlyPath || (
+          a.hash === b.hash &&
         isObjectEqual(a.query, b.query) &&
-        isObjectEqual(a.params, b.params)
+        isObjectEqual(a.params, b.params))
+        )
       )
     } else {
       return false
@@ -8533,7 +8571,9 @@
         type: String,
         default: 'a'
       },
+      custom: Boolean,
       exact: Boolean,
+      exactPath: Boolean,
       append: Boolean,
       replace: Boolean,
       activeClass: String,
@@ -8582,8 +8622,8 @@
         ? createRoute(null, normalizeLocation(route.redirectedFrom), null, router)
         : route;
 
-      classes[exactActiveClass] = isSameRoute(current, compareTarget);
-      classes[activeClass] = this.exact
+      classes[exactActiveClass] = isSameRoute(current, compareTarget, this.exactPath);
+      classes[activeClass] = this.exact || this.exactPath
         ? classes[exactActiveClass]
         : isIncludedRoute(current, compareTarget);
 
@@ -8764,7 +8804,8 @@
     routes,
     oldPathList,
     oldPathMap,
-    oldNameMap
+    oldNameMap,
+    parentRoute
   ) {
     // the path list is used to control path matching priority
     var pathList = oldPathList || [];
@@ -8774,7 +8815,7 @@
     var nameMap = oldNameMap || Object.create(null);
 
     routes.forEach(function (route) {
-      addRouteRecord(pathList, pathMap, nameMap, route);
+      addRouteRecord(pathList, pathMap, nameMap, route, parentRoute);
     });
 
     // ensure wildcard routes are always at the end
@@ -8816,6 +8857,11 @@
       path: normalizedPath,
       regex: compileRouteRegex(normalizedPath, pathToRegexpOptions),
       components: route.components || { default: route.component },
+      alias: route.alias
+        ? typeof route.alias === 'string'
+          ? [route.alias]
+          : route.alias
+        : [],
       instances: {},
       enteredCbs: {},
       name: name,
@@ -8907,6 +8953,28 @@
 
     function addRoutes (routes) {
       createRouteMap(routes, pathList, pathMap, nameMap);
+    }
+
+    function addRoute (parentOrRoute, route) {
+      var parent = (typeof parentOrRoute !== 'object') ? nameMap[parentOrRoute] : undefined;
+      // $flow-disable-line
+      createRouteMap([route || parentOrRoute], pathList, pathMap, nameMap, parent);
+
+      // add aliases of parent
+      if (parent && parent.alias.length) {
+        createRouteMap(
+          // $flow-disable-line route is defined if parent is
+          parent.alias.map(function (alias) { return ({ path: alias, children: [route] }); }),
+          pathList,
+          pathMap,
+          nameMap,
+          parent
+        );
+      }
+    }
+
+    function getRoutes () {
+      return pathList.map(function (path) { return pathMap[path]; })
     }
 
     function match (
@@ -9041,6 +9109,8 @@
 
     return {
       match: match,
+      addRoute: addRoute,
+      getRoutes: getRoutes,
       addRoutes: addRoutes
     }
   }
@@ -9939,7 +10009,13 @@
 
   function getLocation (base) {
     var path = window.location.pathname;
-    if (base && path.toLowerCase().indexOf(base.toLowerCase()) === 0) {
+    var pathLowerCase = path.toLowerCase();
+    var baseLowerCase = base.toLowerCase();
+    // base="/a" shouldn't turn path="/app" into "/a/pp"
+    // https://github.com/vuejs/vue-router/issues/3555
+    // so we ensure the trailing slash in the base
+    if (base && ((pathLowerCase === baseLowerCase) ||
+      (pathLowerCase.indexOf(cleanPath(baseLowerCase + '/')) === 0))) {
       path = path.slice(base.length);
     }
     return (path || '/') + window.location.search + window.location.hash
@@ -10384,6 +10460,17 @@
     }
   };
 
+  VueRouter.prototype.getRoutes = function getRoutes () {
+    return this.matcher.getRoutes()
+  };
+
+  VueRouter.prototype.addRoute = function addRoute (parentOrRoute, route) {
+    this.matcher.addRoute(parentOrRoute, route);
+    if (this.history.current !== START) {
+      this.history.transitionTo(this.history.getCurrentLocation());
+    }
+  };
+
   VueRouter.prototype.addRoutes = function addRoutes (routes) {
     this.matcher.addRoutes(routes);
     if (this.history.current !== START) {
@@ -10407,27 +10494,20 @@
   }
 
   VueRouter.install = install;
-  VueRouter.version = '3.4.9';
+  VueRouter.version = '3.5.2';
   VueRouter.isNavigationFailure = isNavigationFailure;
   VueRouter.NavigationFailureType = NavigationFailureType;
+  VueRouter.START_LOCATION = START;
 
   if (inBrowser$1 && window.Vue) {
     window.Vue.use(VueRouter);
   }
 
-  var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-  function createCommonjsModule(fn) {
-    var module = { exports: {} };
-  	return fn(module, module.exports), module.exports;
-  }
-
   /*!
-   * vuex v3.6.0
-   * (c) 2020 Evan You
+   * vuex v3.6.2
+   * (c) 2021 Evan You
    * @license MIT
    */
-
   function applyMixin (Vue) {
     var version = Number(Vue.version.split('.')[0]);
 
@@ -10466,8 +10546,8 @@
 
   var target$2 = typeof window !== 'undefined'
     ? window
-    : typeof commonjsGlobal !== 'undefined'
-      ? commonjsGlobal
+    : typeof global !== 'undefined'
+      ? global
       : {};
   var devtoolHook = target$2.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 
@@ -11238,7 +11318,7 @@
   /**
    * Reduce the code which written in Vue.js for committing the mutation
    * @param {String} [namespace] - Module's namespace
-   * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+   * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept another params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
    * @return {Object}
    */
   var mapMutations = normalizeNamespace(function (namespace, mutations) {
@@ -11484,10 +11564,10 @@
     return repeat('0', maxLength - num.toString().length) + num
   }
 
-  var index_cjs = {
+  var index$1 = {
     Store: Store,
     install: install$1,
-    version: '3.6.0',
+    version: '3.6.2',
     mapState: mapState,
     mapMutations: mapMutations,
     mapGetters: mapGetters,
@@ -11496,19 +11576,10 @@
     createLogger: createLogger
   };
 
-  var vuex_common = index_cjs;
-
-  const {
-    Store: Store$1,
-    install: install$2,
-    version,
-    mapState: mapState$1,
-    mapMutations: mapMutations$1,
-    mapGetters: mapGetters$1,
-    mapActions: mapActions$1,
-    createNamespacedHelpers: createNamespacedHelpers$1,
-    createLogger: createLogger$1
-  } = vuex_common;
+  function createCommonjsModule(fn) {
+    var module = { exports: {} };
+  	return fn(module, module.exports), module.exports;
+  }
 
   var sdk = createCommonjsModule(function (module) {
   (function (window) {
@@ -11614,7 +11685,7 @@
                   globalParams.push({key: key, value: value});
               };
 
-              addGlobalHeader('x-sdk-version', 'appwrite:javascript:1.1.0');
+              addGlobalHeader('x-sdk-version', 'appwrite:web:1.2.0');
               addGlobalHeader('content-type', '');
 
               /**
@@ -11701,28 +11772,27 @@
                       }
 
                       request.onload = function () {
+                          let data = request.response;
+                          let contentType = this.getResponseHeader('content-type') || '';
+                          contentType = contentType.substring(0, contentType.indexOf(';'));
+
+                          switch (contentType) {
+                              case 'application/json':
+                                  data = JSON.parse(data);
+                                  break;
+                          }
+
+                          let cookieFallback = this.getResponseHeader('X-Fallback-Cookies') || '';
+                          
+                          if(window.localStorage && cookieFallback) {
+                              window.console.warn('Appwrite is using localStorage for session management. Increase your security by adding a custom domain as your API endpoint.');
+                              window.localStorage.setItem('cookieFallback', cookieFallback);
+                          }
+
                           if (4 === request.readyState && 399 >= request.status) {
-                              let data = request.response;
-                              let contentType = this.getResponseHeader('content-type') || '';
-                              contentType = contentType.substring(0, contentType.indexOf(';'));
-
-                              switch (contentType) {
-                                  case 'application/json':
-                                      data = JSON.parse(data);
-                                      break;
-                              }
-
-                              let cookieFallback = this.getResponseHeader('X-Fallback-Cookies') || '';
-                              
-                              if(window.localStorage && cookieFallback) {
-                                  window.console.warn('Appwrite is using localStorage for session management. Increase your security by adding a custom domain as your API endpoint.');
-                                  window.localStorage.setItem('cookieFallback', cookieFallback);
-                              }
-
                               resolve(data);
-
                           } else {
-                              reject(new Error(request.statusText));
+                              reject(data);
                           }
                       };
 
@@ -11787,10 +11857,10 @@
                *
                * Use this endpoint to allow a new user to register a new account in your
                * project. After the user registration completes successfully, you can use
-               * the [/account/verfication](/docs/account#createVerification) route to start
-               * verifying the user email address. To allow your new user to login to his
-               * new account, you need to create a new [account
-               * session](/docs/account#createSession).
+               * the [/account/verfication](/docs/client/account#createVerification) route
+               * to start verifying the user email address. To allow your new user to login
+               * to his new account, you need to create a new [account
+               * session](/docs/client/account#createSession).
                *
                * @param {string} email
                * @param {string} password
@@ -12033,7 +12103,7 @@
                * When the user clicks the confirmation link he is redirected back to your
                * app password reset URL with the secret key and email address values
                * attached to the URL query string. Use the query string params to submit a
-               * request to the [PUT /account/recovery](/docs/account#updateRecovery)
+               * request to the [PUT /account/recovery](/docs/client/account#updateRecovery)
                * endpoint to complete the process.
                *
                * @param {string} email
@@ -12074,7 +12144,7 @@
                * Use this endpoint to complete the user account password reset. Both the
                * **userId** and **secret** arguments will be passed as query parameters to
                * the redirect URL you have provided when sending your request to the [POST
-               * /account/recovery](/docs/account#createRecovery) endpoint.
+               * /account/recovery](/docs/client/account#createRecovery) endpoint.
                * 
                * Please note that in order to avoid a [Redirect
                * Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
@@ -12220,10 +12290,11 @@
                * @param {string} provider
                * @param {string} success
                * @param {string} failure
+               * @param {string[]} scopes
                * @throws {Error}
                * @return {Promise}             
                */
-              createOAuth2Session: function(provider, success = 'https://appwrite.io/auth/oauth2/success', failure = 'https://appwrite.io/auth/oauth2/failure') {
+              createOAuth2Session: function(provider, success = 'https://appwrite.io/auth/oauth2/success', failure = 'https://appwrite.io/auth/oauth2/failure', scopes = []) {
                   if(provider === undefined) {
                       throw new Error('Missing required parameter: "provider"');
                   }
@@ -12240,9 +12311,28 @@
                       payload['failure'] = failure;
                   }
 
+                  if(scopes) {
+                      payload['scopes'] = scopes;
+                  }
+
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   window.location = config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -12279,16 +12369,17 @@
                * Use this endpoint to send a verification message to your user email address
                * to confirm they are the valid owners of that address. Both the **userId**
                * and **secret** arguments will be passed as query parameters to the URL you
-               * have provider to be attached to the verification email. The provided URL
-               * should redirect the user back for your app and allow you to complete the
+               * have provided to be attached to the verification email. The provided URL
+               * should redirect the user back to your app and allow you to complete the
                * verification process by verifying both the **userId** and **secret**
                * parameters. Learn more about how to [complete the verification
-               * process](/docs/account#updateAccountVerification). 
+               * process](/docs/client/account#updateAccountVerification). 
                * 
                * Please note that in order to avoid a [Redirect
-               * Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
+               * Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md),
                * the only valid redirect URLs are the ones from domains you have set when
                * adding your platforms in the console interface.
+               * 
                *
                * @param {string} url
                * @throws {Error}
@@ -12369,7 +12460,7 @@
                * @param {number} height
                * @param {number} quality
                * @throws {Error}
-               * @return {Promise}             
+               * @return {string}             
                */
               getBrowser: function(code, width = 100, height = 100, quality = 100) {
                   if(code === undefined) {
@@ -12392,10 +12483,26 @@
                       payload['quality'] = quality;
                   }
 
-                  return http
-                      .get(path, {
-                          'content-type': 'application/json',
-                      }, payload);
+                  payload['project'] = config.project;
+
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
+                  
+                  return config.endpoint + path + ((query) ? '?' + query : '');
               },
 
               /**
@@ -12436,7 +12543,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -12466,7 +12588,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -12508,7 +12645,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -12550,7 +12702,91 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
+                  
+                  return config.endpoint + path + ((query) ? '?' + query : '');
+              },
+
+              /**
+               * Get User Initials
+               *
+               * Use this endpoint to show your user initials avatar icon on your website or
+               * app. By default, this route will try to print your logged-in user name or
+               * email initials. You can also overwrite the user name if you pass the 'name'
+               * parameter. If no name is given and no user is logged, an empty avatar will
+               * be returned.
+               * 
+               * You can use the color and background params to change the avatar colors. By
+               * default, a random theme will be selected. The random theme will persist for
+               * the user's initials when reloading the same theme will always return for
+               * the same initials.
+               *
+               * @param {string} name
+               * @param {number} width
+               * @param {number} height
+               * @param {string} color
+               * @param {string} background
+               * @throws {Error}
+               * @return {string}             
+               */
+              getInitials: function(name = '', width = 500, height = 500, color = '', background = '') {
+                  let path = '/avatars/initials';
+
+                  let payload = {};
+
+                  if(name) {
+                      payload['name'] = name;
+                  }
+
+                  if(width) {
+                      payload['width'] = width;
+                  }
+
+                  if(height) {
+                      payload['height'] = height;
+                  }
+
+                  if(color) {
+                      payload['color'] = color;
+                  }
+
+                  if(background) {
+                      payload['background'] = background;
+                  }
+
+                  payload['project'] = config.project;
+
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -12564,11 +12800,11 @@
                * @param {string} text
                * @param {number} size
                * @param {number} margin
-               * @param {number} download
+               * @param {boolean} download
                * @throws {Error}
                * @return {string}             
                */
-              getQR: function(text, size = 400, margin = 1, download = 0) {
+              getQR: function(text, size = 400, margin = 1, download = false) {
                   if(text === undefined) {
                       throw new Error('Missing required parameter: "text"');
                   }
@@ -12595,7 +12831,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               }
@@ -12619,12 +12870,10 @@
                * @param {string} orderType
                * @param {string} orderCast
                * @param {string} search
-               * @param {number} first
-               * @param {number} last
                * @throws {Error}
                * @return {Promise}             
                */
-              listDocuments: function(collectionId, filters = [], offset = 0, limit = 50, orderField = '$id', orderType = 'ASC', orderCast = 'string', search = '', first = 0, last = 0) {
+              listDocuments: function(collectionId, filters = [], offset = 0, limit = 50, orderField = '$id', orderType = 'ASC', orderCast = 'string', search = '') {
                   if(collectionId === undefined) {
                       throw new Error('Missing required parameter: "collectionId"');
                   }
@@ -12661,14 +12910,6 @@
                       payload['search'] = search;
                   }
 
-                  if(first) {
-                      payload['first'] = first;
-                  }
-
-                  if(last) {
-                      payload['last'] = last;
-                  }
-
                   return http
                       .get(path, {
                           'content-type': 'application/json',
@@ -12678,7 +12919,10 @@
               /**
                * Create Document
                *
-               * Create a new Document.
+               * Create a new Document. Before using this route, you should create a new
+               * collection resource using either a [server
+               * integration](/docs/server/database?sdk=nodejs#createCollection) API or
+               * directly from your database console.
                *
                * @param {string} collectionId
                * @param {object} data
@@ -12967,15 +13211,35 @@
               /**
                * List Currencies
                *
-               * List of all currencies, including currency symol, name, plural, and decimal
-               * digits for all major and minor currencies. You can use the locale header to
-               * get the data in a supported language.
+               * List of all currencies, including currency symbol, name, plural, and
+               * decimal digits for all major and minor currencies. You can use the locale
+               * header to get the data in a supported language.
                *
                * @throws {Error}
                * @return {Promise}             
                */
               getCurrencies: function() {
                   let path = '/locale/currencies';
+
+                  let payload = {};
+
+                  return http
+                      .get(path, {
+                          'content-type': 'application/json',
+                      }, payload);
+              },
+
+              /**
+               * List Languages
+               *
+               * List of all languages classified by ISO 639-1 including 2-letter code, name
+               * in English, and name in the respective language.
+               *
+               * @throws {Error}
+               * @return {Promise}             
+               */
+              getLanguages: function() {
+                  let path = '/locale/languages';
 
                   let payload = {};
 
@@ -13192,7 +13456,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -13245,7 +13524,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               },
@@ -13276,7 +13570,22 @@
 
                   payload['project'] = config.project;
 
-                  let query = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+                  let query = [];
+
+                  for (let p in payload) {
+                      if(Array.isArray(payload[p])) {
+                          for (let index = 0; index < payload[p].length; index++) {
+                              let param = payload[p][index];
+                              query.push(encodeURIComponent(p + '[]') + "=" + encodeURIComponent(param));
+                          }
+                      }
+                      else {
+                          query.push(encodeURIComponent(p) + "=" + encodeURIComponent(payload[p]));
+                      }
+                  }
+
+                  query =  query.join("&");
                   
                   return config.endpoint + path + ((query) ? '?' + query : '');
               }
@@ -13452,10 +13761,14 @@
                * for this list of resources.
                *
                * @param {string} teamId
+               * @param {string} search
+               * @param {number} limit
+               * @param {number} offset
+               * @param {string} orderType
                * @throws {Error}
                * @return {Promise}             
                */
-              getMemberships: function(teamId) {
+              getMemberships: function(teamId, search = '', limit = 25, offset = 0, orderType = 'ASC') {
                   if(teamId === undefined) {
                       throw new Error('Missing required parameter: "teamId"');
                   }
@@ -13463,6 +13776,22 @@
                   let path = '/teams/{teamId}/memberships'.replace(new RegExp('{teamId}', 'g'), teamId);
 
                   let payload = {};
+
+                  if(search) {
+                      payload['search'] = search;
+                  }
+
+                  if(limit) {
+                      payload['limit'] = limit;
+                  }
+
+                  if(offset) {
+                      payload['offset'] = offset;
+                  }
+
+                  if(orderType) {
+                      payload['orderType'] = orderType;
+                  }
 
                   return http
                       .get(path, {
@@ -13479,8 +13808,8 @@
                * 
                * Use the 'URL' parameter to redirect the user from the invitation email back
                * to your app. When the user is redirected, use the [Update Team Membership
-               * Status](/docs/teams#updateMembershipStatus) endpoint to allow the user to
-               * accept the invitation to the team.
+               * Status](/docs/client/teams#updateMembershipStatus) endpoint to allow the
+               * user to accept the invitation to the team.
                * 
                * Please note that in order to avoid a [Redirect
                * Attacks](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
@@ -13651,7 +13980,7 @@
         default: () => true
       }
     },
-    computed: __assign(__assign(__assign(__assign({}, mapState$1("auth", ["user"])), mapState$1("category", ["categories"])), mapGetters$1("cart", ["totalCart"])), mapGetters$1("auth", ["authenticated"])),
+    computed: __assign(__assign(__assign(__assign({}, mapState("auth", ["user"])), mapState("category", ["categories"])), mapGetters("cart", ["totalCart"])), mapGetters("auth", ["authenticated"])),
     methods: {
       handlerLogout() {
         const promise = appwrite2.account.deleteSession("current");
@@ -13820,7 +14149,7 @@
                         on: {
                           click: function($event) {
                             $event.preventDefault();
-                            return _vm.handlerLogout($event)
+                            return _vm.handlerLogout.apply(null, arguments)
                           }
                         }
                       },
@@ -14759,7 +15088,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1(__assign$1({}, mapState$1("cart", ["carts", "tax"])), mapGetters$1("cart", ["totalTax", "totalCart", "totalAmount", "totalGrand"]))
+    computed: __assign$1(__assign$1({}, mapState("cart", ["carts", "tax"])), mapGetters("cart", ["totalTax", "totalCart", "totalAmount", "totalGrand"]))
   };
 
   /* script */
@@ -15092,7 +15421,7 @@
               on: {
                 submit: function($event) {
                   $event.preventDefault();
-                  return _vm.onSubmit($event)
+                  return _vm.onSubmit.apply(null, arguments)
                 }
               }
             },
@@ -15357,7 +15686,7 @@
               on: {
                 submit: function($event) {
                   $event.preventDefault();
-                  return _vm.onSubmit($event)
+                  return _vm.onSubmit.apply(null, arguments)
                 }
               }
             },
@@ -16512,8 +16841,8 @@
     actions: actions2$2
   };
 
-  Vue.use(vuex_common);
-  const store = new vuex_common.Store({
+  Vue.use(index$1);
+  const store = new index$1.Store({
     modules: {
       auth: auth2,
       cart: cart2,

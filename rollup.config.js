@@ -36,6 +36,7 @@ export default {
           APP_WRITE_PROJECT_ID: process.env.APP_WRITE_PROJECT_ID,
         },
       }),
+      preventAssignment: true
     }),
     resolve({
       jsnext: true,
