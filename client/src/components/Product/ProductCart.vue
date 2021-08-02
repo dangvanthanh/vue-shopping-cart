@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white shadow py-3 flex flex-wrap items-center">
-    <div class="flex-1 w-0 px-3">
+    <div class="w-full lg:w-0 flex-1 px-3">
       <div class="flex flex-wrap items-center">
         <div class="w-24">
           <img
@@ -23,10 +23,10 @@
         mx-3
         mt-3
         px-3
-        md:bg-transparent
-        md:px-0
-        md:m-0
-        md:w-auto
+        lg:bg-transparent
+        lg:px-0
+        lg:m-0
+        lg:w-auto
       "
     >
       <div class="w-1/3 md:w-32 text-center">$ {{ product.price }}</div>

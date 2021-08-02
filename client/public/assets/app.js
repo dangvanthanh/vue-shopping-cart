@@ -14638,7 +14638,7 @@
       "div",
       { staticClass: "bg-white shadow py-3 flex flex-wrap items-center" },
       [
-        _c("div", { staticClass: "flex-1 w-0 px-3" }, [
+        _c("div", { staticClass: "w-full lg:w-0 flex-1 px-3" }, [
           _c("div", { staticClass: "flex flex-wrap items-center" }, [
             _c("div", { staticClass: "w-24" }, [
               _c("img", {
@@ -14658,7 +14658,7 @@
           "div",
           {
             staticClass:
-              "\n      bg-gray-200\n      rounded\n      w-full\n      flex\n      items-center\n      justify-center\n      mx-3\n      mt-3\n      px-3\n      md:bg-transparent\n      md:px-0\n      md:m-0\n      md:w-auto\n    "
+              "\n      bg-gray-200\n      rounded\n      w-full\n      flex\n      items-center\n      justify-center\n      mx-3\n      mt-3\n      px-3\n      lg:bg-transparent\n      lg:px-0\n      lg:m-0\n      lg:w-auto\n    "
           },
           [
             _c("div", { staticClass: "w-1/3 md:w-32 text-center" }, [
@@ -14759,7 +14759,7 @@
   var script$7 = {
     name: "Checkout",
     components: {NavBar: __vue_component__, ProductCart: __vue_component__$6},
-    computed: __assign$1(__assign$1({}, mapState$1("cart", ["carts"])), mapGetters$1("cart", ["totalCart", "totalAmount"]))
+    computed: __assign$1(__assign$1({}, mapState$1("cart", ["carts", "tax"])), mapGetters$1("cart", ["totalTax", "totalCart", "totalAmount", "totalGrand"]))
   };
 
   /* script */
@@ -14785,29 +14785,80 @@
             _vm._v(" "),
             _vm.totalCart
               ? [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.carts, function(item) {
-                    return [
-                      _c("ProductCart", {
-                        key: item.id,
-                        staticClass: "border-b border-gray-300 mb-2 rounded",
-                        attrs: { product: item }
-                      })
-                    ]
-                  }),
-                  _vm._v(" "),
-                  _c("hr", {
-                    staticClass: "my-5 border border-b border-gray-300"
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex flex-wrap" }, [
-                    _vm._m(1),
+                  _c("div", { staticClass: "flex flex-wrap -mx-5" }, [
+                    _c(
+                      "div",
+                      { staticClass: "w-full md:w-2/3 px-5" },
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._l(_vm.carts, function(item) {
+                          return [
+                            _c("ProductCart", {
+                              key: item.id,
+                              staticClass:
+                                "border-b border-gray-300 mb-2 rounded",
+                              attrs: { product: item }
+                            })
+                          ]
+                        })
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "text-right" }, [
-                      _c("strong", { staticClass: "text-lg" }, [
-                        _vm._v("$ " + _vm._s(_vm.totalAmount))
-                      ])
+                    _c("div", { staticClass: "w-full md:w-1/3 px-5" }, [
+                      _c("hr", {
+                        staticClass:
+                          "md:hidden my-5 border border-b border-gray-300"
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex flex-wrap" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("strong", { staticClass: "text-lg" }, [
+                            _vm._v("$ " + _vm._s(_vm.totalAmount))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("hr", {
+                        staticClass: "my-5 border border-b border-gray-300"
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex flex-wrap" }, [
+                        _c("div", { staticClass: "flex-1 w-0" }, [
+                          _c("strong", { staticClass: "text-lg" }, [
+                            _vm._v("Incl. " + _vm._s(_vm.tax) + " % Tax ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("strong", { staticClass: "text-lg" }, [
+                            _vm._v("$ " + _vm._s(_vm.totalTax))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex flex-wrap" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("strong", { staticClass: "text-lg" }, [
+                            _vm._v("$ " + _vm._s(_vm.totalGrand))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "button button-blue rounded-md mt-5 w-full",
+                          attrs: { disabled: "" }
+                        },
+                        [_vm._v("Proceed to Checkout")]
+                      )
                     ])
                   ])
                 ]
@@ -14826,7 +14877,7 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { staticClass: "hidden py-3 md:flex flex-wrap items-center" },
+        { staticClass: "hidden pb-5 md:flex flex-wrap items-center" },
         [
           _c("div", { staticClass: "flex-1 w-0" }, [_vm._v("Item")]),
           _vm._v(" "),
@@ -14844,6 +14895,14 @@
       var _c = _vm._self._c || _h;
       return _c("div", { staticClass: "flex-1 w-0" }, [
         _c("strong", { staticClass: "text-lg" }, [_vm._v("Subtotal")])
+      ])
+    },
+    function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("div", { staticClass: "flex-1 w-0" }, [
+        _c("strong", { staticClass: "text-lg" }, [_vm._v("Grand Total")])
       ])
     }
   ];
@@ -16376,7 +16435,9 @@
 
   var getters2$1 = {
     totalCart: (state) => state.carts.reduce((currentQuantiy, cart) => currentQuantiy + cart.quantity, 0),
-    totalAmount: (state) => state.carts.reduce((currentAmount, cart) => currentAmount + cart.quantity * cart.price, 0)
+    totalAmount: (state) => state.carts.reduce((currentAmount, cart) => currentAmount + cart.quantity * cart.price, 0),
+    totalTax: (state, getters) => getters.totalAmount * state.tax / 100,
+    totalGrand: (state, getters) => getters.totalAmount + getters.totalTax
   };
 
   var __assign$2 = Object.assign;
@@ -16418,7 +16479,8 @@
   };
 
   const state$1 = {
-    carts: localStorage.getItem("carts") ? JSON.parse(localStorage.getItem("carts")) : []
+    carts: localStorage.getItem("carts") ? JSON.parse(localStorage.getItem("carts")) : [],
+    tax: 10
   };
   var cart2 = {
     namespaced: true,

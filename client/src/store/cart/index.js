@@ -4,6 +4,7 @@ import actions from './actions';
 
 const state = {
   carts: localStorage.getItem('carts') ? JSON.parse(localStorage.getItem('carts')) : [],
+  tax: 10
 };
 
 export default {
