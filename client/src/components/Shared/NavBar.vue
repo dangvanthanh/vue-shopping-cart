@@ -85,7 +85,7 @@
           >
             <router-link
               :to="`/category/${category.slug}`"
-              class="block text-lg border-b-2 border-transparent p-3 hover:border-orange p-3"
+              class="block text-base p-2 border-b-2 border-transparent lg:text-lg lg:p-3 hover:border-orange"
               >{{ category.name }}</router-link
             >
           </li>

@@ -3,7 +3,7 @@
     <NavBar />
     <div class="max-w-5xl mx-auto px-6 py-12">
       <div class="flex flex-wrap -m-3">
-        <div v-for="product in products" :key="product.id" class="flex w-full p-3 md:w-1/2 lg:w-1/4">
+        <div v-for="product in products" :key="product.id" class="flex w-full p-3 md:w-1/2 lg:w-1/3">
           <Product :product="product" />
         </div>
       </div>

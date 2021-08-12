@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow rounded pb-5 flex flex-col overflow-hidden">
+  <div class="w-full bg-white shadow rounded pb-5 flex flex-col overflow-hidden">
     <div class="block relative h-48 overflow-hidden">
       <img
         :src="product.thumbnail"

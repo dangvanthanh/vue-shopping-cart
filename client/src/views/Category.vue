@@ -6,7 +6,7 @@
         <div
           v-for="product in products"
           :key="product.id"
-          class="flex w-full p-3 md:w-1/2 lg:w-1/4"
+          class="flex w-full p-3 md:w-1/2 lg:w-1/3"
         >
           <Product :product="product" />
         </div>

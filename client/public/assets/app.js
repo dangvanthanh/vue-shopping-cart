@@ -14250,7 +14250,7 @@
                         "router-link",
                         {
                           staticClass:
-                            "block text-lg border-b-2 border-transparent p-3 hover:border-orange p-3",
+                            "block text-base p-2 border-b-2 border-transparent lg:text-lg lg:p-3 hover:border-orange",
                           attrs: { to: "/category/" + category.slug }
                         },
                         [_vm._v(_vm._s(category.name))]
@@ -14272,7 +14272,7 @@
     /* style */
     const __vue_inject_styles__ = undefined;
     /* scoped */
-    const __vue_scope_id__ = "data-v-41777e1a";
+    const __vue_scope_id__ = "data-v-5d1bd059";
     /* module identifier */
     const __vue_module_identifier__ = undefined;
     /* functional template */
@@ -14319,7 +14319,8 @@
     return _c(
       "div",
       {
-        staticClass: "bg-white shadow rounded pb-5 flex flex-col overflow-hidden"
+        staticClass:
+          "w-full bg-white shadow rounded pb-5 flex flex-col overflow-hidden"
       },
       [
         _c("div", { staticClass: "block relative h-48 overflow-hidden" }, [
@@ -14468,7 +14469,7 @@
                 "div",
                 {
                   key: product.id,
-                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/4"
+                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/3"
                 },
                 [_c("Product", { attrs: { product: product } })],
                 1
@@ -14600,7 +14601,7 @@
                 "div",
                 {
                   key: product.id,
-                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/4"
+                  staticClass: "flex w-full p-3 md:w-1/2 lg:w-1/3"
                 },
                 [_c("Product", { attrs: { product: product } })],
                 1
@@ -15114,7 +15115,7 @@
             _vm._v(" "),
             _vm.totalCart
               ? [
-                  _c("div", { staticClass: "flex flex-wrap -mx-5" }, [
+                  _c("div", { staticClass: "flex flex-wrap -mx-5 b" }, [
                     _c(
                       "div",
                       { staticClass: "w-full md:w-2/3 px-5" },
@@ -15136,58 +15137,69 @@
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "w-full md:w-1/3 px-5" }, [
-                      _c("hr", {
-                        staticClass:
-                          "md:hidden my-5 border border-b border-gray-300"
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "flex flex-wrap" }, [
-                        _vm._m(1),
+                      _c("div", { staticClass: "bg-white rounded p-3" }, [
+                        _c("h3", { staticClass: "text-xl font-semibold mb-3" }, [
+                          _vm._v("Order Summary")
+                        ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("strong", { staticClass: "text-lg" }, [
-                            _vm._v("$ " + _vm._s(_vm.totalAmount))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("hr", {
-                        staticClass: "my-5 border border-b border-gray-300"
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "flex flex-wrap" }, [
-                        _c("div", { staticClass: "flex-1 w-0" }, [
-                          _c("strong", { staticClass: "text-lg" }, [
-                            _vm._v("Incl. " + _vm._s(_vm.tax) + " % Tax ")
+                        _c("div", { staticClass: "flex flex-wrap py-3" }, [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "text-right" }, [
+                            _c("strong", { staticClass: "text-base" }, [
+                              _vm._v("$ " + _vm._s(_vm.totalAmount))
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("strong", { staticClass: "text-lg" }, [
-                            _vm._v("$ " + _vm._s(_vm.totalTax))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "flex flex-wrap" }, [
-                        _vm._m(2),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex flex-wrap py-3 border-t border-gray-300"
+                          },
+                          [
+                            _c("div", { staticClass: "flex-1 w-0" }, [
+                              _c("span", { staticClass: "text-base" }, [
+                                _vm._v("Incl. " + _vm._s(_vm.tax) + " % Tax ")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text-right" }, [
+                              _c("strong", { staticClass: "text-base" }, [
+                                _vm._v("$ " + _vm._s(_vm.totalTax))
+                              ])
+                            ])
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("strong", { staticClass: "text-lg" }, [
-                            _vm._v("$ " + _vm._s(_vm.totalGrand))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "button button-blue rounded-md mt-5 w-full",
-                          attrs: { disabled: "" }
-                        },
-                        [_vm._v("Proceed to Checkout")]
-                      )
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "flex flex-wrap py-3 border-t border-gray-300"
+                          },
+                          [
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text-right" }, [
+                              _c("strong", { staticClass: "text-base" }, [
+                                _vm._v("$ " + _vm._s(_vm.totalGrand))
+                              ])
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "button button-blue rounded-md mt-5 w-full",
+                            attrs: { disabled: "" }
+                          },
+                          [_vm._v("Proceed to Checkout")]
+                        )
+                      ])
                     ])
                   ])
                 ]
@@ -15223,7 +15235,7 @@
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
       return _c("div", { staticClass: "flex-1 w-0" }, [
-        _c("strong", { staticClass: "text-lg" }, [_vm._v("Subtotal")])
+        _c("span", { staticClass: "text-base" }, [_vm._v("Subtotal")])
       ])
     },
     function() {
@@ -15231,7 +15243,7 @@
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
       return _c("div", { staticClass: "flex-1 w-0" }, [
-        _c("strong", { staticClass: "text-lg" }, [_vm._v("Grand Total")])
+        _c("span", { staticClass: "text-base" }, [_vm._v("Order Total")])
       ])
     }
   ];
