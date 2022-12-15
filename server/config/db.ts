@@ -1,8 +1,9 @@
-import { Client, config } from '../deps.ts';
+import { Client, config } from '../deps.ts'
 
-const client: any = new Client();
-client.setEndpoint(config().APP_WRITE_API_ENDPOINT);
-client.setKey(config().APP_WRITE_API_KEY);
-client.setProject(config().APP_WRITE_PROJECT_ID);
+const client: any = new Client()
+client
+  .setEndpoint(config().APP_WRITE_API_ENDPOINT)
+  .setProject(config().APP_WRITE_PROJECT_ID)
+  .setKey(config().APP_WRITE_API_KEY)
 
-export default client;
+export default client

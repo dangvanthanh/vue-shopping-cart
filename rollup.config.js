@@ -3,6 +3,7 @@ import alias from '@rollup/plugin-alias'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss'
 import vue from 'rollup-plugin-vue'
 import esbuild from 'rollup-plugin-esbuild'
@@ -24,7 +25,7 @@ export default {
   },
   plugins: [
     alias({
-      entries: [{ find: '@', replacement: __dirname + '/client/src/' }],
+      entries: [{ find: '@', replacement: `${__dirname}/client/src/` }],
     }),
     postcss({ extract: true }),
     vue({ css: false }),
@@ -38,6 +39,7 @@ export default {
       }),
       preventAssignment: true
     }),
+    json(),
     resolve({
       jsnext: true,
       main: true,
