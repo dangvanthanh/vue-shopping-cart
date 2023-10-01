@@ -15,7 +15,6 @@
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "license": "MIT",
   "engines": {
-    "node": "18.17.1"
-  },
-  "packageManager": ""
+    "node": "18.18.0"
+  }
 }
