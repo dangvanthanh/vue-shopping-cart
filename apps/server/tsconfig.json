@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "include": [
+    "**/*"
+  ],
+  "references": [],
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "NodeNext",
+    "outDir": "../../.moon/cache/types/apps/server"
+  }
+}

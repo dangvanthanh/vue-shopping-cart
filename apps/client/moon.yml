@@ -1,0 +1,8 @@
+type: 'application'
+
+language: 'typescript'
+
+tasks:
+  dev:
+    command: 'vite dev'
+    local: true
