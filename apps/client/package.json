@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "script": {
+  "scripts": {
     "dev": "vite",
-    "build: "vite build"
+    "build": "vite build"
   },
   "dependencies": {
     "alova": "^2.13.1",
