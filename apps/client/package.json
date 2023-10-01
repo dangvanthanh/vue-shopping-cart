@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "script": {
+    "dev": "vite",
+    "build: "vite build"
+  },
   "dependencies": {
     "alova": "^2.13.1",
     "pinia": "^2.1.6",
