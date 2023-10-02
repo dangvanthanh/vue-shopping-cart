@@ -22,8 +22,7 @@
     "outDir": "../../.moon/cache/types/apps/client",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@styled-system": ["./styled-system/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
