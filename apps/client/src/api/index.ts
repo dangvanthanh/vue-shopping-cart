@@ -3,7 +3,7 @@ import GlobalFetch from "alova/GlobalFetch";
 import VueHook from "alova/vue";
 
 const alovaInstance = createAlova({
-  baseURL: import.meta.env.BASE_URL_API || "http://localhost:8000",
+  baseURL: import.meta.env.VITE_BASE_URL_API,
   statesHook: VueHook,
   requestAdapter: GlobalFetch(),
   responded: (response) => response.json(),
