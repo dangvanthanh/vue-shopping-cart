@@ -1,0 +1,8 @@
+{
+  "name": "@apps/server",
+  "version": "1.0.0",
+  "description": "Simple shopping cart with Vue.js and Deno.js",
+  "keywords": [],
+  "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
+  "license": "MIT"
+}

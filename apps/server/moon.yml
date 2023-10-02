@@ -1,0 +1,12 @@
+type: 'application'
+
+language: 'typescript'
+
+tasks:
+  deps:
+    command: 'deno cache src/index.ts'
+    local: true
+
+  dev:
+    command: 'deno run --allow-net src/index.ts'
+    local: true

@@ -1,0 +1,21 @@
+type: 'application'
+
+language: 'typescript'
+
+fileGroups:
+  app:
+    - 'env.d.ts'
+    - 'index.html'
+    - 'vite.config.*'
+
+tasks:
+  dev:
+    command: 'vite dev'
+    local: true
+
+  build:
+    command: 'vite build'
+    inputs:
+      - '@group(app)'
+    outputs:
+      - 'dist'
