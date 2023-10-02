@@ -8,13 +8,13 @@ const props = defineProps<{
   category: string;
 }>();
 
-const { loading, data, error } = useRequest(getCategories);
+const { loading, data: categories, error } = useRequest(getCategories);
 </script>
 
 <template>
   <div :class="css({ py: '5' })">
     <div v-if="loading" :class="flex({ align: 'center', gap: 3 })">
-      <template v-for="_n in 3">
+      <template v-for="_ in 3">
         <div
           :class="
             css({
@@ -34,7 +34,18 @@ const { loading, data, error } = useRequest(getCategories);
       </template>
     </div>
     <div v-else-if="error">{{ error.message }}</div>
-    <div v-else :class="flex({ align: 'center', gap: 3 })">
+    <div
+      v-else
+      :class="
+        flex({
+          align: 'center',
+          gap: 3,
+          overflowX: 'auto',
+          whiteSpace: 'nowrap',
+          pb: 4,
+        })
+      "
+    >
       <router-link
         to="/"
         :class="
@@ -51,23 +62,23 @@ const { loading, data, error } = useRequest(getCategories);
       >
         All
       </router-link>
-      <template v-if="data">
-        <template v-for="cat in data.data">
+      <template v-if="categories">
+        <template v-for="category in categories">
           <router-link
-            :to="`/category/${cat.slug}`"
+            :to="`/category/${category.slug}`"
             :class="
               css({
                 display: 'inline-flex',
                 alignItems: 'center',
                 px: 5,
                 py: 1.5,
-                bg: cat.slug === props.category ? 'gray.900' : 'gray.100',
-                color: cat.slug === props.category ? 'white' : 'gray.700',
+                bg: category.slug === props.category ? 'gray.900' : 'gray.100',
+                color: category.slug === props.category ? 'white' : 'gray.700',
                 rounded: 'full',
               })
             "
           >
-            {{ cat.name }}
+            {{ category.name }}
           </router-link>
         </template>
       </template>

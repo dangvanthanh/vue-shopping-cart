@@ -10,14 +10,21 @@
     "apps/*",
     "packages/*"
   ],
-  "keywords": [],
+  "keywords": [
+    "deno",
+    "hono",
+    "appwrite",
+    "pandacss",
+    "moonrepo",
+    "vuejs"
+  ],
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "license": "MIT",
   "engines": {
     "node": "18.17.1"
   },
-  "packageManager": "",
+  "packageManager": "pnpm@8.7.1",
   "devDependencies": {
-    "@moonrepo/cli": "^1.14.3"
+    "@moonrepo/cli": "^1.14.4"
   }
 }

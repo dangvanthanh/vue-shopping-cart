@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@moonrepo/cli':
-        specifier: ^1.14.3
-        version: 1.14.3
+        specifier: ^1.14.4
+        version: 1.14.4
 
   apps/client:
     dependencies:
@@ -29,10 +29,10 @@ importers:
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.15.4
-        version: 0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.23)(typescript@5.2.2)
+        version: 0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.24)(typescript@5.2.2)
       '@vitejs/plugin-vue':
-        specifier: ^4.3.4
-        version: 4.3.4(vite@4.4.9)(vue@3.3.4)
+        specifier: ^4.4.0
+        version: 4.4.0(vite@4.4.9)(vue@3.3.4)
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -157,7 +157,7 @@ packages:
       prismjs: 1.29.0
     dev: true
 
-  /@astrojs/react@2.2.1(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0):
+  /@astrojs/react@2.2.1(@types/react-dom@18.2.8)(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nq5Zr8iWdwjSp5fh1NReaCplwsnL4w5PXAY5XWu1jE/frxEfF/ycGHrrhwWW0uJHX9G+kUtmQLR0GBhlR4FmAw==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -168,7 +168,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.0
       '@babel/plugin-transform-react-jsx': 7.22.15(@babel/core@7.23.0)
-      '@types/react': 18.2.23
+      '@types/react': 18.2.24
       '@types/react-dom': 18.2.8
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -901,72 +901,72 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@moonrepo/cli@1.14.3:
-    resolution: {integrity: sha512-fj+hSK1l8IadfUaqZR3I2fJBGpWNvQZx2DUZ7NfrC5vQqNK/9l6zeTm9TklZ64Elp4CUhcRyucTvfS2sWQ6izg==}
+  /@moonrepo/cli@1.14.4:
+    resolution: {integrity: sha512-UvIcWCOPiOYlkrjrtGWj7a+NSUKssZKwBBS1QF5Qn6Fu+hp1+NryvQ8XLAztNSXgyZpXjaQvgNOcO5dDd1Zn4Q==}
     hasBin: true
     requiresBuild: true
     dependencies:
       detect-libc: 2.0.2
     optionalDependencies:
-      '@moonrepo/core-linux-arm64-gnu': 1.14.3
-      '@moonrepo/core-linux-arm64-musl': 1.14.3
-      '@moonrepo/core-linux-x64-gnu': 1.14.3
-      '@moonrepo/core-linux-x64-musl': 1.14.3
-      '@moonrepo/core-macos-arm64': 1.14.3
-      '@moonrepo/core-macos-x64': 1.14.3
-      '@moonrepo/core-windows-x64-msvc': 1.14.3
+      '@moonrepo/core-linux-arm64-gnu': 1.14.4
+      '@moonrepo/core-linux-arm64-musl': 1.14.4
+      '@moonrepo/core-linux-x64-gnu': 1.14.4
+      '@moonrepo/core-linux-x64-musl': 1.14.4
+      '@moonrepo/core-macos-arm64': 1.14.4
+      '@moonrepo/core-macos-x64': 1.14.4
+      '@moonrepo/core-windows-x64-msvc': 1.14.4
     dev: true
 
-  /@moonrepo/core-linux-arm64-gnu@1.14.3:
-    resolution: {integrity: sha512-PCC/XpXW+Wbg+uUPUCZU2m903f7hGePnolibKr80RqpKfobn76xpbb5kLCT9lAfhjevCUoV7o2mdCTyXxPaFzQ==}
+  /@moonrepo/core-linux-arm64-gnu@1.14.4:
+    resolution: {integrity: sha512-cvyYScgcnBid08nvVDSsvxycf+7M3l83pXLHCSpWFc+yKRMQAFi2vCx82V3hdjASwAOAO17yb715b4XPe4pyzw==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-linux-arm64-musl@1.14.3:
-    resolution: {integrity: sha512-ly3naTJP8Ngr47UypNvp+H/igxbSiaZwgfsHMOHFJDFDuyJYi8cVuWkbE51fmzug8h6V2AOLizwddHf8Y8DQnQ==}
+  /@moonrepo/core-linux-arm64-musl@1.14.4:
+    resolution: {integrity: sha512-4/7gHkzWM9q1y8SuG6ydfpAZW9m/uulk0xXGj0FWT+L+gBWpOK6IEd4J7+bBiIA1yoFl54znlSa/2qN/Prt8RQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-linux-x64-gnu@1.14.3:
-    resolution: {integrity: sha512-F94dZ4sS3Qqq0eI2Ux3A3eISJnpEoutIqZVvdlgoHI5mFkAHzSimIvVefWuQIVPGBkCkhxU0eBsYxRKreBLsjw==}
+  /@moonrepo/core-linux-x64-gnu@1.14.4:
+    resolution: {integrity: sha512-FRfU7Jdpa/bQki7GsRhbJdyUJR0ZgmEOl/7jeKX6FbFgiSTXuHa+TzdvQ1xob/ggOzaYbZHFYr3xDb+HQvd2cQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-linux-x64-musl@1.14.3:
-    resolution: {integrity: sha512-YsoDeJKBM+YGRyJltW1p0MlG/UgP2ogq254fvrWrY0X/qYxspmfa/nT5brlyyNcGK424AyVkVrJez3M807tiqQ==}
+  /@moonrepo/core-linux-x64-musl@1.14.4:
+    resolution: {integrity: sha512-NOTw7NskCgOIq8mO4ZZ0IRr4gQRVI1HtBK2TjuUtFGpsTflXOhvYir368Hb3czsJEsXaWsjly0I3InfIZdxUfA==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-macos-arm64@1.14.3:
-    resolution: {integrity: sha512-Ay3gxPsFesV8Yb6LJk6iynby0wKmMttLdffSuhk7aTg6SjohU5ibjXAvrLJEnUrUSCz67yz3qvrL0aGX/uNnbw==}
+  /@moonrepo/core-macos-arm64@1.14.4:
+    resolution: {integrity: sha512-dheZQRJ+vwLUaOlYWDuIvkgh/Cn/HzmjFMPFD+Skt9Oyq9RLq2JzW3XPy+u7G++DPOaZdarivNgCBWex+/9xiQ==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-macos-x64@1.14.3:
-    resolution: {integrity: sha512-4tvWE78Spx8RlAABbhs9/eJ99I324lR9hI22k48LGff+CXj//YG3smiqPNjWSZjKtNrdIZUOL0OdxU2eSXijxQ==}
+  /@moonrepo/core-macos-x64@1.14.4:
+    resolution: {integrity: sha512-PQ8Aj5utaXhVR8egKAWgTIA0UkSQaj4w2R2pPsiIpDA4Fgn4Faqh4KnXys4O6U7aa70Oqou0SdaXIPb7+S6/2w==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /@moonrepo/core-windows-x64-msvc@1.14.3:
-    resolution: {integrity: sha512-OHmDOA+T/7hiFLqAHt3x9mMOPB0u8++gF+BXmeMHM0OjCIjkCfdTfIc4vHtZro7CX0Hb0NJ4yF5nVxlsxpefZw==}
+  /@moonrepo/core-windows-x64-msvc@1.14.4:
+    resolution: {integrity: sha512-6ktlfeDrtvyD8Y67hmkS6vg6agXc+ZhKhiCOEoAi61FQ+Bk2sGmY+LEq17ye5YvKVmScEdtsaSre6zMZqNB2Xw==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -1031,7 +1031,7 @@ packages:
       ts-pattern: 5.0.5
     dev: true
 
-  /@pandacss/dev@0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.23)(typescript@5.2.2):
+  /@pandacss/dev@0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.24)(typescript@5.2.2):
     resolution: {integrity: sha512-4rEYnvyl4ITojpzJUZRFEv1mUZqlDaMaAUHvtvpjwSQyK2Z2dNFyHDkznzJ3lRKSbm4DGbUhc82+2VSjzpuKIg==}
     hasBin: true
     dependencies:
@@ -1043,7 +1043,7 @@ packages:
       '@pandacss/postcss': 0.15.4(typescript@5.2.2)
       '@pandacss/preset-panda': 0.15.4
       '@pandacss/shared': 0.15.4
-      '@pandacss/studio': 0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.23)(typescript@5.2.2)
+      '@pandacss/studio': 0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.24)(typescript@5.2.2)
       '@pandacss/token-dictionary': 0.15.4
       '@pandacss/types': 0.15.4
       cac: 6.7.14
@@ -1194,11 +1194,11 @@ packages:
     resolution: {integrity: sha512-uG2JEf+8ftO190lHeZXkzTVklFX+kmFK6f7gS0JmMsBbHCRaL6J80RdMyd8p9crxxTJhsCqE3uEQEFtyLXfJVA==}
     dev: true
 
-  /@pandacss/studio@0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.23)(typescript@5.2.2):
+  /@pandacss/studio@0.15.4(@internationalized/date@3.5.0)(@types/react-dom@18.2.8)(@types/react@18.2.24)(typescript@5.2.2):
     resolution: {integrity: sha512-W8fHmfC13ZDCTHBVIJ5WqkT7mj37wp5GRXsdJ3ZwhLF4NYhPTJP3ovPLehVbdpoKubj0tDRUVrv5ky8MobxH/w==}
     dependencies:
       '@ark-ui/react': 0.9.0(@internationalized/date@3.5.0)(react-dom@18.2.0)(react@18.2.0)
-      '@astrojs/react': 2.2.1(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@astrojs/react': 2.2.1(@types/react-dom@18.2.8)(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
       '@pandacss/config': 0.15.4
       '@pandacss/logger': 0.15.4
       '@pandacss/node': 0.15.4(typescript@5.2.2)
@@ -1339,20 +1339,20 @@ packages:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
     dev: true
 
-  /@types/prop-types@15.7.7:
-    resolution: {integrity: sha512-FbtmBWCcSa2J4zL781Zf1p5YUBXQomPEcep9QZCfRfQgTxz3pJWiDFLebohZ9fFntX5ibzOkSsrJ0TEew8cAog==}
+  /@types/prop-types@15.7.8:
+    resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
     dev: true
 
   /@types/react-dom@18.2.8:
     resolution: {integrity: sha512-bAIvO5lN/U8sPGvs1Xm61rlRHHaq5rp5N3kp9C+NJ/Q41P8iqjkXSu0+/qu8POsjH9pNWb0OYabFez7taP7omw==}
     dependencies:
-      '@types/react': 18.2.23
+      '@types/react': 18.2.24
     dev: true
 
-  /@types/react@18.2.23:
-    resolution: {integrity: sha512-qHLW6n1q2+7KyBEYnrZpcsAmU/iiCh9WGCKgXvMxx89+TYdJWRjZohVIo9XTcoLhfX3+/hP0Pbulu3bCZQ9PSA==}
+  /@types/react@18.2.24:
+    resolution: {integrity: sha512-Ee0Jt4sbJxMu1iDcetZEIKQr99J1Zfb6D4F3qfUWoR1JpInkY1Wdg4WwCyBjL257D0+jGqSl1twBjV8iCaC0Aw==}
     dependencies:
-      '@types/prop-types': 15.7.7
+      '@types/prop-types': 15.7.8
       '@types/scheduler': 0.16.4
       csstype: 3.1.2
     dev: true
@@ -1373,8 +1373,8 @@ packages:
     resolution: {integrity: sha512-axdPBuLuEJt0c4yI5OZssC19K2Mq1uKdrfZBzuxLvaztgqUtFYZUNw7lETExPYJR9jdEoIg4mb7RQKRQzOkeGQ==}
     dev: true
 
-  /@vitejs/plugin-vue@4.3.4(vite@4.4.9)(vue@3.3.4):
-    resolution: {integrity: sha512-ciXNIHKPriERBisHFBvnTbfKa6r9SAesOYXeGDzgegcvy9Q4xdScSHAmKbNT0M3O0S9LKhIf5/G+UYG4NnnzYw==}
+  /@vitejs/plugin-vue@4.4.0(vite@4.4.9)(vue@3.3.4):
+    resolution: {integrity: sha512-xdguqb+VUwiRpSg+nsc2HtbAUSGak25DXYvpQQi4RVU1Xq1uworyoH/md9Rfd8zMmPR/pSghr309QNcftUVseg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0

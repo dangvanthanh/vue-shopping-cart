@@ -82,7 +82,7 @@ products.set("7", {
   rating: 2,
   category: "5",
   colors: ["black", "red"],
-  favorite: 0,
+  favorite: 1,
 });
 
 products.set("8", {

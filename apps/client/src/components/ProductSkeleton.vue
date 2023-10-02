@@ -74,7 +74,7 @@ import { flex } from "../../styled-system/patterns";
       </p>
 
       <div :class="flex({ align: 'center', gap: 1 })">
-        <template v-for="_n in 2">
+        <template v-for="_ in 2">
           <div
             :class="
               css({

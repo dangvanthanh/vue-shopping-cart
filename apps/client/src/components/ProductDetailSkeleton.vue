@@ -105,7 +105,7 @@ const fillStar = (n: number, rating: number) => {
         </p>
 
         <div :class="flex({ mt: 6, align: 'center', gap: 1 })">
-          <template v-for="_n in 2">
+          <template v-for="_ in 2">
             <div
               :class="
                 css({
