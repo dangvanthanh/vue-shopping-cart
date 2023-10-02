@@ -6,7 +6,7 @@
   "references": [],
   "compilerOptions": {
     "target": "es2022",
-    "module": "NodeNext",
+    "module": "nodenext",
     "outDir": "../../.moon/cache/types/apps/server"
   }
 }

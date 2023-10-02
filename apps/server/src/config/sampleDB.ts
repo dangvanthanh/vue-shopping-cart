@@ -9,6 +9,7 @@ products.set("1", {
   rating: 1,
   category: "3",
   colors: ["yellow", "cyan"],
+  favorite: 1,
 });
 
 products.set("2", {
@@ -21,6 +22,7 @@ products.set("2", {
   rating: 4,
   category: "2",
   colors: ["red", "cyan"],
+  favorite: 0,
 });
 
 products.set("3", {
@@ -32,6 +34,7 @@ products.set("3", {
   rating: 5,
   category: "4",
   colors: ["blue", "black"],
+  favorite: 1,
 });
 
 products.set("4", {
@@ -43,6 +46,7 @@ products.set("4", {
   rating: 3,
   category: "5",
   colors: ["green", "gray"],
+  favorite: 0,
 });
 
 products.set("5", {
@@ -54,6 +58,7 @@ products.set("5", {
   rating: 4,
   category: "2",
   colors: ["yellow"],
+  favorite: 1,
 });
 
 products.set("6", {
@@ -65,6 +70,7 @@ products.set("6", {
   rating: 2,
   category: "4",
   colors: ["black", "red"],
+  favorite: 0,
 });
 
 products.set("7", {
@@ -76,6 +82,7 @@ products.set("7", {
   rating: 2,
   category: "5",
   colors: ["black", "red"],
+  favorite: 0,
 });
 
 products.set("8", {
@@ -87,6 +94,7 @@ products.set("8", {
   rating: 3,
   category: "3",
   colors: ["green", "yellow"],
+  favorite: 1,
 });
 
 products.set("9", {
@@ -98,6 +106,7 @@ products.set("9", {
   rating: 4,
   category: "5",
   colors: ["yellow", "cyan"],
+  favorite: 0,
 });
 
 products.set("10", {
@@ -120,6 +129,7 @@ products.set("11", {
   rating: 5,
   category: "3",
   colors: ["violet"],
+  favorite: 0,
 });
 
 products.set("12", {
@@ -131,6 +141,7 @@ products.set("12", {
   rating: 2,
   category: "4",
   colors: ["yellow", "green"],
+  favorite: 1,
 });
 
 products.set("13", {
@@ -142,6 +153,7 @@ products.set("13", {
   rating: 5,
   category: "4",
   colors: ["red", "green"],
+  favorite: 1,
 });
 
 products.set("14", {
@@ -153,6 +165,7 @@ products.set("14", {
   rating: 3,
   category: "2",
   colors: ["black", "violet"],
+  favorite: 1,
 });
 
 products.set("15", {
@@ -164,6 +177,7 @@ products.set("15", {
   rating: 4,
   category: "5",
   colors: ["white", "yellow"],
+  favorite: 0,
 });
 
 products.set("16", {
@@ -186,6 +200,7 @@ products.set("17", {
   rating: 1,
   category: "3",
   colors: ["red"],
+  favorite: 0,
 });
 
 products.set("18", {
@@ -208,6 +223,7 @@ products.set("19", {
   rating: 4,
   category: "5",
   colors: ["yellow", "green"],
+  favorite: 0,
 });
 
 products.set("20", {
@@ -219,6 +235,7 @@ products.set("20", {
   rating: 4,
   category: "2",
   colors: ["black", "red"],
+  favorite: 1,
 });
 
 export const categories = new Map<string, any>();

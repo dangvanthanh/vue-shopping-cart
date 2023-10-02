@@ -4,8 +4,7 @@
   "private": true,
   "description": "Simple shopping cart with Vue.js and Deno.js",
   "scripts": {
-    "deps": "pnpm update -i --latest -r",
-    "moon": "moon --color --log trace"
+    "deps": "pnpm update -i --latest -r"
   },
   "workspaces": [
     "apps/*",
@@ -15,7 +14,10 @@
   "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
   "license": "MIT",
   "engines": {
-    "node": "18.18.0"
+    "node": "18.17.1"
   },
-  "packageManager": ""
+  "packageManager": "",
+  "devDependencies": {
+    "@moonrepo/cli": "^1.14.3"
+  }
 }

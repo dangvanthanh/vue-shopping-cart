@@ -10,28 +10,29 @@ app
   )
   .get("/products/:category", (c) => {
     const category = c.req.param("category");
-    const newProducts = [];
-    let newCat;
-
-    for (let cat of categories.values()) {
-      if (cat.slug === category) {
-        newCat = cat;
-        break;
-      }
-    }
-
-    for (let product of products.values()) {
-      if (product.category === newCat.id) {
-        newProducts.push(product);
-      }
-    }
+    const newCat = Array.from(categories.values()).find(
+      (cat) => cat.slug === category
+    );
+    const newProducts = Array.from(products.values()).filter(
+      (product) => product.category === newCat.id
+    );
 
     return c.json({
       ok: true,
       data: newProducts,
     });
   })
-  .use("/categories", cors())
+  .use("/product/*", cors())
+  .get("/product/:id", (c) => {
+    const id = c.req.param("id");
+    const product = Array.from(products.values()).find((p) => p.id === id);
+
+    return c.json({
+      ok: true,
+      data: product,
+    });
+  })
+  .use("/categories/*", cors())
   .get("/categories", (c) =>
     c.json({ ok: true, data: Array.from(categories.values()) })
   );

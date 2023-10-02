@@ -7,6 +7,7 @@
 - [Deno.js](https://deno.land/)
 - [Hono](https://hono.dev/)
 - [Vue.js](https://vuejs.org/)
+- [PandaCSS](https://panda-css.com/)
 - [AppWrite](https://appwrite.io/)
 - [Moon](https://moonrepo.dev/)
 
@@ -27,7 +28,7 @@ $ moon run server:deps
 After installation AppWrite, create `.env` in root folder and updated AppWrite environments.
 
 ```
-APP_WRITE_API_ENDPOINT=http://localhost/v1
+APP_WRITE_API_ENDPOINT=
 APP_WRITE_PROJECT_ID=
 APP_WRITE_API_KEY=
 ```

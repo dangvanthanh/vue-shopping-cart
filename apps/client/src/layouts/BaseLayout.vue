@@ -18,7 +18,7 @@ const year = new Date().getFullYear();
           })
         "
       >
-        <router-link to="/">ShoPP</router-link>
+        <router-link to="/">S</router-link>
       </h1>
       <nav :class="flex({ align: 'center', justify: 'end', columnGap: 4 })">
         <router-link
@@ -55,7 +55,7 @@ const year = new Date().getFullYear();
     :class="css({ maxW: '5xl', mx: 'auto', py: 6, px: 4 })"
   >
     <p :class="css({ fontSize: 'sm', textAlign: 'center' })">
-      © {{ year }} <router-link to="/">ShoPP</router-link>. All Rights Reserved.
+      © {{ year }}. All Rights Reserved.
     </p>
   </footer>
 </template>
