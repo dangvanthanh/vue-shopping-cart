@@ -7,6 +7,7 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "nodenext",
+    "allowImportingTsExtensions": true,
     "outDir": "../../.moon/cache/types/apps/server"
   }
 }

@@ -19,13 +19,24 @@
 
 ### Gettting Started
 
-Make sure everything is centralized in one place (`deps.ts`)
+#### Frontend
 
-```shell
-$ moon run server:deps
+Rename `.env.example` to `.env` in client folder and update API enviroments.
+
+```
+VITE_ALOVA_TIPS=0
+VITE_BASE_URL_API=http://localhost:8000
 ```
 
-After installation AppWrite, create `.env` in root folder and updated AppWrite environments.
+then run command line
+
+```shell
+$ moon run client:dev
+```
+
+### Backend
+
+Rename `.env.example` to `.env` in server folder and update AppWrite enviroments.
 
 ```
 APP_WRITE_API_ENDPOINT=
@@ -33,14 +44,16 @@ APP_WRITE_PROJECT_ID=
 APP_WRITE_API_KEY=
 ```
 
-For development, you need run command line:
+Make sure everything is centralized in one place (`deps.ts`)
 
 ```shell
-## backend
-$ moon run server:dev
+$ moon run server:deps
+```
 
-## frontend
-$ moon run client:dev
+then run command line:
+
+```shell
+$ moon run server:dev
 ```
 
 ## License

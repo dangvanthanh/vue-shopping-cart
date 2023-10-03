@@ -1,6 +1,6 @@
-export const products = new Map<string, any>();
+export const productsSample = new Map<string, any>();
 
-products.set("1", {
+productsSample.set("1", {
   id: "1",
   title: "Moustache Samedi 27 Trail 8",
   description: "Focused around comfort and flexibility",
@@ -12,7 +12,7 @@ products.set("1", {
   favorite: 1,
 });
 
-products.set("2", {
+productsSample.set("2", {
   id: "2",
   title: "Sonder Colibri Ti Force 22",
   description:
@@ -25,7 +25,7 @@ products.set("2", {
   favorite: 0,
 });
 
-products.set("3", {
+productsSample.set("3", {
   id: "3",
   title: "MiRider One electric folding bike",
   description: "Focused around comfort and flexibility",
@@ -37,7 +37,7 @@ products.set("3", {
   favorite: 1,
 });
 
-products.set("4", {
+productsSample.set("4", {
   id: "4",
   title: "Giant Revolt Advanced 0 (2020)",
   description: "Focused around comfort and flexibility",
@@ -49,7 +49,7 @@ products.set("4", {
   favorite: 0,
 });
 
-products.set("5", {
+productsSample.set("5", {
   id: "5",
   title: "Liv Avail Advanced Pro 2",
   description: "A light and agile bike that feels fast over long distances",
@@ -61,7 +61,7 @@ products.set("5", {
   favorite: 1,
 });
 
-products.set("6", {
+productsSample.set("6", {
   id: "6",
   title: "Emu Mini Folding Electric bike",
   description: "Focused around comfort and flexibility",
@@ -73,7 +73,7 @@ products.set("6", {
   favorite: 0,
 });
 
-products.set("7", {
+productsSample.set("7", {
   id: "7",
   title: "Enigma Escape",
   description: "Focused around comfort and flexibility",
@@ -85,7 +85,7 @@ products.set("7", {
   favorite: 1,
 });
 
-products.set("8", {
+productsSample.set("8", {
   id: "8",
   title: "Carrera Titan X",
   description: "Focused around comfort and flexibility",
@@ -97,7 +97,7 @@ products.set("8", {
   favorite: 1,
 });
 
-products.set("9", {
+productsSample.set("9", {
   id: "9",
   title: "Vielo all-road all-rounder V",
   description: "Focused around comfort and flexibility",
@@ -109,7 +109,7 @@ products.set("9", {
   favorite: 0,
 });
 
-products.set("10", {
+productsSample.set("10", {
   id: "10",
   title: "Orbea Terra M20-D1x GRX",
   description: "Stunning looks matched to a top-class ride",
@@ -120,7 +120,7 @@ products.set("10", {
   colors: ["red", "black"],
 });
 
-products.set("11", {
+productsSample.set("11", {
   id: "11",
   title: "Canyon Exceed CF SL 7.0",
   description: "Focused around comfort and flexibility",
@@ -132,7 +132,7 @@ products.set("11", {
   favorite: 0,
 });
 
-products.set("12", {
+productsSample.set("12", {
   id: "12",
   title: "GoCycle GXi folding ebike",
   description: "Focused around comfort and flexibility",
@@ -144,7 +144,7 @@ products.set("12", {
   favorite: 1,
 });
 
-products.set("13", {
+productsSample.set("13", {
   id: "13",
   title: "Vitus E-Escarpe VRX",
   description: "Focused around comfort and flexibility",
@@ -156,7 +156,7 @@ products.set("13", {
   favorite: 1,
 });
 
-products.set("14", {
+productsSample.set("14", {
   id: "14",
   title: "Thorn Club Tour MK5",
   description: "Focused around comfort and flexibility",
@@ -168,7 +168,7 @@ products.set("14", {
   favorite: 1,
 });
 
-products.set("15", {
+productsSample.set("15", {
   id: "15",
   title: "Canyon Grail CF SL 8.0 eTap",
   description: "Focused around comfort and flexibility",
@@ -180,7 +180,7 @@ products.set("15", {
   favorite: 0,
 });
 
-products.set("16", {
+productsSample.set("16", {
   id: "16",
   title: "Ridgeback Panorama",
   description: "Focused around comfort and flexibility",
@@ -191,7 +191,7 @@ products.set("16", {
   colors: ["black", "cyan"],
 });
 
-products.set("17", {
+productsSample.set("17", {
   id: "17",
   title: "Merida One-Twenty 9.7000 (2020)",
   description: "Focused around comfort and flexibility",
@@ -203,7 +203,7 @@ products.set("17", {
   favorite: 0,
 });
 
-products.set("18", {
+productsSample.set("18", {
   id: "18",
   title: "Giant Anthem Advanced Pro 29 1",
   description: "Focused around comfort and flexibility",
@@ -214,7 +214,7 @@ products.set("18", {
   colors: ["black"],
 });
 
-products.set("19", {
+productsSample.set("19", {
   id: "19",
   title: "Cannondale Topstone",
   description: "Focused around comfort and flexibility",
@@ -226,7 +226,7 @@ products.set("19", {
   favorite: 0,
 });
 
-products.set("20", {
+productsSample.set("20", {
   id: "20",
   title: "Bianchi Infinito XE Ultegra",
   description: "Focused around comfort and flexibility",
@@ -238,28 +238,31 @@ products.set("20", {
   favorite: 1,
 });
 
-export const categories = new Map<string, any>();
+export const categoriesSample = new Map<string, any>();
 
-categories.set("2", {
+categoriesSample.set("2", {
   id: "2",
   slug: "road-bikes",
   name: "Road Bikes",
 });
 
-categories.set("3", {
+categoriesSample.set("3", {
   id: "3",
   slug: "mountain-bikes",
   name: "Mountain Bikes",
 });
 
-categories.set("4", {
+categoriesSample.set("4", {
   id: "4",
   slug: "electric-bikes",
   name: "Electric Bikes",
 });
 
-categories.set("5", {
+categoriesSample.set("5", {
   id: "5",
   slug: "touring-bikes",
   name: "Touring Bikes",
 });
+
+export const productsData = Array.from(productsSample.values());
+export const categoriesData = Array.from(categoriesSample.values());
