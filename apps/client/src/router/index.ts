@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
-import Signup from "@/views/Signup.vue";
-import ProductById from "@/views/ProductById.vue";
-import ProductByCategory from "@/views/ProductByCategory.vue";
-import NotFound from "@/views/NotFound.vue";
+const Home = () => import("../views/Home.vue");
+const Login = () => import("../views/Login.vue");
+const Signup = () => import("../views/Signup.vue");
+const ProductById = () => import("../views/ProductById.vue");
+const ProductByCategory = () => import("../views/ProductByCategory.vue");
+const NotFound = () => import("../views/NotFound.vue");
 
 const routes = [
   { path: "/", component: Home },
@@ -20,7 +20,7 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior: (to) => {
+  scrollBehavior: (to: any) => {
     if (to) {
       return { selector: to.hash };
     }
