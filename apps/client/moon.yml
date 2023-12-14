@@ -1,21 +1,29 @@
-type: 'application'
+type: "application"
 
-language: 'typescript'
+language: "typescript"
 
 fileGroups:
   app:
-    - 'env.d.ts'
-    - 'index.html'
-    - 'vite.config.*'
+    - "env.d.ts"
+    - "index.html"
+    - "vite.config.*"
 
 tasks:
   dev:
-    command: 'vite dev'
+    command: "vite dev"
     local: true
 
   build:
-    command: 'vite build'
+    command: "vite build"
     inputs:
-      - '@group(app)'
+      - "@group(app)"
     outputs:
-      - 'dist'
+      - "dist"
+
+  lint:
+    command: "pnpm dlx @biomejs/biome check ./src"
+    local: true
+
+  format:
+    command: "pnpm dlx @biomejs/biome format ./src --write"
+    local: true
