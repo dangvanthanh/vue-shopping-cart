@@ -1,4 +1,28 @@
 const tokens = {
+  "aspectRatios.square": {
+    "value": "1 / 1",
+    "variable": "var(--aspect-ratios-square)"
+  },
+  "aspectRatios.landscape": {
+    "value": "4 / 3",
+    "variable": "var(--aspect-ratios-landscape)"
+  },
+  "aspectRatios.portrait": {
+    "value": "3 / 4",
+    "variable": "var(--aspect-ratios-portrait)"
+  },
+  "aspectRatios.wide": {
+    "value": "16 / 9",
+    "variable": "var(--aspect-ratios-wide)"
+  },
+  "aspectRatios.ultrawide": {
+    "value": "18 / 5",
+    "variable": "var(--aspect-ratios-ultrawide)"
+  },
+  "aspectRatios.golden": {
+    "value": "1.618 / 1",
+    "variable": "var(--aspect-ratios-golden)"
+  },
   "borders.none": {
     "value": "none",
     "variable": "var(--borders-none)"
@@ -1802,6 +1826,10 @@ const tokens = {
   "spacing.-3.5": {
     "value": "calc(var(--spacing-3\\.5) * -1)",
     "variable": "var(--spacing-3\\.5)"
+  },
+  "colors.colorPalette": {
+    "value": "var(--colors-color-palette)",
+    "variable": "var(--colors-color-palette)"
   },
   "colors.colorPalette.50": {
     "value": "var(--colors-color-palette-50)",

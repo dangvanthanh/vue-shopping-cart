@@ -27,3 +27,6 @@ tasks:
   format:
     command: "pnpm dlx @biomejs/biome format ./src --write"
     local: true
+
+  prepare:
+    command: "pnpm dlx @biomejs/biome format ./src --write"

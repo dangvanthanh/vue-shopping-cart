@@ -143,6 +143,7 @@ const fillStar = (n: number, rating: number) => {
                   h: 6,
                   rounded: 'full',
                   borderWidth: '1px',
+                  borderStyle: 'solid',
                   borderColor: 'gray.200',
                 })
               "
@@ -173,6 +174,7 @@ const fillStar = (n: number, rating: number) => {
                 px: 3,
                 py: 1.5,
                 borderWidth: '1px',
+                borderStyle: 'solid',
                 borderColor: 'gray.900',
                 cursor: 'pointer',
               })

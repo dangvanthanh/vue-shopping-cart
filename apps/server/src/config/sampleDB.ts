@@ -1,4 +1,4 @@
-export const productsSample = new Map<string, any>();
+export const productsSample = new Map<string, Record<string, unknown>>();
 
 productsSample.set("1", {
   id: "1",

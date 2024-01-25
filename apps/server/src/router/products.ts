@@ -1,5 +1,5 @@
+import { categoriesData, productsData } from "../config/sampleDB.ts";
 import { Hono } from "../deps.ts";
-import { productsData, categoriesData } from "../config/sampleDB.ts";
 
 const products = new Hono();
 
@@ -9,7 +9,7 @@ products
     const category = c.req.param("category");
     const newCatategory = categoriesData.find((cat) => cat.slug === category);
     const newProducts = productsData.filter(
-      (product) => product.category === newCatategory.id
+      (product) => product.category === newCatategory.id,
     );
 
     return c.json({
@@ -21,11 +21,12 @@ products
     const id = c.req.param("id");
     const product = productsData.find((p) => p.id === id);
     const newProducts = productsData.filter(
-      (p) => p.category === product.category && p.id !== id
+      (p) => p.category === product?.category && p.id !== id,
     );
-    const othersProduct = newProducts.slice(0, 3).map(function () {
-      return this.splice(Math.floor(Math.random() * this.length), 1)[0];
-    }, newProducts.slice());
+    const othersProduct = Array.from({ length: 3 }, () => {
+      const randomIndex = Math.floor(Math.random() * newProducts.length);
+      return newProducts.splice(randomIndex, 1)[0];
+    });
 
     return c.json({
       ok: true,

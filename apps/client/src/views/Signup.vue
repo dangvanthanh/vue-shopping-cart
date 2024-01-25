@@ -58,6 +58,7 @@ import AuthLayout from "@/layouts/AuthLayout.vue";
               shadow: 'sm',
               p: 6,
               borderWidth: '1px',
+              borderStyle: 'solid',
               borderColor: 'gray.100',
             })
           "
@@ -82,6 +83,7 @@ import AuthLayout from "@/layouts/AuthLayout.vue";
                 css({
                   appearance: 'none',
                   borderWidth: '1px',
+                  borderStyle: 'solid',
                   borderColor: 'gray.300',
                   display: 'block',
                   w: 'full',
@@ -115,6 +117,7 @@ import AuthLayout from "@/layouts/AuthLayout.vue";
                 css({
                   appearance: 'none',
                   borderWidth: '1px',
+                  borderStyle: 'solid',
                   borderColor: 'gray.300',
                   display: 'block',
                   w: 'full',
@@ -140,7 +143,8 @@ import AuthLayout from "@/layouts/AuthLayout.vue";
                   color: 'white',
                   px: 3,
                   py: 1.5,
-                  borderWidth: '1px',
+                  border: '1px',
+                  borderStyle: 'solid',
                   borderColor: 'gray.900',
                   cursor: 'pointer',
                 })

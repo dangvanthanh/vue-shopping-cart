@@ -106,6 +106,7 @@ defineProps<{
                 h: 5,
                 rounded: 'full',
                 borderWidth: '1px',
+                borderStyle: 'solid',
                 borderColor: 'gray.200',
               })
             "

@@ -6,8 +6,18 @@
 	"scripts": {
 		"deps": "pnpm update -i --latest -r"
 	},
-	"workspaces": ["apps/*", "packages/*"],
-	"keywords": ["deno", "hono", "appwrite", "pandacss", "moonrepo", "vuejs"],
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"keywords": [
+		"deno",
+		"hono",
+		"appwrite",
+		"pandacss",
+		"moonrepo",
+		"vuejs"
+	],
 	"author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
 	"license": "MIT",
 	"engines": {
@@ -15,6 +25,6 @@
 	},
 	"packageManager": "pnpm@8.7.1",
 	"devDependencies": {
-		"@moonrepo/cli": "^1.18.1"
+		"@moonrepo/cli": "^1.19.3"
 	}
 }
