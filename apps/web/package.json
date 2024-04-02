@@ -18,7 +18,7 @@
 	},
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
-		"@pandacss/dev": "^0.36.1",
+		"@pandacss/dev": "^0.37.0",
 		"@types/node": "^20.12.2",
 		"@vitejs/plugin-vue": "^5.0.4",
 		"typescript": "^5.4.3",

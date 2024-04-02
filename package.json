@@ -33,7 +33,7 @@
 		"@apps/typescript-config": "workspace:*",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
-		"turbo": "^1.13.0"
+		"turbo": "^1.13.1"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,vue}": [
