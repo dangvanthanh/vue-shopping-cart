@@ -1,0 +1,28 @@
+{
+	"name": "@apps/web",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"lint": "pnpm dlx @biomejs/biome check ./src --apply",
+		"format": "pnpm dlx @biomejs/biome format ./src --write",
+		"prepare": "panda codegen"
+	},
+	"dependencies": {
+		"alova": "^2.18.2",
+		"pinia": "^2.1.7",
+		"vue": "^3.4.21",
+		"vue-router": "^4.3.0"
+	},
+	"devDependencies": {
+		"@apps/biome-config": "workspace:*",
+		"@pandacss/dev": "^0.36.1",
+		"@types/node": "^20.12.2",
+		"@vitejs/plugin-vue": "^5.0.4",
+		"typescript": "^5.4.3",
+		"vite": "^5.2.7",
+		"vue-tsc": "^2.0.7"
+	}
+}

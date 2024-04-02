@@ -1,14 +1,9 @@
 {
-  "extends": "../../tsconfig.options.json",
-  "include": [
-    "**/*"
-  ],
-  "references": [],
-  "compilerOptions": {
-    "target": "es2022",
-    "module": "nodenext",
-    "allowImportingTsExtensions": true,
-    "outDir": "../../.moon/cache/types/apps/server",
-    "paths": {}
-  }
+	"extends": "@apps/typescript-config/base.json",
+	"include": ["**/*"],
+	"references": [],
+	"compilerOptions": {
+		"target": "es2022",
+		"module": "nodenext"
+	}
 }

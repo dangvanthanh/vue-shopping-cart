@@ -1,10 +1,8 @@
-import { Hono } from "../deps.ts";
-import { categoriesData } from "../config/sampleDB.ts";
+import { categoriesData } from '../config/sampleDB.ts'
+import { Hono } from '../deps.ts'
 
-const categories = new Hono();
+const categories = new Hono()
 
-categories.get("/", (c) =>
-  c.json({ ok: true, data: categoriesData })
-);
+categories.get('/', (c) => c.json({ ok: true, data: categoriesData }))
 
-export { categories };
+export { categories }

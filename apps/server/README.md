@@ -1,3 +1,3 @@
 # Deno
 
-A Deno application using Hono, powered by Moon.
+A Deno application using Hono, powered by Turborepo.

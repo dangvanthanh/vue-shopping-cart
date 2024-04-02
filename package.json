@@ -4,7 +4,11 @@
 	"private": true,
 	"description": "Simple shopping cart with Vue.js and Deno.js",
 	"scripts": {
-		"deps": "pnpm update -i --latest -r"
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "turbo lint",
+		"format": "turbo format",
+		"prepare": "husky"
 	},
 	"workspaces": [
 		"apps/*",
@@ -15,7 +19,7 @@
 		"hono",
 		"appwrite",
 		"pandacss",
-		"moonrepo",
+		"turborepo",
 		"vuejs"
 	],
 	"author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
@@ -25,6 +29,16 @@
 	},
 	"packageManager": "pnpm@8.7.1",
 	"devDependencies": {
-		"@moonrepo/cli": "^1.21.3"
+		"@apps/biome-config": "workspace:*",
+		"@apps/typescript-config": "workspace:*",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"turbo": "^1.13.0"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,vue}": [
+			"pnpm run lint",
+			"pnpm run format"
+		]
 	}
 }

@@ -9,7 +9,6 @@
 - [Vue.js](https://vuejs.org/)
 - [PandaCSS](https://panda-css.com/)
 - [AppWrite](https://appwrite.io/)
-- [Moon](https://moonrepo.dev/)
 
 ## Development
 
@@ -31,7 +30,7 @@ VITE_BASE_URL_API=http://localhost:8000
 then run command line
 
 ```shell
-$ moon run client:dev
+$ turbo run dev --filter=web
 ```
 
 ### Backend
@@ -47,13 +46,13 @@ APP_WRITE_API_KEY=
 Make sure everything is centralized in one place (`deps.ts`)
 
 ```shell
-$ moon run server:deps
+$ turbo run deps --filter=server
 ```
 
 then run command line:
 
 ```shell
-$ moon run server:dev
+$ turbo run dev --filter=server
 ```
 
 ## License

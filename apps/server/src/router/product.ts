@@ -1,16 +1,16 @@
-import { Hono } from "../deps.ts";
-import { productsData } from "../config/sampleDB.ts";
+import { productsData } from '../config/sampleDB.ts'
+import { Hono } from '../deps.ts'
 
-const product = new Hono();
+const product = new Hono()
 
-product.get("/:id", (c) => {
-  const id = c.req.param("id");
-  const product = productsData.find((p) => p.id === id);
+product.get('/:id', (c) => {
+	const id = c.req.param('id')
+	const product = productsData.find((p) => p.id === id)
 
-  return c.json({
-    ok: true,
-    data: product,
-  });
-});
+	return c.json({
+		ok: true,
+		data: product,
+	})
+})
 
-export { product };
+export { product }

@@ -1,0 +1,3 @@
+{
+	"extends": ["@apps/biome-config/biome"]
+}

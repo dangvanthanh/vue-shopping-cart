@@ -1,0 +1,16 @@
+{
+	"name": "@apps/biome-config",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		"./biome": "./biome.json"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.6.3"
+	}
+}
