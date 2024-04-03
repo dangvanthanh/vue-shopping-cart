@@ -1,4 +1,4 @@
-export type CategoryProps = {
+export type Category = {
 	id: string
 	name: string
 	slug: string

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { formatcurrency } from '@/lib'
-import type { ProductProps } from '@/types'
+import type { Product } from '@/types'
 import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 
 defineProps<{
-	product: ProductProps
+	product: Product
 }>()
 
 const fillStar = (n: number, rating: number) => {

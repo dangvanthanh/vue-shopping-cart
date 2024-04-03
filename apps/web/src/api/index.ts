@@ -1,4 +1,4 @@
-import type { CategoryProps, ProductProps } from '@/types'
+import type { Category, Product } from '@/types'
 import { createAlova } from 'alova'
 import GlobalFetch from 'alova/GlobalFetch'
 import VueHook from 'alova/vue'
@@ -16,24 +16,24 @@ const transformData =
 		data.map((item) => ({ ...item }))
 
 export const getCategories = alovaInstance.Get('/categories', {
-	transformData: transformData<CategoryProps>(),
+	transformData: transformData<Category>(),
 })
 
 export const getProducts = alovaInstance.Get('/products', {
-	transformData: transformData<ProductProps>(),
+	transformData: transformData<Product>(),
 })
 
 export const getProductsByCategory = (category: string) =>
 	alovaInstance.Get(`/products/${category}`, {
-		transformData: transformData<ProductProps>(),
+		transformData: transformData<Product>(),
 	})
 
 export const getOthersProductsById = (id: string) =>
 	alovaInstance.Get(`/products/others/${id}`, {
-		transformData: transformData<ProductProps>(),
+		transformData: transformData<Product>(),
 	})
 
 export const getProductById = (id: string) =>
 	alovaInstance.Get(`/product/${id}`, {
-		transformData: ({ data }: { data: ProductProps }) => data,
+		transformData: ({ data }: { data: Product }) => data,
 	})
