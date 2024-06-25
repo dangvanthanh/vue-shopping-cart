@@ -5,7 +5,7 @@ import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 
 const props = defineProps<{
-  category: string
+	category: string
 }>()
 
 const { loading, data: categories, error } = useRequest(getCategories)

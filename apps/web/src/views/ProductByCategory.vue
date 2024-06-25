@@ -13,24 +13,24 @@ const route = useRoute()
 const category = ref(route.params.category as string)
 
 const {
-  loading,
-  data: products,
-  error,
+	loading,
+	data: products,
+	error,
 } = useRequest(getProductsByCategory(category.value))
 
 watch(
-  () => route.params.category,
-  async (newCategory) => {
-    const { data: newData, onSuccess } = useRequest(
-      getProductsByCategory(newCategory as string),
-    )
+	() => route.params.category,
+	async (newCategory) => {
+		const { data: newData, onSuccess } = useRequest(
+			getProductsByCategory(newCategory as string),
+		)
 
-    onSuccess(() => {
-      products.value = newData.value
-    })
+		onSuccess(() => {
+			products.value = newData.value
+		})
 
-    category.value = newCategory as string
-  },
+		category.value = newCategory as string
+	},
 )
 </script>
 

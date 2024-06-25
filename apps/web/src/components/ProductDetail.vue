@@ -5,11 +5,11 @@ import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 
 defineProps<{
-  product: Product
+	product: Product
 }>()
 
 const fillStar = (n: number, rating: number) => {
-  return n <= rating ? 'currentColor' : 'none'
+	return n <= rating ? 'currentColor' : 'none'
 }
 </script>
 

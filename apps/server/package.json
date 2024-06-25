@@ -4,7 +4,7 @@
 	"description": "Simple shopping cart with Vue.js and Deno.js",
 	"scripts": {
 		"dev": "deno run --allow-net src/index.ts",
-		"lint": "bunx @biomejs/biome check ./src --apply",
+		"lint": "bunx @biomejs/biome check ./src --write",
 		"format": "bunx @biomejs/biome format ./src --write",
 		"deps": "deno cache src/index.ts"
 	},

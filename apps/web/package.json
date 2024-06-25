@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"lint": "bunx @biomejs/biome check ./src --apply",
+		"lint": "bunx @biomejs/biome check ./src --write",
 		"format": "bunx @biomejs/biome format ./src --write",
 		"prepare": "panda codegen"
 	},

@@ -3,7 +3,7 @@ import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 
 const fillStar = (n: number, rating: number) => {
-  return n <= rating ? 'currentColor' : 'none'
+	return n <= rating ? 'currentColor' : 'none'
 }
 </script>
 

@@ -17,31 +17,31 @@ const id = ref(route.params.id as string)
 
 const { loading, data: product, error } = useRequest(getProductById(id.value))
 const {
-  loading: loadingOthersProducts,
-  data: othersProducts,
-  error: errorOthersProducts,
+	loading: loadingOthersProducts,
+	data: othersProducts,
+	error: errorOthersProducts,
 } = useRequest(getOthersProductsById(id.value))
 
 watch(
-  () => route.params.id,
-  async (newId) => {
-    const { data: newProduct, onSuccess: onSuccessProduct } = useRequest(
-      getProductById(newId as string),
-    )
+	() => route.params.id,
+	async (newId) => {
+		const { data: newProduct, onSuccess: onSuccessProduct } = useRequest(
+			getProductById(newId as string),
+		)
 
-    const { data: newOthersProducts, onSuccess: onSuccessOthersProducts } =
-      useRequest(getOthersProductsById(newId as string))
+		const { data: newOthersProducts, onSuccess: onSuccessOthersProducts } =
+			useRequest(getOthersProductsById(newId as string))
 
-    onSuccessProduct(() => {
-      product.value = newProduct.value
-    })
+		onSuccessProduct(() => {
+			product.value = newProduct.value
+		})
 
-    onSuccessOthersProducts(() => {
-      othersProducts.value = newOthersProducts.value
-    })
+		onSuccessOthersProducts(() => {
+			othersProducts.value = newOthersProducts.value
+		})
 
-    id.value = newId as string
-  },
+		id.value = newId as string
+	},
 )
 </script>
 
