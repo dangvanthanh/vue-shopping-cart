@@ -11,18 +11,18 @@
 		"prepare": "panda codegen"
 	},
 	"dependencies": {
-		"alova": "^2.18.3",
+		"alova": "^2.21.3",
 		"pinia": "^2.1.7",
-		"vue": "^3.4.21",
-		"vue-router": "^4.3.0"
+		"vue": "^3.4.30",
+		"vue-router": "^4.4.0"
 	},
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
-		"@pandacss/dev": "^0.37.2",
-		"@types/node": "^20.12.5",
-		"@vitejs/plugin-vue": "^5.0.4",
-		"typescript": "^5.4.4",
-		"vite": "^5.2.8",
-		"vue-tsc": "^2.0.11"
+		"@pandacss/dev": "^0.41.0",
+		"@types/node": "^20.14.8",
+		"@vitejs/plugin-vue": "^5.0.5",
+		"typescript": "^5.5.2",
+		"vite": "^5.3.1",
+		"vue-tsc": "^2.0.22"
 	}
 }

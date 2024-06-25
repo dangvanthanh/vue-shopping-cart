@@ -30,7 +30,7 @@ VITE_BASE_URL_API=http://localhost:8000
 then run command line
 
 ```shell
-$ turbo run dev --filter=web
+$ bun run dev --filter=@app/web
 ```
 
 ### Backend
@@ -46,13 +46,13 @@ APP_WRITE_API_KEY=
 Make sure everything is centralized in one place (`deps.ts`)
 
 ```shell
-$ turbo run deps --filter=server
+$ bun run deps --filter=@app/server
 ```
 
 then run command line:
 
 ```shell
-$ turbo run dev --filter=server
+$ bun run dev --filter=@app/server
 ```
 
 ## License

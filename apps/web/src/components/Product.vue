@@ -5,7 +5,7 @@ import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 
 defineProps<{
-	product: Product
+  product: Product
 }>()
 </script>
 
@@ -19,27 +19,27 @@ defineProps<{
   })
     ">
     <div :class="css({
-    display: 'block',
-    pos: 'relative',
-    h: '64',
-    overflow: 'hidden',
-    bg: 'gray.100',
-    rounded: 'xl',
-    p: 6,
-  })
-    ">
+      display: 'block',
+      pos: 'relative',
+      h: '64',
+      overflow: 'hidden',
+      bg: 'gray.100',
+      rounded: 'xl',
+      p: 6,
+    })
+      ">
       <img :src="product.thumbnail" loading="lazy" :class="css({ w: 'full', h: 'full', objectFit: 'contain' })" />
       <div :class="css({
-    pos: 'absolute',
-    top: 0,
-    right: 0,
-    m: 2,
-    p: 1,
-    bg: 'white',
-    rounded: 'sm',
-    color: product.favorite ? 'red.600' : 'gray.900',
-  })
-    ">
+        pos: 'absolute',
+        top: 0,
+        right: 0,
+        m: 2,
+        p: 1,
+        bg: 'white',
+        rounded: 'sm',
+        color: product.favorite ? 'red.600' : 'gray.900',
+      })
+        ">
         <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           :class="css({ w: '4', h: '4' })" viewBox="0 0 24 24">
           <path
@@ -49,38 +49,38 @@ defineProps<{
     </div>
     <div :class="css({ flex: '1' })">
       <h2 :class="css({
-    color: 'gray.900',
-    fontSize: 'base',
-    lineHeight: 'base',
-    fontWeight: 'medium',
-    mt: '3',
-    mb: '3',
-  })
-    ">
+        color: 'gray.900',
+        fontSize: 'base',
+        lineHeight: 'base',
+        fontWeight: 'medium',
+        mt: '3',
+        mb: '3',
+      })
+        ">
         {{ product.title }}
       </h2>
       <p :class="css({
-    mb: '3',
-    fontSize: 'lg',
-    lineHeight: '1',
-    fontWeight: 'semibold',
-    fontVariantNumeric: 'tabular-nums',
-  })
-    ">
+        mb: '3',
+        fontSize: 'lg',
+        lineHeight: '1',
+        fontWeight: 'semibold',
+        fontVariantNumeric: 'tabular-nums',
+      })
+        ">
         {{ formatcurrency(product.price) }}
       </p>
 
       <div :class="flex({ align: 'center', gap: 1 })">
         <template v-for="color in product.colors">
           <div :class="css({
-    w: 5,
-    h: 5,
-    rounded: 'full',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'gray.200',
-  })
-    " :style="{ backgroundColor: color }"></div>
+            w: 5,
+            h: 5,
+            rounded: 'full',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'gray.200',
+          })
+            " :style="{ backgroundColor: color }"></div>
         </template>
       </div>
     </div>

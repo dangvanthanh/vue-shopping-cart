@@ -8,6 +8,7 @@
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "turbo format",
+		"deps": "turbo deps",
 		"prepare": "husky"
 	},
 	"workspaces": ["apps/*", "packages/*"],
@@ -17,13 +18,13 @@
 	"engines": {
 		"node": "18.17.1"
 	},
-	"packageManager": "bun@1.1.2",
+	"packageManager": "bun@1.1.16",
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
 		"@apps/typescript-config": "workspace:*",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
-		"turbo": "^1.13.2"
+		"turbo": "^2.0.4"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,vue}": ["bun run lint", "bun run format"]

@@ -17,31 +17,31 @@ const id = ref(route.params.id as string)
 
 const { loading, data: product, error } = useRequest(getProductById(id.value))
 const {
-	loading: loadingOthersProducts,
-	data: othersProducts,
-	error: errorOthersProducts,
+  loading: loadingOthersProducts,
+  data: othersProducts,
+  error: errorOthersProducts,
 } = useRequest(getOthersProductsById(id.value))
 
 watch(
-	() => route.params.id,
-	async (newId) => {
-		const { data: newProduct, onSuccess: onSuccessProduct } = useRequest(
-			getProductById(newId as string),
-		)
+  () => route.params.id,
+  async (newId) => {
+    const { data: newProduct, onSuccess: onSuccessProduct } = useRequest(
+      getProductById(newId as string),
+    )
 
-		const { data: newOthersProducts, onSuccess: onSuccessOthersProducts } =
-			useRequest(getOthersProductsById(newId as string))
+    const { data: newOthersProducts, onSuccess: onSuccessOthersProducts } =
+      useRequest(getOthersProductsById(newId as string))
 
-		onSuccessProduct(() => {
-			product.value = newProduct.value
-		})
+    onSuccessProduct(() => {
+      product.value = newProduct.value
+    })
 
-		onSuccessOthersProducts(() => {
-			othersProducts.value = newOthersProducts.value
-		})
+    onSuccessOthersProducts(() => {
+      othersProducts.value = newOthersProducts.value
+    })
 
-		id.value = newId as string
-	},
+    id.value = newId as string
+  },
 )
 </script>
 
@@ -56,40 +56,29 @@ watch(
         <ProductDetail :product="product" />
       </template>
     </div>
-    <h2
-      :class="
-        css({
-          fontSize: '2xl',
-          fontWeight: '600',
-          mb: 8,
-        })
-      "
-    >
+    <h2 :class="css({
+      fontSize: '2xl',
+      fontWeight: '600',
+      mb: 8,
+    })
+      ">
       Others bike
     </h2>
-    <div
-      v-if="loadingOthersProducts"
-      :class="
-        grid({
-          columns: { base: 1, md: 2, lg: 3 },
-          gap: { base: 4, md: 5, lg: 6 },
-        })
-      "
-    >
+    <div v-if="loadingOthersProducts" :class="grid({
+      columns: { base: 1, md: 2, lg: 3 },
+      gap: { base: 4, md: 5, lg: 6 },
+    })
+      ">
       <template v-for="_ in 3">
         <ProductSkeleton />
       </template>
     </div>
     <div v-else-if="errorOthersProducts">{{ errorOthersProducts.message }}</div>
-    <div
-      v-if="othersProducts"
-      :class="
-        grid({
-          columns: { base: 1, md: 2, lg: 3 },
-          gap: { base: 4, md: 5, lg: 6 },
-        })
-      "
-    >
+    <div v-if="othersProducts" :class="grid({
+      columns: { base: 1, md: 2, lg: 3 },
+      gap: { base: 4, md: 5, lg: 6 },
+    })
+      ">
       <template v-for="otherProduct in othersProducts">
         <Product :product="otherProduct" />
       </template>
