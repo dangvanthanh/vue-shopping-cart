@@ -1,5 +1,7 @@
 {
-  "editor.formatOnSave": true,
-  "editor.inlayHints.enabled": "off",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": false
+	"editor.formatOnSave": true,
+	"editor.inlayHints.enabled": "off",
+	"typescript.tsserver.experimental.enableProjectDiagnostics": false,
+	"deno.enablePaths": ["../apps/server"],
+	"deno.enable": true
 }

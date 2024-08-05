@@ -1,5 +1,22 @@
 {
   "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@hono/hono@^4.5.3": "jsr:@hono/hono@4.5.3",
+      "npm:create-hono": "npm:create-hono@0.11.0"
+    },
+    "jsr": {
+      "@hono/hono@4.5.3": {
+        "integrity": "429923b2b3c6586a1450862328d61a1346fee5841e8ae86c494250475057213c"
+      }
+    },
+    "npm": {
+      "create-hono@0.11.0": {
+        "integrity": "sha512-JbWkO/3NqMC5qGXwpo6WnoA4Cwtl0QO+4VPYPCkXCM0StIuVaFrRYQ2VXvtMpyXdQQGU9/EGz1ZVh8UGLu+2Vw==",
+        "dependencies": {}
+      }
+    }
+  },
   "remote": {
     "https://deno.land/std@0.122.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.122.0/_util/os.ts": "dfb186cc4e968c770ab6cc3288bd65f4871be03b93beecae57d657232ecffcac",
@@ -291,10 +308,15 @@
       "dependencies": [
         "npm:husky@^9.0.11",
         "npm:lint-staged@^15.2.2",
-        "npm:turbo@^2.0.4"
+        "npm:turbo@^2.0.11"
       ]
     },
     "members": {
+      "apps/server": {
+        "dependencies": [
+          "jsr:@hono/hono@^4.5.3"
+        ]
+      },
       "apps/web": {
         "packageJson": {
           "dependencies": [

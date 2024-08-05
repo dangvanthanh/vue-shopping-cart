@@ -1,5 +1,5 @@
+import { Hono } from 'hono'
 import { categoriesData, productsData } from '../config/sampleDB.ts'
-import { Hono } from '../deps.ts'
 
 const products = new Hono()
 

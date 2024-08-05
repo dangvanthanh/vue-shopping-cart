@@ -9,6 +9,19 @@ const props = defineProps<{
 }>()
 
 const { loading, data: categories, error } = useRequest(getCategories)
+
+function getCategoryActive(isSameCategory: boolean) {
+	return {
+		display: 'inline-flex',
+		alignItems: 'center',
+		px: 4,
+		py: 1.5,
+		bg: isSameCategory ? 'gray.900' : 'gray.100',
+		color: isSameCategory ? 'white' : 'gray.700',
+		rounded: 'full',
+		fontSize: 'sm',
+	}
+}
 </script>
 
 <template>
@@ -39,14 +52,7 @@ const { loading, data: categories, error } = useRequest(getCategories)
     })
       ">
       <router-link to="/" :class="css({
-        display: 'inline-flex',
-        alignItems: 'center',
-        px: 5,
-        py: 1.5,
-        bg: props.category === '/' ? 'gray.900' : 'gray.100',
-        color: props.category === '/' ? 'white' : 'gray.700',
-        rounded: 'full',
-        fontSize: 'sm'
+        ...getCategoryActive(props.category === '/')
       })
         ">
         All
@@ -54,14 +60,7 @@ const { loading, data: categories, error } = useRequest(getCategories)
       <template v-if="categories">
         <template v-for="category in categories">
           <router-link :to="`/category/${category.slug}`" :class="css({
-            display: 'inline-flex',
-            alignItems: 'center',
-            px: 5,
-            py: 1.5,
-            bg: category.slug === props.category ? 'gray.900' : 'gray.100',
-            color: category.slug === props.category ? 'white' : 'gray.700',
-            rounded: 'full',
-            fontSize: 'sm'
+            ...getCategoryActive((category.slug === props.category))
           })
             ">
             {{ category.name }}

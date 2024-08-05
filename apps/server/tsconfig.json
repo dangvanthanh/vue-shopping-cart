@@ -3,7 +3,7 @@
 	"include": ["**/*"],
 	"references": [],
 	"compilerOptions": {
-		"target": "es2022",
-		"module": "nodenext"
+		"target": "ESNext",
+		"lib": ["ESNext"]
 	}
 }
