@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getCategories } from '@/api'
-import { useRequest } from 'alova'
+import { useRequest } from 'alova/client'
 import { css } from '../../styled-system/css'
 import { flex } from '../../styled-system/patterns'
 

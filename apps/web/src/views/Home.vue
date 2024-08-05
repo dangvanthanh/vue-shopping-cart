@@ -3,7 +3,7 @@ import { getProducts } from '@/api'
 import Product from '@/components/Product.vue'
 import ProductSkeleton from '@/components/ProductSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
-import { useRequest } from 'alova'
+import { useRequest } from 'alova/client'
 import { css } from '../../styled-system/css'
 import { grid } from '../../styled-system/patterns'
 

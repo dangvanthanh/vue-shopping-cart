@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { Conditional } from './conditions';
+import type { ConditionalValue } from './conditions';
 import type { CssProperties } from './system-types';
 import type { Tokens } from '../tokens/index';
 
@@ -7,16 +7,16 @@ export interface UtilityValues {
 	aspectRatio: Tokens["aspectRatios"];
 	top: Tokens["spacing"];
 	left: Tokens["spacing"];
+	inset: "auto" | Tokens["spacing"];
 	insetInline: Tokens["spacing"];
 	insetBlock: Tokens["spacing"];
-	inset: "auto" | Tokens["spacing"];
 	insetBlockEnd: Tokens["spacing"];
 	insetBlockStart: Tokens["spacing"];
 	insetInlineEnd: Tokens["spacing"];
 	insetInlineStart: Tokens["spacing"];
 	right: Tokens["spacing"];
 	bottom: Tokens["spacing"];
-	float: "left" | "right" | "start" | "end";
+	float: "start" | "end" | CssProperties["float"];
 	hideFrom: Tokens["breakpoints"];
 	hideBelow: Tokens["breakpoints"];
 	flexBasis: Tokens["spacing"] | "1/2" | "1/3" | "2/3" | "1/4" | "2/4" | "3/4" | "1/5" | "2/5" | "3/5" | "4/5" | "1/6" | "2/6" | "3/6" | "4/6" | "5/6" | "1/12" | "2/12" | "3/12" | "4/12" | "5/12" | "6/12" | "7/12" | "8/12" | "9/12" | "10/12" | "11/12" | "full";
@@ -146,6 +146,7 @@ export interface UtilityValues {
 	transitionDuration: Tokens["durations"];
 	transition: "all" | "common" | "background" | "colors" | "opacity" | "shadow" | "transform";
 	animation: Tokens["animations"];
+	animationName: "spin" | "ping" | "pulse" | "bounce";
 	animationTimingFunction: Tokens["easings"];
 	animationDuration: Tokens["durations"];
 	animationDelay: Tokens["durations"];
@@ -161,6 +162,9 @@ export interface UtilityValues {
 	accentColor: Tokens["colors"];
 	caretColor: Tokens["colors"];
 	scrollbar: "visible" | "hidden";
+	scrollbarColor: Tokens["colors"];
+	scrollbarGutter: Tokens["spacing"];
+	scrollbarWidth: Tokens["sizes"];
 	scrollMargin: Tokens["spacing"];
 	scrollMarginLeft: Tokens["spacing"];
 	scrollMarginRight: Tokens["spacing"];
@@ -206,7 +210,7 @@ type WithColorOpacityModifier<T> = T extends string ? `${T}/${string}` : T
 type ImportantMark = "!" | "!important"
 type WhitespaceImportant = ` ${ImportantMark}`
 type Important = ImportantMark | WhitespaceImportant
-type WithImportant<T> = T extends string ? `${T}${Important}${string}` : T
+type WithImportant<T> = T extends string ? `${T}${Important}` & { __important?: true } : T;
 
 /**
  * Only relevant when using `strictTokens` or `strictPropertyValues` in your config.
@@ -224,7 +228,7 @@ type WithImportant<T> = T extends string ? `${T}${Important}${string}` : T
  * @see https://panda-css.com/docs/concepts/writing-styles#stricttokens
  * @see https://panda-css.com/docs/concepts/writing-styles#strictpropertyvalues
  */
-export type WithEscapeHatch<T> = T | `[${string}]` | (T extends string ? WithColorOpacityModifier<string> | WithImportant<T> : T)
+export type WithEscapeHatch<T> = T | `[${string}]` | WithColorOpacityModifier<T> | WithImportant<T>
 
 /**
  * Will restrict the value of properties that have predefined values to those values only.

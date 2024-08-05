@@ -180,7 +180,7 @@ function createCss(context) {
   });
 }
 function compactStyles(...styles) {
-  return styles.filter((style) => isObject(style) && Object.keys(compact(style)).length > 0);
+  return styles.flat().filter((style) => isObject(style) && Object.keys(compact(style)).length > 0);
 }
 function createMergeCss(context) {
   function resolve(styles) {
@@ -229,7 +229,7 @@ var patternFns = {
   isCssUnit
 };
 var getPatternStyles = (pattern, styles) => {
-  if (!pattern.defaultValues)
+  if (!pattern?.defaultValues)
     return styles;
   const defaults = typeof pattern.defaultValues === "function" ? pattern.defaultValues(styles) : pattern.defaultValues;
   return Object.assign({}, defaults, compact(styles));
