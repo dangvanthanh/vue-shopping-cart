@@ -12,7 +12,7 @@ const { loading, data: categories, error } = useRequest(getCategories)
 </script>
 
 <template>
-  <div :class="css({ py: '5' })">
+  <div>
     <div v-if="loading" :class="flex({ align: 'center', gap: 3 })">
       <template v-for="_ in 3">
         <div :class="css({
@@ -36,7 +36,6 @@ const { loading, data: categories, error } = useRequest(getCategories)
       gap: 3,
       overflowX: 'auto',
       whiteSpace: 'nowrap',
-      pb: 4,
     })
       ">
       <router-link to="/" :class="css({
@@ -47,6 +46,7 @@ const { loading, data: categories, error } = useRequest(getCategories)
         bg: props.category === '/' ? 'gray.900' : 'gray.100',
         color: props.category === '/' ? 'white' : 'gray.700',
         rounded: 'full',
+        fontSize: 'sm'
       })
         ">
         All
@@ -61,6 +61,7 @@ const { loading, data: categories, error } = useRequest(getCategories)
             bg: category.slug === props.category ? 'gray.900' : 'gray.100',
             color: category.slug === props.category ? 'white' : 'gray.700',
             rounded: 'full',
+            fontSize: 'sm'
           })
             ">
             {{ category.name }}
