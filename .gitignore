@@ -37,5 +37,6 @@ yarn-error.log*
 .DS_Store
 *.pem
 
-# PandaCSS
+## Panda
 styled-system
+styled-system-studio
