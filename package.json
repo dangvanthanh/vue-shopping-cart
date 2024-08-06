@@ -18,12 +18,12 @@
 	"engines": {
 		"node": "18.17.1"
 	},
-	"packageManager": "bun@1.1.16",
+	"packageManager": "bun@1.1.21",
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
 		"@apps/typescript-config": "workspace:*",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.2",
+		"husky": "^9.1.4",
+		"lint-staged": "^15.2.8",
 		"turbo": "^2.0.11"
 	},
 	"lint-staged": {

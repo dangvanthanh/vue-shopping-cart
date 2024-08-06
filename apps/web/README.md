@@ -1,3 +1,3 @@
 # Vue
 
-A Vue application using Vite, powered by Moon.
+A Vue application using Vite, powered by Turborepo.
