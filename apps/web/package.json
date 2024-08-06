@@ -7,8 +7,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"lint": "biome check ./src",
-		"format": "biome format ./src --write",
-		"prepare": "panda codegen"
+		"format": "biome format ./src --write"
 	},
 	"dependencies": {
 		"alova": "^3.0.5",
@@ -22,6 +21,7 @@
 		"@types/node": "^22.1.0",
 		"@vitejs/plugin-vue": "^5.1.2",
 		"typescript": "^5.5.4",
+		"unplugin-vue-router": "^0.10.2",
 		"vite": "^5.3.5",
 		"vue-tsc": "^2.0.29"
 	}

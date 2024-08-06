@@ -23,9 +23,16 @@
 		/* Paths */
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@/styled-system/*": ["./styled-system/*"]
 		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"styled-system/**/*",
+		"./typed-router.d.ts"
+	],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

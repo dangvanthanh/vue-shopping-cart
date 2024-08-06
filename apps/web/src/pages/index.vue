@@ -12,7 +12,7 @@ const { loading, data: products, error } = useRequest(getProducts)
 
 <template>
   <BaseLayout>
-    <h2 :class="css({fontSize: '3xl', lineHeight: 1, fontWeight: 600, mb: 6, mt: 2})">All Bikes</h2>
+    <h2 :class="css({ fontSize: '3xl', lineHeight: 1, fontWeight: 600, mb: 6, mt: 2 })">All Bikes</h2>
     <div v-if="loading" :class="grid({
       columns: { base: 1, md: 2, lg: 3 },
       gap: { base: 4, md: 5, lg: 6 },

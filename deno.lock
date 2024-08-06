@@ -326,6 +326,7 @@
             "npm:alova@^3.0.5",
             "npm:pinia@^2.2.0",
             "npm:typescript@^5.5.4",
+            "npm:unplugin-vue-router@^0.10.2",
             "npm:vite@^5.3.5",
             "npm:vue-router@^4.4.2",
             "npm:vue-tsc@^2.0.29",
