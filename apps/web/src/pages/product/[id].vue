@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { getOthersProductsById, getProductById } from '@/api'
-import Product from '@/components/Product.vue'
-import ProductDetail from '@/components/ProductDetail.vue'
-import ProductDetailSkeleton from '@/components/ProductDetailSkeleton.vue'
-import ProductSkeleton from '@/components/ProductSkeleton.vue'
+import ProductDetail from '@/components/product/Detail.vue'
+import ProductDetailSkeleton from '@/components/product/DetailSkeleton.vue'
+import ProductItem from '@/components/product/Item.vue'
+import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { css } from '@styled-system/css'
 import { grid } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
+import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -18,23 +19,36 @@ const {
 	loading: loadingProduct,
 	data: product,
 	error: errorProduct,
-	onSuccess: onSuccessProduct,
 } = useRequest(() => getProductById(id))
 
 const {
 	loading: loadingOthersProducts,
 	data: othersProducts,
 	error: errorOthersProducts,
-	onSuccess: onSuccessOthersProducts,
 } = useRequest(() => getOthersProductsById(id))
 
-onSuccessProduct((response) => {
-	product.value = response.data
-})
+watch(
+	() => route.params.id,
+	(newId) => {
+		const newSlugId = newId as unknown as string
 
-onSuccessOthersProducts((response) => {
-	othersProducts.value = response.data
-})
+		const { onSuccess: onSuccessProduct } = useRequest(() =>
+			getProductById(newSlugId),
+		)
+
+		const { onSuccess: onSuccessOthersProducts } = useRequest(() =>
+			getOthersProductsById(newSlugId),
+		)
+
+		onSuccessProduct((response) => {
+			product.value = response.data
+		})
+
+		onSuccessOthersProducts((response) => {
+			othersProducts.value = response.data
+		})
+	},
+)
 </script>
 
 <template>
@@ -62,7 +76,7 @@ onSuccessOthersProducts((response) => {
     })
       ">
       <template v-for="_ in 3">
-        <ProductSkeleton />
+        <ProductItemSkeleton />
       </template>
     </div>
     <div v-else-if="errorOthersProducts">{{ errorOthersProducts.message }}</div>
@@ -72,7 +86,7 @@ onSuccessOthersProducts((response) => {
     })
       ">
       <template v-for="otherProduct in othersProducts">
-        <Product :product="otherProduct" />
+        <ProductItem :product="otherProduct" />
       </template>
     </div>
   </BaseLayout>

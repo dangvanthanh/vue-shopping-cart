@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { formatcurrency } from '@/lib'
+import { useCartStore } from '@/store'
 import type { Product } from '@/types'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
@@ -7,6 +8,8 @@ import { flex } from '@styled-system/patterns'
 defineProps<{
 	product: Product
 }>()
+
+const { addToCart } = useCartStore()
 
 const fillStar = (n: number, rating: number) => {
 	return n <= rating ? 'currentColor' : 'none'
@@ -128,7 +131,7 @@ const fillStar = (n: number, rating: number) => {
             borderColor: 'gray.900',
             cursor: 'pointer',
           })
-            ">
+            " @click="addToCart(product)">
             Add To Cart
           </button>
         </div>

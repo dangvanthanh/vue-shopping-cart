@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getCategories, getProductsByCategory } from '@/api'
-import Product from '@/components/Product.vue'
-import ProductSkeleton from '@/components/ProductSkeleton.vue'
+import ProductItem from '@/components/product/Item.vue'
+import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { css } from '@styled-system/css'
 import { grid } from '@styled-system/patterns'
@@ -22,9 +22,9 @@ const { data: categories } = useRequest(getCategories)
 watch(
 	() => route.params.category,
 	(newCategory) => {
-		const newCat = newCategory as unknown as string
+		const newSlugCategory = newCategory as unknown as string
 
-		const { onSuccess } = useRequest(getProductsByCategory(newCat))
+		const { onSuccess } = useRequest(getProductsByCategory(newSlugCategory))
 
 		onSuccess((response) => {
 			products.value = response.data
@@ -44,7 +44,7 @@ watch(
     })
       ">
       <template v-for="_ in 6">
-        <ProductSkeleton />
+        <ProductItemSkeleton />
       </template>
     </div>
     <div v-else-if="errorProducts">{{ errorProducts.message }}</div>
@@ -55,7 +55,7 @@ watch(
       })
         ">
         <template v-for="product in products">
-          <Product :product="product" />
+          <ProductItem :product="product" />
         </template>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Container from '@/components/Container.vue'
-import Footer from '@/components/Footer.vue'
-import Header from '@/components/Header.vue'
+import Container from '@/components/shared/Container.vue'
+import Footer from '@/components/shared/Footer.vue'
+import Header from '@/components/shared/Header.vue'
 import { css } from '@styled-system/css'
 </script>
 

@@ -9,3 +9,7 @@ export type Product = {
 	colors: string[]
 	favorite: number
 }
+
+export type ProductCart = Product & {
+	quanlity: number
+}

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getProducts } from '@/api'
-import Product from '@/components/Product.vue'
-import ProductSkeleton from '@/components/ProductSkeleton.vue'
+import ProductItem from '@/components/product/Item.vue'
+import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { css } from '@styled-system/css'
 import { grid } from '@styled-system/patterns'
@@ -19,7 +19,7 @@ const { loading, data: products, error } = useRequest(getProducts)
     })
       ">
       <template v-for="_ in 6">
-        <ProductSkeleton />
+        <ProductItemSkeleton />
       </template>
     </div>
     <div v-else-if="error">{{ error.message }}</div>
@@ -30,7 +30,7 @@ const { loading, data: products, error } = useRequest(getProducts)
       })
         ">
         <template v-for="product in products">
-          <Product :product="product" />
+          <ProductItem :product="product" />
         </template>
       </div>
     </template>
