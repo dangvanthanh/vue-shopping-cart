@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { formatcurrency } from '@/lib'
 import type { Product } from '@/types'
-import { css } from '../../styled-system/css'
-import { flex } from '../../styled-system/patterns'
+import { css } from '@styled-system/css'
+import { flex } from '@styled-system/patterns'
 
 defineProps<{
 	product: Product

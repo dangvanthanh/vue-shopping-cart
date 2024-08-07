@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { css } from '../../styled-system/css'
+import { css } from '@styled-system/css'
 import Container from './Container.vue'
 
 const year = new Date().getFullYear()

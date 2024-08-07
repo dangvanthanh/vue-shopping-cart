@@ -3,9 +3,9 @@ import { getProducts } from '@/api'
 import Product from '@/components/Product.vue'
 import ProductSkeleton from '@/components/ProductSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
+import { css } from '@styled-system/css'
+import { grid } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
-import { css } from '../../styled-system/css'
-import { grid } from '../../styled-system/patterns'
 
 const { loading, data: products, error } = useRequest(getProducts)
 </script>

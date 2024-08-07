@@ -2,7 +2,7 @@
 import Container from '@/components/Container.vue'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
-import { css } from '../../styled-system/css'
+import { css } from '@styled-system/css'
 </script>
 
 <template>

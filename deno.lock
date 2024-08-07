@@ -14,8 +14,8 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:husky@^9.0.11",
-        "npm:lint-staged@^15.2.2",
+        "npm:husky@^9.1.4",
+        "npm:lint-staged@^15.2.8",
         "npm:turbo@^2.0.11"
       ]
     },

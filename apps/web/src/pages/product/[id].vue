@@ -5,10 +5,10 @@ import ProductDetail from '@/components/ProductDetail.vue'
 import ProductDetailSkeleton from '@/components/ProductDetailSkeleton.vue'
 import ProductSkeleton from '@/components/ProductSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
+import { css } from '@styled-system/css'
+import { grid } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
 import { useRoute } from 'vue-router'
-import { css } from '../../../styled-system/css'
-import { grid } from '../../../styled-system/patterns'
 
 const route = useRoute()
 

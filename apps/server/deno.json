@@ -1,5 +1,6 @@
 {
 	"imports": {
+		"@/": "./src/",
 		"hono": "jsr:@hono/hono@^4.5.3"
 	},
 	"tasks": {
