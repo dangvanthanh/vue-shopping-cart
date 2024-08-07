@@ -16,7 +16,7 @@
       "dependencies": [
         "npm:husky@^9.1.4",
         "npm:lint-staged@^15.2.8",
-        "npm:turbo@^2.0.11"
+        "npm:turbo@^2.0.12"
       ]
     },
     "members": {
@@ -28,17 +28,17 @@
       "apps/web": {
         "packageJson": {
           "dependencies": [
-            "npm:@pandacss/dev@^0.44.0",
+            "npm:@pandacss/dev@^0.45.0",
             "npm:@types/node@^22.1.0",
             "npm:@vitejs/plugin-vue@^5.1.2",
             "npm:alova@^3.0.5",
-            "npm:pinia@^2.2.0",
+            "npm:pinia@^2.2.1",
             "npm:typescript@^5.5.4",
             "npm:unplugin-vue-router@^0.10.2",
             "npm:vite@^5.3.5",
-            "npm:vue-router@^4.4.2",
+            "npm:vue-router@^4.4.3",
             "npm:vue-tsc@^2.0.29",
-            "npm:vue@^3.4.35"
+            "npm:vue@^3.4.36"
           ]
         }
       },

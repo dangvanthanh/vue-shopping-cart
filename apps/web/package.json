@@ -12,13 +12,13 @@
 	},
 	"dependencies": {
 		"alova": "^3.0.5",
-		"pinia": "^2.2.0",
-		"vue": "^3.4.35",
-		"vue-router": "^4.4.2"
+		"pinia": "^2.2.1",
+		"vue": "^3.4.36",
+		"vue-router": "^4.4.3"
 	},
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
-		"@pandacss/dev": "^0.44.0",
+		"@pandacss/dev": "^0.45.0",
 		"@types/node": "^22.1.0",
 		"@vitejs/plugin-vue": "^5.1.2",
 		"typescript": "^5.5.4",

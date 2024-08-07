@@ -24,7 +24,7 @@
 		"@apps/typescript-config": "workspace:*",
 		"husky": "^9.1.4",
 		"lint-staged": "^15.2.8",
-		"turbo": "^2.0.11"
+		"turbo": "^2.0.12"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,vue}": ["bun run lint", "bun run format"]
