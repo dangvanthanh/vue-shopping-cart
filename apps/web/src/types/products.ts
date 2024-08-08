@@ -11,5 +11,5 @@ export type Product = {
 }
 
 export type ProductCart = Product & {
-	quanlity: number
+	quantity: number
 }

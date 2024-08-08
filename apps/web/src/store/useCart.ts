@@ -6,13 +6,12 @@ export const useCartStore = defineStore('cart', () => {
 	const cart = ref<ProductCart[]>([])
 
 	function addToCart(product: Product) {
-		const newProduct = Object.assign({}, product) as ProductCart
-		const productExist = cart.value.find((c) => c.id === newProduct.id)
+		const productExist = cart.value.find((c) => c.id === product.id)
 
 		if (productExist) {
-			productExist.quanlity += 1
+			productExist.quantity += 1
 		} else {
-			newProduct.quanlity = 1
+			const newProduct: ProductCart = { ...product, quantity: 1 }
 			cart.value.push(newProduct)
 		}
 	}

@@ -27,9 +27,8 @@ const { removeFromCart } = useCartStore()
         {{ product.description }}
       </p>
       <div :class="flex({ align: 'center', justify: 'space-between' })">
+        <p :class="css({ color: 'gray.500' })">Quantity: {{ product.quantity }}</p>
         <p>{{ formatcurrency(product.price) }}</p>
-        <p>
-          {{ product.quanlity }}</p>
       </div>
     </div>
     <div :class="css({ mt: '2px' })">

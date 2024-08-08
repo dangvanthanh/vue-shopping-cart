@@ -7,7 +7,7 @@ import { formatcurrency } from '@/lib'
 import { useCartStore } from '@/store'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import Categories from './Categories.vue'
 import Container from './Container.vue'
@@ -16,9 +16,14 @@ const { cart } = useCartStore()
 const isOpenMenu = ref(false)
 const isOpenCart = ref(false)
 const route = useRoute()
+
 const category = ref(
 	route.fullPath === '/' ? '/' : (route.params.category as string),
 )
+
+const total = computed(() => {
+	return cart.reduce((prev, curr) => prev + curr.price * curr.quantity, 0)
+})
 
 onMounted(() => {
 	onResize()
@@ -160,7 +165,7 @@ function onResize() {
               ">
               <router-link to="/">S</router-link>
             </h1>
-            <Categories :category="category" />
+            <Categories :category="category || '/'" />
             <nav
               :class="flex({ gap: 3, mt: 6, direction: 'column', align: 'center', justify: 'end', md: { flexDirection: 'row', mt: 0 } })">
               <button type="button" :class="css({
@@ -246,18 +251,17 @@ function onResize() {
               <template v-if="cart.length">
                 <div :class="flex({ direction: 'column', w: 'full', h: 'full' })">
                   <div
-                    :class="flex({ direction: 'column', overflowY: 'auto', gap: 2, maxH: 'calc(100vh - 12rem)', py: 6 })">
+                    :class="flex({ direction: 'column', overflowY: 'auto', gap: 2, maxH: 'calc(100vh - 12rem)', py: 4 })">
                     <template v-for="product in cart">
                       <ProductCart :product="product" />
                     </template>
                   </div>
                   <div :class="css({ pb: 4 })">
-                    <h3 :class="css({ fontSize: 'xl', fontWeight: 500 })">Order summary</h3>
                     <div :class="flex({ justify: 'space-between', my: 2 })">
-                      <div>Order total</div>
-                      <div :class="css({ fontSize: 'xl', fontWeight: 500 })">{{ formatcurrency(cart.reduce((prev,
-                        curr) => prev +
-                        curr.price * curr.quanlity, 0)) }}</div>
+                      <div :class="css({ fontSize: 'xl', fontWeight: 500 })">Total</div>
+                      <div :class="css({ fontSize: 'xl', fontWeight: 500 })">
+                        {{ formatcurrency(total) }}
+                      </div>
                     </div>
                     <button type="button" :class="css({
                       w: 'full',
