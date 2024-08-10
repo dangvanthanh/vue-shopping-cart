@@ -4,16 +4,14 @@ import ProductDetail from '@/components/product/Detail.vue'
 import ProductDetailSkeleton from '@/components/product/DetailSkeleton.vue'
 import ProductItem from '@/components/product/Item.vue'
 import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
+import { useParam } from '@/composables'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { css } from '@styled-system/css'
 import { grid } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
 import { watch } from 'vue'
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
-
-const { id } = route.params
+const id = useParam('id')
 
 const {
 	loading: loadingProduct,
@@ -28,7 +26,7 @@ const {
 } = useRequest(() => getOthersProductsById(id))
 
 watch(
-	() => route.params.id,
+	() => useParam('id'),
 	(newId) => {
 		const newSlugId = newId as unknown as string
 

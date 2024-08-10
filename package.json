@@ -18,7 +18,7 @@
 	"engines": {
 		"node": "18.17.1"
 	},
-	"packageManager": "bun@1.1.21",
+	"packageManager": "bun@1.1.22",
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
 		"@apps/typescript-config": "workspace:*",
