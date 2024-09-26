@@ -2,14 +2,16 @@
 import { getCategories, getProductsByCategory } from '@/api'
 import ProductItem from '@/components/product/Item.vue'
 import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
-import { useParam } from '@/composables'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { css } from '@styled-system/css'
 import { grid } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
 import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
-const category = useParam('category')
+const route = useRoute()
+
+const category = route.params.category
 
 const {
 	loading: loadingProducts,
@@ -19,9 +21,10 @@ const {
 const { data: categories } = useRequest(getCategories)
 
 watch(
-	() => useParam('category'),
+	() => route.params.category,
 	(newCategory) => {
 		const newSlugCategory = newCategory as unknown as string
+		console.log(newSlugCategory)
 
 		const { onSuccess } = useRequest(getProductsByCategory(newSlugCategory))
 
