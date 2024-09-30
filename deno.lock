@@ -14,9 +14,9 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:husky@^9.1.4",
-        "npm:lint-staged@^15.2.8",
-        "npm:turbo@^2.0.12"
+        "npm:husky@^9.1.6",
+        "npm:lint-staged@^15.2.10",
+        "npm:turbo@^2.1.2"
       ]
     },
     "members": {
@@ -29,16 +29,16 @@
         "packageJson": {
           "dependencies": [
             "npm:@pandacss/dev@^0.46.1",
-            "npm:@types/node@^22.7.2",
+            "npm:@types/node@^22.7.4",
             "npm:@vitejs/plugin-vue@^5.1.4",
-            "npm:alova@^3.0.16",
-            "npm:pinia@^2.2.2",
+            "npm:alova@^3.0.17",
+            "npm:pinia@^2.2.3",
             "npm:typescript@^5.6.2",
             "npm:unplugin-vue-router@^0.10.8",
             "npm:vite@^5.4.8",
             "npm:vue-router@^4.4.5",
             "npm:vue-tsc@^2.1.6",
-            "npm:vue@^3.5.8"
+            "npm:vue@^3.5.10"
           ]
         }
       },

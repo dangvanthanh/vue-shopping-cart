@@ -11,15 +11,15 @@
 		"format": "biome format ./src --write"
 	},
 	"dependencies": {
-		"alova": "^3.0.16",
-		"pinia": "^2.2.2",
-		"vue": "^3.5.8",
+		"alova": "^3.0.17",
+		"pinia": "^2.2.3",
+		"vue": "^3.5.10",
 		"vue-router": "^4.4.5"
 	},
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
 		"@pandacss/dev": "^0.46.1",
-		"@types/node": "^22.7.2",
+		"@types/node": "^22.7.4",
 		"@vitejs/plugin-vue": "^5.1.4",
 		"typescript": "^5.6.2",
 		"unplugin-vue-router": "^0.10.8",
