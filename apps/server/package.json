@@ -1,5 +1,5 @@
 {
-	"name": "@apps/api",
+	"name": "@apps/server",
 	"version": "1.0.0",
 	"description": "Simple shopping cart with Vue.js and Deno.js",
 	"scripts": {
