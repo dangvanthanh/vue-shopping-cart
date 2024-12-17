@@ -9,7 +9,7 @@ products
 		const category = c.req.param('category')
 		const newCatategory = categoriesData.find((cat) => cat.slug === category)
 		const newProducts = productsData.filter(
-			(product) => product.category === newCatategory.id,
+			(product) => product.category === newCatategory?.id,
 		)
 
 		return c.json({

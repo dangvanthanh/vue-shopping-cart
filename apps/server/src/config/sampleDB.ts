@@ -1,4 +1,6 @@
-export const productsSample = new Map<string, Record<string, unknown>>()
+import type { Category, Product } from '@/types/index.ts'
+
+export const productsSample = new Map<string, Product>()
 
 productsSample.set('1', {
 	id: '1',
@@ -238,7 +240,7 @@ productsSample.set('20', {
 	favorite: 1,
 })
 
-export const categoriesSample = new Map<string, unknown>()
+export const categoriesSample = new Map<string, Category>()
 
 categoriesSample.set('2', {
 	id: '2',
