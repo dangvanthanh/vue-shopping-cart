@@ -29,9 +29,10 @@ function getCategoryActive(isSameCategory: boolean) {
 </script>
 
 <template>
-  <div v-if="loading" :class="flex({ align: 'center', gap: 3 })">
-    <template v-for="_ in 3">
-      <div :class="css({
+	<div v-if="loading" :class="flex({ align: 'center', gap: 3 })">
+		<template v-for="_ in 3">
+			<div
+				:class="css({
         display: 'inline-flex',
         alignItems: 'center',
         px: 5,
@@ -41,13 +42,16 @@ function getCategoryActive(isSameCategory: boolean) {
         rounded: 'full',
         minW: '28',
       })
-        ">
-        &nbsp;
-      </div>
-    </template>
-  </div>
-  <div v-else-if="error">{{ error.message }}</div>
-  <div v-else :class="flex({
+        "
+			>
+				&nbsp;
+			</div>
+		</template>
+	</div>
+	<div v-else-if="error">{{ error.message }}</div>
+	<div
+		v-else
+		:class="flex({
     direction: 'column',
     align: 'start',
     gap: 3,
@@ -61,22 +65,29 @@ function getCategoryActive(isSameCategory: boolean) {
       mt: 0
     }
   })
-    ">
-    <router-link to="/" :class="css({
+    "
+	>
+		<router-link
+			to="/"
+			:class="css({
       ...getCategoryActive(props.category === '/')
     })
-      ">
-      All
-    </router-link>
-    <template v-if="categories">
-      <template v-for="category in categories">
-        <router-link :to="`/category/${category.slug}`" :class="css({
+      "
+		>
+			All
+		</router-link>
+		<template v-if="categories">
+			<template v-for="category in categories">
+				<router-link
+					:to="`/category/${category.slug}`"
+					:class="css({
           ...getCategoryActive((category.slug === props.category))
         })
-          ">
-          {{ category.name }}
-        </router-link>
-      </template>
-    </template>
-  </div>
+          "
+				>
+					{{ category.name }}
+				</router-link>
+			</template>
+		</template>
+	</div>
 </template>

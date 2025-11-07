@@ -6,11 +6,11 @@ import { css } from '@styled-system/css'
 </script>
 
 <template>
-  <Header />
-  <main role="main" :class="css({ py: 6 })">
-    <Container>
-      <slot />
-    </Container>
-  </main>
-  <Footer />
+	<Header/>
+	<main role="main" :class="css({ py: 6 })">
+		<Container>
+			<slot/>
+		</Container>
+	</main>
+	<Footer/>
 </template>

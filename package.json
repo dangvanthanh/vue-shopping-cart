@@ -18,13 +18,13 @@
 	"engines": {
 		"node": "18.17.1"
 	},
-	"packageManager": "bun@1.1.38",
+	"packageManager": "bun@1.3.1",
 	"devDependencies": {
 		"@apps/biome-config": "workspace:*",
 		"@apps/typescript-config": "workspace:*",
 		"husky": "^9.1.7",
-		"lint-staged": "^15.2.11",
-		"turbo": "^2.3.3"
+		"lint-staged": "^16.2.6",
+		"turbo": "^2.6.0"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,vue}": ["bun run lint", "bun run format"]

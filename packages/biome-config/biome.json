@@ -1,18 +1,54 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "single",
-			"semicolons": "asNeeded"
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true
+    },
+    "experimentalFullSupportEnabled": true
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded"
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/*.vue"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off",
+            "useHookAtTopLevel": "off"
+          }
+        }
+      }
+    }
+  ]
 }

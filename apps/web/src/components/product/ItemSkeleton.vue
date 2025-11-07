@@ -4,15 +4,18 @@ import { flex } from '@styled-system/patterns'
 </script>
 
 <template>
-  <div :class="flex({
+	<div
+		:class="flex({
     w: 'full',
     bgColor: 'white',
     pb: '5',
     direction: 'column',
     overflow: 'hidden',
   })
-    ">
-    <div :class="css({
+    "
+	>
+		<div
+			:class="css({
       display: 'block',
       pos: 'relative',
       h: '64',
@@ -21,19 +24,23 @@ import { flex } from '@styled-system/patterns'
       rounded: 'xl',
       p: 6,
     })
-      ">
-      <div :class="css({
+      "
+		>
+			<div
+				:class="css({
         w: 'full',
         h: 'full',
         objectFit: 'contain',
         bg: 'gray.100',
       })
-        ">
-        &nbsp;
-      </div>
-    </div>
-    <div :class="css({ flex: '1' })">
-      <h2 :class="css({
+        "
+			>
+				&nbsp;
+			</div>
+		</div>
+		<div :class="css({ flex: '1' })">
+			<h2
+				:class="css({
         color: 'gray.900',
         fontSize: 'base',
         lineHeight: 'base',
@@ -42,10 +49,12 @@ import { flex } from '@styled-system/patterns'
         mb: '3',
         bg: 'gray.100',
       })
-        ">
-        &nbsp;
-      </h2>
-      <p :class="css({
+        "
+			>
+				&nbsp;
+			</h2>
+			<p
+				:class="css({
         mb: '3',
         fontSize: 'lg',
         lineHeight: '1',
@@ -54,13 +63,15 @@ import { flex } from '@styled-system/patterns'
         bg: 'gray.100',
         w: '1/2',
       })
-        ">
-        &nbsp;
-      </p>
+        "
+			>
+				&nbsp;
+			</p>
 
-      <div :class="flex({ align: 'center', gap: 1 })">
-        <template v-for="_ in 2">
-          <div :class="css({
+			<div :class="flex({ align: 'center', gap: 1 })">
+				<template v-for="_ in 2">
+					<div
+						:class="css({
             w: 5,
             h: 5,
             rounded: 'full',
@@ -69,9 +80,10 @@ import { flex } from '@styled-system/patterns'
             borderColor: 'gray.200',
             bg: 'gray.100',
           })
-            "></div>
-        </template>
-      </div>
-    </div>
-  </div>
+            "
+					></div>
+				</template>
+			</div>
+		</div>
+	</div>
 </template>

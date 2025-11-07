@@ -36,30 +36,39 @@ watch(
 </script>
 
 <template>
-  <BaseLayout>
-    <h2 :class="css({ fontSize: '3xl', lineHeight: 1, fontWeight: 600, mb: 6, mt: 2 })" v-if="categories">
-      {{ categories.find(c => c.slug === category)?.name }}
-    </h2>
-    <div v-if="loadingProducts" :class="grid({
+	<BaseLayout>
+		<h2
+			:class="css({ fontSize: '3xl', lineHeight: 1, fontWeight: 600, mb: 6, mt: 2 })"
+			v-if="categories"
+		>
+			{{ categories.find(c => c.slug === category)?.name }}
+		</h2>
+		<div
+			v-if="loadingProducts"
+			:class="grid({
       columns: { base: 1, md: 2, lg: 3 },
       gap: { base: 4, md: 5, lg: 6 },
     })
-      ">
-      <template v-for="_ in 6">
-        <ProductItemSkeleton />
-      </template>
-    </div>
-    <div v-else-if="errorProducts">{{ errorProducts.message }}</div>
-    <div v-else>
-      <div v-if="products" :class="grid({
+      "
+		>
+			<template v-for="_ in 6">
+				<ProductItemSkeleton/>
+			</template>
+		</div>
+		<div v-else-if="errorProducts">{{ errorProducts.message }}</div>
+		<div v-else>
+			<div
+				v-if="products"
+				:class="grid({
         columns: { base: 1, md: 2, lg: 3 },
         gap: { base: 4, md: 5, lg: 6 },
       })
-        ">
-        <template v-for="product in products">
-          <ProductItem :product="product" />
-        </template>
-      </div>
-    </div>
-  </BaseLayout>
+        "
+			>
+				<template v-for="product in products">
+					<ProductItem :product="product"/>
+				</template>
+			</div>
+		</div>
+	</BaseLayout>
 </template>
