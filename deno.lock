@@ -1,54 +1,53 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@hono/hono@^4.6.14": "4.6.14",
-    "npm:husky@^9.1.7": "9.1.7"
+    "jsr:@hono/hono@^4.11.1": "4.11.1"
   },
   "jsr": {
-    "@hono/hono@4.6.14": {
-      "integrity": "b39a5488266adf448fb1081bc3071a0d05145e72f3ab3ff83cf140e780c6c1de"
-    }
-  },
-  "npm": {
-    "husky@9.1.7": {
-      "integrity": "sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA=="
+    "@hono/hono@4.11.1": {
+      "integrity": "28bb28c7322a1379e7132af05ef76aef09f86bb8cdd7077c67e004dea288ac0d"
     }
   },
   "workspace": {
     "packageJson": {
       "dependencies": [
         "npm:husky@^9.1.7",
-        "npm:lint-staged@^16.2.6",
-        "npm:turbo@^2.6.0"
+        "npm:lint-staged@^16.2.7",
+        "npm:turbo@^2.6.3"
       ]
     },
     "members": {
       "apps/server": {
         "dependencies": [
-          "jsr:@hono/hono@^4.6.14"
-        ]
+          "jsr:@hono/hono@^4.11.1"
+        ],
+        "packageJson": {
+          "dependencies": [
+            "npm:effect@^3.19.13"
+          ]
+        }
       },
       "apps/web": {
         "packageJson": {
           "dependencies": [
-            "npm:@pandacss/dev@^1.4.3",
-            "npm:@types/node@^24.10.0",
-            "npm:@vitejs/plugin-vue@^6.0.1",
-            "npm:alova@^3.3.4",
+            "npm:@pandacss/dev@^1.7.1",
+            "npm:@types/node@^25.0.3",
+            "npm:@vitejs/plugin-vue@^6.0.3",
+            "npm:alova@^3.4.1",
             "npm:pinia@^3.0.4",
             "npm:typescript@^5.9.3",
-            "npm:unplugin-vue-router@~0.16.1",
-            "npm:vite@^7.2.1",
-            "npm:vue-router@^4.6.3",
-            "npm:vue-tsc@^3.1.3",
-            "npm:vue@^3.5.23"
+            "npm:unplugin-vue-router@~0.19.1",
+            "npm:vite@^7.3.0",
+            "npm:vue-router@^4.6.4",
+            "npm:vue-tsc@^3.1.8",
+            "npm:vue@^3.5.26"
           ]
         }
       },
       "packages/biome-config": {
         "packageJson": {
           "dependencies": [
-            "npm:@biomejs/biome@2.3.4"
+            "npm:@biomejs/biome@2.3.10"
           ]
         }
       }

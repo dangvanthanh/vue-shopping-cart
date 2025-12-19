@@ -8,10 +8,12 @@ import { products } from '@/router/products.ts'
 
 const app = new Hono()
 
-app
-	.use('*', logger(), prettyJSON(), cors())
-	.route('/categories', categories)
-	.route('/product', product)
-	.route('/products', products)
+// Middleware setup
+app.use('*', logger(), prettyJSON(), cors())
+
+// Route setup
+app.route('/product', product)
+app.route('/products', products)
+app.route('/categories', categories)
 
 Deno.serve(app.fetch)

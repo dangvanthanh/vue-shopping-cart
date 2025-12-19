@@ -1,7 +1,7 @@
 {
   "imports": {
     "@/": "./src/",
-    "hono": "jsr:@hono/hono@^4.10.4"
+    "hono": "jsr:@hono/hono@^4.11.1"
   },
   "tasks": {
     "start": "deno run --allow-env --allow-net --allow-read src/index.ts"

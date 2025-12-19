@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { getCategories } from '@/api'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
 import { useRequest } from 'alova/client'
+import { getCategories } from '@/api'
 
 const props = defineProps<{
 	category: string

@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import { css } from '@styled-system/css'
+import { flex } from '@styled-system/patterns'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import IconBarMenu from '@/components/icon/BarMenu.vue'
 import IconClose from '@/components/icon/Close.vue'
 import IconShoppingCart from '@/components/icon/ShoppingCart.vue'
 import ProductCart from '@/components/product/Cart.vue'
 import { formatcurrency } from '@/lib'
 import { useCartStore } from '@/store'
-import { css } from '@styled-system/css'
-import { flex } from '@styled-system/patterns'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import Categories from './Categories.vue'
 import Container from './Container.vue'
 

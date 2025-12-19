@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import { css } from '@styled-system/css'
+import { grid } from '@styled-system/patterns'
+import { useRequest } from 'alova/client'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { getOthersProductsById, getProductById } from '@/api'
 import ProductDetail from '@/components/product/Detail.vue'
 import ProductDetailSkeleton from '@/components/product/DetailSkeleton.vue'
 import ProductItem from '@/components/product/Item.vue'
 import ProductItemSkeleton from '@/components/product/ItemSkeleton.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
-import { css } from '@styled-system/css'
-import { grid } from '@styled-system/patterns'
-import { useRequest } from 'alova/client'
-import { watch } from 'vue'
-import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const id = route.params.id

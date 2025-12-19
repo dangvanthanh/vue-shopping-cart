@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { css } from '@styled-system/css'
+import { flex } from '@styled-system/patterns'
 import { formatcurrency } from '@/lib'
 import { useCartStore } from '@/store'
 import type { Product } from '@/types'
-import { css } from '@styled-system/css'
-import { flex } from '@styled-system/patterns'
 
 defineProps<{
 	product: Product
