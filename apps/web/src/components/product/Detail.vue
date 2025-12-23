@@ -18,23 +18,25 @@ const fillStar = (n: number, rating: number) => {
 
 <template>
 	<section
-		:class="css({
-    overflow: 'hidden',
-    py: '8',
-  })
+		:class="
+      css({
+        py: '8',
+      })
     "
 	>
 		<div :class="css({ display: 'flex', flexWrap: 'wrap' })">
 			<div
-				:class="css({
-        lg: { w: '1/2', h: 'auto', p: 8 },
-        w: 'full',
-        h: '64',
-        bgColor: 'gray.100',
-        p: 6,
-        rounded: 'xl',
-        pos: 'relative',
-      })
+				:class="
+          css({
+            lg: { w: '1/2', h: 'auto', p: 8 },
+            w: 'full',
+            h: '64',
+            bgColor: 'gray.50',
+            p: 6,
+            rounded: 'sm',
+            pos: 'relative',
+            shadow: '4px 4px 0 0',
+          })
         "
 			>
 				<img
@@ -44,16 +46,18 @@ const fillStar = (n: number, rating: number) => {
 					:src="product.thumbnail"
 				>
 				<div
-					:class="css({
-          pos: 'absolute',
-          top: 0,
-          right: 0,
-          m: 2,
-          p: 2,
-          bg: 'white',
-          rounded: 'sm',
-          color: product.favorite ? 'red.600' : 'gray.900',
-        })
+					:class="
+            css({
+              pos: 'absolute',
+              top: 0,
+              right: 0,
+              m: 2,
+              p: 2,
+              bg: 'white',
+              rounded: 'sm',
+              color: product.favorite ? 'red.600' : 'gray.900',
+              shadow: '4px 4px 0 0',
+            })
           "
 				>
 					<svg
@@ -71,22 +75,24 @@ const fillStar = (n: number, rating: number) => {
 				</div>
 			</div>
 			<div
-				:class="css({
-        lg: { w: '1/2', mt: 0, pl: 6 },
-        w: 'full',
-        mt: '6',
-        pos: 'relative',
-      })
+				:class="
+          css({
+            lg: { w: '1/2', mt: 0, pl: 6 },
+            w: 'full',
+            mt: '6',
+            pos: 'relative',
+          })
         "
 			>
 				<h1
-					:class="css({
-          color: 'gray.900',
-          fontSize: '3xl',
-          lineHeight: '1',
-          fontWeight: 'medium',
-          mb: 2,
-        })
+					:class="
+            css({
+              color: 'gray.900',
+              fontSize: '3xl',
+              lineHeight: '1',
+              fontWeight: 'medium',
+              mb: 2,
+            })
           "
 				>
 					{{ product.title }}
@@ -99,12 +105,13 @@ const fillStar = (n: number, rating: number) => {
 							stroke-linecap="round"
 							stroke-linejoin="round"
 							stroke-width="2"
-							:class="css({
-                w: 5,
-                h: 5,
-                color: 'orange.500',
-              })
-                "
+							:class="
+                css({
+                  w: 5,
+                  h: 5,
+                  color: 'orange.500',
+                })
+              "
 							viewBox="0 0 24 24"
 							v-for="n in 5"
 							:key="n"
@@ -118,12 +125,13 @@ const fillStar = (n: number, rating: number) => {
 				<p :class="css({ lineHeight: 'relaxed' })">{{ product.description }}</p>
 				<p :class="css({ mt: '6' })">
 					<span
-						:class="css({
-            fontWeight: 'semibold',
-            fontSize: '2xl',
-            lineHeight: '1',
-            fontVariantNumeric: 'tabular-nums',
-          })
+						:class="
+              css({
+                fontWeight: 'semibold',
+                fontSize: '2xl',
+                lineHeight: '1',
+                fontVariantNumeric: 'tabular-nums',
+              })
             "
 					>
 						{{ formatcurrency(product.price) }}
@@ -133,14 +141,16 @@ const fillStar = (n: number, rating: number) => {
 				<div :class="flex({ mt: 6, align: 'center', gap: 1 })">
 					<template v-for="color in product.colors">
 						<div
-							:class="css({
-              w: 6,
-              h: 6,
-              rounded: 'full',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'gray.200',
-            })
+							:class="
+                css({
+                  w: 6,
+                  h: 6,
+                  rounded: 'full',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'gray.200',
+                  shadow: '4px 4px 0 0',
+                })
               "
 							:style="{ backgroundColor: color }"
 						></div>
@@ -148,29 +158,32 @@ const fillStar = (n: number, rating: number) => {
 				</div>
 
 				<div
-					:class="css({
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          mt: '6',
-        })
+					:class="
+            css({
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              mt: '6',
+            })
           "
 				>
 					<button
-						:class="css({
-            w: 'full',
-            rounded: 'md',
-            display: 'inline-flex',
-            justifyContent: 'center',
-            bg: 'gray.900',
-            color: 'white',
-            px: 3,
-            py: 1.5,
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'gray.900',
-            cursor: 'pointer',
-          })
+						:class="
+              css({
+                w: 'full',
+                rounded: 'sm',
+                display: 'inline-flex',
+                justifyContent: 'center',
+                bg: 'white',
+                color: 'gray.900',
+                px: 3,
+                py: 2,
+                borderWidth: 1,
+                borderStyle: 'solid',
+                borderColor: 'gray.900',
+                cursor: 'pointer',
+                shadow: '4px 4px 0 0',
+              })
             "
 						@click="addToCart(product)"
 					>

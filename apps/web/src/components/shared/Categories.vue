@@ -15,12 +15,13 @@ function getCategoryActive(isSameCategory: boolean) {
 		display: 'inline-flex',
 		alignItems: 'center',
 		px: 4,
-		py: 1.5,
+		py: 2,
 		bg: isSameCategory ? 'gray.900' : 'gray.100',
 		color: isSameCategory ? 'white' : 'gray.700',
-		rounded: 'full',
+		rounded: 'sm',
 		fontSize: 'sm',
 		w: 'full',
+		shadow: '4px 4px 0 0',
 		md: {
 			w: 'auto',
 		},
@@ -32,16 +33,17 @@ function getCategoryActive(isSameCategory: boolean) {
 	<div v-if="loading" :class="flex({ align: 'center', gap: 3 })">
 		<template v-for="_ in 3">
 			<div
-				:class="css({
-        display: 'inline-flex',
-        alignItems: 'center',
-        px: 5,
-        py: 1.5,
-        bg: 'gray.100',
-        color: 'gray.700',
-        rounded: 'full',
-        minW: '28',
-      })
+				:class="
+          css({
+            display: 'inline-flex',
+            alignItems: 'center',
+            px: 5,
+            py: 1.5,
+            bg: 'gray.100',
+            color: 'gray.700',
+            rounded: 'full',
+            minW: '28',
+          })
         "
 			>
 				&nbsp;
@@ -51,27 +53,29 @@ function getCategoryActive(isSameCategory: boolean) {
 	<div v-else-if="error">{{ error.message }}</div>
 	<div
 		v-else
-		:class="flex({
-    direction: 'column',
-    align: 'start',
-    gap: 3,
-    whiteSpace: 'nowrap',
-    mt: 6,
-    md: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      mr: 'auto',
-      ml: 12,
-      mt: 0
-    }
-  })
+		:class="
+      flex({
+        direction: 'column',
+        align: 'start',
+        gap: 3,
+        whiteSpace: 'nowrap',
+        mt: 6,
+        md: {
+          flexDirection: 'row',
+          alignItems: 'center',
+          mr: 'auto',
+          ml: 12,
+          mt: 0,
+        },
+      })
     "
 	>
 		<router-link
 			to="/"
-			:class="css({
-      ...getCategoryActive(props.category === '/')
-    })
+			:class="
+        css({
+          ...getCategoryActive(props.category === '/'),
+        })
       "
 		>
 			All
@@ -80,9 +84,10 @@ function getCategoryActive(isSameCategory: boolean) {
 			<template v-for="category in categories">
 				<router-link
 					:to="`/category/${category.slug}`"
-					:class="css({
-          ...getCategoryActive((category.slug === props.category))
-        })
+					:class="
+            css({
+              ...getCategoryActive(category.slug === props.category),
+            })
           "
 				>
 					{{ category.name }}

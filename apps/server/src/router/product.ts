@@ -1,71 +1,23 @@
-import { Effect } from 'effect'
 import { Hono } from 'hono'
+import { vValidator } from 'hono/valibot-validator'
+import { object, string } from 'valibot'
 import { productsData } from '@/config/sampleDB.ts'
-import type { Product } from '../types/index.ts'
+import type { Product } from '../types'
 
 const product = new Hono()
 
-// Error types using tagged union pattern
-type ProductError =
-	| { _tag: 'ProductNotFoundError'; id: string; message: string }
-	| { _tag: 'InvalidProductIdError'; message: string }
+const productSchema = object({
+	id: string(),
+})
 
-// Result types
-type SuccessResult<T> = { ok: true; data: T }
-type ErrorResult = { ok: false; error: string }
-type ApiResult<T> = SuccessResult<T> | ErrorResult
+product.get('/:id', vValidator('param', productSchema), (c) => {
+	const { id } = c.req.valid('param')
+	const product = productsData.find((p: Product) => p.id === id)
 
-// Effect-based service layer
-const ProductService = {
-	getProductById: (id: string): Effect.Effect<Product, ProductError> =>
-		Effect.gen(function* () {
-			if (!id || id.trim() === '') {
-				return yield* Effect.fail<ProductError>({
-					_tag: 'InvalidProductIdError',
-					message: 'Product ID parameter is required',
-				})
-			}
-
-			const foundProduct = productsData.find((p: Product) => p.id === id)
-			if (!foundProduct) {
-				return yield* Effect.fail<ProductError>({
-					_tag: 'ProductNotFoundError',
-					id,
-					message: `Product with id ${id} not found`,
-				})
-			}
-
-			return foundProduct
-		}),
-}
-
-product.get('/:id', async (c) => {
-	const id = c.req.param('id')
-
-	const result = await Effect.runPromise(
-		ProductService.getProductById(id).pipe(
-			Effect.map(
-				(product): ApiResult<Product> => ({ ok: true, data: product }),
-			),
-			Effect.catchAll(() =>
-				Effect.succeed({
-					ok: false,
-					error: 'Failed to fetch product',
-				}),
-			),
-		),
-	)
-
-	const errorResult = result as ErrorResult
-	const statusCode = result.ok
-		? 200
-		: errorResult.error.includes('not found')
-			? 404
-			: errorResult.error.includes('required')
-				? 400
-				: 500
-
-	return c.json(result, statusCode)
+	return c.json({
+		ok: true,
+		data: product,
+	})
 })
 
 export { product }

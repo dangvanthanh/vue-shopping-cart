@@ -53,17 +53,28 @@ function onResize() {
 <template>
 	<header
 		role="banner"
-		:class="css({ pos: 'sticky', top: 0, zIndex: 50, w: 'full', bg: 'white', borderBottomWidth: '1px', borderColor: 'gray.200' })"
+		:class="
+      css({
+        pos: 'sticky',
+        top: 0,
+        zIndex: 50,
+        w: 'full',
+        bg: 'white',
+        borderBottomWidth: '1px',
+        borderColor: 'gray.200',
+      })
+    "
 	>
 		<Container>
 			<div :class="flex({ align: 'center', justify: 'space-between', py: 3 })">
 				<h1
-					:class="css({
-          fontSize: '3xl',
-          lineHeight: '1.125',
-          color: 'gray.900',
-          fontWeight: '600',
-        })
+					:class="
+            css({
+              fontSize: '3xl',
+              lineHeight: '1.125',
+              color: 'gray.900',
+              fontWeight: '600',
+            })
           "
 				>
 					<router-link to="/">S</router-link>
@@ -71,184 +82,212 @@ function onResize() {
 				<div :class="flex({ gap: 2, md: { display: 'none' } })">
 					<button
 						type="button"
-						:class="css({
-            fontSize: 'sm',
-            px: 2,
-            py: 1.5,
-            bg: 'gray.50',
-            rounded: 'md',
-            color: 'gray.900',
-            borderWidth: 1,
-            borderColor: 'gray.100',
-            cursor: 'pointer',
-            pos: 'relative'
-          })
+						:class="
+              css({
+                fontSize: 'sm',
+                p: 2,
+                rounded: 'sm',
+                color: 'gray.900',
+                borderWidth: 1,
+                borderColor: 'gray.900',
+                cursor: 'pointer',
+                pos: 'relative',
+                shadow: '4px 4px 0 0',
+              })
             "
 						@click="isOpenCart = true"
 					>
 						<span
 							v-if="cart.length"
-							:class="css({
-              pos: 'absolute',
-              top: -2,
-              right: -2,
-              w: 5,
-              h: 5,
-              p: .5,
-              fontWeight: 500,
-              rounded: 'full',
-              fontSize: '10px',
-              color: 'white',
-              bg: 'gray.900'
-            })"
+							:class="
+                css({
+                  pos: 'absolute',
+                  top: -2,
+                  right: -2,
+                  w: 5,
+                  h: 5,
+                  p: 0.5,
+                  fontWeight: 500,
+                  rounded: 'full',
+                  fontSize: '10px',
+                  color: 'white',
+                  bg: 'gray.900',
+                })
+              "
 							>{{ cart.length }}</span
 						>
 						<IconShoppingCart :class="css({ w: 6, h: 6 })"/>
 					</button>
 					<button
-						:class="css({
-            fontSize: 'sm',
-            px: 2,
-            py: 1.5,
-            bg: 'gray.50',
-            rounded: 'md',
-            color: 'gray.900',
-            borderWidth: 1,
-            borderColor: 'gray.100',
-            cursor: 'pointer'
-          })"
+						:class="
+              css({
+                fontSize: 'sm',
+                px: 3,
+                py: 2,
+                rounded: 'sm',
+                color: 'gray.900',
+                borderWidth: 1,
+                borderColor: 'gray.900',
+                cursor: 'pointer',
+                shadow: '4px 4px 0 0',
+              })
+            "
 						type="button"
 						@click="isOpenMenu = !isOpenMenu"
 					>
-						<IconBarMenu :class="css({ w: 6, h: 6 })"/>
+						<IconBarMenu :class="css({ w: 4, h: 4 })"/>
 					</button>
 				</div>
 				<div :class="css({ flex: 1 })" v-if="isOpenMenu">
 					<div
-						:class="css({
-            pos: 'fixed',
-            top: 0,
-            left: 0,
-            h: 'full',
-            w: 'full',
-            zIndex: -1,
-            bg: 'gray.900/90',
-            md: {
-              display: 'none',
-              opacity: 0,
-            }
-          })"
+						:class="
+              css({
+                pos: 'fixed',
+                top: 0,
+                left: 0,
+                h: 'full',
+                w: 'full',
+                zIndex: -1,
+                bg: 'gray.900/90',
+                md: {
+                  display: 'none',
+                  opacity: 0,
+                },
+              })
+            "
 						@click="isOpenMenu = false"
 					></div>
 					<div
-						:class="css({
-            pos: 'fixed',
-            bg: 'white',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            w: 72,
-            p: 6,
-            md: {
-              pos: 'relative',
-              w: 'auto',
-              p: 0,
-              top: 'auto',
-              left: 'auto',
-              bottom: 'auto',
-              display: 'flex',
-              flex: '1'
-            }
-          })"
+						:class="
+              css({
+                pos: 'fixed',
+                bg: 'white',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                w: 72,
+                p: 6,
+                md: {
+                  pos: 'relative',
+                  w: 'auto',
+                  p: 0,
+                  top: 'auto',
+                  left: 'auto',
+                  bottom: 'auto',
+                  display: 'flex',
+                  flex: '1',
+                },
+              })
+            "
 					>
 						<button
 							type="button"
-							:class="css({
-              pos: 'absolute',
-              top: 0,
-              right: 0,
-              m: 2,
-              cursor: 'pointer',
-              color: 'gray.600',
-              md: {
-                display: 'none',
-              }
-            })"
+							:class="
+                css({
+                  pos: 'absolute',
+                  top: 0,
+                  right: 0,
+                  m: 2,
+                  cursor: 'pointer',
+                  color: 'gray.600',
+                  md: {
+                    display: 'none',
+                  },
+                })
+              "
 							@click="isOpenMenu = false"
 						>
 							<IconClose :class="css({ w: 6, h: 6 })"/>
 						</button>
 						<h1
-							:class="css({
-              fontSize: '3xl',
-              lineHeight: '1.125',
-              color: 'gray.900',
-              fontWeight: '600',
-              md: {
-                display: 'none',
-              }
-            })
+							:class="
+                css({
+                  fontSize: '3xl',
+                  lineHeight: '1.125',
+                  color: 'gray.900',
+                  fontWeight: '600',
+                  md: {
+                    display: 'none',
+                  },
+                })
               "
 						>
 							<router-link to="/">S</router-link>
 						</h1>
 						<Categories :category="category || '/'"/>
 						<nav
-							:class="flex({ gap: 3, mt: 6, direction: 'column', align: 'center', justify: 'end', md: { flexDirection: 'row', mt: 0 } })"
+							:class="
+                flex({
+                  gap: 3,
+                  mt: 6,
+                  direction: 'column',
+                  align: 'center',
+                  justify: 'end',
+                  md: { flexDirection: 'row', mt: 0 },
+                })
+              "
 						>
 							<button
 								type="button"
-								:class="css({
-                display: 'none',
-                fontSize: 'sm',
-                px: 2,
-                py: 1.5,
-                bg: 'gray.50',
-                rounded: 'md',
-                color: 'gray.900',
-                borderWidth: 1,
-                borderColor: 'gray.100',
-                cursor: 'pointer',
-                pos: 'relative',
-                md: {
-                  display: 'block'
-                }
-              })
+								:class="
+                  css({
+                    display: 'none',
+                    fontSize: 'sm',
+                    p: 2,
+                    rounded: 'sm',
+                    color: 'gray.900',
+                    borderWidth: 1,
+                    borderColor: 'gray.900',
+                    cursor: 'pointer',
+                    pos: 'relative',
+                    shadow: '4px 4px 0 0',
+                    md: {
+                      display: 'block',
+                    },
+                  })
                 "
 								@click="isOpenCart = true"
 							>
 								<span
 									v-if="cart.length"
-									:class="css({
-                  pos: 'absolute',
-                  top: -2,
-                  right: -2,
-                  w: 5,
-                  h: 5,
-                  p: .5,
-                  fontWeight: 500,
-                  rounded: 'full',
-                  fontSize: '10px',
-                  color: 'white',
-                  bg: 'gray.900'
-                })"
+									:class="
+                    css({
+                      pos: 'absolute',
+                      top: -2,
+                      right: -2,
+                      w: 5,
+                      h: 5,
+                      p: 0.5,
+                      fontWeight: 500,
+                      rounded: 'full',
+                      fontSize: '10px',
+                      color: 'white',
+                      bg: 'gray.900',
+                    })
+                  "
 									>{{ cart.length }}</span
 								>
 								<IconShoppingCart :class="css({ w: 6, h: 6 })"/>
 							</button>
 							<router-link
 								to="/login"
-								:class="css({
-                w: 'full',
-                fontSize: 'sm',
-                px: 2,
-                py: 1.5,
-                bg: 'gray.900',
-                rounded: 'md',
-                color: 'white',
-                borderWidth: 1,
-                borderColor: 'gray.900',
-              })
+								:class="
+                  css({
+                    w: 'full',
+                    rounded: 'sm',
+                    display: 'inline-flex',
+                    justifyContent: 'center',
+                    px: 3,
+                    py: 2,
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                    borderColor: 'gray.900',
+                    cursor: 'pointer',
+                    bg: 'white',
+                    color: 'gray.900',
+                    fontWeight: 'semibold',
+                    shadow: '4px 4px 0 0',
+                  })
                 "
 							>
 								Login
@@ -259,39 +298,52 @@ function onResize() {
 
 				<div v-if="isOpenCart" :class="css({ zIndex: 100 })">
 					<div
-						:class="css({
-            pos: 'fixed',
-            top: 0,
-            left: 0,
-            h: 'full',
-            w: 'full',
-            zIndex: -1,
-            bg: 'gray.900/90',
-          })"
+						:class="
+              css({
+                pos: 'fixed',
+                top: 0,
+                left: 0,
+                h: 'full',
+                w: 'full',
+                zIndex: -1,
+                bg: 'gray.900/90',
+              })
+            "
 						@click="isOpenCart = false"
 					></div>
 					<div
-						:class="css({
-            pos: 'fixed',
-            bg: 'white',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            w: '24rem',
-            p: 6
-          })"
+						:class="
+              css({
+                pos: 'fixed',
+                bg: 'white',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                w: '24rem',
+                p: 6,
+              })
+            "
 					>
 						<div :class="flex({ direction: 'column', h: 'full' })">
 							<div
-								:class="flex({ justify: 'space-between', pb: 4, borderBottomWidth: 1, borderBottomColor: 'gray.100' })"
+								:class="
+                  flex({
+                    justify: 'space-between',
+                    pb: 4,
+                    borderBottomWidth: 1,
+                    borderBottomColor: 'gray.100',
+                  })
+                "
 							>
 								<h3 :class="css({ fontSize: 'xl', fontWeight: 600 })">Cart</h3>
 								<button
 									type="button"
-									:class="css({
-                  cursor: 'pointer',
-                  color: 'gray.600',
-                })"
+									:class="
+                    css({
+                      cursor: 'pointer',
+                      color: 'gray.600',
+                    })
+                  "
 									@click="isOpenCart = false"
 								>
 									<IconClose :class="css({ w: 6, h: 6 })"/>
@@ -302,7 +354,15 @@ function onResize() {
 									:class="flex({ direction: 'column', w: 'full', h: 'full' })"
 								>
 									<div
-										:class="flex({ direction: 'column', overflowY: 'auto', gap: 2, maxH: 'calc(100vh - 12rem)', py: 4 })"
+										:class="
+                      flex({
+                        direction: 'column',
+                        overflowY: 'auto',
+                        gap: 2,
+                        maxH: 'calc(100vh - 12rem)',
+                        py: 4,
+                      })
+                    "
 									>
 										<template v-for="product in cart">
 											<ProductCart :product="product"/>
@@ -319,17 +379,18 @@ function onResize() {
 										</div>
 										<button
 											type="button"
-											:class="css({
-                      w: 'full',
-                      fontSize: 'sm',
-                      px: 2,
-                      py: 1.5,
-                      bg: 'gray.900',
-                      rounded: 'md',
-                      color: 'white',
-                      borderWidth: 1,
-                      borderColor: 'gray.900',
-                    })
+											:class="
+                        css({
+                          w: 'full',
+                          fontSize: 'sm',
+                          p: 2,
+                          bg: 'white',
+                          color: 'gray.900',
+                          rounded: 'sm',
+                          borderWidth: 1,
+                          borderColor: 'gray.900',
+                          shadow: '4px 4px 0 0',
+                        })
                       "
 										>
 											Checkout
@@ -339,7 +400,15 @@ function onResize() {
 							</template>
 							<template v-else>
 								<div
-									:class="flex({ direction: 'column', align: 'center', justify: 'center', w: 'full', h: 'full' })"
+									:class="
+                    flex({
+                      direction: 'column',
+                      align: 'center',
+                      justify: 'center',
+                      w: 'full',
+                      h: 'full',
+                    })
+                  "
 								>
 									<IconShoppingCart
 										:class="css({ w: 16, h: 16, color: 'gray.600' })"

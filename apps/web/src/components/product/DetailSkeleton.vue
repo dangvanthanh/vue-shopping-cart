@@ -9,23 +9,25 @@ const fillStar = (n: number, rating: number) => {
 
 <template>
 	<section
-		:class="css({
-    overflow: 'hidden',
-    py: '8',
-  })
+		:class="
+      css({
+        overflow: 'hidden',
+        py: '8',
+      })
     "
 	>
 		<div :class="css({ display: 'flex', flexWrap: 'wrap' })">
 			<div
-				:class="css({
-        lg: { w: '1/2', h: 'auto', p: 8 },
-        w: 'full',
-        h: '64',
-        bgColor: 'gray.100',
-        p: 6,
-        rounded: 'xl',
-        pos: 'relative',
-      })
+				:class="
+          css({
+            lg: { w: '1/2', h: 'auto', p: 8 },
+            w: 'full',
+            h: '64',
+            bgColor: 'gray.50',
+            p: 6,
+            rounded: 'xl',
+            pos: 'relative',
+          })
         "
 			>
 				<div :class="css({ w: 'full', h: 'full', objectFit: 'contain' })">
@@ -33,23 +35,25 @@ const fillStar = (n: number, rating: number) => {
 				</div>
 			</div>
 			<div
-				:class="css({
-        lg: { w: '1/2', mt: 0, pl: 6 },
-        w: 'full',
-        mt: '6',
-        pos: 'relative',
-      })
+				:class="
+          css({
+            lg: { w: '1/2', mt: 0, pl: 6 },
+            w: 'full',
+            mt: '6',
+            pos: 'relative',
+          })
         "
 			>
 				<h1
-					:class="css({
-          color: 'gray.900',
-          fontSize: '3xl',
-          lineHeight: '1',
-          fontWeight: 'medium',
-          mb: 2,
-          bg: 'gray.100',
-        })
+					:class="
+            css({
+              color: 'gray.900',
+              fontSize: '3xl',
+              lineHeight: '1',
+              fontWeight: 'medium',
+              mb: 2,
+              bg: 'gray.100',
+            })
           "
 				>
 					&nbsp;
@@ -62,12 +66,13 @@ const fillStar = (n: number, rating: number) => {
 							stroke-linecap="round"
 							stroke-linejoin="round"
 							stroke-width="2"
-							:class="css({
-                w: 5,
-                h: 5,
-                color: 'gray.100',
-              })
-                "
+							:class="
+                css({
+                  w: 5,
+                  h: 5,
+                  color: 'gray.100',
+                })
+              "
 							viewBox="0 0 24 24"
 							v-for="n in 5"
 							:key="n"
@@ -83,15 +88,16 @@ const fillStar = (n: number, rating: number) => {
 				</p>
 				<p :class="css({ mt: '6' })">
 					<span
-						:class="css({
-            fontWeight: 'semibold',
-            fontSize: '2xl',
-            lineHeight: '1',
-            fontVariantNumeric: 'tabular-nums',
-            bg: 'gray.100',
-            w: '1/2',
-            display: 'block',
-          })
+						:class="
+              css({
+                fontWeight: 'semibold',
+                fontSize: '2xl',
+                lineHeight: '1',
+                fontVariantNumeric: 'tabular-nums',
+                bg: 'gray.100',
+                w: '1/2',
+                display: 'block',
+              })
             "
 					>
 						&nbsp;
@@ -101,44 +107,47 @@ const fillStar = (n: number, rating: number) => {
 				<div :class="flex({ mt: 6, align: 'center', gap: 1 })">
 					<template v-for="_ in 2">
 						<div
-							:class="css({
-              w: 6,
-              h: 6,
-              rounded: 'full',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'gray.200',
-              bg: 'gray.100',
-            })
+							:class="
+                css({
+                  w: 6,
+                  h: 6,
+                  rounded: 'full',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'gray.200',
+                  bg: 'gray.100',
+                })
               "
 						></div>
 					</template>
 				</div>
 
 				<div
-					:class="css({
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          mt: '6',
-        })
+					:class="
+            css({
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              mt: '6',
+            })
           "
 				>
 					<button
-						:class="css({
-            w: 'full',
-            rounded: 'md',
-            display: 'inline-flex',
-            justifyContent: 'center',
-            bg: 'gray.100',
-            color: 'white',
-            px: 3,
-            py: 1.5,
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'gray.100',
-            cursor: 'pointer',
-          })
+						:class="
+              css({
+                w: 'full',
+                rounded: 'sm',
+                display: 'inline-flex',
+                justifyContent: 'center',
+                bg: 'gray.100',
+                color: 'white',
+                px: 3,
+                py: 1.5,
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray.100',
+                cursor: 'pointer',
+              })
             "
 					>
 						&nbsp;
