@@ -1,10 +1,12 @@
 {
   "imports": {
     "@/": "./src/",
-    "hono": "jsr:@hono/hono@^4.10.4"
+    "hono": "jsr:@hono/hono@^4.11.1",
+    "hono/valibot-validator": "jsr:@hono/valibot-validator@^0.6.1",
+    "valibot": "npm:valibot"
   },
   "tasks": {
-    "start": "deno run --allow-env --allow-net --allow-read src/index.ts"
+    "start": "deno run --allow-env --allow-net --allow-read --sloppy-imports src/index.ts"
   },
   "compilerOptions": {
     "jsx": "precompile",

@@ -1,7 +1,7 @@
-import type { Category, Product } from '@/types'
 import { createAlova } from 'alova'
 import fetchAdapter from 'alova/fetch'
 import VueHook from 'alova/vue'
+import type { Category, Product } from '@/types'
 
 const alovaInstance = createAlova({
 	baseURL: import.meta.env.VITE_BASE_URL_API,

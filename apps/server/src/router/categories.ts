@@ -1,5 +1,5 @@
-import { categoriesData } from '@/config/sampleDB.ts'
 import { Hono } from 'hono'
+import { categoriesData } from '@/config/sampleDB.ts'
 
 const categories = new Hono()
 

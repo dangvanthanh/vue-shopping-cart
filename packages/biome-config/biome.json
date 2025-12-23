@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
   "assist": {
     "enabled": true,
     "actions": {
@@ -33,9 +33,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/*.vue"
-      ],
+      "includes": ["**/*.vue"],
       "linter": {
         "rules": {
           "style": {

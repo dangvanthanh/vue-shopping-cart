@@ -1,7 +1,7 @@
 import {
-	type RouteLocationNormalized,
 	createRouter,
 	createWebHistory,
+	type RouteLocationNormalized,
 } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 

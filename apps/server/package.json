@@ -1,16 +1,22 @@
 {
-	"name": "@apps/server",
-	"version": "1.0.0",
-	"description": "Simple shopping cart with Vue.js and Deno.js",
-	"scripts": {
-		"dev": "deno task start",
-		"lint": "biome lint ./src",
-		"format": "biome format ./src --write"
-	},
-	"keywords": ["Deno", "Hono"],
-	"author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
-	"license": "MIT",
-	"devDependencies": {
-		"@apps/biome-config": "workspace:*"
-	}
+  "name": "@apps/server",
+  "version": "1.0.0",
+  "description": "Simple shopping cart with Vue.js and Deno.js",
+  "scripts": {
+    "dev": "deno task start",
+    "lint": "biome check ./src --write",
+    "format": "biome format ./src --write"
+  },
+  "keywords": [
+    "Deno",
+    "Hono"
+  ],
+  "author": "Dang Van Thanh <dangvanthanh@dangthanh.org>",
+  "license": "MIT",
+  "dependencies": {
+    "valibot": "^1.2.0"
+  },
+  "devDependencies": {
+    "@apps/biome-config": "workspace:*"
+  }
 }

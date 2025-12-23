@@ -1,92 +1,99 @@
 <script setup lang="ts">
-import AuthLayout from '@/layouts/AuthLayout.vue'
 import { css } from '@styled-system/css'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 </script>
 
 <template>
 	<AuthLayout>
 		<div
-			:class="css({
-      w: 'full',
-      maxW: 'lg',
-      mx: 'auto',
-      py: 12,
-      px: 6,
-      bgColor: 'white',
-      shadow: 'shadow',
-      rounded: 'md',
-    })
+			:class="
+        css({
+          w: 'full',
+          maxW: 'lg',
+          mx: 'auto',
+          py: 12,
+          px: 6,
+          bgColor: 'white',
+          shadow: 'shadow',
+          rounded: 'sm',
+        })
       "
 		>
 			<h2 :class="css({ display: 'flex', justifyContent: 'center' })">
 				<router-link
 					to="/"
-					:class="css({
-          display: 'flex',
-          alignItems: 'center',
-          fontSize: '6xl',
-          lineHeight: '1',
-          textTransform: 'uppercase',
-          pos: 'relative',
-          fontWeight: '600',
-        })
+					:class="
+            css({
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '6xl',
+              lineHeight: '1',
+              textTransform: 'uppercase',
+              pos: 'relative',
+              fontWeight: '600',
+            })
           "
 				>
 					<span>S</span>
 				</router-link>
 			</h2>
 			<p
-				:class="css({
-        my: '6',
-        fontSize: 'base',
-        lineHeight: '1',
-        textAlign: 'center',
-        color: 'gray.900',
-      })
+				:class="
+          css({
+            my: '6',
+            fontSize: 'base',
+            lineHeight: '1',
+            textAlign: 'center',
+            color: 'gray.900',
+          })
         "
 			>
 				Log in to your account
 			</p>
 			<form>
 				<div
-					:class="css({
-          rounded: 'md',
-          shadow: 'sm',
-          p: 6,
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: 'gray.100',
-        })
+					:class="
+            css({
+              rounded: 'sm',
+              p: 6,
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: 'gray.900',
+              shadow: '4px 4px 0 0',
+            })
           "
 				>
 					<div :class="css({ mb: '3' })">
 						<label
 							for="email"
-							:class="css({
-              display: 'block',
-              mb: '2',
-              fontSize: 'sm',
-              lineHeight: 'sm',
-              color: 'gray.900',
-            })
+							:class="
+                css({
+                  display: 'block',
+                  mb: '2',
+                  fontSize: 'sm',
+                  lineHeight: 'sm',
+                  color: 'gray.900',
+                })
               "
 						>
 							Email
 						</label>
 						<input
 							type="email"
-							:class="css({
-              appearance: 'none',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'gray.200',
-              display: 'block',
-              w: 'full',
-              px: 3,
-              py: 1.5,
-              color: 'gray.900',
-              rounded: 'md',
-            })
+							:class="
+                css({
+                  appearance: 'none',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'gray.900',
+                  display: 'block',
+                  w: 'full',
+                  px: 3,
+                  py: 2,
+                  color: 'gray.900',
+                  rounded: 'sm',
+                  shadow: '4px 4px 0 0',
+                })
               "
 							placeholder="Email address"
 						>
@@ -94,13 +101,14 @@ import { css } from '@styled-system/css'
 					<div :class="css({ mb: '3' })">
 						<label
 							for="password"
-							:class="css({
-              display: 'block',
-              mb: '2',
-              fontSize: 'sm',
-              lineHeight: 'sm',
-              color: 'gray.900',
-            })
+							:class="
+                css({
+                  display: 'block',
+                  mb: '2',
+                  fontSize: 'sm',
+                  lineHeight: 'sm',
+                  color: 'gray.900',
+                })
               "
 						>
 							Password
@@ -108,18 +116,20 @@ import { css } from '@styled-system/css'
 						<input
 							id="password"
 							type="password"
-							:class="css({
-              appearance: 'none',
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'gray.200',
-              display: 'block',
-              w: 'full',
-              px: 3,
-              py: 1.5,
-              color: 'gray.900',
-              rounded: 'md',
-            })
+							:class="
+                css({
+                  appearance: 'none',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'gray.900',
+                  display: 'block',
+                  w: 'full',
+                  px: 3,
+                  py: 2,
+                  color: 'gray.900',
+                  rounded: 'sm',
+                  shadow: '4px 4px 0 0',
+                })
               "
 							placeholder="Password"
 						>
@@ -127,20 +137,23 @@ import { css } from '@styled-system/css'
 					<div :class="css({ mt: '6' })">
 						<button
 							type="submit"
-							:class="css({
-              w: 'full',
-              rounded: 'md',
-              display: 'inline-flex',
-              justifyContent: 'center',
-              bg: 'gray.900',
-              color: 'white',
-              px: 3,
-              py: 1.5,
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'gray.900',
-              cursor: 'pointer',
-            })
+							:class="
+                css({
+                  w: 'full',
+                  rounded: 'sm',
+                  display: 'inline-flex',
+                  justifyContent: 'center',
+                  px: 3,
+                  py: 2,
+                  borderWidth: 1,
+                  borderStyle: 'solid',
+                  borderColor: 'gray.900',
+                  cursor: 'pointer',
+                  bg: 'white',
+                  color: 'gray.900',
+                  fontWeight: 'semibold',
+                  shadow: '4px 4px 0 0',
+                })
               "
 						>
 							Sign In
@@ -153,11 +166,12 @@ import { css } from '@styled-system/css'
 					Not registered?
 					<router-link
 						to="/signup"
-						:class="css({
-            textUnderlineOffset: '2px',
-            textDecorationLine: 'underline',
-            _hover: { textDecorationLine: 'none' },
-          })
+						:class="
+              css({
+                textUnderlineOffset: '2px',
+                textDecorationLine: 'underline',
+                _hover: { textDecorationLine: 'none' },
+              })
             "
 					>
 						Create an account

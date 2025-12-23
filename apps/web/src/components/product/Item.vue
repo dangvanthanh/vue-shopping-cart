@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { formatcurrency } from '@/lib'
-import type { Product } from '@/types'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
+import { formatcurrency } from '@/lib'
+import type { Product } from '@/types'
 
 defineProps<{
 	product: Product
@@ -12,25 +12,26 @@ defineProps<{
 <template>
 	<router-link
 		:to="`/product/${product.id}`"
-		:class="flex({
-    w: 'full',
-    bgColor: 'white',
-    pb: '5',
-    direction: 'column',
-    overflow: 'hidden',
-  })
+		:class="
+      flex({
+        w: 'full',
+        bgColor: 'white',
+        pb: '5',
+        direction: 'column',
+      })
     "
 	>
 		<div
-			:class="css({
-      display: 'block',
-      pos: 'relative',
-      h: '64',
-      overflow: 'hidden',
-      bg: 'gray.100',
-      rounded: 'xl',
-      p: 6,
-    })
+			:class="
+        css({
+          display: 'block',
+          pos: 'relative',
+          rounded: 'sm',
+          h: '64',
+          bg: 'gray.100',
+          p: 6,
+          shadow: '4px 4px 0 0',
+        })
       "
 		>
 			<img
@@ -39,16 +40,18 @@ defineProps<{
 				:class="css({ w: 'full', h: 'full', objectFit: 'contain' })"
 			>
 			<div
-				:class="css({
-        pos: 'absolute',
-        top: 0,
-        right: 0,
-        m: 2,
-        p: 1,
-        bg: 'white',
-        rounded: 'sm',
-        color: product.favorite ? 'red.600' : 'gray.900',
-      })
+				:class="
+          css({
+            pos: 'absolute',
+            top: 0,
+            right: 0,
+            m: 2,
+            p: 1,
+            bg: 'white',
+            rounded: 'sm',
+            color: product.favorite ? 'red.600' : 'gray.900',
+            shadow: '4px 4px 0 0',
+          })
         "
 			>
 				<svg
@@ -67,26 +70,28 @@ defineProps<{
 		</div>
 		<div :class="css({ flex: '1' })">
 			<h2
-				:class="css({
-        color: 'gray.900',
-        fontSize: 'base',
-        lineHeight: 'base',
-        fontWeight: 'medium',
-        mt: '3',
-        mb: '3',
-      })
+				:class="
+          css({
+            color: 'gray.900',
+            fontSize: 'base',
+            lineHeight: 'base',
+            fontWeight: 'medium',
+            mt: '3',
+            mb: '3',
+          })
         "
 			>
 				{{ product.title }}
 			</h2>
 			<p
-				:class="css({
-        mb: '3',
-        fontSize: 'lg',
-        lineHeight: '1',
-        fontWeight: 'semibold',
-        fontVariantNumeric: 'tabular-nums',
-      })
+				:class="
+          css({
+            mb: '3',
+            fontSize: 'lg',
+            lineHeight: '1',
+            fontWeight: 'semibold',
+            fontVariantNumeric: 'tabular-nums',
+          })
         "
 			>
 				{{ formatcurrency(product.price) }}
@@ -95,14 +100,16 @@ defineProps<{
 			<div :class="flex({ align: 'center', gap: 1 })">
 				<template v-for="color in product.colors">
 					<div
-						:class="css({
-            w: 5,
-            h: 5,
-            rounded: 'full',
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'gray.200',
-          })
+						:class="
+              css({
+                w: 5,
+                h: 5,
+                rounded: 'full',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray.200',
+                shadow: '4px 4px 0 0',
+              })
             "
 						:style="{ backgroundColor: color }"
 					></div>
